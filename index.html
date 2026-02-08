@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Mahikari_Hola | Profilecard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="overlay" id="start-overlay">
+        <div class="pulse-icon"><i class="fas fa-power-off"></i></div>
+        <p>TAP TO START SYSTEM</p>
+    </div>
+
+    <div class="bg-blobs">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+    </div>
+
+    <div class="card-wrapper">
+        <div class="animated-border"></div>
+        
+        <div class="card-content">
+            <div class="col-identity">
+                <div class="avatar-container">
+                    <div class="magic-circle"></div>
+                    <img src="avatar.png" alt="Avatar" class="char-img">
+                </div>
+
+                <div class="name-box">
+                    <h1 class="glitch" data-text="Mahikari_Hola">Mahikari_Hola</h1>
+                    <div class="badge-container">
+                        <span class="badge red">&lt;/&gt; CODER</span>
+                        <span class="badge purple">GAMER</span>
+                    </div>
+                </div>
+
+                <div class="social-row">
+                    <a href="https://www.facebook.com/profile.php?id=61582336522985" target="_blank" class="s-btn fb"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@mahikari_hola" target="_blank" class="s-btn tt"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="col-info">
+                <div class="panel waifu-panel">
+                    <div class="panel-head"><i class="fas fa-heart"></i> WAIFU LIST</div>
+                    <ul class="waifu-list">
+                        <li class="top-1">
+                            <span class="rank">01</span> Shiina Mahiru <i class="fas fa-crown"></i>
+                        </li>
+                        <li><span class="rank">02</span> Kagari Fuyukawa</li>
+                        <li><span class="rank">03</span> Hiura Mihate</li>
+                    </ul>
+                </div>
+
+                <div class="panel music-panel">
+                    <div class="panel-head"><i class="fas fa-music"></i> MUSIC PLAYER</div>
+                    
+                    <div class="track-info">
+                        <div class="bars-animation">
+                            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        </div>
+                        <div class="track-text">
+                            <span id="song-name">Waiting...</span>
+                            <small id="timer">0:00 / 0:00</small>
+                        </div>
+                    </div>
+
+                    <div class="progress-area" id="progress-container">
+                        <div class="progress-bar" id="progress"></div>
+                    </div>
+
+                    <div class="controls">
+                        <button id="prev"><i class="fas fa-backward"></i></button>
+                        <button id="play" class="play-btn"><i class="fas fa-play"></i></button>
+                        <button id="next"><i class="fas fa-forward"></i></button>
+                    </div>
+                    
+                    <div class="volume-control">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" id="volume-slider" min="0" max="100" value="50">
+                    </div>
+
+                    <audio id="audio"></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const playlist = [
+            { name: "Ngủ sớm đi em - DucMinh", file: "song1.mp3" },
+            { name: "Nhắn nhủ | Ronboogz",     file: "song2.mp3" },
+            { name: "W/n - id 072019 | 3107",  file: "song3.mp3" },
+            { name: "Madihu - Có em (Feat. Low G)", file: "song4.mp3" },
+            { name: "TƯƠNG TƯ | CLOW X FLEPY", file: "song5.mp3" },
+            { name: "Nghe kể năm 90s | Ân ngờ", file: "song6.mp3" }
+        ];
+
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const title = document.getElementById('song-name');
+        const timer = document.getElementById('timer');
+        const progress = document.getElementById('progress');
+        const progressContainer = document.getElementById('progress-container');
+        const volumeSlider = document.getElementById('volume-slider');
+        const overlay = document.getElementById('start-overlay');
+        const bars = document.querySelectorAll('.bar');
+
+        let songIndex = localStorage.getItem('songIndex') || 0;
+        if (songIndex >= playlist.length) songIndex = 0;
+        let isPlaying = false;
+
+        loadSong(playlist[songIndex]);
+        audio.volume = 0.5;
+
+        overlay.addEventListener('click', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 500);
+            playSong();
+        });
+
+        function loadSong(song) {
+            title.innerText = song.name;
+            audio.src = song.file;
+            localStorage.setItem('songIndex', songIndex);
+        }
+
+        function playSong() {
+            isPlaying = true;
+            audio.play();
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            bars.forEach(b => b.style.animationPlayState = 'running');
+        }
+
+        function pauseSong() {
+            isPlaying = false;
+            audio.pause();
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            bars.forEach(b => b.style.animationPlayState = 'paused');
+        }
+
+        playBtn.addEventListener('click', () => isPlaying ? pauseSong() : playSong());
+        prevBtn.addEventListener('click', () => {
+            songIndex = (songIndex - 1 + playlist.length) % playlist.length;
+            loadSong(playlist[songIndex]);
+            playSong();
+        });
+        nextBtn.addEventListener('click', () => {
+            songIndex = (songIndex + 1) % playlist.length;
+            loadSong(playlist[songIndex]);
+            playSong();
+        });
+
+        audio.addEventListener('timeupdate', (e) => {
+            const { duration, currentTime } = e.srcElement;
+            const percent = (currentTime / duration) * 100;
+            progress.style.width = `${percent}%`;
+            timer.innerText = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+        });
+        
+        audio.addEventListener('ended', () => nextBtn.click());
+        
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value / 100);
+
+        function formatTime(time) {
+            if(isNaN(time)) return "0:00";
+            let min = Math.floor(time / 60);
+            let sec = Math.floor(time % 60);
+            return `${min}:${sec < 10 ? '0' + sec : sec}`;
+        }
+    </script>
+</body>
+</html>
