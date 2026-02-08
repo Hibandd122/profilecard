@@ -3,16 +3,17 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background: #1a0b2e; /* Tím than đậm */
+    background: #1a0b2e;
     font-family: 'Nunito', sans-serif;
     display: flex; justify-content: center; align-items: center;
     min-height: 100vh;
-    overflow: hidden;
     color: #fff;
-    cursor: default; /* Có thể đổi thành none nếu muốn ẩn chuột */
+    /* --- FIX 1: CHO PHÉP CUỘN TRÊN MOBILE --- */
+    overflow-x: hidden; /* Chỉ ẩn thanh cuộn ngang */
+    overflow-y: auto;   /* Cho phép cuộn dọc */
 }
 
-/* --- 1. MAGIC CURSOR CSS --- */
+/* ... (GIỮ NGUYÊN CÁC PHẦN KHÁC: MAGIC CURSOR, HEART POP, BG, OVERLAY...) ... */
 .cursor-trail {
     position: absolute; width: 10px; height: 10px;
     background: #fbc2eb; border-radius: 50%;
@@ -22,7 +23,6 @@ body {
     mix-blend-mode: screen;
 }
 
-/* --- 2. HEART POP CSS (Avatar Click) --- */
 .heart-pop {
     position: fixed; font-size: 20px; color: #ff0099;
     pointer-events: none; z-index: 9999;
@@ -33,8 +33,7 @@ body {
     100% { transform: translate(var(--x), calc(var(--y) - 100px)) scale(0.5); opacity: 0; }
 }
 
-/* --- BACKGROUND VŨ TRỤ --- */
-.bg-universe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); overflow: hidden; }
+.bg-universe { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); }
 .stars {
     width: 1px; height: 1px; background: transparent;
     box-shadow: 100px 200px #fff, 300px 500px #fff, 500px 100px #fff, 700px 300px #fff, 900px 600px #fff; 
@@ -53,7 +52,6 @@ body {
     100% { transform: rotate(315deg) translateX(-1000px); opacity: 0; }
 }
 
-/* --- OVERLAY --- */
 .overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(26, 11, 46, 0.95); z-index: 9999;
@@ -64,7 +62,6 @@ body {
 .overlay p { letter-spacing: 3px; font-weight: 800; font-size: 14px; }
 @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 0.6; } }
 
-/* --- CARD CHÍNH --- */
 .card-container {
     width: 850px; max-width: 90%; height: 520px;
     background: rgba(255, 255, 255, 0.1);
@@ -72,21 +69,23 @@ body {
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    display: flex; overflow: hidden;
+    display: flex; 
+    /* overflow: hidden; -> Bỏ cái này đi để tránh lỗi hiển thị trên mobile nếu cần */
+    position: relative;
     animation: breathe 5s ease-in-out infinite;
+    margin: 50px 0; /* Thêm margin để không bị sát lề khi cuộn */
 }
 @keyframes breathe {
     0%, 100% { transform: translateY(0); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
     50% { transform: translateY(-10px); box-shadow: 0 35px 60px rgba(161, 140, 209, 0.2); }
 }
 
-/* --- CỘT TRÁI --- */
+/* ... (GIỮ NGUYÊN CÁC PHẦN CỘT TRÁI, PHẢI, PLAYER, COUNTDOWN...) ... */
 .col-left {
     flex: 1.2; border-right: 1px solid rgba(255,255,255,0.1);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     padding: 20px; position: relative; background: rgba(255, 255, 255, 0.02);
 }
-
 .avatar-holder {
     width: 200px; height: 200px; position: relative;
     display: flex; justify-content: center; align-items: flex-end; margin-bottom: 20px;
@@ -109,7 +108,9 @@ body {
     max-height: 125%; width: auto; max-width: 100%;
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
     animation: floatChar 4s ease-in-out infinite; z-index: 2;
-    cursor: pointer; /* Để biết là click được */
+    cursor: pointer;
+    /* Thêm transition để đổi ảnh mượt hơn */
+    transition: transform 0.3s, opacity 0.3s;
 }
 .char-img:hover { filter: drop-shadow(0 0 15px #ff0099); transform: translateX(-50%) scale(1.05); }
 @keyframes floatChar { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
@@ -122,10 +123,19 @@ body {
 .glitch-text:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; }
 @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
 
-.badge-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 25px; }
+/* --- FIX 2: SỬA LỖI GIẬT CHỮ --- */
+.badge-row { 
+    display: flex; gap: 10px; justify-content: center; margin-bottom: 25px;
+    /* Cố định chiều cao tối thiểu để khi chữ mất đi, khung không bị xẹp xuống */
+    min-height: 28px; 
+}
+
 .badge {
     background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 15px;
     font-size: 11px; font-weight: 700; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.1);
+    /* Đảm bảo badge luôn có chiều cao */
+    display: inline-block;
+    min-width: 100px; /* Độ rộng tối thiểu cho đẹp */
 }
 
 .social-row { display: flex; gap: 15px; }
@@ -136,21 +146,15 @@ body {
 }
 .s-btn:hover { background: #fff; color: #a18cd1; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(255,255,255,0.3); }
 
-/* --- CỘT PHẢI --- */
 .col-right {
     flex: 1.5; padding: 35px; display: flex; flex-direction: column; gap: 20px; justify-content: center;
 }
-
-/* SMART GREETING CSS */
 .greeting-style {
     font-size: 14px; font-weight: 800; color: #ffd700; text-align: center;
     background: rgba(255, 255, 255, 0.05); padding: 8px; border-radius: 10px;
     border: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px;
 }
-
 .box-label { font-size: 11px; font-weight: 800; color: #fbc2eb; letter-spacing: 1.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-
-/* COUNTDOWN */
 .countdown-box { background: rgba(0,0,0,0.2); border-radius: 15px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
 .timer-display { display: flex; justify-content: center; align-items: center; gap: 8px; }
 .t-unit { text-align: center; width: 45px; }
@@ -159,7 +163,6 @@ body {
 .sep { font-size: 18px; color: #fbc2eb; margin-top: -15px; animation: blink 1s infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* WAIFU LIST */
 .waifu-box { background: rgba(0,0,0,0.2); border-radius: 15px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
 .w-list { list-style: none; }
 .w-list li { display: flex; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; font-size: 14px; }
@@ -168,20 +171,16 @@ body {
 .top-1 { color: #ffd700; text-shadow: 0 0 5px rgba(255, 215, 0, 0.4); }
 .top-1 .rank { color: #ffd700; }
 
-/* MUSIC PLAYER */
 .music-player { background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 15px; border: 1px solid rgba(255,255,255,0.2); margin-top: auto; }
 .track-info { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .equalizer { display: flex; gap: 3px; align-items: flex-end; height: 15px; }
 .bar { width: 4px; height: 8px; background: #fbc2eb; border-radius: 2px; animation: eq 0.5s infinite alternate; animation-play-state: paused; }
 .bar:nth-child(2) { animation-delay: 0.2s; } .bar:nth-child(3) { animation-delay: 0.4s; }
 @keyframes eq { 100% { height: 18px; } }
-
 .text-scroll { flex: 1; overflow: hidden; white-space: nowrap; }
 #song-name { font-size: 13px; font-weight: 700; color: #fff; }
-
 .progress-area { width: 100%; height: 4px; background: rgba(255,255,255,0.1); cursor: pointer; border-radius: 5px; margin-bottom: 10px; }
 .progress-bar { width: 0%; height: 100%; background: #fbc2eb; border-radius: 5px; }
-
 .controls { display: flex; align-items: center; gap: 15px; }
 .controls button { background: none; border: none; color: #ccc; cursor: pointer; font-size: 16px; }
 .controls button:hover { color: #fff; }
@@ -189,9 +188,34 @@ body {
 .vol-wrapper { margin-left: auto; display: flex; align-items: center; gap: 5px; color: #ccc; font-size: 12px; }
 input[type=range] { width: 60px; height: 3px; accent-color: #fbc2eb; }
 
-/* MOBILE RESPONSIVE */
+/* --- FIX 3: MOBILE RESPONSIVE (CUỘN ĐƯỢC) --- */
 @media (max-width: 850px) {
-    .card-container { width: 95%; height: auto; min-height: 600px; flex-direction: column; margin: 20px 0; }
-    .col-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 40px 20px 20px; }
-    .col-right { padding: 25px 20px; gap: 15px; }
+    body {
+        /* Cho phép body dãn ra theo nội dung */
+        height: auto;
+        min-height: 100vh;
+        overflow-y: scroll; /* Bắt buộc hiện thanh cuộn */
+        padding: 40px 0; /* Thêm padding trên dưới để không bị sát */
+    }
+
+    .card-container { 
+        width: 95%; 
+        height: auto; /* Chiều cao tự động */
+        min-height: 600px; 
+        flex-direction: column; 
+        margin: 20px 0; 
+        /* Tắt animation thở trên mobile cho đỡ lag */
+        animation: none;
+    }
+
+    .col-left { 
+        border-right: none; 
+        border-bottom: 1px solid rgba(255,255,255,0.1); 
+        padding: 40px 20px 20px; 
+    }
+
+    .col-right { 
+        padding: 25px 20px; 
+        gap: 15px; 
+    }
 }
