@@ -1,186 +1,209 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Orbitron:wght@500;700&display=swap');
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahikari_Hola | Living Card</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+    <div class="overlay" id="start-overlay">
+        <div class="pulse-icon"><i class="fas fa-fingerprint"></i></div>
+        <p>CHẠM ĐỂ MỞ</p>
+    </div>
 
-body {
-    background: #0f0c29;
-    font-family: 'Outfit', sans-serif;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    color: #fff;
-}
+    <div class="bg-universe">
+        <div class="stars"></div>
+        <div class="shooting-stars"></div>
+    </div>
 
-/* --- BACKGROUND BLOBS --- */
-.bg-blobs { position: absolute; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
-.blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.6; animation: floatBlob 10s infinite alternate; }
-.b1 { width: 300px; height: 300px; background: #ff4b1f; top: -50px; left: -50px; }
-.b2 { width: 400px; height: 400px; background: #1fddff; bottom: -100px; right: -100px; animation-delay: -5s; }
-.b3 { width: 200px; height: 200px; background: #ff9068; top: 40%; left: 40%; animation-duration: 15s; }
+    <div class="card-container floating-card">
+        
+        <div class="col-left">
+            <div class="avatar-holder">
+                <div class="ripple-base">
+                    <span></span><span></span><span></span>
+                </div>
+                <img src="avatar.png" alt="Avatar" class="char-img">
+            </div>
 
-@keyframes floatBlob { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 50px); } }
+            <div class="name-box">
+                <h1 class="glitch-text" data-text="Mahikari_Hola">Mahikari_Hola <i class="fas fa-check-circle"></i></h1>
+                <div class="badge-row">
+                    <span class="badge">&lt;/&gt; CODER</span>
+                    <span class="badge">GAMER</span>
+                </div>
+            </div>
 
-/* --- OVERLAY --- */
-.overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(15, 12, 41, 0.95); z-index: 9999;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    cursor: pointer; transition: 0.5s;
-}
-.pulse-icon { font-size: 50px; color: #1fddff; animation: pulse 1.5s infinite; margin-bottom: 15px; }
-.overlay p { letter-spacing: 2px; font-weight: 800; font-size: 14px; }
-@keyframes pulse { 0% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 0.5; } }
+            <div class="social-row">
+                <a href="https://www.facebook.com/profile.php?id=61582336522985" target="_blank" class="s-btn fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.tiktok.com/@mahikari_hola" target="_blank" class="s-btn tt"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
 
-/* --- CARD WRAPPER --- */
-.card-wrapper {
-    position: relative;
-    width: 850px; max-width: 90%; 
-    height: 520px; /* Tăng chiều cao để chứa countdown */
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-}
+        <div class="col-right">
+            
+            <div class="countdown-box">
+                <div class="box-label"><i class="fas fa-clock"></i> SỰ KIỆN SẮP TỚI (VN)</div>
+                <div class="timer-display">
+                    <div class="t-unit"><span id="days">00</span><small>NGÀY</small></div>
+                    <div class="sep">:</div>
+                    <div class="t-unit"><span id="hours">00</span><small>GIỜ</small></div>
+                    <div class="sep">:</div>
+                    <div class="t-unit"><span id="minutes">00</span><small>PHÚT</small></div>
+                    <div class="sep">:</div>
+                    <div class="t-unit"><span id="seconds">00</span><small>GIÂY</small></div>
+                </div>
+            </div>
 
-.animated-border {
-    position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
-    border-radius: 32px;
-    background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc, #ff00cc);
-    background-size: 400%; z-index: -1;
-    animation: glowing 20s linear infinite; opacity: 0.7;
-}
-@keyframes glowing { 0% { background-position: 0 0; } 50% { background-position: 400% 0; } 100% { background-position: 0 0; } }
+            <div class="waifu-box">
+                <div class="box-label"><i class="fas fa-heart"></i> WAIFU LIST</div>
+                <ul class="w-list">
+                    <li class="top-1">
+                        <span class="rank">#1</span> Shiina Mahiru <i class="fas fa-crown"></i>
+                    </li>
+                    <li><span class="rank">#2</span> Kagari Fuyukawa</li>
+                    <li><span class="rank">#3</span> Hiura Mihate</li>
+                </ul>
+            </div>
 
-.card-content {
-    width: 100%; height: 100%; display: flex;
-    border-radius: 30px; overflow: hidden;
-    background: rgba(15, 12, 41, 0.6);
-}
+            <div class="music-player">
+                <div class="track-info">
+                    <div class="equalizer">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    </div>
+                    <div class="text-scroll">
+                        <span id="song-name">Waiting for music...</span>
+                    </div>
+                </div>
 
-/* --- CỘT TRÁI: IDENTITY --- */
-.col-identity {
-    flex: 1; border-right: 1px solid rgba(255,255,255,0.1);
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 20px; position: relative;
-}
+                <div class="progress-area" id="progress-container">
+                    <div class="progress-bar" id="progress"></div>
+                </div>
 
-.avatar-container {
-    width: 200px; height: 200px; position: relative;
-    display: flex; justify-content: center; align-items: flex-end; margin-bottom: 15px;
-}
+                <div class="controls">
+                    <button id="prev"><i class="fas fa-backward"></i></button>
+                    <button id="play" class="play-btn"><i class="fas fa-play"></i></button>
+                    <button id="next"><i class="fas fa-forward"></i></button>
+                    <div class="vol-wrapper">
+                        <i class="fas fa-volume-down"></i>
+                        <input type="range" id="volume-slider" min="0" max="100" value="50">
+                    </div>
+                </div>
 
-.magic-circle {
-    position: absolute; bottom: 10px; width: 100%; height: 50px;
-    border: 2px solid #1fddff; border-radius: 50%;
-    background: radial-gradient(rgba(31, 221, 255, 0.2), transparent);
-    transform: rotateX(60deg); animation: spinCircle 10s linear infinite;
-}
-@keyframes spinCircle { 100% { transform: rotateX(60deg) rotate(360deg); } }
+                <audio id="audio"></audio>
+            </div>
 
-.char-img {
-    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-    max-height: 130%; width: auto; max-width: 100%;
-    filter: drop-shadow(0 0 15px rgba(31, 221, 255, 0.4));
-    animation: floatChar 4s ease-in-out infinite; z-index: 2;
-}
-@keyframes floatChar { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-15px); } }
+        </div>
+    </div>
 
-.name-box { text-align: center; z-index: 3; }
-.glitch { font-size: 26px; font-weight: 800; position: relative; margin-bottom: 5px; }
-.glitch:hover { animation: glitchAnim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; color: #ff00cc; }
-@keyframes glitchAnim { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+    <script>
+        // --- 1. COUNTDOWN LOGIC (03/04/2026 18:30 VN) ---
+        const targetDate = new Date("2026-04-03T18:30:00+07:00").getTime();
 
-.badge-container { display: flex; gap: 8px; justify-content: center; }
-.badge { font-size: 10px; padding: 4px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; }
-.red { background: rgba(255, 75, 31, 0.2); border: 1px solid #ff4b1f; color: #ff4b1f; }
-.purple { background: rgba(189, 52, 254, 0.2); border: 1px solid #bd34fe; color: #bd34fe; }
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance < 0) return;
 
-.social-row { display: flex; gap: 10px; margin-top: 20px; z-index: 3; margin-bottom: 20px; }
-.s-btn {
-    width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,0.05);
-    display: flex; justify-content: center; align-items: center; color: #fff; text-decoration: none;
-    font-size: 18px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1);
-}
-.s-btn:hover { background: #fff; color: #000; transform: translateY(-5px); box-shadow: 0 0 20px #fff; }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-/* --- CSS CHO COUNTDOWN --- */
-.countdown-wrapper {
-    width: 100%;
-    margin-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 15px;
-    text-align: center;
-}
-.countdown-label {
-    font-size: 10px; color: #888; letter-spacing: 2px; font-weight: 800; margin-bottom: 8px;
-}
-.timer-box {
-    display: flex; justify-content: center; gap: 8px; align-items: center;
-    background: rgba(0,0,0,0.3); padding: 8px; border-radius: 10px;
-    border: 1px solid rgba(31, 221, 255, 0.3);
-}
-.time-unit { display: flex; flex-direction: column; align-items: center; width: 40px; }
-.time-unit span {
-    font-family: 'Orbitron', monospace; font-size: 18px; color: #1fddff; font-weight: 700;
-    text-shadow: 0 0 5px rgba(31, 221, 255, 0.6);
-}
-.time-unit small { font-size: 8px; color: #888; margin-top: 2px; }
-.separator { font-family: 'Orbitron', monospace; font-size: 16px; color: #fff; margin-top: -12px; }
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }, 1000);
 
-/* --- CỘT PHẢI: INFO --- */
-.col-info { flex: 1.3; padding: 40px; display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+        // --- 2. MUSIC PLAYER LOGIC ---
+        const playlist = [
+            { name: "Ngủ sớm đi em - DucMinh", file: "song1.mp3" },
+            { name: "Nhắn nhủ | Ronboogz",     file: "song2.mp3" },
+            { name: "W/n - id 072019 | 3107",  file: "song3.mp3" },
+            { name: "Madihu - Có em (Feat. Low G)", file: "song4.mp3" },
+            { name: "TƯƠNG TƯ | CLOW X FLEPY", file: "song5.mp3" },
+            { name: "Nghe kể năm 90s | Ân ngờ", file: "song6.mp3" }
+        ];
 
-.panel { background: rgba(0,0,0,0.3); border-radius: 20px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
-.panel-head { font-size: 12px; font-weight: 800; color: #888; margin-bottom: 15px; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
-.panel-head i { color: #1fddff; }
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const songName = document.getElementById('song-name');
+        const progress = document.getElementById('progress');
+        const progressContainer = document.getElementById('progress-container');
+        const volumeSlider = document.getElementById('volume-slider');
+        const overlay = document.getElementById('start-overlay');
+        const eqBars = document.querySelectorAll('.bar');
 
-.waifu-list { list-style: none; }
-.waifu-list li { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; font-size: 14px; }
-.waifu-list li:last-child { border-bottom: none; }
-.rank { width: 30px; font-weight: 800; color: #555; }
-.top-1 { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-.top-1 .rank { color: #ffd700; }
+        let songIndex = localStorage.getItem('songIndex') || 0;
+        if(songIndex >= playlist.length) songIndex = 0;
+        let isPlaying = false;
 
-/* MUSIC PLAYER */
-.track-info { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-.bars-animation { display: flex; gap: 4px; height: 20px; align-items: flex-end; }
-.bar { width: 4px; height: 5px; background: #1fddff; animation: equalize 0.5s infinite alternate; animation-play-state: paused; }
-.bar:nth-child(odd) { animation-delay: 0.2s; }
-@keyframes equalize { 100% { height: 20px; } }
+        loadSong(playlist[songIndex]);
+        audio.volume = 0.5;
 
-.track-text { flex: 1; overflow: hidden; }
-#song-name { display: block; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#timer { font-size: 11px; color: #888; }
+        overlay.addEventListener('click', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 500);
+            playSong();
+        });
 
-.progress-area { width: 100%; height: 5px; background: rgba(255,255,255,0.1); cursor: pointer; border-radius: 5px; margin-bottom: 15px; }
-.progress-bar { width: 0%; height: 100%; background: #1fddff; border-radius: 5px; box-shadow: 0 0 10px #1fddff; }
+        function loadSong(song) {
+            songName.innerText = song.name;
+            audio.src = song.file;
+            localStorage.setItem('songIndex', songIndex);
+        }
 
-.controls { display: flex; justify-content: center; gap: 20px; align-items: center; }
-.controls button { background: none; border: none; color: #888; font-size: 18px; cursor: pointer; transition: 0.2s; }
-.controls button:hover { color: #fff; }
-.play-btn {
-    width: 40px; height: 40px; border-radius: 50%; border: 2px solid #1fddff !important;
-    color: #1fddff !important; display: flex; justify-content: center; align-items: center; font-size: 14px !important;
-}
-.play-btn:hover { background: #1fddff !important; color: #000 !important; box-shadow: 0 0 20px #1fddff; }
+        function playSong() {
+            isPlaying = true;
+            audio.play();
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            eqBars.forEach(b => b.style.animationPlayState = 'running');
+        }
 
-.volume-control { display: flex; align-items: center; gap: 10px; margin-top: 15px; color: #888; font-size: 12px; }
-input[type=range] { flex: 1; height: 3px; accent-color: #1fddff; cursor: pointer; }
+        function pauseSong() {
+            isPlaying = false;
+            audio.pause();
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            eqBars.forEach(b => b.style.animationPlayState = 'paused');
+        }
 
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 850px) {
-    .card-wrapper {
-        width: 95%; height: auto; min-height: 600px; margin: 20px 0;
-    }
-    .card-content { flex-direction: column; }
-    .col-identity {
-        border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 40px 20px 20px;
-    }
-    .avatar-container { width: 180px; height: 180px; margin-bottom: 15px; }
-    .magic-circle { height: 40px; }
-    .name-box h1 { font-size: 24px; }
-    .col-info { padding: 25px 20px; gap: 15px; }
-    .controls button { font-size: 22px; }
-    .play-btn { width: 50px; height: 50px; }
-}
+        playBtn.addEventListener('click', () => isPlaying ? pauseSong() : playSong());
+
+        prevBtn.addEventListener('click', () => {
+            songIndex = (songIndex - 1 + playlist.length) % playlist.length;
+            loadSong(playlist[songIndex]);
+            playSong();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            songIndex = (songIndex + 1) % playlist.length;
+            loadSong(playlist[songIndex]);
+            playSong();
+        });
+
+        audio.addEventListener('timeupdate', (e) => {
+            const { duration, currentTime } = e.srcElement;
+            const percent = (currentTime / duration) * 100;
+            progress.style.width = `${percent}%`;
+        });
+        
+        audio.addEventListener('ended', () => nextBtn.click());
+        
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value / 100);
+    </script>
+</body>
+</html>
