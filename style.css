@@ -9,18 +9,38 @@ body {
     min-height: 100vh;
     overflow: hidden;
     color: #fff;
+    cursor: default; /* Có thể đổi thành none nếu muốn ẩn chuột */
 }
 
-/* --- BACKGROUND VŨ TRỤ (Có sao băng) --- */
+/* --- 1. MAGIC CURSOR CSS --- */
+.cursor-trail {
+    position: absolute; width: 10px; height: 10px;
+    background: #fbc2eb; border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    box-shadow: 0 0 10px #fbc2eb, 0 0 20px #fff;
+    transition: transform 0.1s, opacity 0.3s;
+    mix-blend-mode: screen;
+}
+
+/* --- 2. HEART POP CSS (Avatar Click) --- */
+.heart-pop {
+    position: fixed; font-size: 20px; color: #ff0099;
+    pointer-events: none; z-index: 9999;
+    animation: popMove 1s ease-out forwards;
+}
+@keyframes popMove {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--x), calc(var(--y) - 100px)) scale(0.5); opacity: 0; }
+}
+
+/* --- BACKGROUND VŨ TRỤ --- */
 .bg-universe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); overflow: hidden; }
 .stars {
     width: 1px; height: 1px; background: transparent;
-    box-shadow: 100px 200px #fff, 300px 500px #fff, 500px 100px #fff, 700px 300px #fff, 900px 600px #fff; /* Tạo sao tĩnh đơn giản */
+    box-shadow: 100px 200px #fff, 300px 500px #fff, 500px 100px #fff, 700px 300px #fff, 900px 600px #fff; 
     animation: twinkle 5s infinite;
 }
 @keyframes twinkle { 50% { opacity: 0.5; } }
-
-/* Sao băng rơi */
 .shooting-stars::before {
     content: ""; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px;
     background: #fff; border-radius: 50%;
@@ -44,37 +64,33 @@ body {
 .overlay p { letter-spacing: 3px; font-weight: 800; font-size: 14px; }
 @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 0.6; } }
 
-/* --- CARD CHÍNH (Hiệu ứng thở) --- */
+/* --- CARD CHÍNH --- */
 .card-container {
-    width: 850px; max-width: 90%; 
-    height: 520px;
+    width: 850px; max-width: 90%; height: 520px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(25px);
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
     display: flex; overflow: hidden;
-    animation: breathe 5s ease-in-out infinite; /* Card thở nhẹ */
+    animation: breathe 5s ease-in-out infinite;
 }
 @keyframes breathe {
     0%, 100% { transform: translateY(0); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
     50% { transform: translateY(-10px); box-shadow: 0 35px 60px rgba(161, 140, 209, 0.2); }
 }
 
-/* --- CỘT TRÁI: IDENTITY --- */
+/* --- CỘT TRÁI --- */
 .col-left {
     flex: 1.2; border-right: 1px solid rgba(255,255,255,0.1);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 20px; position: relative;
-    background: rgba(255, 255, 255, 0.02);
+    padding: 20px; position: relative; background: rgba(255, 255, 255, 0.02);
 }
 
 .avatar-holder {
     width: 200px; height: 200px; position: relative;
     display: flex; justify-content: center; align-items: flex-end; margin-bottom: 20px;
 }
-
-/* Hiệu ứng sóng nước (Ripple) dưới chân */
 .ripple-base {
     position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) rotateX(60deg);
     width: 150px; height: 150px;
@@ -93,7 +109,9 @@ body {
     max-height: 125%; width: auto; max-width: 100%;
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
     animation: floatChar 4s ease-in-out infinite; z-index: 2;
+    cursor: pointer; /* Để biết là click được */
 }
+.char-img:hover { filter: drop-shadow(0 0 15px #ff0099); transform: translateX(-50%) scale(1.05); }
 @keyframes floatChar { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
 
 .name-box { text-align: center; z-index: 3; }
@@ -101,7 +119,6 @@ body {
     font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 10px; position: relative;
     text-shadow: 2px 2px #ff00ff;
 }
-/* Hiệu ứng Glitch nhẹ */
 .glitch-text:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; }
 @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
 
@@ -119,18 +136,22 @@ body {
 }
 .s-btn:hover { background: #fff; color: #a18cd1; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(255,255,255,0.3); }
 
-/* --- CỘT PHẢI: INFO --- */
+/* --- CỘT PHẢI --- */
 .col-right {
     flex: 1.5; padding: 35px; display: flex; flex-direction: column; gap: 20px; justify-content: center;
 }
 
+/* SMART GREETING CSS */
+.greeting-style {
+    font-size: 14px; font-weight: 800; color: #ffd700; text-align: center;
+    background: rgba(255, 255, 255, 0.05); padding: 8px; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px;
+}
+
 .box-label { font-size: 11px; font-weight: 800; color: #fbc2eb; letter-spacing: 1.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 
-/* COUNTDOWN STYLE */
-.countdown-box {
-    background: rgba(0,0,0,0.2); border-radius: 15px; padding: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
-}
+/* COUNTDOWN */
+.countdown-box { background: rgba(0,0,0,0.2); border-radius: 15px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
 .timer-display { display: flex; justify-content: center; align-items: center; gap: 8px; }
 .t-unit { text-align: center; width: 45px; }
 .t-unit span { display: block; font-size: 20px; font-weight: 800; color: #fff; }
@@ -139,10 +160,7 @@ body {
 @keyframes blink { 50% { opacity: 0; } }
 
 /* WAIFU LIST */
-.waifu-box {
-    background: rgba(0,0,0,0.2); border-radius: 15px; padding: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
-}
+.waifu-box { background: rgba(0,0,0,0.2); border-radius: 15px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
 .w-list { list-style: none; }
 .w-list li { display: flex; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; font-size: 14px; }
 .w-list li:last-child { border-bottom: none; }
@@ -151,10 +169,7 @@ body {
 .top-1 .rank { color: #ffd700; }
 
 /* MUSIC PLAYER */
-.music-player {
-    background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 15px;
-    border: 1px solid rgba(255,255,255,0.2); margin-top: auto;
-}
+.music-player { background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 15px; border: 1px solid rgba(255,255,255,0.2); margin-top: auto; }
 .track-info { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .equalizer { display: flex; gap: 3px; align-items: flex-end; height: 15px; }
 .bar { width: 4px; height: 8px; background: #fbc2eb; border-radius: 2px; animation: eq 0.5s infinite alternate; animation-play-state: paused; }
@@ -171,7 +186,6 @@ body {
 .controls button { background: none; border: none; color: #ccc; cursor: pointer; font-size: 16px; }
 .controls button:hover { color: #fff; }
 .play-btn { width: 30px; height: 30px; background: #fff !important; color: #a18cd1 !important; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 12px !important; }
-
 .vol-wrapper { margin-left: auto; display: flex; align-items: center; gap: 5px; color: #ccc; font-size: 12px; }
 input[type=range] { width: 60px; height: 3px; accent-color: #fbc2eb; }
 
