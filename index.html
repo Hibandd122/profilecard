@@ -2,7 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Mahikari_Hola | Profilecard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahikari_Hola | Ultimate Profile</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -41,7 +42,32 @@
                     <a href="https://www.facebook.com/profile.php?id=61582336522985" target="_blank" class="s-btn fb"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://www.tiktok.com/@mahikari_hola" target="_blank" class="s-btn tt"><i class="fab fa-tiktok"></i></a>
                 </div>
-            </div>
+
+                <div class="countdown-wrapper">
+                    <div class="countdown-label">EVENT COUNTDOWN (VN)</div>
+                    <div class="timer-box" id="countdown-display" data-timer_second="4593814">
+                        <div class="time-unit">
+                            <span id="days">00</span>
+                            <small>DAYS</small>
+                        </div>
+                        <div class="separator">:</div>
+                        <div class="time-unit">
+                            <span id="hours">00</span>
+                            <small>HRS</small>
+                        </div>
+                        <div class="separator">:</div>
+                        <div class="time-unit">
+                            <span id="minutes">00</span>
+                            <small>MIN</small>
+                        </div>
+                        <div class="separator">:</div>
+                        <div class="time-unit">
+                            <span id="seconds">00</span>
+                            <small>SEC</small>
+                        </div>
+                    </div>
+                </div>
+                </div>
 
             <div class="col-info">
                 <div class="panel waifu-panel">
@@ -90,6 +116,46 @@
     </div>
 
     <script>
+        // --- LOGIC COUNTDOWN (CHẠY THEO GIÂY - KHÔNG SỢ SAI MÚI GIỜ) ---
+        const countdownEl = document.getElementById('countdown-display');
+        // Lấy số giây từ HTML
+        let totalSeconds = parseInt(countdownEl.getAttribute('data-timer_second'));
+
+        function startCountdown() {
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            const interval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(interval);
+                    daysEl.innerText = "00";
+                    return;
+                }
+
+                // Công thức quy đổi Giây -> Ngày/Giờ/Phút
+                const days = Math.floor(totalSeconds / (3600 * 24));
+                const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = Math.floor(totalSeconds % 60);
+
+                // Hiển thị (thêm số 0 nếu < 10)
+                daysEl.innerText = days < 10 ? '0' + days : days;
+                hoursEl.innerText = hours < 10 ? '0' + hours : hours;
+                minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+                secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+
+                // Giảm 1 giây
+                totalSeconds--;
+            }, 1000);
+        }
+
+        // Chạy ngay lập tức
+        startCountdown();
+
+
+        // --- LOGIC NHẠC (GIỮ NGUYÊN) ---
         const playlist = [
             { name: "Ngủ sớm đi em - DucMinh", file: "song1.mp3" },
             { name: "Nhắn nhủ | Ronboogz",     file: "song2.mp3" },
