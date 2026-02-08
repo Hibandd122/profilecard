@@ -1,8 +1,8 @@
 /* --- CẤU HÌNH --- */
 const CONFIG = {
-    avatarDefault: "avatar.png", // Ảnh mặc định
-    avatarChange: "avatar2.png", // Ảnh khi di chuột/click (BẠN CẦN CÓ FILE NÀY)
-    targetDate: "2026-04-03T18:30:00+07:00", // Giờ VN
+    avatarDefault: "avatar.png", 
+    avatarChange: "avatar2.png", 
+    targetDate: "2026-04-03T18:30:00+07:00", 
     roles: ["</> PYTHON CODER", "🎮 ROBLOX GAMER", "💖 WAIFU COLLECTOR", "🎵 LOFI CHILL"]
 };
 
@@ -17,51 +17,60 @@ document.addEventListener('mousemove', (e) => {
     setTimeout(() => trail.remove(), 300);
 });
 
-// --- 2. SMART GREETING (CHUẨN GIỜ VIỆT NAM) ---
+// --- 2. SMART GREETING ---
 function setGreeting() {
     const greetBox = document.getElementById('greeting-box');
-    
-    // Lấy giờ hiện tại theo múi giờ Việt Nam (Asia/Ho_Chi_Minh)
     const vnTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
     const hour = new Date(vnTime).getHours();
-
-    let msg = "";
-    let icon = "";
-
+    let msg = ""; let icon = "";
     if (hour >= 5 && hour < 12) { msg = "Ohayo! Chào buổi sáng"; icon = "⛅"; }
     else if (hour >= 12 && hour < 18) { msg = "Konnichiwa! Buổi chiều vui vẻ"; icon = "🍵"; }
     else { msg = "Oyasumi! Đêm rồi, chill thôi"; icon = "🌙"; }
-
     greetBox.innerHTML = `${icon} ${msg}`;
 }
 setGreeting();
-// Cập nhật lời chào mỗi phút để luôn đúng
 setInterval(setGreeting, 60000); 
 
-// --- 3. AVATAR INTERACTION (ĐỔI ẢNH + BẮN TIM) ---
+// --- 3. FIX AVATAR TRÊN MOBILE + CLICK ---
 const avatarImg = document.getElementById('char-avatar');
 
-// a. Đổi ảnh khi di chuột vào (Hover)
+// Hàm xử lý đổi ảnh tạm thời (dùng chung cho click và touch)
+function tempChangeAvatar(e) {
+    // Đổi ảnh
+    avatarImg.src = CONFIG.avatarChange;
+    
+    // Hiệu ứng bắn tim
+    if (e) {
+        // Lấy tọa độ click hoặc touch
+        let clientX = e.clientX;
+        let clientY = e.clientY;
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        }
+
+        for(let i=0; i<10; i++) {
+            createHeart(clientX, clientY);
+        }
+    }
+
+    // Sau 2 giây tự trả về ảnh cũ
+    setTimeout(() => {
+        avatarImg.src = CONFIG.avatarDefault;
+    }, 2000);
+}
+
+// PC: Hover vào đổi ảnh
 avatarImg.addEventListener('mouseenter', () => {
     avatarImg.src = CONFIG.avatarChange;
 });
-
-// b. Trả lại ảnh cũ khi di chuột ra
 avatarImg.addEventListener('mouseleave', () => {
     avatarImg.src = CONFIG.avatarDefault;
 });
 
-// c. Click: Bắn tim + Giữ ảnh thay đổi một chút
-avatarImg.addEventListener('click', (e) => {
-    // Đổi ảnh (nếu đang dùng điện thoại không có hover)
-    avatarImg.src = CONFIG.avatarChange;
-    setTimeout(() => avatarImg.src = CONFIG.avatarDefault, 2000); // 2 giây sau về lại cũ
-
-    // Hiệu ứng bắn tim
-    for(let i=0; i<10; i++) {
-        createHeart(e.clientX, e.clientY);
-    }
-});
+// PC & Mobile: Click/Touch để đổi ảnh + bắn tim
+avatarImg.addEventListener('click', tempChangeAvatar);
+avatarImg.addEventListener('touchstart', tempChangeAvatar, {passive: true});
 
 function createHeart(x, y) {
     const heart = document.createElement('div');
@@ -77,7 +86,8 @@ function createHeart(x, y) {
     setTimeout(() => heart.remove(), 1000);
 }
 
-// --- 4. TYPEWRITER EFFECT (CHỮ CHẠY) ---
+// --- 4. FIX LỖI GIẬT CHỮ (TYPEWRITER) ---
+// Đã fix cứng min-height trong CSS, logic JS giữ nguyên
 let roleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -85,10 +95,15 @@ const typeTarget = document.getElementById('typing-text');
 
 function typeEffect() {
     const currentRole = CONFIG.roles[roleIndex];
-    if (isDeleting) {
-        typeTarget.innerText = currentRole.substring(0, charIndex--);
+    
+    // Thêm ký tự không nhìn thấy để giữ dòng không bị xẹp khi xóa hết
+    let textToShow = isDeleting ? currentRole.substring(0, charIndex--) : currentRole.substring(0, charIndex++);
+    
+    // Mẹo: Luôn giữ một ký tự tàng hình (&nbsp;) nếu chuỗi rỗng để giữ độ cao
+    if (textToShow.length === 0) {
+        typeTarget.innerHTML = "&nbsp;"; 
     } else {
-        typeTarget.innerText = currentRole.substring(0, charIndex++);
+        typeTarget.innerText = textToShow;
     }
 
     let typeSpeed = isDeleting ? 50 : 100;
@@ -107,12 +122,10 @@ setInterval(() => {
     const now = new Date().getTime();
     const distance = targetTime - now;
     if (distance < 0) return;
-
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
     document.getElementById('days').innerText = days < 10 ? '0' + days : days;
     document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
     document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
@@ -128,7 +141,6 @@ const playlist = [
     { name: "TƯƠNG TƯ | CLOW X FLEPY", file: "song5.mp3" },
     { name: "Nghe kể năm 90s | Ân ngờ", file: "song6.mp3" }
 ];
-
 const audio = document.getElementById('audio');
 const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
@@ -143,7 +155,6 @@ const eqBars = document.querySelectorAll('.bar');
 let songIndex = localStorage.getItem('songIndex') || 0;
 if(songIndex >= playlist.length) songIndex = 0;
 let isPlaying = false;
-
 loadSong(playlist[songIndex]);
 audio.volume = 0.5;
 
@@ -158,13 +169,11 @@ function loadSong(song) {
     audio.src = song.file;
     localStorage.setItem('songIndex', songIndex);
 }
-
 function playSong() {
     isPlaying = true; audio.play();
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
     eqBars.forEach(b => b.style.animationPlayState = 'running');
 }
-
 function pauseSong() {
     isPlaying = false; audio.pause();
     playBtn.innerHTML = '<i class="fas fa-play"></i>';
