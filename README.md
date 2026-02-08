@@ -1,66 +1,66 @@
 <div align="center">
 
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=Mahikari_Hola%20Profile&fontSize=80&fontAlign=50&fontAlignY=35&desc=Ultimate%20Interactive%20Card&descAlign=50&descAlignY=60&animation=fadeIn" alt="Header" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=280&section=header&text=Mahikari_Hola%20Profile&fontSize=70&fontAlign=50&fontAlignY=35&desc=Ultimate%20Interactive%20Hologram&descAlign=50&descAlignY=60&animation=fadeIn&fontColor=ffffff" alt="Header" width="100%"/>
 
-  # ✨ Ultimate Personal Profile Card
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/Vibe-Chill-7b2cbf?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Waifu-Approved-ff0099?style=for-the-badge" />
+</p>
 
-  **Một chiếc Profile Card mang phong cách "Angelic Sunset" với hiệu ứng tương tác cao cấp, trình phát nhạc và đếm ngược thời gian thực.**
+# 🌌 Ultimate Personal Profile Card
 
-  [Xem Demo (Link web của bạn)] • [Báo lỗi (Issues)]
+**Chào mừng đến với không gian số của tôi! Một chiếc Card Profile mang phong cách "Angelic Sunset" kết hợp công nghệ tương tác thực tế.**
 
-  <p align="center">
-    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-    <img src="https://img.shields.io/badge/Design-Glassmorphism-pink?style=for-the-badge" />
-  </p>
+[✨ Xem Demo Trực Tiếp](#) • [🐛 Báo Lỗi](#)
+
 </div>
 
 ---
 
-## 📸 Ảnh Minh Họa (Screenshot)
+## 🚀 Tính Năng Đỉnh Cao (Highlights)
 
-<div align="center">
-  <img src="https://via.placeholder.com/800x400?text=Thay+Anh+Web+Cua+Ban+Vao+Day" alt="Demo Screenshot" width="100%" />
-</div>
+Dự án này được tích hợp những hiệu ứng Visual và Audio xịn nhất hiện nay:
 
----
-
-## 🌟 Tính Năng Nổi Bật (Features)
-
-Dự án này không chỉ là một trang web tĩnh, nó là một trải nghiệm tương tác sống động:
-
-### 🎨 Giao diện & Hiệu ứng
-* **Angelic Sunset Theme:** Phối màu Tím/Hồng Pastel huyền ảo.
-* **Magic Cursor:** Hiệu ứng sao băng đi theo con trỏ chuột.
-* **Interactive Avatar:**
-    * Hover: Đổi biểu cảm nhân vật.
-    * Click: Hiệu ứng bắn tim (Heart Pop) tung tóe.
-    * Ripple Effect: Hiệu ứng sóng nước dưới chân nhân vật.
-* **Background Động:** Sao rơi (Shooting stars) và bầu trời đêm lung linh.
-
-### ⚙️ Chức năng Thông minh
-* **🕒 Smart Greeting:** Tự động chào "Ohayo", "Konnichiwa" hoặc "Oyasumi" dựa trên giờ thực tế của Việt Nam.
-* **⏳ Event Countdown:** Đếm ngược chính xác đến từng giây cho sự kiện quan trọng (Auto sync múi giờ VN).
-* **🎵 Music Player:**
-    * Danh sách phát không giới hạn.
-    * Visualizer (Sóng nhạc) nhảy theo điệu nhạc.
-    * Thanh tiến trình, điều chỉnh âm lượng.
-* **⌨️ Typewriter Effect:** Hiệu ứng gõ chữ tự động thay đổi vai trò (Coder, Gamer, Waifu Collector...).
+| Danh Mục | Tính Năng | Mô Tả Chi Tiết |
+| :--- | :--- | :--- |
+| **🎨 VISUAL** | ![Magic Cursor](https://img.shields.io/badge/Magic_Cursor-FF69B4?style=flat-square) | Hiệu ứng sao băng màu hồng phấn bay theo con trỏ chuột. |
+| | ![Living Card](https://img.shields.io/badge/Living_Card-8A2BE2?style=flat-square) | Thẻ Card có hiệu ứng "thở" và nền vũ trụ sao rơi. |
+| | ![Hologram](https://img.shields.io/badge/Scanline-00FFFF?style=flat-square) | Quét tia sáng dọc thẻ tạo cảm giác công nghệ tương lai. |
+| **🤖 AI/LOGIC** | ![Smart Greeting](https://img.shields.io/badge/Smart_Greeting-FFA500?style=flat-square) | Tự động chào (Ohayo/Konnichiwa) theo giờ VN chuẩn xác. |
+| | ![Countdown](https://img.shields.io/badge/Event_Timer-00FF00?style=flat-square) | Đếm ngược sự kiện `03/04/2026` theo múi giờ thực. |
+| **🖱️ INTERACT** | ![Waifu Click](https://img.shields.io/badge/Interactive-Heart_Pop-FF0000?style=flat-square) | Click vào Avatar để bắn tim tung tóe màn hình. |
+| | ![Typewriter](https://img.shields.io/badge/Effect-Typewriter-CCCCCC?style=flat-square) | Chữ tự động gõ và xóa (Coder -> Gamer -> Collector). |
 
 ---
 
-## 📂 Cấu Trúc Thư Mục
+## 🎵 Danh Sách Nhạc (Playlist)
 
-```text
-📦 mahikari-profile
- ┣ 📂 songs           # Chứa các file nhạc (.mp3)
- ┃ ┣ 📜 song1.mp3
- ┃ ┣ 📜 song2.mp3
+Hệ thống tích hợp trình phát nhạc Visualizer sóng âm:
+
+| # | Tên Bài Hát | Trạng Thái |
+| :-: | :--- | :--- |
+| 01 | **Ngủ sớm đi em** - DucMinh | 🌙 Chill |
+| 02 | **Nhắn nhủ** - Ronboogz | 🎹 Lofi |
+| 03 | **id 072019** - W/n | 🌧️ Mood |
+| 04 | **Có em** - Madihu ft. Low G | 🎸 Vibe |
+| 05 | **Tương Tư** - CLOW | 🎤 Rap |
+| 06 | **Nghe kể năm 90s** | 📻 Retro |
+
+---
+
+## 📂 Cấu Trúc Thư Mục (Structure)
+
+```bash
+📦 MAHIKARI-PROFILE
+ ┣ 📂 songs/                # Kho nhạc chất lượng cao
+ ┃ ┣ 💿 song1.mp3
  ┃ ┗ ...
- ┣ 📜 index.html      # Cấu trúc trang web
- ┣ 📜 style.css       # Giao diện & Hiệu ứng (Animations)
- ┣ 📜 script.js       # Logic xử lý (Music, Countdown, Greeting)
- ┣ 📜 avatar.png      # Ảnh đại diện mặc định
- ┣ 📜 avatar2.png     # Ảnh đại diện khi hover/click
- ┗ 📜 README.md       # Tài liệu hướng dẫn này
+ ┣ 📜 index.html            # Bộ khung xương (Skeleton)
+ ┣ 📜 style.css             # Trang điểm & Hiệu ứng (Makeup)
+ ┣ 📜 script.js             # Bộ não xử lý (Brain)
+ ┣ 📜 avatar.png            # Ảnh chính (Normal State)
+ ┣ 📜 avatar2.png           # Ảnh tương tác (Hover State)
+ ┗ 📜 README.md             # Bạn đang đọc cái này đây!
