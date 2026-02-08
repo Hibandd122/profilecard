@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahikari_Hola | Living Card</title>
+    <title>Mahikari_Hola | Ultimate</title>
+    <link rel="icon" type="image/png" href="avatar.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -11,7 +12,7 @@
 
     <div class="overlay" id="start-overlay">
         <div class="pulse-icon"><i class="fas fa-fingerprint"></i></div>
-        <p>CHẠM ĐỂ MỞ</p>
+        <p>CHẠM ĐỂ KẾT NỐI</p>
     </div>
 
     <div class="bg-universe">
@@ -23,17 +24,16 @@
         
         <div class="col-left">
             <div class="avatar-holder">
-                <div class="ripple-base">
-                    <span></span><span></span><span></span>
-                </div>
-                <img src="avatar.png" alt="Avatar" class="char-img">
+                <div class="ripple-base"><span></span><span></span><span></span></div>
+                
+                <img src="avatar.png" alt="Avatar" class="char-img" id="char-avatar">
+                
             </div>
 
             <div class="name-box">
                 <h1 class="glitch-text" data-text="Mahikari_Hola">Mahikari_Hola <i class="fas fa-check-circle"></i></h1>
                 <div class="badge-row">
-                    <span class="badge">&lt;/&gt; CODER</span>
-                    <span class="badge">GAMER</span>
+                    <span class="badge" id="typing-text"></span>
                 </div>
             </div>
 
@@ -44,16 +44,14 @@
         </div>
 
         <div class="col-right">
-            
+            <div id="greeting-box" class="greeting-style">Loading...</div>
+
             <div class="countdown-box">
                 <div class="box-label"><i class="fas fa-clock"></i> SỰ KIỆN SẮP TỚI (VN)</div>
                 <div class="timer-display">
-                    <div class="t-unit"><span id="days">00</span><small>NGÀY</small></div>
-                    <div class="sep">:</div>
-                    <div class="t-unit"><span id="hours">00</span><small>GIỜ</small></div>
-                    <div class="sep">:</div>
-                    <div class="t-unit"><span id="minutes">00</span><small>PHÚT</small></div>
-                    <div class="sep">:</div>
+                    <div class="t-unit"><span id="days">00</span><small>NGÀY</small></div><div class="sep">:</div>
+                    <div class="t-unit"><span id="hours">00</span><small>GIỜ</small></div><div class="sep">:</div>
+                    <div class="t-unit"><span id="minutes">00</span><small>PHÚT</small></div><div class="sep">:</div>
                     <div class="t-unit"><span id="seconds">00</span><small>GIÂY</small></div>
                 </div>
             </div>
@@ -61,9 +59,7 @@
             <div class="waifu-box">
                 <div class="box-label"><i class="fas fa-heart"></i> WAIFU LIST</div>
                 <ul class="w-list">
-                    <li class="top-1">
-                        <span class="rank">#1</span> Shiina Mahiru <i class="fas fa-crown"></i>
-                    </li>
+                    <li class="top-1"><span class="rank">#1</span> Shiina Mahiru <i class="fas fa-crown"></i></li>
                     <li><span class="rank">#2</span> Kagari Fuyukawa</li>
                     <li><span class="rank">#3</span> Hiura Mihate</li>
                 </ul>
@@ -71,139 +67,21 @@
 
             <div class="music-player">
                 <div class="track-info">
-                    <div class="equalizer">
-                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                    </div>
-                    <div class="text-scroll">
-                        <span id="song-name">Waiting for music...</span>
-                    </div>
+                    <div class="equalizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                    <div class="text-scroll"><span id="song-name">Waiting...</span></div>
                 </div>
-
-                <div class="progress-area" id="progress-container">
-                    <div class="progress-bar" id="progress"></div>
-                </div>
-
+                <div class="progress-area" id="progress-container"><div class="progress-bar" id="progress"></div></div>
                 <div class="controls">
                     <button id="prev"><i class="fas fa-backward"></i></button>
                     <button id="play" class="play-btn"><i class="fas fa-play"></i></button>
                     <button id="next"><i class="fas fa-forward"></i></button>
-                    <div class="vol-wrapper">
-                        <i class="fas fa-volume-down"></i>
-                        <input type="range" id="volume-slider" min="0" max="100" value="50">
-                    </div>
+                    <div class="vol-wrapper"><i class="fas fa-volume-down"></i><input type="range" id="volume-slider" min="0" max="100" value="50"></div>
                 </div>
-
                 <audio id="audio"></audio>
             </div>
-
         </div>
     </div>
 
-    <script>
-        // --- 1. COUNTDOWN LOGIC (03/04/2026 18:30 VN) ---
-        const targetDate = new Date("2026-04-03T18:30:00+07:00").getTime();
-
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            
-            if (distance < 0) return;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-        }, 1000);
-
-        // --- 2. MUSIC PLAYER LOGIC ---
-        const playlist = [
-            { name: "Ngủ sớm đi em - DucMinh", file: "song1.mp3" },
-            { name: "Nhắn nhủ | Ronboogz",     file: "song2.mp3" },
-            { name: "W/n - id 072019 | 3107",  file: "song3.mp3" },
-            { name: "Madihu - Có em (Feat. Low G)", file: "song4.mp3" },
-            { name: "TƯƠNG TƯ | CLOW X FLEPY", file: "song5.mp3" },
-            { name: "Nghe kể năm 90s | Ân ngờ", file: "song6.mp3" }
-        ];
-
-        const audio = document.getElementById('audio');
-        const playBtn = document.getElementById('play');
-        const prevBtn = document.getElementById('prev');
-        const nextBtn = document.getElementById('next');
-        const songName = document.getElementById('song-name');
-        const progress = document.getElementById('progress');
-        const progressContainer = document.getElementById('progress-container');
-        const volumeSlider = document.getElementById('volume-slider');
-        const overlay = document.getElementById('start-overlay');
-        const eqBars = document.querySelectorAll('.bar');
-
-        let songIndex = localStorage.getItem('songIndex') || 0;
-        if(songIndex >= playlist.length) songIndex = 0;
-        let isPlaying = false;
-
-        loadSong(playlist[songIndex]);
-        audio.volume = 0.5;
-
-        overlay.addEventListener('click', () => {
-            overlay.style.opacity = '0';
-            setTimeout(() => overlay.style.display = 'none', 500);
-            playSong();
-        });
-
-        function loadSong(song) {
-            songName.innerText = song.name;
-            audio.src = song.file;
-            localStorage.setItem('songIndex', songIndex);
-        }
-
-        function playSong() {
-            isPlaying = true;
-            audio.play();
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            eqBars.forEach(b => b.style.animationPlayState = 'running');
-        }
-
-        function pauseSong() {
-            isPlaying = false;
-            audio.pause();
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            eqBars.forEach(b => b.style.animationPlayState = 'paused');
-        }
-
-        playBtn.addEventListener('click', () => isPlaying ? pauseSong() : playSong());
-
-        prevBtn.addEventListener('click', () => {
-            songIndex = (songIndex - 1 + playlist.length) % playlist.length;
-            loadSong(playlist[songIndex]);
-            playSong();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            songIndex = (songIndex + 1) % playlist.length;
-            loadSong(playlist[songIndex]);
-            playSong();
-        });
-
-        audio.addEventListener('timeupdate', (e) => {
-            const { duration, currentTime } = e.srcElement;
-            const percent = (currentTime / duration) * 100;
-            progress.style.width = `${percent}%`;
-        });
-        
-        audio.addEventListener('ended', () => nextBtn.click());
-        
-        progressContainer.addEventListener('click', (e) => {
-            const width = progressContainer.clientWidth;
-            const clickX = e.offsetX;
-            const duration = audio.duration;
-            audio.currentTime = (clickX / width) * duration;
-        });
-
-        volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value / 100);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
