@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahikari_Hola | Ultimate</title>
+    <title>Mahikari_Hola | Cosmic</title>
     <link rel="icon" type="image/png" href="avatar.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -11,27 +11,31 @@
 <body>
 
     <div class="overlay" id="start-overlay">
-        <div class="pulse-icon"><i class="fas fa-fingerprint"></i></div>
-        <p>CHẠM ĐỂ KẾT NỐI</p>
+        <div class="loader-ring"></div>
+        <p>INITIALIZING...</p>
     </div>
 
-    <div class="bg-universe">
-        <div class="stars"></div>
-        <div class="shooting-stars"></div>
+    <div class="bg-fixed"></div>
+    
+    <div class="cosmic-portal"></div>
+
+    <div class="fireflies">
+        <div class="fly"></div><div class="fly"></div><div class="fly"></div><div class="fly"></div><div class="fly"></div>
+        <div class="fly"></div><div class="fly"></div><div class="fly"></div><div class="fly"></div><div class="fly"></div>
+        <div class="fly"></div><div class="fly"></div><div class="fly"></div><div class="fly"></div><div class="fly"></div>
     </div>
 
-    <div class="card-container floating-card">
+    <div class="card-container">
+        <span class="rgb-border"></span>
         
         <div class="col-left">
             <div class="avatar-holder">
                 <div class="ripple-base"><span></span><span></span><span></span></div>
-                
                 <img src="avatar.png" alt="Avatar" class="char-img" id="char-avatar">
-                
             </div>
 
             <div class="name-box">
-                <h1 class="glitch-text" data-text="Mahikari_Hola">Mahikari_Hola <i class="fas fa-check-circle"></i></h1>
+                <h1 class="gradient-text" data-text="Mahikari_Hola">Mahikari_Hola</h1>
                 <div class="badge-row">
                     <span class="badge" id="typing-text"></span>
                 </div>
