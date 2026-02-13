@@ -1,256 +1,1078 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-    background: #0d0616; /* Nền tối tuyệt đối để hiệu ứng sáng nổi bật */
     font-family: 'Nunito', sans-serif;
-    display: flex; justify-content: center; align-items: center;
+    background: #03050f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
     color: #fff;
     overflow-x: hidden;
     overflow-y: auto;
+    position: relative;
 }
 
-/* --- OVERLAY MỚI (LOADER RING) --- */
-.overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #000; z-index: 9999;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    transition: 0.5s;
+/* ----- NỀN SAO ĐỘNG (CANVAS) ----- */
+.starry-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -5;
 }
-.loader-ring {
-    width: 60px; height: 60px; border-radius: 50%;
-    border: 5px solid transparent; border-top-color: #00f2ff; border-bottom-color: #ff0099;
-    animation: spinLoader 1s linear infinite; margin-bottom: 20px;
-}
-@keyframes spinLoader { 100% { transform: rotate(360deg); } }
-.overlay p { letter-spacing: 5px; color: #00f2ff; font-weight: 800; font-size: 14px; animation: blink 1s infinite; }
 
-/* --- 1. COSMIC PORTAL (VÒNG XOÁY SAU LƯNG) --- */
-.cosmic-portal {
-    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 900px; height: 900px;
-    background: conic-gradient(from 0deg, transparent 0%, #4a00e0 20%, #8e2de2 40%, transparent 60%);
+/* ----- TINH VÂN BIẾN MÀU ----- */
+.nebula {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 30%, rgba(0,242,255,0.08) 0%, transparent 45%),
+                radial-gradient(circle at 80% 60%, rgba(255,0,153,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(128,0,255,0.08) 0%, transparent 55%);
+    filter: blur(70px);
+    animation: nebulaWave 20s infinite alternate;
+    z-index: -4;
+}
+
+@keyframes nebulaWave {
+    0% { opacity: 0.4; transform: scale(1); }
+    100% { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* ----- CỔNG VŨ TRỤ XOÁY KÉP ----- */
+.cosmic-whirl {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1300px;
+    height: 1300px;
+    background: conic-gradient(from 0deg, transparent 0deg, #4a00e0 30deg, #8e2de2 70deg, #00f2ff 130deg, transparent 190deg);
     border-radius: 50%;
-    filter: blur(80px); /* Làm mờ để tạo hào quang */
-    opacity: 0.6;
-    animation: rotatePortal 10s linear infinite;
+    filter: blur(110px);
+    opacity: 0.25;
+    animation: spinCosmic 35s linear infinite;
+    z-index: -3;
+}
+
+.cosmic-whirl.secondary {
+    width: 1000px;
+    height: 1000px;
+    background: conic-gradient(from 180deg, transparent 0deg, #ff0099 30deg, #00f2ff 90deg, transparent 160deg);
+    animation: spinCosmicReverse 40s linear infinite;
+    opacity: 0.15;
+}
+
+@keyframes spinCosmic {
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinCosmicReverse {
+    100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+/* ----- HẠT SPARK TƯƠNG TÁC (CANVAS) ----- */
+.spark-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9997;
+}
+
+/* ----- LOADER GLITCH ----- */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #03050f;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 25px;
+}
+
+.ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: #00f2ff;
+    border-bottom-color: #ff0099;
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.ring.inner {
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 15%;
+    border-top-color: #ff0099;
+    border-bottom-color: #00f2ff;
+    animation-direction: reverse;
+    animation-duration: 0.7s;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.glitch-text {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: #00f2ff;
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+}
+
+.glitch-text::before {
+    color: #ff0099;
     z-index: -1;
-}
-@keyframes rotatePortal { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
-
-/* --- 2. FIREFLIES (ĐOM ĐÓM BAY LÊN) --- */
-.fireflies { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-.fly {
-    position: absolute; bottom: -50px; width: 4px; height: 4px;
-    background: #fbc2eb; border-radius: 50%;
-    box-shadow: 0 0 10px #fbc2eb, 0 0 20px #fbc2eb;
-    animation: riseUp 15s linear infinite;
-}
-/* Random vị trí và tốc độ cho từng con đom đóm */
-.fly:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
-.fly:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: 2s; }
-.fly:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: 4s; }
-.fly:nth-child(4) { left: 40%; animation-duration: 14s; animation-delay: 1s; }
-.fly:nth-child(5) { left: 50%; animation-duration: 9s; animation-delay: 3s; }
-.fly:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: 5s; }
-.fly:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: 2s; }
-.fly:nth-child(8) { left: 80%; animation-duration: 10s; animation-delay: 0s; }
-.fly:nth-child(9) { left: 90%; animation-duration: 15s; animation-delay: 4s; }
-.fly:nth-child(10) { left: 15%; animation-duration: 12s; animation-delay: 6s; }
-.fly:nth-child(11) { left: 85%; animation-duration: 9s; animation-delay: 1s; }
-.fly:nth-child(12) { left: 55%; animation-duration: 14s; animation-delay: 3s; }
-.fly:nth-child(13) { left: 25%; animation-duration: 10s; animation-delay: 5s; }
-.fly:nth-child(14) { left: 75%; animation-duration: 13s; animation-delay: 2s; }
-.fly:nth-child(15) { left: 45%; animation-duration: 11s; animation-delay: 0s; }
-
-@keyframes riseUp {
-    0% { transform: translateY(0) scale(0); opacity: 0; }
-    10% { opacity: 1; transform: translateY(-10vh) scale(1); }
-    90% { opacity: 1; transform: translateY(-90vh) scale(1); }
-    100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+    animation: glitchOffset 0.2s infinite;
 }
 
-/* --- CARD CHÍNH --- */
+.glitch-text::after {
+    color: #00f2ff;
+    z-index: -2;
+    animation: glitchOffset 0.1s infinite reverse;
+}
+
+@keyframes glitchOffset {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 2px); }
+    40% { transform: translate(3px, -2px); }
+    60% { transform: translate(-3px, 1px); }
+    80% { transform: translate(3px, -1px); }
+    100% { transform: translate(0); }
+}
+
+.tap-pulse {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    letter-spacing: 4px;
+    margin-top: 25px;
+    animation: pulseFade 1.8s infinite;
+    border: 1px solid rgba(0,242,255,0.3);
+    padding: 8px 22px;
+    border-radius: 40px;
+}
+
+@keyframes pulseFade {
+    0%, 100% { opacity: 0.6; box-shadow: 0 0 10px rgba(0,242,255,0.2); }
+    50% { opacity: 1; box-shadow: 0 0 25px rgba(0,242,255,0.6); }
+}
+
+/* ----- CARD CHÍNH 3D TILT ----- */
+.card-wrapper {
+    perspective: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    margin: 25px 0;
+    z-index: 10;
+}
+
 .card-container {
-    width: 850px; max-width: 90%; height: 600px;
-    background: rgba(18, 18, 30, 0.7); /* Nền tối hơn */
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-radius: 30px;
-    display: flex; position: relative;
-    overflow: hidden; /* Quan trọng cho viền RGB */
-    margin: 50px 0;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    animation: floatCard 6s ease-in-out infinite;
-    z-index: 1;
+    width: 860px;
+    max-width: 94%;
+    height: 620px;
+    background: rgba(10, 10, 20, 0.68);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 40px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+    animation: floatSoft 8s infinite ease-in-out;
+    transition: box-shadow 0.2s, transform 0.1s;
+    z-index: 10;
 }
 
-/* 3. VIỀN RGB CHẢY (FLOWING BORDER) */
-.rgb-border {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 30px; padding: 2px; /* Độ dày viền */
+.card-container.pulse {
+    box-shadow: 0 0 50px #00f2ff, 0 0 100px #ff0099;
+}
+
+@keyframes floatSoft {
+    0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+    50% { transform: translateY(-8px) rotateX(0.5deg) rotateY(1deg); }
+}
+
+/* ----- VIỀN RGB CHẢY NHANH HƠN ----- */
+.rgb-flow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 40px;
+    padding: 2px;
     background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-    background-size: 400%;
+    background-size: 500% 100%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: rgbFlow 10s linear infinite;
-    pointer-events: none; z-index: 10;
+    animation: rgbStream 5s linear infinite;
+    pointer-events: none;
+    z-index: 15;
+    opacity: 0.9;
 }
-@keyframes rgbFlow { 0% { background-position: 0 0; } 100% { background-position: 400% 0; } }
 
-@keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+.rgb-flow.reverse {
+    background: linear-gradient(270deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background-size: 500% 100%;
+    animation: rgbStreamReverse 7s linear infinite;
+    opacity: 0.5;
+}
 
-/* --- CỘT TRÁI --- */
+@keyframes rgbStream {
+    0% { background-position: 0% 0; }
+    100% { background-position: 500% 0; }
+}
+
+@keyframes rgbStreamReverse {
+    0% { background-position: 500% 0; }
+    100% { background-position: 0% 0; }
+}
+
+/* ----- CỘT TRÁI ----- */
 .col-left {
-    flex: 1.2; border-right: 1px solid rgba(255,255,255,0.1);
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 20px; position: relative;
+    flex: 1.2;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
 }
-.avatar-holder {
-    width: 220px; height: 220px; position: relative;
-    display: flex; justify-content: center; align-items: flex-end; margin-bottom: 20px;
+
+.avatar-zone {
+    width: 220px;
+    height: 220px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 15px;
 }
-/* Hiệu ứng xoáy dưới chân mạnh hơn */
-.ripple-base {
-    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) rotateX(60deg);
-    width: 160px; height: 160px;
-    background: radial-gradient(transparent, rgba(0, 242, 255, 0.2)); /* Thêm nền nhẹ */
+
+/* HÀO QUANG XOAY KÉP */
+.halo-rotate {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
-}
-.ripple-base span {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    border: 2px solid #00f2ff; border-radius: 50%;
-    animation: ripple 2s linear infinite; opacity: 0;
-}
-@keyframes ripple { 0% { width: 0; height: 0; opacity: 1; margin-top: 80px; margin-left: 80px; } 100% { width: 100%; height: 100%; opacity: 0; margin-top: 0; margin-left: 0; } }
-
-.char-img {
-    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    max-height: 125%; width: auto; max-width: 100%;
-    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.5)); /* Glow xanh */
-    transition: transform 0.3s, opacity 0.3s, bottom 0.2s; /* Thêm transition cho bottom */
-    cursor: pointer; z-index: 2;
+    border: 2px solid transparent;
+    border-top: 3px solid #00f2ff;
+    border-bottom: 3px solid #ff0099;
+    animation: spinHalo 6s linear infinite;
+    box-shadow: 0 0 25px rgba(0,242,255,0.4);
 }
 
-/* FIX QUAN TRỌNG: Kéo Avatar 2 xuống */
-.char-img.fix-height { bottom: -30px !important; }
-
-.char-img.active-touch { transform: translateX(-50%) scale(1.1); filter: drop-shadow(0 0 30px #ff0099); }
-.char-img:hover { transform: translateX(-50%) scale(1.05); filter: drop-shadow(0 0 25px #ff0099); }
-
-.name-box { text-align: center; margin-bottom: 10px; z-index: 3; }
-
-/* 4. TÊN GRADIENT CHUYỂN MÀU */
-.gradient-text {
-    font-size: 32px; font-weight: 800; margin-bottom: 5px;
-    background: linear-gradient(to right, #00f2ff, #00c6ff, #0072ff, #ff0099);
-    background-size: 200% auto;
-    color: transparent; -webkit-background-clip: text; background-clip: text;
-    animation: textFlow 3s linear infinite;
-}
-@keyframes textFlow { to { background-position: 200% center; } }
-
-.badge-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 25px; min-height: 28px; }
-.badge {
-    background: rgba(255,255,255,0.05); padding: 6px 15px; border-radius: 20px;
-    font-size: 11px; font-weight: 700; border: 1px solid rgba(0, 242, 255, 0.3); color: #00f2ff;
-    display: inline-block; min-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
-    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+.halo-rotate.outer {
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+    border-top: 2px solid #ff0099;
+    border-bottom: 2px solid #00f2ff;
+    animation: spinHaloReverse 8s linear infinite;
+    opacity: 0.5;
 }
 
-.social-row { display: flex; gap: 15px; }
-.s-btn {
-    width: 45px; height: 45px; border-radius: 12px; background: rgba(255,255,255,0.05);
-    display: flex; justify-content: center; align-items: center; color: #fff; text-decoration: none;
-    font-size: 20px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1);
+@keyframes spinHalo {
+    100% { transform: rotate(360deg); }
 }
-.s-btn:hover { background: #00f2ff; color: #000; box-shadow: 0 0 20px #00f2ff; transform: translateY(-5px); }
 
-/* --- CỘT PHẢI --- */
+@keyframes spinHaloReverse {
+    100% { transform: rotate(-360deg); }
+}
+
+.ripple-ground {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotateX(60deg);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0,242,255,0.18) 0%, transparent 80%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(0,242,255,0.3);
+}
+
+.ripple-ground span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #00f2ff;
+    border-radius: 50%;
+    animation: rippleWave 2.6s infinite;
+    opacity: 0;
+}
+
+.ripple-ground span:nth-child(2) { animation-delay: 0.9s; }
+.ripple-ground span:nth-child(3) { animation-delay: 1.8s; }
+
+@keyframes rippleWave {
+    0% { width: 0; height: 0; opacity: 1; margin-top: 100px; margin-left: 100px; }
+    100% { width: 100%; height: 100%; opacity: 0; margin-top: 0; margin-left: 0; }
+}
+
+.avatar-img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 130%;
+    width: auto;
+    max-width: 100%;
+    filter: drop-shadow(0 0 20px rgba(0,242,255,0.6));
+    transition: transform 0.25s, filter 0.25s, bottom 0.2s;
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* 🚀 AVATAR 2 Ở VỊ TRÍ BÌNH THƯỜNG (BOTTOM: 0) */
+.avatar-img.fix-height {
+    bottom: 0px !important;
+}
+
+.avatar-img.active-touch {
+    transform: translateX(-50%) scale(1.15);
+    filter: drop-shadow(0 0 45px #ff0099) drop-shadow(0 0 90px #ff0099);
+}
+
+.avatar-img:hover {
+    transform: translateX(-50%) scale(1.1);
+    filter: drop-shadow(0 0 40px #ff0099) drop-shadow(0 0 80px #ff0099);
+}
+
+.title-area {
+    text-align: center;
+    margin-bottom: 10px;
+    z-index: 5;
+}
+
+.gradient-glitch {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    background: linear-gradient(to right, #00f2ff, #00c6ff, #0072ff, #ff0099, #00f2ff);
+    background-size: 400% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientFlow 5s linear infinite;
+}
+
+@keyframes gradientFlow {
+    to { background-position: 400% center; }
+}
+
+.badge-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 36px;
+}
+
+.badge-live {
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(6px);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #00f2ff;
+    color: #fff;
+    text-shadow: 0 0 12px #00f2ff;
+    min-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 0 20px rgba(0,242,255,0.3);
+    position: relative;
+}
+
+.badge-live::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(90deg, transparent, rgba(0,242,255,0.5), transparent);
+    border-radius: 50px;
+    animation: scan 2.5s infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateX(-100%); }
+    20%, 100% { transform: translateX(100%); }
+}
+
+.cursor-beam {
+    color: #00f2ff;
+    font-size: 20px;
+    font-weight: 800;
+    animation: blinkBeam 1s step-end infinite;
+}
+
+@keyframes blinkBeam {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.social-panel {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 22px;
+    transition: 0.25s;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.4s;
+}
+
+.social-icon:hover::before {
+    left: 100%;
+}
+
+.social-icon.fb:hover { background: #1877f2; box-shadow: 0 0 30px #1877f2; transform: translateY(-5px) scale(1.1); }
+.social-icon.tt:hover { background: #000; box-shadow: 0 0 30px #ff0050; transform: translateY(-5px) scale(1.1); }
+
+/* ----- CỘT PHẢI ----- */
 .col-right {
-    flex: 1.5; padding: 35px; display: flex; flex-direction: column; gap: 20px; justify-content: center;
+    flex: 1.5;
+    padding: 30px 30px 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    justify-content: center;
 }
 
-.greeting-style {
-    font-size: 13px; font-weight: 800; color: #ffd700; text-align: center; letter-spacing: 2px;
-    background: rgba(0,0,0,0.3); padding: 8px; border-radius: 10px; border: 1px solid #ffd700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+.greeting-beam {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffd700;
+    text-align: center;
+    letter-spacing: 3px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    padding: 10px;
+    border-radius: 18px;
+    border: 1px solid #ffd700;
+    box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    text-shadow: 0 0 12px #ffd700;
 }
 
-.box-label { font-size: 11px; font-weight: 800; color: #00f2ff; letter-spacing: 1.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.panel-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: #00f2ff;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+}
 
-/* Countdown */
-.countdown-box {
-    background: rgba(0,0,0,0.4); border-radius: 20px; padding: 15px; border: 1px solid rgba(0, 242, 255, 0.2);
-    box-shadow: inset 0 0 20px rgba(0, 242, 255, 0.05);
+/* ----- COUNTDOWN FLIP ----- */
+.countdown-panel {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+    border-radius: 28px;
+    padding: 18px;
+    border: 1px solid rgba(0,242,255,0.25);
+    box-shadow: inset 0 0 25px rgba(0,242,255,0.05);
 }
-.timer-display { display: flex; justify-content: center; align-items: center; gap: 10px; }
-.t-unit { text-align: center; width: 50px; }
-.t-unit span { display: block; font-size: 22px; font-weight: 800; color: #fff; text-shadow: 0 0 10px rgba(0, 242, 255, 0.8); }
-.t-unit small { font-size: 9px; color: #888; }
-.sep { font-size: 20px; color: #00f2ff; margin-top: -18px; animation: blink 1s infinite; }
-@keyframes blink { 50% { opacity: 0; } }
 
-/* Waifu List */
-.waifu-box {
-    background: rgba(0,0,0,0.4); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,0,153,0.2);
+.flip-clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
-.w-list { list-style: none; }
-.w-list li { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; font-size: 14px; transition: 0.3s; }
-.w-list li:hover { padding-left: 10px; background: rgba(255,0,153,0.1); border-radius: 5px; color: #ff0099; }
-.w-list li:last-child { border-bottom: none; }
-.rank { width: 35px; color: #00f2ff; font-weight: 800; }
-.top-1 { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
 
-/* Music Player */
-.music-player {
-    background: rgba(0, 0, 0, 0.4); border-radius: 20px; padding: 20px;
-    border: 1px solid rgba(255,255,255,0.1); margin-top: auto;
+.flip-unit {
+    text-align: center;
+    width: 58px;
 }
-.track-info { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-.equalizer { display: flex; gap: 4px; align-items: flex-end; height: 20px; }
-.bar { width: 4px; height: 10px; background: #00f2ff; border-radius: 2px; animation: eq 0.5s infinite alternate; animation-play-state: paused; }
-.bar:nth-child(2) { animation-delay: 0.2s; } .bar:nth-child(3) { animation-delay: 0.4s; }
-@keyframes eq { 100% { height: 20px; box-shadow: 0 0 10px #00f2ff; } }
-.text-scroll { flex: 1; overflow: hidden; white-space: nowrap; }
-#song-name { font-size: 14px; font-weight: 700; color: #00f2ff; }
-.progress-area { width: 100%; height: 5px; background: rgba(255,255,255,0.1); cursor: pointer; border-radius: 5px; margin-bottom: 15px; }
-.progress-bar { width: 0%; height: 100%; background: #00f2ff; border-radius: 5px; box-shadow: 0 0 10px #00f2ff; }
-.controls { display: flex; align-items: center; gap: 20px; }
-.controls button { background: none; border: none; color: #888; cursor: pointer; font-size: 18px; transition: 0.2s; }
-.controls button:hover { color: #fff; transform: scale(1.2); }
-.play-btn {
-    width: 40px; height: 40px; background: #00f2ff !important; color: #000 !important;
-    border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px !important;
-    box-shadow: 0 0 15px #00f2ff;
-}
-.vol-wrapper { margin-left: auto; display: flex; align-items: center; gap: 8px; color: #888; font-size: 12px; }
-input[type=range] { width: 70px; height: 3px; accent-color: #00f2ff; cursor: pointer; }
 
-/* MAGIC CURSOR & HEARTS */
-.cursor-trail {
-    position: absolute; width: 12px; height: 12px; background: #00f2ff; border-radius: 50%;
-    pointer-events: none; z-index: 9999; box-shadow: 0 0 15px #00f2ff, 0 0 30px #fff;
-    transition: transform 0.1s, opacity 0.3s; mix-blend-mode: screen;
+.flip-unit span {
+    display: block;
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 25px #00f2ff, 0 0 50px #00f2ff;
+    background: rgba(0,0,0,0.45);
+    padding: 6px 0;
+    border-radius: 14px;
+    transition: transform 0.15s, text-shadow 0.2s;
+    font-family: 'Nunito', monospace;
 }
+
+.flip-unit small {
+    font-size: 9px;
+    color: #ccc;
+    display: block;
+    margin-top: 6px;
+    letter-spacing: 2px;
+}
+
+.flip-sep {
+    font-size: 32px;
+    color: #00f2ff;
+    margin-top: -12px;
+    animation: pulseDot 1s infinite;
+    text-shadow: 0 0 20px #00f2ff;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ----- WAIFU LIST ĐỘNG ----- */
+.waifu-panel {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+    border-radius: 28px;
+    padding: 18px;
+    border: 1px solid rgba(255,0,153,0.3);
+}
+
+.waifu-list {
+    list-style: none;
+}
+
+.waifu-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.25s;
+    position: relative;
+}
+
+.waifu-list li:hover {
+    padding-left: 18px;
+    background: rgba(255,0,153,0.15);
+    border-radius: 14px;
+    color: #ffb3c6;
+}
+
+.rank-badge {
+    width: 45px;
+    color: #00f2ff;
+    font-weight: 800;
+}
+
+.rank-1 {
+    color: #ffd700;
+    text-shadow: 0 0 15px #ffd700;
+}
+
+.crown-glow { color: #ffd700; margin-left: 8px; animation: glowPulse 1.5s infinite; }
+.pulse-heart { color: #ff0099; margin-left: 8px; animation: heartBeat 1.2s infinite; }
+.spark-star { color: #00f2ff; margin-left: 8px; animation: rotateStar 3s infinite; }
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+@keyframes rotateStar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 10px #ffd700; }
+    50% { text-shadow: 0 0 25px #ffd700; }
+}
+
+/* ----- MUSIC PLAYER CAO CẤP ----- */
+.music-panel {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(12px);
+    border-radius: 32px;
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: inset 0 0 30px rgba(0,242,255,0.05);
+}
+
+.track-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+#frequency-vis {
+    width: 60px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 0 15px rgba(0,242,255,0.2);
+}
+
+.track-marquee {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.track-title {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #00f2ff;
+    text-shadow: 0 0 12px #00f2ff;
+    animation: slideMarquee 14s linear infinite;
+}
+
+@keyframes slideMarquee {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.time-track {
+    text-align: right;
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+#current-time, #total-time {
+    color: #00f2ff;
+    font-weight: 700;
+    margin: 0 3px;
+}
+
+.seek-area {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 18px;
+    overflow: visible;
+}
+
+.seek-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #00f2ff, #ff0099);
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00f2ff;
+    transition: width 0.05s;
+    position: relative;
+}
+
+.seek-tooltip {
+    position: absolute;
+    top: -32px;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid #00f2ff;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    box-shadow: 0 0 15px rgba(0,242,255,0.3);
+}
+
+.seek-area:hover .seek-tooltip {
+    opacity: 1;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.ctrl {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ctrl:hover {
+    color: #fff;
+    transform: scale(1.25);
+    text-shadow: 0 0 20px #00f2ff;
+}
+
+.play-circle {
+    width: 48px;
+    height: 48px;
+    background: radial-gradient(circle at 30% 30%, #00f2ff, #0099ff);
+    border: none;
+    border-radius: 50%;
+    color: #000;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 35px #00f2ff;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.play-circle:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 55px #00f2ff;
+}
+
+.volume-dock {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ddd;
+    font-size: 13px;
+}
+
+input[type=range] {
+    width: 80px;
+    height: 5px;
+    -webkit-appearance: none;
+    background: linear-gradient(90deg, #00f2ff, #ff0099);
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    border: 2px solid #00f2ff;
+    box-shadow: 0 0 20px #00f2ff;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.audio-alert {
+    color: #ffa0a0;
+    font-size: 11px;
+    margin-top: 10px;
+    text-align: center;
+    letter-spacing: 2px;
+    background: rgba(0,0,0,0.5);
+    padding: 6px;
+    border-radius: 20px;
+    border: 1px solid #ff8888;
+}
+
+.hidden { display: none; }
+
+/* ----- TRÁI TIM LASER ----- */
 .heart-pop {
-    position: fixed; font-size: 24px; color: #ff0099; pointer-events: none; z-index: 9999;
-    animation: popMove 1s ease-out forwards; text-shadow: 0 0 10px #ff0099;
-}
-@keyframes popMove {
-    0% { transform: translate(0,0) scale(1); opacity: 1; }
-    100% { transform: translate(var(--x), calc(var(--y) - 150px)) scale(0.5); opacity: 0; }
+    position: fixed;
+    font-size: 30px;
+    color: #ff0099;
+    pointer-events: none;
+    z-index: 9999;
+    animation: heartLaser 1.2s ease-out forwards;
+    text-shadow: 0 0 30px #ff0099, 0 0 60px #ff0099;
 }
 
-/* MOBILE RESPONSIVE */
+@keyframes heartLaser {
+    0% { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--x), calc(var(--y) - 200px)) scale(0.2) rotate(720deg); opacity: 0; }
+}
+
+/* ----- SCROLLBAR ----- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00f2ff, #ff0099);
+    border-radius: 10px;
+}
+
+/* ===== RESPONSIVE MOBILE – ĐÃ TỐI ƯU ĐẸP HƠN ===== */
 @media (max-width: 850px) {
-    body { height: auto; min-height: 100vh; padding: 40px 0; overflow-y: scroll; }
-    .card-container { width: 95%; height: auto; min-height: 600px; flex-direction: column; margin: 20px 0; }
-    .col-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 40px 20px 20px; }
-    .col-right { padding: 25px 20px; gap: 20px; }
-    .controls button { font-size: 24px; padding: 10px; } .play-btn { width: 55px; height: 55px; }
-    .cosmic-portal { width: 100%; height: 50vh; opacity: 0.4; } /* Portal nhỏ hơn trên mobile */
+    .card-container {
+        flex-direction: column;
+        height: auto;
+        width: 96%;
+        margin: 15px 0;
+        border-radius: 30px;
+    }
+
+    .col-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding: 25px 15px 20px;
+    }
+
+    .avatar-zone {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 10px;
+    }
+
+    .avatar-img {
+        max-height: 130%;
+    }
+
+    /* Avatar 2 trên mobile – bottom: 0px (theo yêu cầu) */
+    .avatar-img.fix-height {
+        bottom: 0px !important;
+    }
+
+    .gradient-glitch {
+        font-size: 28px;
+    }
+
+    .badge-live {
+        min-width: 140px;
+        padding: 6px 16px;
+        font-size: 11px;
+    }
+
+    .col-right {
+        padding: 22px 18px;
+        gap: 18px;
+    }
+
+    .greeting-beam {
+        font-size: 12px;
+        padding: 8px;
+        letter-spacing: 2px;
+    }
+
+    .panel-title {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .flip-clock {
+        gap: 6px;
+    }
+
+    .flip-unit {
+        width: 45px;
+    }
+
+    .flip-unit span {
+        font-size: 24px;
+        padding: 5px 0;
+    }
+
+    .flip-sep {
+        font-size: 24px;
+        margin-top: -8px;
+    }
+
+    .waifu-list li {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    .rank-badge {
+        width: 40px;
+    }
+
+    .music-panel {
+        padding: 18px;
+    }
+
+    .track-header {
+        gap: 12px;
+    }
+
+    #frequency-vis {
+        width: 50px;
+        height: 30px;
+    }
+
+    .track-title {
+        font-size: 13px;
+        animation: none;
+        white-space: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .time-track {
+        font-size: 10px;
+    }
+
+    .player-controls {
+        gap: 16px;
+    }
+
+    .ctrl {
+        font-size: 16px;
+    }
+
+    .play-circle {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .volume-dock {
+        margin-left: 0;
+    }
+
+    input[type=range] {
+        width: 60px;
+    }
+
+    .cosmic-whirl,
+    .spark-field {
+        opacity: 0.2;
+    }
+
+    .seek-tooltip {
+        display: none;
+    }
+}
+
+/* MÀN HÌNH RẤT NHỎ (DƯỚI 480px) */
+@media (max-width: 480px) {
+    .avatar-zone {
+        width: 140px;
+        height: 140px;
+    }
+
+    .avatar-img.fix-height {
+        bottom: 0px !important;
+    }
+
+    .gradient-glitch {
+        font-size: 24px;
+    }
+
+    .badge-live {
+        min-width: 120px;
+        font-size: 10px;
+    }
+
+    .flip-unit {
+        width: 38px;
+    }
+
+    .flip-unit span {
+        font-size: 20px;
+    }
+
+    .flip-unit small {
+        font-size: 8px;
+    }
+
+    .flip-sep {
+        font-size: 20px;
+        margin-top: -6px;
+    }
+
+    .col-right {
+        padding: 18px 14px;
+    }
+
+    .waifu-list li {
+        font-size: 13px;
+    }
+
+    .volume-dock {
+        gap: 5px;
+    }
+
+    input[type=range] {
+        width: 50px;
+    }
 }
