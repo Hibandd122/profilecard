@@ -186,14 +186,31 @@ function pauseAudio() {
 }
 
 playBtn.addEventListener('click', () => isPlaying ? pauseAudio() : playAudio());
+// Hỗ trợ touch cho nút play
+playBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    isPlaying ? pauseAudio() : playAudio();
+});
 
 prevBtn.addEventListener('click', () => {
     songIndex = (songIndex - 1 + playlist.length) % playlist.length;
     loadSong(playlist[songIndex]);
     if (isPlaying) playAudio(); else audio.load();
 });
+prevBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    songIndex = (songIndex - 1 + playlist.length) % playlist.length;
+    loadSong(playlist[songIndex]);
+    if (isPlaying) playAudio(); else audio.load();
+});
 
 nextBtn.addEventListener('click', () => {
+    songIndex = (songIndex + 1) % playlist.length;
+    loadSong(playlist[songIndex]);
+    if (isPlaying) playAudio(); else audio.load();
+});
+nextBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     songIndex = (songIndex + 1) % playlist.length;
     loadSong(playlist[songIndex]);
     if (isPlaying) playAudio(); else audio.load();
@@ -228,6 +245,15 @@ seekContainer.addEventListener('click', (e) => {
     const width = rect.width;
     audio.currentTime = (offsetX / width) * audio.duration;
 });
+seekContainer.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (!audio.duration) return;
+    const touch = e.touches[0];
+    const rect = seekContainer.getBoundingClientRect();
+    const offsetX = touch.clientX - rect.left;
+    const width = rect.width;
+    audio.currentTime = (offsetX / width) * audio.duration;
+});
 
 seekContainer.addEventListener('mousemove', (e) => {
     if (!audio.duration) return;
@@ -246,12 +272,18 @@ seekContainer.addEventListener('mouseleave', () => {
 volumeCtrl.addEventListener('input', (e) => {
     audio.volume = e.target.value / 100;
 });
+volumeCtrl.addEventListener('touchstart', (e) => e.stopPropagation()); // Không preventDefault để thanh trượt hoạt động
 
-overlay.addEventListener('click', () => {
+/* ===== XỬ LÝ OVERLAY CHO CẢ CLICK VÀ TOUCH ===== */
+function hideOverlay(e) {
+    if (e) e.preventDefault(); // Ngăn chặn hành vi mặc định (ví dụ double tap zoom)
     overlay.style.opacity = '0';
     setTimeout(() => overlay.style.display = 'none', 500);
     playAudio();
-});
+}
+
+overlay.addEventListener('click', hideOverlay);
+overlay.addEventListener('touchstart', hideOverlay, { passive: false });
 
 audio.addEventListener('error', () => {
     audioAlert.classList.remove('hidden');
