@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- OVERLAY KHỞI ĐỘNG - THÊM ONCLICK TRỰC TIẾP -->
+    <!-- OVERLAY KHỞI ĐỘNG - XÓA NGAY KHI CHẠM -->
     <div class="overlay" id="start-overlay" onclick="this.remove(); document.getElementById('audio-player').play();">
         <div class="loader">
             <div class="ring"></div>
@@ -55,9 +55,10 @@
                     </div>
                 </div>
                 <div class="social-panel">
-                    <a href="https://www.facebook.com/profile.php?id=61582336522985" target="_blank" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.tiktok.com/@mahikari_hola" target="_blank" class="social-icon tt"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://discord.gg/NkbMV48zY6" target="_blank" class="social-icon discord"><i class="fab fa-discord"></i></a>
+                    <!-- Chuyển sang button + data-url -->
+                    <button class="social-icon fb" data-url="https://www.facebook.com/profile.php?id=61582336522985"><i class="fab fa-facebook-f"></i></button>
+                    <button class="social-icon tt" data-url="https://www.tiktok.com/@mahikari_hola"><i class="fab fa-tiktok"></i></button>
+                    <button class="social-icon discord" data-url="https://discord.gg/NkbMV48zY6"><i class="fab fa-discord"></i></button>
                 </div>
             </div>
 
