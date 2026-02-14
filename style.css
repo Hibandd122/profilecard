@@ -1115,7 +1115,11 @@ input[type=range]::-webkit-slider-thumb:hover {
         height: 40px;
         font-size: 18px;
     }
-
+    .social-icon {
+        cursor: pointer;
+        border: none; /* Bỏ viền mặc định của button */
+        outline: none;
+    }
     .glitch-text {
         font-size: 14px !important;
         letter-spacing: 3px !important;
@@ -1126,3 +1130,4 @@ input[type=range]::-webkit-slider-thumb:hover {
         padding: 5px 12px;
     }
 }
+
