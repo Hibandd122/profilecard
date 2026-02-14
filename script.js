@@ -453,3 +453,19 @@ if (wrapper && cardMain && window.matchMedia("(min-width: 850px)").matches) {
         cardMain.style.transform = 'rotateX(0deg) rotateY(0deg)';
     });
 }
+
+/* ===== 9. XỬ LÝ NÚT MẠNG XÃ HỘI (thay vì dùng thẻ a) ===== */
+const socialButtons = document.querySelectorAll('.social-icon');
+socialButtons.forEach(btn => {
+    const url = btn.getAttribute('data-url');
+    if (!url) return;
+
+    const openLink = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.open(url, '_blank');
+    };
+
+    btn.addEventListener('click', openLink);
+    btn.addEventListener('touchstart', openLink, { passive: false });
+});
