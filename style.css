@@ -107,6 +107,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: auto; /* Mặc định nhận sự kiện */
 }
 
 .loader {
@@ -485,6 +486,8 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
     position: relative;
     overflow: hidden;
+    cursor: pointer; /* Đảm bảo con trỏ dạng pointer */
+    -webkit-tap-highlight-color: transparent; /* Bỏ highlight khi chạm */
 }
 
 .social-icon::before {
