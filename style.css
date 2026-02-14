@@ -106,8 +106,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-    pointer-events: auto; /* Mặc định nhận sự kiện */
+    transition: opacity 0.3s ease; /* Nhanh hơn để không bị delay */
+    pointer-events: auto;
 }
 
 .loader {
@@ -486,8 +486,9 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
     position: relative;
     overflow: hidden;
-    cursor: pointer; /* Đảm bảo con trỏ dạng pointer */
-    -webkit-tap-highlight-color: transparent; /* Bỏ highlight khi chạm */
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; /* Ngăn double-tap zoom */
 }
 
 .social-icon::before {
@@ -507,8 +508,12 @@ body {
 
 .social-icon.fb:hover { background: #1877f2; box-shadow: 0 0 30px #1877f2; transform: translateY(-5px) scale(1.1); }
 .social-icon.tt:hover { background: #000; box-shadow: 0 0 30px #ff0050; transform: translateY(-5px) scale(1.1); }
-/* Discord hover effect */
 .social-icon.discord:hover { background: #5865F2; box-shadow: 0 0 30px #5865F2; transform: translateY(-5px) scale(1.1); }
+
+/* Thêm touch-action cho các nút khác */
+.ctrl, .play-circle, input[type=range] {
+    touch-action: manipulation;
+}
 
 /* ----- CỘT PHẢI ----- */
 .col-right {
@@ -887,7 +892,7 @@ input[type=range]::-webkit-slider-thumb:hover {
     border-radius: 10px;
 }
 
-/* ===== RESPONSIVE MOBILE – ĐÃ TỐI ƯU ĐẸP HƠN ===== */
+/* ===== RESPONSIVE MOBILE ===== */
 @media (max-width: 850px) {
     .card-container {
         flex-direction: column;
@@ -913,7 +918,6 @@ input[type=range]::-webkit-slider-thumb:hover {
         max-height: 130%;
     }
 
-    /* Avatar 2 trên mobile – bottom: 0px (theo yêu cầu) */
     .avatar-img.fix-height {
         bottom: 0px !important;
     }
@@ -1027,26 +1031,25 @@ input[type=range]::-webkit-slider-thumb:hover {
         display: none;
     }
 
-    /* Điều chỉnh kích thước icon mạng xã hội trên mobile */
     .social-icon {
         width: 44px;
         height: 44px;
         font-size: 20px;
     }
 
-    /* ---------- FIX OVERLAY MOBILE ---------- */
+    /* FIX OVERLAY MOBILE */
     .overlay {
-        padding: 0 20px;          /* Tránh chữ sát mép */
+        padding: 0 20px;
         text-align: center;
         box-sizing: border-box;
     }
 
     .glitch-text {
-        font-size: 18px !important;        /* Giảm kích thước */
-        letter-spacing: 5px !important;    /* Giảm khoảng cách chữ */
+        font-size: 18px !important;
+        letter-spacing: 5px !important;
         max-width: 100%;
         word-wrap: break-word;
-        white-space: normal;                /* Cho phép xuống dòng nếu cần */
+        white-space: normal;
     }
 
     .tap-pulse {
@@ -1055,7 +1058,6 @@ input[type=range]::-webkit-slider-thumb:hover {
     }
 }
 
-/* MÀN HÌNH RẤT NHỎ (DƯỚI 480px) */
 @media (max-width: 480px) {
     .avatar-zone {
         width: 140px;
@@ -1114,7 +1116,6 @@ input[type=range]::-webkit-slider-thumb:hover {
         font-size: 18px;
     }
 
-    /* ---------- FIX OVERLAY CHO MÀN HÌNH RẤT NHỎ ---------- */
     .glitch-text {
         font-size: 14px !important;
         letter-spacing: 3px !important;
