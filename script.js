@@ -272,14 +272,16 @@ seekContainer.addEventListener('mouseleave', () => {
 volumeCtrl.addEventListener('input', (e) => {
     audio.volume = e.target.value / 100;
 });
-volumeCtrl.addEventListener('touchstart', (e) => e.stopPropagation()); // Không preventDefault để thanh trượt hoạt động
+volumeCtrl.addEventListener('touchstart', (e) => e.stopPropagation());
 
 /* ===== XỬ LÝ OVERLAY CHO CẢ CLICK VÀ TOUCH ===== */
 function hideOverlay(e) {
-    if (e) e.preventDefault(); // Ngăn chặn hành vi mặc định (ví dụ double tap zoom)
+    if (e) e.preventDefault();
     overlay.style.opacity = '0';
-    setTimeout(() => overlay.style.display = 'none', 500);
-    playAudio();
+    overlay.style.pointerEvents = 'none'; // Cho phép chạm xuyên qua ngay lập tức
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 500);
 }
 
 overlay.addEventListener('click', hideOverlay);
