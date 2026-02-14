@@ -122,7 +122,6 @@ const seekFill = document.getElementById('seek-fill');
 const seekContainer = document.getElementById('seek-container');
 const seekTip = document.getElementById('seek-tip');
 const volumeCtrl = document.getElementById('volume-control');
-const overlay = document.getElementById('start-overlay');
 const visualizer = document.getElementById('frequency-vis');
 const vCtx = visualizer.getContext('2d');
 const currentTimeEl = document.getElementById('current-time');
@@ -272,23 +271,6 @@ volumeCtrl.addEventListener('input', (e) => {
     audio.volume = e.target.value / 100;
 });
 volumeCtrl.addEventListener('touchstart', (e) => e.stopPropagation());
-
-/* ===== XỬ LÝ OVERLAY CHO CẢ CLICK VÀ TOUCH ===== */
-function hideOverlay(e) {
-    if (e) {
-        e.preventDefault();
-        e.stopPropagation(); // Ngăn sự kiện lan ra
-    }
-    overlay.style.opacity = '0';
-    overlay.style.pointerEvents = 'none'; // Cho phép chạm xuyên qua ngay lập tức
-    // Ẩn hẳn sau 300ms (đủ để hiệu ứng chạy)
-    setTimeout(() => {
-        overlay.style.display = 'none';
-    }, 300);
-}
-
-overlay.addEventListener('click', hideOverlay);
-overlay.addEventListener('touchstart', hideOverlay, { passive: false });
 
 audio.addEventListener('error', () => {
     audioAlert.classList.remove('hidden');
