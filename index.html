@@ -10,8 +10,8 @@
 </head>
 <body>
 
-    <!-- OVERLAY KHỞI ĐỘNG (HIỆU ỨNG LỖI GLITCH) -->
-    <div class="overlay" id="start-overlay">
+    <!-- OVERLAY KHỞI ĐỘNG - THÊM ONCLICK TRỰC TIẾP -->
+    <div class="overlay" id="start-overlay" onclick="this.remove(); document.getElementById('audio-player').play();">
         <div class="loader">
             <div class="ring"></div>
             <div class="ring inner"></div>
