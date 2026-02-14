@@ -186,7 +186,6 @@ function pauseAudio() {
 }
 
 playBtn.addEventListener('click', () => isPlaying ? pauseAudio() : playAudio());
-// Hỗ trợ touch cho nút play
 playBtn.addEventListener('touchstart', (e) => {
     e.preventDefault();
     isPlaying ? pauseAudio() : playAudio();
@@ -276,12 +275,16 @@ volumeCtrl.addEventListener('touchstart', (e) => e.stopPropagation());
 
 /* ===== XỬ LÝ OVERLAY CHO CẢ CLICK VÀ TOUCH ===== */
 function hideOverlay(e) {
-    if (e) e.preventDefault();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation(); // Ngăn sự kiện lan ra
+    }
     overlay.style.opacity = '0';
     overlay.style.pointerEvents = 'none'; // Cho phép chạm xuyên qua ngay lập tức
+    // Ẩn hẳn sau 300ms (đủ để hiệu ứng chạy)
     setTimeout(() => {
         overlay.style.display = 'none';
-    }, 500);
+    }, 300);
 }
 
 overlay.addEventListener('click', hideOverlay);
@@ -339,7 +342,7 @@ function musicPulse() {
 }
 musicPulse();
 
-/* ===== 4. AVATAR TƯƠNG TÁC (FIX MOBILE) ===== */
+/* ===== 4. AVATAR TƯƠNG TÁC ===== */
 const avatar = document.getElementById('char-avatar');
 let avatarAnim = false;
 
