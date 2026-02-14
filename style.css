@@ -504,6 +504,8 @@ body {
 
 .social-icon.fb:hover { background: #1877f2; box-shadow: 0 0 30px #1877f2; transform: translateY(-5px) scale(1.1); }
 .social-icon.tt:hover { background: #000; box-shadow: 0 0 30px #ff0050; transform: translateY(-5px) scale(1.1); }
+/* Discord hover effect */
+.social-icon.discord:hover { background: #5865F2; box-shadow: 0 0 30px #5865F2; transform: translateY(-5px) scale(1.1); }
 
 /* ----- CỘT PHẢI ----- */
 .col-right {
@@ -1021,6 +1023,33 @@ input[type=range]::-webkit-slider-thumb:hover {
     .seek-tooltip {
         display: none;
     }
+
+    /* Điều chỉnh kích thước icon mạng xã hội trên mobile */
+    .social-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+    }
+
+    /* ---------- FIX OVERLAY MOBILE ---------- */
+    .overlay {
+        padding: 0 20px;          /* Tránh chữ sát mép */
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .glitch-text {
+        font-size: 18px !important;        /* Giảm kích thước */
+        letter-spacing: 5px !important;    /* Giảm khoảng cách chữ */
+        max-width: 100%;
+        word-wrap: break-word;
+        white-space: normal;                /* Cho phép xuống dòng nếu cần */
+    }
+
+    .tap-pulse {
+        font-size: 12px;
+        padding: 6px 16px;
+    }
 }
 
 /* MÀN HÌNH RẤT NHỎ (DƯỚI 480px) */
@@ -1074,5 +1103,22 @@ input[type=range]::-webkit-slider-thumb:hover {
 
     input[type=range] {
         width: 50px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    /* ---------- FIX OVERLAY CHO MÀN HÌNH RẤT NHỎ ---------- */
+    .glitch-text {
+        font-size: 14px !important;
+        letter-spacing: 3px !important;
+    }
+
+    .tap-pulse {
+        font-size: 11px;
+        padding: 5px 12px;
     }
 }
