@@ -1,71 +1,81 @@
 <div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=280&section=header&text=Mikagu_Hola%20Profile&fontSize=70&fontAlign=50&fontAlignY=35&desc=Ultimate%20Interactive%20Hologram&descAlign=50&descAlignY=60&animation=fadeIn&fontColor=ffffff" alt="Header" width="100%"/>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-  <img src="https://img.shields.io/badge/Vibe-Chill-7b2cbf?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Waifu-Approved-ff0099?style=for-the-badge" />
-</p>
-
-# 🌌 Ultimate Personal Profile Card
-
-**Chào mừng đến với không gian số của tôi! Một chiếc Card Profile mang phong cách "Cosmic Sunset" kết hợp công nghệ tương tác thực tế.**
-
-[✨ Xem Demo Trực Tiếp](https://your-demo-link.com) • [🐛 Báo Lỗi](https://github.com/your-repo/issues)
-
+  <img src="https://capsule-render.vercel.app/api?type=shark&height=200&color=gradient&text=Mikagu_Hola&reversal=false&fontAlign=50&desc=✨%20Cosmic%20Profile%20Card%20✨&descAlign=60&fontColor=ffffff" width="100%"/>
+  
+  <p align="center">
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+    <img src="https://img.shields.io/badge/WebAudio-FF6B6B?style=for-the-badge&logo=web-audio&logoColor=white" />
+    <img src="https://img.shields.io/badge/Canvas-00C4B4?style=for-the-badge&logo=html5canvas&logoColor=white" />
+    <img src="https://img.shields.io/badge/Vibe-Cosmic-8B5CF6?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/Waifu-Approved-FF69B4?style=for-the-badge" />
+  </p>
+  
+  <h1>🌌 ULTIMATE INTERACTIVE PROFILE CARD</h1>
+  <p><i>Nơi công nghệ và thẩm mỹ vũ trụ giao thoa – Một chiếc card sống động với hiệu ứng 3D, âm nhạc và tương tác thông minh.</i></p>
+  
+  <a href="https://your-demo-link.github.io"><img src="https://img.shields.io/badge/DEMO-LIVE-ff69b4?style=for-the-badge&logo=github" /></a>
+  <a href="https://github.com/yourname/yourrepo/issues"><img src="https://img.shields.io/badge/REPORT-BUG-red?style=for-the-badge&logo=github" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" /></a>
 </div>
 
 ---
 
-## 🚀 Tính Năng Đỉnh Cao (Highlights)
+## 🌟 Tổng Quan
 
-Dự án này được tích hợp những hiệu ứng Visual và Audio xịn nhất hiện nay:
+**Mikagu_Hola** là một dự án profile card mang phong cách **cosmic futuristic**, kết hợp giữa hiệu ứng đồ họa thời thượng (sao động, tinh vân, hào quang, RGB flow) và khả năng tương tác thông minh (xoay ảnh, bắn tim, phát nhạc kèm visualizer). Tất cả được gói gọn trong một thẻ card duy nhất, tối ưu cho cả desktop và mobile.
 
-| Danh Mục | Tính Năng | Mô Tả Chi Tiết |
-| :--- | :--- | :--- |
-| **🎨 VISUAL** | ![Magic Cursor](https://img.shields.io/badge/Magic_Cursor-FF69B4?style=flat-square) | Hiệu ứng hạt ánh sáng (spark) bay theo con trỏ chuột, tạo cảm giác huyền ảo. |
-| | ![Living Card](https://img.shields.io/badge/Living_Card-8A2BE2?style=flat-square) | Thẻ Card có hiệu ứng "thở" (float), nền sao động, tinh vân và cổng xoáy vũ trụ. |
-| | ![Hologram](https://img.shields.io/badge/Scanline-00FFFF?style=flat-square) | Viền RGB chạy liên tục quanh card, hiệu ứng quét trên badge. |
-| | ![Avatar Halo](https://img.shields.io/badge/Avatar-Halo_Spin-00f2ff?style=flat-square) | Hào quang xoay kép quanh avatar, hiệu ứng gợn sóng dưới chân. |
-| **🤖 AI/LOGIC** | ![Smart Greeting](https://img.shields.io/badge/Smart_Greeting-FFA500?style=flat-square) | Tự động chào theo giờ Việt Nam (Ohayo/Konnichiwa/Oyasumi). |
-| | ![Countdown](https://img.shields.io/badge/Event_Timer-00FF00?style=flat-square) | Đếm ngược sự kiện `03/04/2026` với hiệu ứng flip số. |
-| | ![Typewriter](https://img.shields.io/badge/Effect-Typewriter-CCCCCC?style=flat-square) | Chữ tự động gõ và xóa: Python Coder, Roblox Gamer, Waifu Collector, Lofi Chill. |
-| **🖱️ INTERACT** | ![Waifu Click](https://img.shields.io/badge/Interactive-Heart_Pop-FF0000?style=flat-square) | Click vào Avatar để bắn tim tung tóe màn hình và đổi ảnh ngẫu nhiên. |
-| | ![Avatar Rotate](https://img.shields.io/badge/Avatar-Rotate_4_Images-4CAF50?style=flat-square) | Avatar tự động xoay vòng 4 ảnh mỗi 2 giây. |
-| | ![Music Visualizer](https://img.shields.io/badge/Music-Visualizer-ff0099?style=flat-square) | Trình phát nhạc tích hợp với cột tần số và card nhấp nháy theo nhạc. |
-| **🔗 SOCIAL** | ![One-Click](https://img.shields.io/badge/Social-One--Click_Open-5865F2?style=flat-square) | Nút Facebook, TikTok, Discord mở liên kết nhanh, hoạt động cả trên mobile. |
+> 💡 *Mục tiêu: Tạo ấn tượng mạnh với người xem ngay từ cái nhìn đầu tiên.*
 
 ---
 
-## 🎵 Danh Sách Nhạc (Playlist)
+## 🔥 Tính Năng Nổi Bật
 
-Hệ thống tích hợp trình phát nhạc Visualizer sóng âm với 3 bài hát đặc trưng:
+| Loại | Tên Tính Năng | Mô Tả |
+|------|---------------|-------|
+| **✨ Hiệu ứng nền** | Sao động + Tinh vân | Hàng trăm ngôi sao rơi và tinh vân chuyển động mềm mại. |
+| | Cổng xoáy vũ trụ | Hai lớp xoáy conic gradient xoay ngược chiều tạo chiều sâu. |
+| | Spark theo chuột | Hạt sáng bay theo con trỏ (chỉ trên PC). |
+| **🃏 Card chính** | 3D Tilt | Card nghiêng theo chuyển động chuột (hiệu ứng parallax). |
+| | Viền RGB chạy | Hai lớp viền neon chạy liên tục. |
+| | Hiệu ứng "thở" | Card phồng lên/xẹp xuống nhẹ nhàng. |
+| **🖼️ Avatar** | Xoay vòng 4 ảnh | Tự động chuyển ảnh mỗi 2 giây. |
+| | Click bắn tim | Khi click, tim bay khắp màn hình + ảnh ngẫu nhiên trong 2 giây. |
+| | Hào quang xoay | Hai vòng sáng xoay quanh avatar. |
+| **📜 Badge & Text** | Typewriter động | Hiển thị luân phiên các vai trò: Coder, Gamer, Collector, Lofi. |
+| | Gradient glitch | Chữ tên biến đổi màu sắc liên tục. |
+| **⏳ Countdown** | Flip số | Đếm ngược tới sự kiện với hiệu ứng lật số và glow mạnh. |
+| **💖 Waifu List** | 4 nhân vật | Shiina Mahiru, Kaguya, Kagari Fuyukawa, Hiura Mihate, mỗi người một icon hiệu ứng riêng (vương miện, mặt trăng, tim, sao). |
+| **🎵 Music Player** | 3 bài nhạc | Playlist ngắn nhưng chất, hiển thị tên bài chạy marquee. |
+| | Visualizer cột tần số | Cột sáng nhảy theo nhạc, gradient xanh – hồng. |
+| | Card pulse | Card nhấp nháy theo nhịp nhạc. |
+| | Seek bar | Thanh tua có tooltip hiện thời gian, kéo được trên mobile. |
+| | Điều khiển âm lượng | Thanh trượt âm lượng dạng gradient. |
+| **🔗 Social** | 3 nút | Facebook, TikTok, Discord – mở tab mới khi click, hoạt động trên mobile. |
+| **📱 Responsive** | Tối ưu mọi thiết bị | Card tự động chuyển thành dạng cột trên điện thoại, giảm kích thước phù hợp. |
+
+---
+
+## 🎵 Danh Sách Nhạc
 
 | # | Tên Bài Hát | File |
-| :-: | :--- | :--- |
-| 01 | **Chiisana Koi no Uta** (The Angel Next Door Spoils Me Rotten) | `song1.mp3` |
-| 02 | **Remember** (Cosmic Princess Kaguya!) | `song2.mp3` |
-| 03 | **ハッピーシンセサイザ** (Cosmic Princess Kaguya!) | `song3.mp3` |
+|:-:|-------------|------|
+| 1 | **Chiisana Koi no Uta** (The Angel Next Door Spoils Me Rotten) | `song1.mp3` |
+| 2 | **Remember** (Cosmic Princess Kaguya!) | `song2.mp3` |
+| 3 | **ハッピーシンセサイザ** (Cosmic Princess Kaguya!) | `song3.mp3` |
 
-> 📌 *Bạn có thể dễ dàng thay đổi playlist trong file `script.js`.*
+> 📌 *Bạn có thể thoải mái thay đổi playlist trong file `script.js`.*
 
 ---
 
-## 📂 Cấu Trúc Thư Mục (Structure)
+## 🛠️ Công Nghệ Sử Dụng
 
-```bash
-📦 MIKAGU-PROFILE
- ┣ 📜 index.html            # Bộ khung xương (Skeleton)
- ┣ 📜 style.css             # Trang điểm & Hiệu ứng (Makeup)
- ┣ 📜 script.js             # Bộ não xử lý (Brain)
- ┣ 🖼️ avatar.png            # Ảnh chính #1
- ┣ 🖼️ avatar2.png           # Ảnh chính #2
- ┣ 🖼️ avatar3.png           # Ảnh chính #3
- ┣ 🖼️ avatar4.png           # Ảnh chính #4
- ┣ 🎵 song1.mp3             # Bài hát 1
- ┣ 🎵 song2.mp3             # Bài hát 2
- ┣ 🎵 song3.mp3             # Bài hát 3
- ┗ 📜 README.md             # Bạn đang đọc cái này đây!
+- **HTML5** – Cấu trúc semantic, canvas, audio.
+- **CSS3** – Flexbox, Grid, animations, keyframes, backdrop-filter, mask.
+- **JavaScript ES6** – Xử lý sự kiện, canvas animations, Web Audio API, localStorage.
+- **Thư viện hỗ trợ**: Font Awesome 6, Google Fonts (Nunito).
+- **Không dùng framework** – Code thuần, tối ưu hiệu năng.
+
+---
+
+## 📂 Cấu Trúc Thư Mục
