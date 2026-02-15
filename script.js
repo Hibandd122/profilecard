@@ -1,25 +1,25 @@
 /* ===== CẤU HÌNH ===== */
 const CONFIG = {
-    avatarDefault: "avatar.png",
-    avatarChange: "avatar2.png",
+    avatars: ["avatar.png", "avatar2.png", "avatar3.png", "avatar4.png"],
     targetDate: "2026-04-03T18:30:00+07:00",
     roles: ["</> PYTHON CODER", "🎮 ROBLOX GAMER", "💖 WAIFU COLLECTOR", "🎵 LOFI CHILL"]
 };
 
-/* ===== 1. NỀN SAO ĐỘNG + TƯƠNG TÁC ===== */
+/* ===== NỀN SAO ===== */
 const starCanvas = document.getElementById('starry-canvas');
-const starCtx = starCanvas.getContext('2d');
+const starCtx = starCanvas?.getContext('2d');
 let starWidth, starHeight;
-let starArray = [];
+let stars = [];
 
 function initStars() {
+    if (!starCanvas) return;
     starWidth = window.innerWidth;
     starHeight = window.innerHeight;
     starCanvas.width = starWidth;
     starCanvas.height = starHeight;
-    starArray = [];
+    stars = [];
     for (let i = 0; i < 200; i++) {
-        starArray.push({
+        stars.push({
             x: Math.random() * starWidth,
             y: Math.random() * starHeight,
             radius: Math.random() * 1.8 + 0.8,
@@ -31,46 +31,43 @@ function initStars() {
 }
 
 function drawStars() {
+    if (!starCtx) return;
     starCtx.clearRect(0, 0, starWidth, starHeight);
-    starArray.forEach(s => {
+    stars.forEach(s => {
         starCtx.beginPath();
         starCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
         starCtx.fillStyle = `rgba(255, 255, 255, ${s.glow})`;
         starCtx.shadowBlur = 8;
         starCtx.shadowColor = '#00f2ff';
         starCtx.fill();
-        
         s.y += s.speed;
         s.x += Math.sin(s.angle * Math.PI / 180) * 0.1;
         s.angle += 0.2;
-        
-        if (s.y > starHeight) {
-            s.y = 0;
-            s.x = Math.random() * starWidth;
-        }
+        if (s.y > starHeight) { s.y = 0; s.x = Math.random() * starWidth; }
         if (s.x > starWidth) s.x = 0;
         if (s.x < 0) s.x = starWidth;
     });
     requestAnimationFrame(drawStars);
 }
+window.addEventListener('resize', initStars);
+if (starCanvas) {
+    initStars();
+    drawStars();
+}
 
-window.addEventListener('resize', () => { initStars(); });
-initStars();
-drawStars();
-
-/* ===== 2. HẠT SPARK TƯƠNG TÁC ===== */
+/* ===== SPARK ===== */
 const sparkCanvas = document.getElementById('spark-field');
-const sparkCtx = sparkCanvas.getContext('2d');
+const sparkCtx = sparkCanvas?.getContext('2d');
 let sparkWidth, sparkHeight;
 let sparks = [];
 
 function initSparkField() {
+    if (!sparkCanvas) return;
     sparkWidth = window.innerWidth;
     sparkHeight = window.innerHeight;
     sparkCanvas.width = sparkWidth;
     sparkCanvas.height = sparkHeight;
 }
-
 function addSpark(x, y) {
     for (let i = 0; i < 3; i++) {
         sparks.push({
@@ -83,8 +80,8 @@ function addSpark(x, y) {
         });
     }
 }
-
 function drawSparks() {
+    if (!sparkCtx) return;
     sparkCtx.clearRect(0, 0, sparkWidth, sparkHeight);
     sparks = sparks.filter(s => {
         s.x += s.vx;
@@ -92,7 +89,6 @@ function drawSparks() {
         s.vy += 0.15;
         s.life -= 0.008;
         if (s.life <= 0) return false;
-        
         sparkCtx.beginPath();
         sparkCtx.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
         sparkCtx.fillStyle = s.color;
@@ -103,16 +99,13 @@ function drawSparks() {
     });
     requestAnimationFrame(drawSparks);
 }
-
-if (window.matchMedia("(min-width: 850px)").matches) {
+if (window.matchMedia("(min-width: 850px)").matches && sparkCanvas) {
     initSparkField();
     drawSparks();
-    document.addEventListener('mousemove', (e) => {
-        addSpark(e.clientX, e.clientY);
-    });
+    document.addEventListener('mousemove', (e) => addSpark(e.clientX, e.clientY));
 }
 
-/* ===== 3. MUSIC PLAYER – MP3 ONLY ===== */
+/* ===== MUSIC PLAYER ===== */
 const audio = document.getElementById('audio-player');
 const playBtn = document.getElementById('play-pause');
 const prevBtn = document.getElementById('prev-track');
@@ -123,18 +116,15 @@ const seekContainer = document.getElementById('seek-container');
 const seekTip = document.getElementById('seek-tip');
 const volumeCtrl = document.getElementById('volume-control');
 const visualizer = document.getElementById('frequency-vis');
-const vCtx = visualizer.getContext('2d');
+const vCtx = visualizer?.getContext('2d');
 const currentTimeEl = document.getElementById('current-time');
 const totalTimeEl = document.getElementById('total-time');
 const audioAlert = document.getElementById('audio-alert');
 
 const playlist = [
-    { name: "Ngủ sớm đi em - DucMinh", file: "song1.mp3" },
-    { name: "Nhắn nhủ | Ronboogz",     file: "song2.mp3" },
-    { name: "W/n - id 072019 | 3107",  file: "song3.mp3" },
-    { name: "Madihu - Có em (Feat. Low G)", file: "song4.mp3" },
-    { name: "TƯƠNG TƯ | CLOW X FLEPY", file: "song5.mp3" },
-    { name: "Nghe kể năm 90s | Ân ngờ", file: "song6.mp3" }
+    { name: "Chiisana Koi no Uta", file: "song1.mp3" },
+    { name: "Remember", file: "song2.mp3" },
+    { name: "ハッピーシンセサイザ", file: "song3.mp3" }
 ];
 
 let songIndex = localStorage.getItem('songIndex') || 0;
@@ -143,17 +133,17 @@ let isPlaying = false;
 let audioCtx, analyser, source;
 
 function loadSong(song) {
-    trackName.innerText = song.name;
-    audio.src = song.file;
+    if (trackName) trackName.innerText = song.name;
+    if (audio) audio.src = song.file;
     localStorage.setItem('songIndex', songIndex);
-    audioAlert.classList.add('hidden');
+    if (audioAlert) audioAlert.classList.add('hidden');
 }
-loadSong(playlist[songIndex]);
-audio.volume = 0.45;
-volumeCtrl.value = 45;
+if (audio && playlist[songIndex]) loadSong(playlist[songIndex]);
+if (audio) audio.volume = 0.45;
+if (volumeCtrl) volumeCtrl.value = 45;
 
 function initAudioAnalyser() {
-    if (audioCtx) return;
+    if (audioCtx || !audio) return;
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     analyser = audioCtx.createAnalyser();
     analyser.fftSize = 128;
@@ -165,69 +155,69 @@ function initAudioAnalyser() {
 }
 
 function playAudio() {
+    if (!audio) return;
     if (!audioCtx) initAudioAnalyser();
     if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
     isPlaying = true;
     audio.play()
-        .then(() => playBtn.innerHTML = '<i class="fas fa-pause"></i>')
+        .then(() => {
+            if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        })
         .catch(err => {
-            console.warn('Lỗi phát nhạc:', err);
-            audioAlert.classList.remove('hidden');
+            if (audioAlert) audioAlert.classList.remove('hidden');
             isPlaying = false;
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
         });
 }
 
 function pauseAudio() {
+    if (!audio) return;
     isPlaying = false;
     audio.pause();
-    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
 
-playBtn.addEventListener('click', () => isPlaying ? pauseAudio() : playAudio());
-playBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    isPlaying ? pauseAudio() : playAudio();
-});
+if (playBtn) {
+    playBtn.addEventListener('click', () => isPlaying ? pauseAudio() : playAudio());
+    playBtn.addEventListener('touchstart', (e) => { e.preventDefault(); isPlaying ? pauseAudio() : playAudio(); });
+}
 
-prevBtn.addEventListener('click', () => {
-    songIndex = (songIndex - 1 + playlist.length) % playlist.length;
-    loadSong(playlist[songIndex]);
-    if (isPlaying) playAudio(); else audio.load();
-});
-prevBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    songIndex = (songIndex - 1 + playlist.length) % playlist.length;
-    loadSong(playlist[songIndex]);
-    if (isPlaying) playAudio(); else audio.load();
-});
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        songIndex = (songIndex - 1 + playlist.length) % playlist.length;
+        loadSong(playlist[songIndex]);
+        if (isPlaying) playAudio(); else if (audio) audio.load();
+    });
+    prevBtn.addEventListener('touchstart', (e) => { e.preventDefault(); prevBtn.click(); });
+}
 
-nextBtn.addEventListener('click', () => {
-    songIndex = (songIndex + 1) % playlist.length;
-    loadSong(playlist[songIndex]);
-    if (isPlaying) playAudio(); else audio.load();
-});
-nextBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    songIndex = (songIndex + 1) % playlist.length;
-    loadSong(playlist[songIndex]);
-    if (isPlaying) playAudio(); else audio.load();
-});
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        songIndex = (songIndex + 1) % playlist.length;
+        loadSong(playlist[songIndex]);
+        if (isPlaying) playAudio(); else if (audio) audio.load();
+    });
+    nextBtn.addEventListener('touchstart', (e) => { e.preventDefault(); nextBtn.click(); });
+}
 
-audio.addEventListener('timeupdate', () => {
-    if (audio.duration) {
-        const percent = (audio.currentTime / audio.duration) * 100;
-        seekFill.style.width = `${percent}%`;
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-    }
-});
-
-audio.addEventListener('loadedmetadata', () => {
-    totalTimeEl.textContent = formatTime(audio.duration);
-    audioAlert.classList.add('hidden');
-});
-
-audio.addEventListener('ended', () => nextBtn.click());
+if (audio) {
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration && seekFill) {
+            seekFill.style.width = (audio.currentTime / audio.duration) * 100 + '%';
+        }
+        if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+    audio.addEventListener('loadedmetadata', () => {
+        if (totalTimeEl) totalTimeEl.textContent = formatTime(audio.duration);
+        if (audioAlert) audioAlert.classList.add('hidden');
+    });
+    audio.addEventListener('ended', () => { if (nextBtn) nextBtn.click(); });
+    audio.addEventListener('error', () => {
+        if (audioAlert) audioAlert.classList.remove('hidden');
+        isPlaying = false;
+        if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    });
+}
 
 function formatTime(sec) {
     if (isNaN(sec)) return '0:00';
@@ -236,66 +226,57 @@ function formatTime(sec) {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
 }
 
-seekContainer.addEventListener('click', (e) => {
-    if (!audio.duration) return;
-    const rect = seekContainer.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left;
-    const width = rect.width;
-    audio.currentTime = (offsetX / width) * audio.duration;
-});
-seekContainer.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    if (!audio.duration) return;
-    const touch = e.touches[0];
-    const rect = seekContainer.getBoundingClientRect();
-    const offsetX = touch.clientX - rect.left;
-    const width = rect.width;
-    audio.currentTime = (offsetX / width) * audio.duration;
-});
+if (seekContainer) {
+    seekContainer.addEventListener('click', (e) => {
+        if (!audio || !audio.duration) return;
+        const rect = seekContainer.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        audio.currentTime = (offsetX / rect.width) * audio.duration;
+    });
+    seekContainer.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!audio || !audio.duration) return;
+        const touch = e.touches[0];
+        const rect = seekContainer.getBoundingClientRect();
+        const offsetX = touch.clientX - rect.left;
+        audio.currentTime = (offsetX / rect.width) * audio.duration;
+    });
+    seekContainer.addEventListener('mousemove', (e) => {
+        if (!audio || !audio.duration || !seekTip) return;
+        const rect = seekContainer.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const seekTime = (offsetX / rect.width) * audio.duration;
+        seekTip.style.left = offsetX + 'px';
+        seekTip.textContent = formatTime(seekTime);
+    });
+    seekContainer.addEventListener('mouseleave', () => {
+        if (seekTip) seekTip.style.opacity = '0';
+    });
+}
 
-seekContainer.addEventListener('mousemove', (e) => {
-    if (!audio.duration) return;
-    const rect = seekContainer.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left;
-    const width = rect.width;
-    const seekTime = (offsetX / width) * audio.duration;
-    seekTip.style.left = `${offsetX}px`;
-    seekTip.textContent = formatTime(seekTime);
-});
+if (volumeCtrl && audio) {
+    volumeCtrl.addEventListener('input', (e) => audio.volume = e.target.value / 100);
+    volumeCtrl.addEventListener('touchstart', (e) => e.stopPropagation());
+}
 
-seekContainer.addEventListener('mouseleave', () => {
-    seekTip.style.opacity = '0';
-});
-
-volumeCtrl.addEventListener('input', (e) => {
-    audio.volume = e.target.value / 100;
-});
-volumeCtrl.addEventListener('touchstart', (e) => e.stopPropagation());
-
-audio.addEventListener('error', () => {
-    audioAlert.classList.remove('hidden');
-    isPlaying = false;
-    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-});
-
-// VISUALIZER DẠNG CỘT TẦN SỐ
+// VISUALIZER
 function drawFrequencyBars() {
     requestAnimationFrame(drawFrequencyBars);
-    if (!analyser || !isPlaying) {
-        vCtx.clearRect(0, 0, visualizer.width, visualizer.height);
-        vCtx.fillStyle = '#0a0c14';
-        vCtx.fillRect(0, 0, visualizer.width, visualizer.height);
+    if (!vCtx || !analyser || !isPlaying) {
+        if (vCtx && visualizer) {
+            vCtx.clearRect(0, 0, visualizer.width, visualizer.height);
+            vCtx.fillStyle = '#0a0c14';
+            vCtx.fillRect(0, 0, visualizer.width, visualizer.height);
+        }
         return;
     }
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    analyser.getByteFrequencyData(dataArray);
-    
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(data);
     vCtx.clearRect(0, 0, visualizer.width, visualizer.height);
-    const barWidth = (visualizer.width / bufferLength) * 2.2;
+    const barWidth = (visualizer.width / data.length) * 2.2;
     let x = 0;
-    for (let i = 0; i < bufferLength; i++) {
-        const barHeight = (dataArray[i] / 255) * visualizer.height;
+    for (let i = 0; i < data.length; i++) {
+        const barHeight = (data[i] / 255) * visualizer.height;
         const gradient = vCtx.createLinearGradient(0, 0, 0, visualizer.height);
         gradient.addColorStop(0, '#00f2ff');
         gradient.addColorStop(1, '#ff0099');
@@ -304,14 +285,12 @@ function drawFrequencyBars() {
         x += barWidth + 1.5;
     }
 }
-drawFrequencyBars();
+if (visualizer) drawFrequencyBars();
 
-// CARD PULSE THEO NHẠC
+// CARD PULSE
 function musicPulse() {
-    if (!analyser || !isPlaying) {
-        requestAnimationFrame(musicPulse);
-        return;
-    }
+    requestAnimationFrame(musicPulse);
+    if (!analyser || !isPlaying) return;
     const data = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(data);
     const avg = data.reduce((a,b) => a+b,0) / data.length;
@@ -320,20 +299,40 @@ function musicPulse() {
     if (card) {
         card.style.boxShadow = `0 0 ${30 + intensity*30}px #00f2ff, 0 0 ${60 + intensity*60}px #ff0099`;
     }
-    requestAnimationFrame(musicPulse);
 }
 musicPulse();
 
-/* ===== 4. AVATAR TƯƠNG TÁC ===== */
+/* ===== AVATAR ===== */
 const avatar = document.getElementById('char-avatar');
+let currentAvatarIndex = 0;
+let rotationInterval;
+let isForced = false;
 let avatarAnim = false;
 
+function startAvatarRotation() {
+    if (!avatar) return;
+    if (rotationInterval) clearInterval(rotationInterval);
+    rotationInterval = setInterval(() => {
+        if (!isForced) {
+            currentAvatarIndex = (currentAvatarIndex + 1) % CONFIG.avatars.length;
+            avatar.src = CONFIG.avatars[currentAvatarIndex];
+        }
+    }, 2000);
+}
+startAvatarRotation();
+
 function handleAvatar(e) {
-    if (avatarAnim) return;
+    if (!avatar || avatarAnim) return;
     avatarAnim = true;
-    avatar.src = CONFIG.avatarChange;
-    avatar.classList.add('active-touch', 'fix-height');
-    
+    isForced = true;
+
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * CONFIG.avatars.length);
+    } while (randomIndex === currentAvatarIndex && CONFIG.avatars.length > 1);
+    avatar.src = CONFIG.avatars[randomIndex];
+    avatar.classList.add('active-touch');
+
     let x, y;
     if (e.type === 'touchstart') {
         e.preventDefault();
@@ -343,29 +342,21 @@ function handleAvatar(e) {
         x = e.clientX;
         y = e.clientY;
     }
-    for (let i=0;i<18;i++) heartBurst(x + (Math.random()*60-30), y + (Math.random()*60-30));
-    
+    for (let i = 0; i < 18; i++) {
+        heartBurst(x + (Math.random()*60-30), y + (Math.random()*60-30));
+    }
+
     setTimeout(() => {
-        avatar.src = CONFIG.avatarDefault;
-        avatar.classList.remove('active-touch', 'fix-height');
+        avatar.src = CONFIG.avatars[currentAvatarIndex];
+        avatar.classList.remove('active-touch');
+        isForced = false;
         avatarAnim = false;
     }, 2000);
 }
-
-avatar.addEventListener('touchstart', handleAvatar, { passive: false });
-avatar.addEventListener('click', handleAvatar);
-avatar.addEventListener('mouseenter', () => {
-    if (!avatarAnim) {
-        avatar.src = CONFIG.avatarChange;
-        avatar.classList.add('fix-height');
-    }
-});
-avatar.addEventListener('mouseleave', () => {
-    if (!avatarAnim) {
-        avatar.src = CONFIG.avatarDefault;
-        avatar.classList.remove('fix-height');
-    }
-});
+if (avatar) {
+    avatar.addEventListener('touchstart', handleAvatar, { passive: false });
+    avatar.addEventListener('click', handleAvatar);
+}
 
 function heartBurst(x, y) {
     const heart = document.createElement('div');
@@ -381,35 +372,25 @@ function heartBurst(x, y) {
     setTimeout(() => heart.remove(), 1200);
 }
 
-/* ===== 5. SMART GREETING ===== */
-function updateGreeting() {
-    const g = document.getElementById('greeting-radar');
-    const vn = new Date().toLocaleString('en-US', {timeZone:'Asia/Ho_Chi_Minh'});
-    const h = new Date(vn).getHours();
-    let msg, icon;
-    if (h>=5 && h<12) { msg='OHAYO! NGÀY MỚI TỐT LÀNH'; icon='⛅'; }
-    else if (h>=12 && h<18) { msg='KONNICHIWA! CỐ GẮNG NHÉ'; icon='🍵'; }
-    else { msg='OYASUMI! THƯ GIÃN THÔI'; icon='🌙'; }
-    g.innerHTML = `${icon} ${msg}`;
-}
-updateGreeting();
-setInterval(updateGreeting, 60000);
+/* ===== GREETING (đã bỏ) ===== */
+// (Không cần)
 
-/* ===== 6. TYPEWRITER ===== */
-let rI=0, cI=0, del=false;
+/* ===== TYPEWRITER (ĐÃ FIX LỖI NULL) ===== */
+let rI = 0, cI = 0, del = false;
 const badge = document.getElementById('typing-badge');
 function type() {
+    if (!badge) return; // QUAN TRỌNG: Nếu không tìm thấy badge thì thoát
     const role = CONFIG.roles[rI];
     let sp = 80;
     if (del) { cI--; sp = 35; } else cI++;
     badge.innerHTML = role.substring(0, cI) || '&nbsp;';
     if (!del && cI === role.length) { sp = 2000; del = true; }
-    else if (del && cI === 0) { del = false; rI = (rI+1)%CONFIG.roles.length; sp = 450; }
+    else if (del && cI === 0) { del = false; rI = (rI + 1) % CONFIG.roles.length; sp = 450; }
     setTimeout(type, sp);
 }
-type();
+type(); // Bắt đầu typewriter nếu badge tồn tại
 
-/* ===== 7. COUNTDOWN FLIP ===== */
+/* ===== COUNTDOWN ===== */
 const target = new Date(CONFIG.targetDate).getTime();
 setInterval(() => {
     const now = new Date().getTime();
@@ -423,6 +404,7 @@ setInterval(() => {
 
 function flipNumber(id, val) {
     const el = document.getElementById(id);
+    if (!el) return;
     const newVal = String(val).padStart(2,'0');
     if (el.innerText !== newVal) {
         el.innerText = newVal;
@@ -435,7 +417,7 @@ function flipNumber(id, val) {
     }
 }
 
-/* ===== 8. 3D TILT (PC) ===== */
+/* ===== 3D TILT ===== */
 const wrapper = document.getElementById('card-tilt');
 const cardMain = document.querySelector('.card-container');
 if (wrapper && cardMain && window.matchMedia("(min-width: 850px)").matches) {
@@ -454,10 +436,10 @@ if (wrapper && cardMain && window.matchMedia("(min-width: 850px)").matches) {
     });
 }
 
-/* ===== 9. XỬ LÝ NÚT MẠNG XÃ HỘI (thay vì dùng thẻ a) ===== */
+/* ===== SOCIAL BUTTONS ===== */
 const socialButtons = document.querySelectorAll('.social-icon');
 socialButtons.forEach(btn => {
-    const url = btn.getAttribute('data-url');
+    const url = btn.dataset.url;
     if (!url) return;
 
     const openLink = (e) => {

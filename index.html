@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Mahikari_Hola · COSMIC 3.0</title>
+    <title>Mikagu_Hola · COSMIC 3.0</title>
     <link rel="icon" type="image/png" href="avatar.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- OVERLAY KHỞI ĐỘNG - XÓA NGAY KHI CHẠM -->
-    <div class="overlay" id="start-overlay" onclick="this.remove(); document.getElementById('audio-player').play();">
+    <!-- OVERLAY KHỞI ĐỘNG -->
+    <div class="overlay" id="start-overlay" onclick="this.remove(); document.getElementById('play-pause').click();">
         <div class="loader">
             <div class="ring"></div>
             <div class="ring inner"></div>
@@ -20,20 +20,14 @@
         <span class="tap-pulse">⏵ CHẠM ĐỂ KẾT NỐI</span>
     </div>
 
-    <!-- NỀN SAO CHUYỂN ĐỘNG (CANVAS) -->
+    <!-- NỀN SAO -->
     <canvas id="starry-canvas" class="starry-bg"></canvas>
-
-    <!-- LỚP TINH VÂN MÀU BIẾN ĐỔI -->
     <div class="nebula"></div>
-
-    <!-- HẠT ÁNH SÁNG TƯƠNG TÁC -->
     <canvas id="spark-field" class="spark-field"></canvas>
-
-    <!-- CỔNG VŨ TRỤ XOÁY MẠNH MẼ -->
     <div class="cosmic-whirl"></div>
     <div class="cosmic-whirl secondary"></div>
 
-    <!-- CARD CHÍNH – 3D TILT + PULSE -->
+    <!-- CARD CHÍNH -->
     <div class="card-wrapper" id="card-tilt">
         <div class="card-container" id="main-card">
             <span class="rgb-flow"></span>
@@ -48,25 +42,25 @@
                     <img src="avatar.png" alt="Avatar" class="avatar-img" id="char-avatar">
                 </div>
                 <div class="title-area">
-                    <h1 class="gradient-glitch" data-text="Mahikari_Hola">Mahikari_Hola</h1>
+                    <h1 class="gradient-glitch" data-text="Mikagu_Hola">Mikagu_Hola</h1>
                     <div class="badge-wrapper">
                         <span class="badge-live" id="typing-badge"></span>
                         <span class="cursor-beam">|</span>
                     </div>
                 </div>
                 <div class="social-panel">
-                    <!-- Chuyển sang button + data-url -->
                     <button class="social-icon fb" data-url="https://www.facebook.com/profile.php?id=61582336522985"><i class="fab fa-facebook-f"></i></button>
-                    <button class="social-icon tt" data-url="https://www.tiktok.com/@mahikari_hola"><i class="fab fa-tiktok"></i></button>
+                    <button class="social-icon tt" data-url="https://www.tiktok.com/@Mikagu_hola"><i class="fab fa-tiktok"></i></button>
                     <button class="social-icon discord" data-url="https://discord.gg/NkbMV48zY6"><i class="fab fa-discord"></i></button>
                 </div>
             </div>
 
             <!-- CỘT PHẢI -->
             <div class="col-right">
-                <div id="greeting-radar" class="greeting-beam">⛅ OHAYO!</div>
+                <!-- GREETING BEAM ĐÃ ĐƯỢC BỎ THEO YÊU CẦU -->
+                <!-- <div id="greeting-radar" class="greeting-beam">⛅ OHAYO! NGÀY MỚI TỐT LÀNH</div> -->
 
-                <!-- COUNTDOWN – HIỆU ỨNG FLIP SỐ -->
+                <!-- COUNTDOWN -->
                 <div class="countdown-panel">
                     <div class="panel-title"><i class="fas fa-satellite-dish"></i> COUNTDOWN • VN</div>
                     <div class="flip-clock">
@@ -80,17 +74,18 @@
                     </div>
                 </div>
 
-                <!-- WAIFU LIST – ICON TIM ĐẬP -->
+                <!-- WAIFU LIST -->
                 <div class="waifu-panel">
                     <div class="panel-title"><i class="fas fa-heart-circle"></i> WAIFU COLLECTION</div>
                     <ul class="waifu-list">
                         <li class="rank-1"><span class="rank-badge">#1</span> Shiina Mahiru <i class="fas fa-crown crown-glow"></i></li>
-                        <li><span class="rank-badge">#2</span> Kagari Fuyukawa <i class="fas fa-heart pulse-heart"></i></li>
-                        <li><span class="rank-badge">#3</span> Hiura Mihate <i class="fas fa-star spark-star"></i></li>
+                        <li><span class="rank-badge">#2</span> Kaguya <i class="fas fa-moon moon-icon"></i></li>
+                        <li><span class="rank-badge">#3</span> Kagari Fuyukawa <i class="fas fa-star spark-star"></i></li>
+                        <li><span class="rank-badge">#4</span> Hiura Mihate <i class="fas fa-heart pulse-heart"></i></li>
                     </ul>
                 </div>
 
-                <!-- MUSIC PLAYER – ĐĨA CD XOAY + VISUALIZER CỘT -->
+                <!-- MUSIC PLAYER -->
                 <div class="music-panel">
                     <div class="track-header">
                         <canvas id="frequency-vis" width="60" height="36"></canvas>
