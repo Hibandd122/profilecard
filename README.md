@@ -4,8 +4,6 @@
 
 Bạn có thể xem bản demo trực tiếp tại đây: **[profilecard-azure.vercel.app](https://profilecard-azure.vercel.app)**
 
-[![Screenshot của dự án](link-vao-anh-chup-man-hinh-cua-ban.png)](https://profilecard-azure.vercel.app)
-
 ## ✨ Tính năng nổi bật
 
 *   **Giao diện Vũ trụ Động đầy mê hoặc:**
