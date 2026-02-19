@@ -1,0 +1,39 @@
+@media (max-width: 850px) {
+    .card-container { flex-direction: column; height: auto; width: 96%; border-radius: 30px; }
+    .col-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 25px 15px; }
+    .avatar-zone { width: 160px; height: 160px; }
+    .gradient-glitch { font-size: 28px; }
+    .badge-live { min-width: 140px; padding: 6px 16px; font-size: 11px; }
+    .col-right { padding: 22px 18px; gap: 18px; }
+    .flip-unit { width: 45px; }
+    .flip-unit span { font-size: 24px; }
+    .flip-sep { font-size: 24px; }
+    .waifu-list li { font-size: 14px; }
+    .music-panel { padding: 18px; }
+    #frequency-vis { width: 50px; height: 30px; }
+    .track-title { font-size: 13px; animation: none; overflow-x: auto; }
+    .player-controls { gap: 16px; }
+    .play-circle { width: 42px; height: 42px; font-size: 16px; }
+    .volume-dock input { width: 60px; }
+    .social-icon { width: 44px; height: 44px; font-size: 20px; }
+    .cosmic-whirl, .spark-field { opacity: 0.2; }
+    .overlay { padding: 0 20px; text-align: center; }
+    .glitch-text { font-size: 18px !important; letter-spacing: 5px !important; word-wrap: break-word; white-space: normal; }
+    .tap-pulse { font-size: 12px; padding: 6px 16px; }
+}
+
+@media (max-width: 480px) {
+    .avatar-zone { width: 140px; height: 140px; }
+    .gradient-glitch { font-size: 24px; }
+    .badge-live { min-width: 120px; font-size: 10px; }
+    .flip-unit { width: 38px; }
+    .flip-unit span { font-size: 20px; }
+    .flip-unit small { font-size: 8px; }
+    .flip-sep { font-size: 20px; margin-top: -6px; }
+    .col-right { padding: 18px 14px; }
+    .waifu-list li { font-size: 13px; }
+    .volume-dock input { width: 50px; }
+    .social-icon { width: 40px; height: 40px; font-size: 18px; }
+    .glitch-text { font-size: 14px !important; letter-spacing: 3px !important; }
+    .tap-pulse { font-size: 11px; padding: 5px 12px; }
+}

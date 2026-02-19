@@ -1,0 +1,68 @@
+/* CARD CHÍNH */
+.card-wrapper {
+    perspective: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    margin: 25px 0;
+    z-index: 100;
+}
+
+.card-container {
+    width: 860px;
+    max-width: 94%;
+    min-height: 620px;        /* thay height:620px bằng min-height */
+    height: auto;             /* cho phép mở rộng theo nội dung */
+    background: rgba(10, 10, 20, 0.68);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 40px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+    animation: floatSoft 8s infinite ease-in-out;
+    transition: box-shadow 0.3s, transform 0.1s;
+    z-index: 200 !important;
+    pointer-events: auto !important;
+}
+
+.card-container:hover {
+    box-shadow: 0 40px 80px rgba(0,242,255,0.2), 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+@keyframes floatSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* VIỀN RGB */
+.rgb-flow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 40px;
+    padding: 2px;
+    background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background-size: 500% 100%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rgbStream 5s linear infinite;
+    pointer-events: none !important;
+    z-index: 15;
+    opacity: 0.9;
+}
+
+.rgb-flow.reverse {
+    background: linear-gradient(270deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    animation: rgbStreamReverse 7s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes rgbStream { 100% { background-position: 500% 0; } }
+@keyframes rgbStreamReverse { 100% { background-position: 0% 0; } }

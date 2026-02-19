@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Mikagu_Hola · COSMIC 3.0</title>
     <link rel="icon" type="image/png" href="avatar.png">
-    <link rel="stylesheet" href="style.css">
+    <!-- CSS files -->
+    <link rel="stylesheet" href="style-base.css">
+    <link rel="stylesheet" href="style-backgrounds.css">
+    <link rel="stylesheet" href="style-card.css">
+    <link rel="stylesheet" href="style-left.css">
+    <link rel="stylesheet" href="style-right.css">
+    <link rel="stylesheet" href="style-responsive.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -57,9 +63,6 @@
 
             <!-- CỘT PHẢI -->
             <div class="col-right">
-                <!-- GREETING BEAM ĐÃ ĐƯỢC BỎ THEO YÊU CẦU -->
-                <!-- <div id="greeting-radar" class="greeting-beam">⛅ OHAYO! NGÀY MỚI TỐT LÀNH</div> -->
-
                 <!-- COUNTDOWN -->
                 <div class="countdown-panel">
                     <div class="panel-title"><i class="fas fa-satellite-dish"></i> COUNTDOWN • VN</div>
@@ -74,15 +77,56 @@
                     </div>
                 </div>
 
-                <!-- WAIFU LIST -->
+                <!-- WAIFU LIST NÂNG CẤP (ĐÃ SỬA ICON) -->
                 <div class="waifu-panel">
                     <div class="panel-title"><i class="fas fa-heart-circle"></i> WAIFU COLLECTION</div>
-                    <ul class="waifu-list">
-                        <li class="rank-1"><span class="rank-badge">#1</span> Shiina Mahiru <i class="fas fa-crown crown-glow"></i></li>
-                        <li><span class="rank-badge">#2</span> Kaguya <i class="fas fa-moon moon-icon"></i></li>
-                        <li><span class="rank-badge">#3</span> Kagari Fuyukawa <i class="fas fa-star spark-star"></i></li>
-                        <li><span class="rank-badge">#4</span> Hiura Mihate <i class="fas fa-heart pulse-heart"></i></li>
-                    </ul>
+                    <div class="waifu-grid">
+                        <!-- #1 Shiina Mahiru - Thiên thần (feather) -->
+                        <div class="waifu-item rank-1">
+                            <div class="waifu-rank">#1</div>
+                            <div class="waifu-info">
+                                <span class="waifu-name">Shiina Mahiru</span>
+                                <div class="waifu-bar"><div class="waifu-fill" style="width: 100%"></div></div>
+                            </div>
+                            <i class="fas fa-feather-alt angel-icon"></i>
+                        </div>
+                        <!-- #2 Kaguya - Mặt trăng -->
+                        <div class="waifu-item rank-2">
+                            <div class="waifu-rank">#2</div>
+                            <div class="waifu-info">
+                                <span class="waifu-name">Kaguya</span>
+                                <div class="waifu-bar"><div class="waifu-fill" style="width: 96%"></div></div>
+                            </div>
+                            <i class="fas fa-moon moon-icon"></i>
+                        </div>
+                        <!-- #3 Yachiyo Runami - Mặt trăng -->
+                        <div class="waifu-item rank-3">
+                            <div class="waifu-rank">#3</div>
+                            <div class="waifu-info">
+                                <span class="waifu-name">Yachiyo Runami</span>
+                                <div class="waifu-bar"><div class="waifu-fill" style="width: 93%"></div></div>
+                            </div>
+                            <i class="fas fa-moon moon-icon"></i>
+                        </div>
+                        <!-- #4 Kagari Fuyukawa - Con mèo -->
+                        <div class="waifu-item">
+                            <div class="waifu-rank">#4</div>
+                            <div class="waifu-info">
+                                <span class="waifu-name">Kagari Fuyukawa</span>
+                                <div class="waifu-bar"><div class="waifu-fill" style="width: 89%"></div></div>
+                            </div>
+                            <i class="fas fa-cat cat-icon"></i>
+                        </div>
+                        <!-- #5 Hiura Mihate - Trái tim -->
+                        <div class="waifu-item">
+                            <div class="waifu-rank">#5</div>
+                            <div class="waifu-info">
+                                <span class="waifu-name">Hiura Mihate</span>
+                                <div class="waifu-bar"><div class="waifu-fill" style="width: 86%"></div></div>
+                            </div>
+                            <i class="fas fa-heart pulse-heart"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- MUSIC PLAYER -->
@@ -116,6 +160,15 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- JavaScript files (thứ tự: config trước) -->
+    <script src="config.js"></script>
+    <script src="stars.js"></script>
+    <script src="spark.js"></script>
+    <script src="music.js"></script>
+    <script src="avatar.js"></script>
+    <script src="typewriter.js"></script>
+    <script src="countdown.js"></script>
+    <script src="tilt.js"></script>
+    <script src="social.js"></script>
 </body>
 </html>

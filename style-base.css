@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #03050f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* OVERLAY KHỞI ĐỘNG */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #03050f;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+    pointer-events: auto;
+}
+
+.loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 25px;
+}
+
+.ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: #00f2ff;
+    border-bottom-color: #ff0099;
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.ring.inner {
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 15%;
+    border-top-color: #ff0099;
+    border-bottom-color: #00f2ff;
+    animation-direction: reverse;
+    animation-duration: 0.7s;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.glitch-text {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: #00f2ff;
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+}
+.glitch-text::before {
+    color: #ff0099;
+    z-index: -1;
+    animation: glitchOffset 0.2s infinite;
+}
+.glitch-text::after {
+    color: #00f2ff;
+    z-index: -2;
+    animation: glitchOffset 0.1s infinite reverse;
+}
+
+@keyframes glitchOffset {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 2px); }
+    40% { transform: translate(3px, -2px); }
+    60% { transform: translate(-3px, 1px); }
+    80% { transform: translate(3px, -1px); }
+    100% { transform: translate(0); }
+}
+
+.tap-pulse {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    letter-spacing: 4px;
+    margin-top: 25px;
+    animation: pulseFade 1.8s infinite;
+    border: 1px solid rgba(0,242,255,0.3);
+    padding: 8px 22px;
+    border-radius: 40px;
+}
+
+@keyframes pulseFade {
+    0%, 100% { opacity: 0.6; box-shadow: 0 0 10px rgba(0,242,255,0.2); }
+    50% { opacity: 1; box-shadow: 0 0 25px rgba(0,242,255,0.6); }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
+::-webkit-scrollbar-thumb { background: linear-gradient(#00f2ff, #ff0099); border-radius: 10px; }
+
+/* TRÁI TIM LASER */
+.heart-pop {
+    position: fixed; font-size: 30px; color: #ff0099; pointer-events: none; z-index: 9999;
+    animation: heartLaser 1.2s ease-out forwards; text-shadow: 0 0 30px #ff0099, 0 0 60px #ff0099;
+}
+@keyframes heartLaser {
+    0% { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--x), calc(var(--y) - 200px)) scale(0.2) rotate(720deg); opacity: 0; }
+}
