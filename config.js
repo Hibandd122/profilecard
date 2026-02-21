@@ -1,7 +1,7 @@
 /* ===== CẤU HÌNH NÂNG CẤP ===== */
 const CONFIG = {
     // ===== CẤU HÌNH CƠ BẢN (GIỮ NGUYÊN) =====
-    avatars: ["avatar.png", "avatar2.png", "avatar3.png", "avatar4.png"],
+    avatars: ["avatar.png", "avatar2.png", "avatar3.png", "avatar4.png","avatar5.png"],
     targetDate: "2026-04-03T18:30:00+07:00",
     roles: ["</> PYTHON CODER", "🎮 ROBLOX GAMER", "💖 WAIFU COLLECTOR", "🎵 LOFI CHILL"],
 
@@ -87,4 +87,5 @@ if (!CONFIG.avatars || CONFIG.avatars.length === 0) {
 }
 
 // (Tùy chọn) Đóng băng đối tượng để tránh sửa đổi ngoài ý muốn
+
 // Object.freeze(CONFIG);
