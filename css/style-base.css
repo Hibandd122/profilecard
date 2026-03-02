@@ -1,1 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+:root {
+    /* Light theme - tươi sáng, hiện đại */
+    --bg-light: linear-gradient(145deg, #f9fafc 0%, #eef2f6 100%);
+    --card-bg-light: rgba(255, 255, 255, 0.75);
+    --text-primary-light: #1e293b;
+    --text-secondary-light: #475569;
+    --border-light: rgba(0, 0, 0, 0.08);
+    --shadow-light: 0 30px 50px -20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.02);
+    --glow-primary-light: #4f46e5;
+    --glow-secondary-light: #db2777;
+    --accent-gradient-light: linear-gradient(135deg, #4f46e5, #db2777);
+    --hover-glow-light: rgba(79, 70, 229, 0.2);
+    --panel-bg-light: rgba(255, 255, 255, 0.5);
+
+    /* Dark theme - sâu, huyền bí */
+    --bg-dark: linear-gradient(145deg, #0b0f1a 0%, #141b2b 100%);
+    --card-bg-dark: rgba(15, 23, 42, 0.8);
+    --text-primary-dark: #f1f5f9;
+    --text-secondary-dark: #94a3b8;
+    --border-dark: rgba(255, 255, 255, 0.06);
+    --shadow-dark: 0 30px 50px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --glow-primary-dark: #38bdf8;
+    --glow-secondary-dark: #f472b6;
+    --accent-gradient-dark: linear-gradient(135deg, #38bdf8, #f472b6);
+    --hover-glow-dark: rgba(56, 189, 248, 0.2);
+    --panel-bg-dark: rgba(255, 255, 255, 0.05);
+
+    /* Mặc định light */
+    --bg: var(--bg-light);
+    --card-bg: var(--card-bg-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --border: var(--border-light);
+    --shadow: var(--shadow-light);
+    --glow-primary: var(--glow-primary-light);
+    --glow-secondary: var(--glow-secondary-light);
+    --accent-gradient: var(--accent-gradient-light);
+    --hover-glow: var(--hover-glow-light);
+    --panel-bg: var(--panel-bg-light);
+}
+
+.dark-mode {
+    --bg: var(--bg-dark);
+    --card-bg: var(--card-bg-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --border: var(--border-dark);
+    --shadow: var(--shadow-dark);
+    --glow-primary: var(--glow-primary-dark);
+    --glow-secondary: var(--glow-secondary-dark);
+    --accent-gradient: var(--accent-gradient-dark);
+    --hover-glow: var(--hover-glow-dark);
+    --panel-bg: var(--panel-bg-dark);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 1rem;
+    transition: background 0.5s ease, color 0.3s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Overlay khởi động */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    transition: opacity 0.4s ease;
+}
+
+.loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: var(--glow-primary);
+    border-bottom-color: var(--glow-secondary);
+    animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.ring.inner {
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 15%;
+    border-top-color: var(--glow-secondary);
+    border-bottom-color: var(--glow-primary);
+    animation-direction: reverse;
+    animation-duration: 0.8s;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.glitch-text {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    color: var(--glow-primary);
+    position: relative;
+    text-transform: uppercase;
+    animation: glitch 3s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+}
+.glitch-text::before {
+    color: var(--glow-secondary);
+    z-index: -1;
+    animation: glitchOffset 0.3s infinite;
+}
+.glitch-text::after {
+    color: var(--glow-primary);
+    z-index: -2;
+    animation: glitchOffset 0.2s infinite reverse;
+}
+
+@keyframes glitchOffset {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-1px, 2px); }
+    80% { transform: translate(1px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.tap-pulse {
+    color: var(--text-secondary);
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-top: 25px;
+    animation: pulseFade 2s infinite;
+    border: 1px solid var(--border);
+    padding: 10px 28px;
+    border-radius: 40px;
+    backdrop-filter: blur(5px);
+    background: var(--panel-bg);
+}
+
+@keyframes pulseFade {
+    0%, 100% { opacity: 0.7; box-shadow: 0 0 15px var(--glow-primary); }
+    50% { opacity: 1; box-shadow: 0 0 30px var(--glow-primary); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--panel-bg); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--accent-gradient); border-radius: 10px; }
+
+/* Theme toggle */
+.theme-toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 0 25px var(--hover-glow);
+    border-color: transparent;
+}
+
+.theme-toggle i {
+    position: absolute;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.theme-toggle .fa-sun {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.theme-toggle .fa-moon {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.dark-mode .theme-toggle .fa-sun {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.dark-mode .theme-toggle .fa-moon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Heart pop */
+.heart-pop {
+    position: fixed;
+    font-size: 28px;
+    color: var(--glow-secondary);
+    pointer-events: none;
+    z-index: 9999;
+    animation: heartLaser 1.2s ease-out forwards;
+    text-shadow: 0 0 20px var(--glow-secondary);
+}
+
+@keyframes heartLaser {
+    0% { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--x), calc(var(--y) - 180px)) scale(0.2) rotate(720deg); opacity: 0; }
+}
+
+/* Reveal animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ripple effect */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple 0.7s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(5);
+        opacity: 0;
+    }
+}

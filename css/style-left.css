@@ -1,0 +1,223 @@
+.countdown-panel,
+.waifu-panel,
+.music-panel,
+.social-icon {
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix lỗi bo góc trên Safari */
+}
+
+/* Phần còn lại giữ nguyên */
+.col-left {
+    flex: 1.2;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 20px;
+    position: relative;
+    z-index: 300;
+}
+
+.avatar-zone {
+    width: 220px;
+    height: 220px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+
+.halo-rotate {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top: 3px solid var(--glow-primary);
+    border-bottom: 3px solid var(--glow-secondary);
+    animation: spinHalo 7s linear infinite;
+    box-shadow: 0 0 25px var(--glow-primary);
+}
+
+.halo-rotate.outer {
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+    border-top: 2px solid var(--glow-secondary);
+    border-bottom: 2px solid var(--glow-primary);
+    animation: spinHaloReverse 9s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes spinHalo { 100% { transform: rotate(360deg); } }
+@keyframes spinHaloReverse { 100% { transform: rotate(-360deg); } }
+
+.ripple-ground {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotateX(60deg);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--glow-primary) 0%, transparent 80%);
+    border-radius: 50%;
+    opacity: 0.15;
+}
+
+.ripple-ground span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--glow-primary);
+    border-radius: 50%;
+    animation: rippleWave 3s infinite;
+    opacity: 0;
+}
+
+.ripple-ground span:nth-child(2) { animation-delay: 1s; }
+.ripple-ground span:nth-child(3) { animation-delay: 2s; }
+
+@keyframes rippleWave {
+    0% { width: 0; height: 0; opacity: 1; margin-top: 100px; margin-left: 100px; }
+    100% { width: 100%; height: 100%; opacity: 0; margin-top: 0; margin-left: 0; }
+}
+
+.avatar-img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 130%;
+    width: auto;
+    max-width: 100%;
+    filter: drop-shadow(0 0 20px var(--glow-primary));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.avatar-img:hover {
+    transform: translateX(-50%) scale(1.08);
+    filter: drop-shadow(0 0 35px var(--glow-secondary));
+}
+
+.avatar-img.active-touch {
+    transform: translateX(-50%) scale(1.12);
+    filter: drop-shadow(0 0 45px var(--glow-secondary));
+}
+
+.title-area {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.gradient-glitch {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: var(--accent-gradient);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientFlow 6s linear infinite;
+}
+
+@keyframes gradientFlow { to { background-position: 200% center; } }
+
+.badge-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 40px;
+}
+
+.badge-live {
+    background: var(--panel-bg);
+    backdrop-filter: blur(8px);
+    padding: 8px 24px;
+    border-radius: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    min-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 0 15px var(--hover-glow);
+    position: relative;
+}
+
+.badge-live::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(90deg, transparent, var(--glow-primary), transparent);
+    border-radius: 40px;
+    animation: scan 2.8s infinite;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+@keyframes scan {
+    0% { transform: translateX(-100%); }
+    20%, 100% { transform: translateX(100%); }
+}
+
+.cursor-beam {
+    color: var(--glow-primary);
+    font-size: 22px;
+    font-weight: 800;
+    animation: blinkBeam 1s step-end infinite;
+}
+
+@keyframes blinkBeam { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+/* Social panel */
+.social-panel {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    font-size: 24px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 30px var(--hover-glow);
+    border-color: transparent;
+}
+
+.social-icon:active {
+    transform: scale(0.95);
+}
+
+.social-icon.fb:hover { background: #1877f2; color: white; }
+.social-icon.tt:hover { background: #000; color: white; }
+.social-icon.discord:hover { background: #5865F2; color: white; }
