@@ -37,6 +37,25 @@
     .social-icon {
         border-radius: 18px; /* giảm từ 20px xuống 18px */
     }
+    
+    /* FIX LAG MOIBLE: Tắt bớt hiệu ứng nặng */
+    .rgb-flow, .rgb-flow.reverse {
+        display: none !important;
+    }
+    .cosmic-whirl, .cosmic-whirl.secondary, .nebula {
+        display: none !important;
+        animation: none !important;
+    }
+    .card-container {
+        animation: none !important;
+    }
+    .card-wrapper {
+        perspective: none !important;
+        transform-style: flat !important;
+    }
+    .halo-rotate, .halo-rotate.outer, .ripple-ground {
+        display: none !important;
+    }
 }
 
 @media (max-width: 480px) {

@@ -1,31 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    /* Light theme - tươi sáng, hiện đại */
-    --bg-light: linear-gradient(145deg, #f9fafc 0%, #eef2f6 100%);
-    --card-bg-light: rgba(255, 255, 255, 0.75);
+    /* Light theme - rực rỡ, sống động, không nhàm chán */
+    --bg-light: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+    --card-bg-light: rgba(255, 255, 255, 0.45); /* Trong suốt hơn để thấy nền */
     --text-primary-light: #1e293b;
     --text-secondary-light: #475569;
-    --border-light: rgba(0, 0, 0, 0.08);
-    --shadow-light: 0 30px 50px -20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.02);
-    --glow-primary-light: #4f46e5;
-    --glow-secondary-light: #db2777;
-    --accent-gradient-light: linear-gradient(135deg, #4f46e5, #db2777);
-    --hover-glow-light: rgba(79, 70, 229, 0.2);
-    --panel-bg-light: rgba(255, 255, 255, 0.5);
+    --border-light: rgba(255, 255, 255, 0.7);
+    --shadow-light: 0 30px 60px -15px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5);
+    --glow-primary-light: #6366f1;
+    --glow-secondary-light: #ec4899;
+    --accent-gradient-light: linear-gradient(135deg, #6366f1, #ec4899);
+    --hover-glow-light: rgba(99, 102, 241, 0.4);
+    --panel-bg-light: rgba(255, 255, 255, 0.55);
 
-    /* Dark theme - sâu, huyền bí */
-    --bg-dark: linear-gradient(145deg, #0b0f1a 0%, #141b2b 100%);
-    --card-bg-dark: rgba(15, 23, 42, 0.8);
-    --text-primary-dark: #f1f5f9;
+    /* Dark theme - sâu, huyền bí, dải ngân hà */
+    --bg-dark: linear-gradient(-45deg, #0f172a, #1e1b4b, #170f3f, #020617);
+    --card-bg-dark: rgba(15, 23, 42, 0.45);
+    --text-primary-dark: #f8fafc;
     --text-secondary-dark: #94a3b8;
-    --border-dark: rgba(255, 255, 255, 0.06);
-    --shadow-dark: 0 30px 50px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02);
-    --glow-primary-dark: #38bdf8;
-    --glow-secondary-dark: #f472b6;
-    --accent-gradient-dark: linear-gradient(135deg, #38bdf8, #f472b6);
-    --hover-glow-dark: rgba(56, 189, 248, 0.2);
-    --panel-bg-dark: rgba(255, 255, 255, 0.05);
+    --border-dark: rgba(255, 255, 255, 0.15);
+    --shadow-dark: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    --glow-primary-dark: #00f2fe;
+    --glow-secondary-dark: #4facfe;
+    --accent-gradient-dark: linear-gradient(135deg, #00f2fe, #4facfe);
+    --hover-glow-dark: rgba(0, 242, 254, 0.4);
+    --panel-bg-dark: rgba(30, 41, 59, 0.4);
 
     /* Mặc định light */
     --bg: var(--bg-light);
@@ -64,6 +64,8 @@
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -71,9 +73,15 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     padding: 1rem;
-    transition: background 0.5s ease, color 0.3s ease;
+    transition: color 0.3s ease;
     position: relative;
     overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Overlay khởi động */

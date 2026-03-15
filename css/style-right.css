@@ -57,17 +57,20 @@
     font-size: 34px;
     font-weight: 800;
     color: var(--text-primary);
-    text-shadow: 0 0 20px var(--glow-primary);
-    background: rgba(0,0,0,0.2);
+    text-shadow: 0 0 10px var(--glow-primary); /* Giảm shadow gốc bớt chói */
+    background: var(--panel-bg); /* Sửa nền từ màu đen mờ sang biến panel chung để theo theme */
+    border: 1px solid var(--border); /* Thêm viền mỏng mờ */
     padding: 6px 0;
     border-radius: 16px;
-    transition: transform 0.2s, text-shadow 0.2s;
+    transition: transform 0.2s, text-shadow 0.2s, box-shadow 0.2s;
     font-family: 'Inter', monospace;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Bóng đổ mềm cho light mode */
 }
 
 .flip-unit span:hover {
     transform: scale(1.05);
-    text-shadow: 0 0 30px var(--glow-primary), 0 0 60px var(--glow-secondary);
+    text-shadow: 0 0 20px var(--glow-primary), 0 0 40px var(--glow-secondary);
+    box-shadow: 0 5px 15px var(--hover-glow);
 }
 
 .flip-unit small {
@@ -122,10 +125,11 @@
 }
 
 .waifu-item:hover {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.12);
     border-color: var(--glow-primary);
-    transform: translateX(5px);
-    box-shadow: 0 5px 20px var(--hover-glow);
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 8px 25px var(--hover-glow);
+    z-index: 10;
 }
 
 .waifu-rank {

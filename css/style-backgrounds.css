@@ -19,16 +19,17 @@
 
 /* Nebula tinh vân */
 .nebula {
-    background: radial-gradient(circle at 30% 40%, rgba(56, 189, 248, 0.1) 0%, transparent 45%),
-                radial-gradient(circle at 70% 60%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+    background: radial-gradient(circle at 30% 40%, var(--glow-primary) 0%, transparent 45%),
+                radial-gradient(circle at 70% 60%, var(--glow-secondary) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, var(--glow-primary) 0%, transparent 60%);
+    opacity: 0.15;
     filter: blur(80px);
     animation: nebulaWave 18s infinite alternate ease-in-out;
 }
 
 @keyframes nebulaWave {
-    0% { opacity: 0.3; transform: scale(1); }
-    100% { opacity: 0.7; transform: scale(1.15); }
+    0% { opacity: 0.1; transform: scale(1); }
+    100% { opacity: 0.25; transform: scale(1.15); }
 }
 
 /* Xoáy vũ trụ */
