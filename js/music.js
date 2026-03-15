@@ -50,14 +50,17 @@ if (volumeCtrl) volumeCtrl.value = loadVolume();
 
 function initAudioAnalyser() {
     if (audioCtx || !audio) return;
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 128;
     try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256; // Increased resolution slightly for smoother bars
         source = audioCtx.createMediaElementSource(audio);
         source.connect(analyser);
         analyser.connect(audioCtx.destination);
-    } catch (e) {}
+    } catch (e) {
+        console.warn("AudioContext init failed:", e);
+    }
 }
 
 function playAudio() {
@@ -203,9 +206,19 @@ function musicPulse() {
     analyser.getByteFrequencyData(data);
     const avg = data.reduce((a,b) => a+b,0) / data.length;
     const intensity = Math.min(avg / 60, 1.8);
+    
+    // Animate Card Glow Minimalistically
     const card = document.querySelector('.card-container');
     if (card) {
-        card.style.boxShadow = `0 0 ${30 + intensity*30}px #00f2ff, 0 0 ${60 + intensity*60}px #ff0099`;
+        card.style.boxShadow = `0 15px 40px -10px rgba(0,0,0,0.5), 0 0 ${10 + intensity*10}px var(--glow-primary)`;
+    }
+
+    // Audio Reactive Avatar
+    const avatarImg = document.getElementById('char-avatar');
+    if (avatarImg && !avatarImg.classList.contains('active-touch')) {
+        const scale = 1 + (intensity * 0.05); // max scale 1.09
+        avatarImg.style.transform = `translateX(-50%) scale(${scale})`;
+        avatarImg.style.filter = `drop-shadow(0 0 ${20 + intensity*20}px var(--glow-secondary))`;
     }
 }
 musicPulse();

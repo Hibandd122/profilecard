@@ -2,9 +2,16 @@
 const CONFIG = {
     avatars: ["assets/avatar.png", "assets/avatar2.png", "assets/avatar3.png", "assets/avatar4.png","assets/avatar5.png"],
     targetDate: "2026-04-03T18:30:00+07:00",
-    roles: ["</> PYTHON CODER", "🎮 ROBLOX GAMER", "💖 WAIFU COLLECTOR", "🎵 LOFI CHILL"],
+    roles: [
+        "</> PYTHON DEVELOPER", 
+        "🎮 ROBLOX PRO PLAYER", 
+        "💖 WAIFU COLLECTOR", 
+        "🎵 LOFI & CHILL",
+        "✨ DREAMER & CREATOR",
+        "🌙 LOST IN THE STARS"
+    ],
 
-    pageName: "Mikagu_Hola",
+    pageName: "Mahikari_Hola",
 
     favicon: {
         enabled: true,

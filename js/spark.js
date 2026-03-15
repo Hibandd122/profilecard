@@ -47,6 +47,18 @@ if (CONFIG.effects.sparks) {
         initSparkField();
         drawSparks();
         document.addEventListener('mousemove', (e) => addSpark(e.clientX, e.clientY));
+        document.addEventListener('mousedown', (e) => {
+            for(let i=0; i<30; i++) {
+                sparks.push({
+                    x: e.clientX, y: e.clientY,
+                    vx: (Math.random() - 0.5) * 15,
+                    vy: (Math.random() - 0.5) * 15,
+                    life: 1 + Math.random(),
+                    size: Math.random() * 6 + 3,
+                    color: `hsl(${Math.random() * 360}, 100%, 65%)` // random colors on click
+                });
+            }
+        });
     }
 } else {
     // Nếu tắt spark, ẩn canvas
