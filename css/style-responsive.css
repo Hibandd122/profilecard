@@ -1,0 +1,89 @@
+@media (max-width: 850px) {
+    .card-container {
+        flex-direction: column;
+        height: auto;
+        width: 96%;
+        border-radius: 36px; /* giảm từ 48px xuống 36px */
+    }
+    .rgb-flow, .rgb-flow.reverse {
+        border-radius: 36px;
+    }
+    .col-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 30px 20px;
+    }
+    .avatar-zone { width: 160px; height: 160px; }
+    .gradient-glitch { font-size: 30px; }
+    .badge-live { min-width: 140px; padding: 6px 18px; font-size: 12px; }
+    .col-right { padding: 24px 20px; gap: 20px; }
+    .flip-unit { width: 48px; }
+    .flip-unit span { font-size: 26px; }
+    .flip-sep { font-size: 26px; }
+    .waifu-name { font-size: 14px; }
+    .music-panel { padding: 20px; }
+    #frequency-vis { width: 50px; height: 30px; }
+    .track-title { font-size: 14px; }
+    .player-controls { gap: 18px; }
+    .play-circle { width: 44px; height: 44px; font-size: 18px; }
+    .volume-dock input { width: 65px; }
+    .social-icon { width: 46px; height: 46px; font-size: 22px; }
+    .theme-toggle-container { top: 15px; right: 15px; }
+
+    /* Điều chỉnh border-radius cho các panel */
+    .countdown-panel, .waifu-panel, .music-panel {
+        border-radius: 28px; /* giảm từ 32px xuống 28px */
+    }
+    .social-icon {
+        border-radius: 18px; /* giảm từ 20px xuống 18px */
+    }
+    
+    /* FIX LAG MOIBLE: Tắt bớt hiệu ứng nặng */
+    .rgb-flow, .rgb-flow.reverse {
+        display: none !important;
+    }
+    .cosmic-whirl, .cosmic-whirl.secondary, .nebula {
+        display: none !important;
+        animation: none !important;
+    }
+    .card-container {
+        animation: none !important;
+    }
+    .card-wrapper {
+        perspective: none !important;
+        transform-style: flat !important;
+    }
+    .halo-rotate, .halo-rotate.outer, .ripple-ground {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        border-radius: 30px; /* giảm thêm cho mobile nhỏ */
+    }
+    .rgb-flow, .rgb-flow.reverse {
+        border-radius: 30px;
+    }
+    .avatar-zone { width: 140px; height: 140px; }
+    .gradient-glitch { font-size: 26px; }
+    .badge-live { min-width: 120px; font-size: 11px; padding: 5px 14px; }
+    .flip-unit { width: 40px; }
+    .flip-unit span { font-size: 22px; }
+    .flip-unit small { font-size: 8px; }
+    .flip-sep { font-size: 22px; margin-top: -8px; }
+    .col-right { padding: 18px 14px; }
+    .waifu-name { font-size: 13px; }
+    .volume-dock input { width: 55px; }
+    .social-icon { width: 42px; height: 42px; font-size: 20px; }
+    .glitch-text { font-size: 16px !important; letter-spacing: 4px !important; }
+    .tap-pulse { font-size: 11px; padding: 6px 14px; }
+
+    /* Điều chỉnh border-radius cho các panel */
+    .countdown-panel, .waifu-panel, .music-panel {
+        border-radius: 24px;
+    }
+    .social-icon {
+        border-radius: 16px;
+    }
+}

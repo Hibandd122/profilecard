@@ -1,0 +1,70 @@
+/* Card chính */
+.card-wrapper {
+    perspective: 1500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    margin: 20px 0;
+    z-index: 100;
+}
+
+.card-container {
+    width: 900px;
+    max-width: 95%;
+    min-height: 650px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 48px;
+    overflow: hidden; /* đảm bảo nội dung không tràn ra ngoài bo góc */
+    display: flex;
+    position: relative;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 200;
+    animation: floatSoft 8s infinite ease-in-out;
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix lỗi bo góc trên Safari */
+}
+
+.card-container:hover {
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5), 0 0 45px var(--hover-glow);
+    transform: translateY(-12px) scale(1.01);
+}
+
+@keyframes floatSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Viền RGB */
+.rgb-flow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 48px; /* đồng bộ với card-container */
+    padding: 2px;
+    background: linear-gradient(90deg, #f43f5e, #eab308, #22c55e, #3b82f6, #8b5cf6, #d946ef, #f43f5e);
+    background-size: 400% 100%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rgbStream 8s linear infinite;
+    pointer-events: none;
+    z-index: 15;
+    opacity: 0.7;
+}
+
+.rgb-flow.reverse {
+    border-radius: 48px;
+    background: linear-gradient(270deg, #f43f5e, #eab308, #22c55e, #3b82f6, #8b5cf6, #d946ef, #f43f5e);
+    animation: rgbStreamReverse 10s linear infinite;
+    opacity: 0.4;
+}
+
+@keyframes rgbStream { 100% { background-position: 400% 0; } }
+@keyframes rgbStreamReverse { 100% { background-position: 0% 0; } }
