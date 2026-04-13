@@ -1,9 +1,16 @@
 /* ===== CẤU HÌNH NÂNG CẤP ===== */
 const CONFIG = {
     avatars: ["assets/avatar.png", "assets/avatar2.png", "assets/avatar3.png", "assets/avatar4.png", "assets/avatar5.png"],
-    roles: [],
+    roles: ["Wibu Chúa 👑", "Gacha Player 🎲", "Developer 💻", "Music Lover 🎵"],
 
     pageName: "Mahikari_Hola",
+    quotes: [
+        "Ara ara~",
+        "Oni-chan baka!",
+        "Kyou mo ganbatte ne!",
+        "Nyan nyan~ 🐾",
+        "Let's explore the cosmos together~ ✨"
+    ],
 
     favicon: {
         enabled: true,
@@ -50,11 +57,11 @@ const CONFIG = {
 
     waifu: {
         list: [
-            { name: "Shiina Mahiru", icon: "feather-alt", color: "#f5e6d3", rank: 1, affection: 100 },
-            { name: "Kaguya", icon: "moon", color: "#f0e68c", rank: 2, affection: 96 },
-            { name: "Yachiyo Runami", icon: "moon", color: "#f0e68c", rank: 3, affection: 93 },
-            { name: "Kagari Fuyukawa", icon: "cat", color: "#ffaa66", rank: 4, affection: 89 },
-            { name: "Hiura Mihate", icon: "heart", color: "#ff0099", rank: 5, affection: 86 }
+            { name: "Shiina Mahiru", icon: "feather-alt", color: "#f5e6d3", rank: 1, affection: 100, image: "assets/avatar2.png" },
+            { name: "Kaguya", icon: "moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar3.png" },
+            { name: "Yachiyo Runami", icon: "moon", color: "#f0e68c", rank: 3, affection: 93, image: "assets/avatar4.png" },
+            { name: "Kagari Fuyukawa", icon: "cat", color: "#ffaa66", rank: 4, affection: 89, image: "assets/avatar5.png" },
+            { name: "Hiura Mihate", icon: "heart", color: "#ff0099", rank: 5, affection: 86, image: "assets/avatar.png" }
         ]
     }
 };

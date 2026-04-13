@@ -26,6 +26,9 @@ function initStars() {
 
 function drawStars() {
     if (!starCtx) return;
+    requestAnimationFrame(drawStars);
+    if (document.hidden) return;
+    
     starCtx.clearRect(0, 0, starWidth, starHeight);
     stars.forEach(s => {
         starCtx.beginPath();
@@ -41,7 +44,6 @@ function drawStars() {
         if (s.x > starWidth) s.x = 0;
         if (s.x < 0) s.x = starWidth;
     });
-    requestAnimationFrame(drawStars);
 }
 window.addEventListener('resize', initStars);
 if (starCanvas && CONFIG.effects.stars) {

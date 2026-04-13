@@ -175,6 +175,7 @@ if (volumeCtrl && audio) {
 let renderLoopId;
 function musicRenderLoop() {
     renderLoopId = requestAnimationFrame(musicRenderLoop);
+    if (document.hidden) return;
     
     if (!vCtx || !analyser || !isPlaying) {
         if (vCtx && visualizer) {

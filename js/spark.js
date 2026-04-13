@@ -26,6 +26,9 @@ if (CONFIG.effects.sparks) {
     }
     function drawSparks() {
         if (!sparkCtx) return;
+        requestAnimationFrame(drawSparks);
+        if (document.hidden) return;
+        
         sparkCtx.clearRect(0, 0, sparkWidth, sparkHeight);
         sparks = sparks.filter(s => {
             s.x += s.vx;
@@ -41,7 +44,6 @@ if (CONFIG.effects.sparks) {
             sparkCtx.fill();
             return true;
         });
-        requestAnimationFrame(drawSparks);
     }
     if (window.matchMedia("(min-width: 850px)").matches && sparkCanvas) {
         initSparkField();

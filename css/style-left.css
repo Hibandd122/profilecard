@@ -116,16 +116,18 @@
 }
 
 .gradient-glitch {
-    font-size: 38px;
-    font-weight: 800;
-    margin-bottom: 8px;
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 12px;
     background: var(--accent-gradient);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: gradientFlow 6s linear infinite;
-    filter: drop-shadow(0 0 10px var(--glow-primary));
+    filter: drop-shadow(0 0 15px var(--glow-primary));
+    position: relative;
+    display: inline-block;
 }
 
 @keyframes gradientFlow { to { background-position: 200% center; } }
