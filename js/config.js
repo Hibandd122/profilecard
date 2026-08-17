@@ -5,7 +5,7 @@ const CONFIG = {
     handle: "@mahikari",
     tagline: "Cosmic Voyager · Developer · Anime Enthusiast",
     bio: "Exploring the endless cosmos with waifus & lo-fi beats ✨",
-
+    
     // Danh sách avatar 6 nhân vật theo đúng thứ tự 1 -> 6
     avatars: [
         "assets/avatar1.png", // #1 Shiina Mahiru
@@ -16,12 +16,12 @@ const CONFIG = {
         "assets/avatar6.png"  // #6 Hiura Mihate
     ],
 
-    // Banner mặc định và các banner theo waifu
+    // Banner mặc định và các banner chuẩn 16:9 1920x1080 theo từng waifu
     banners: {
         default: "assets/bannertop1.jpg",
         mahiru: "assets/bannertop1.jpg",
-        kaguya: "assets/bannertop2.png",
-        yachiyo: "assets/bannertop3.png",
+        kaguya: "assets/bannertop2.jpg",
+        yachiyo: "assets/bannertop3.jpg",
         elfaria: "assets/bannertop4.jpg",
         kagari: "assets/bannertop5.jpg",
         mihate: "assets/bannertop6.jpg"
@@ -29,8 +29,11 @@ const CONFIG = {
 
     // Các vai trò / danh hiệu chạy hiệu ứng typewriter
     roles: [
+        "Wibu Chúa 👑",
         "Developer 💻",
+        "Gacha Player 🎲",
         "Music Lover 🎵",
+        "Cosmic Voyager ✨"
     ],
 
     // Danh ngôn ngẫu nhiên
@@ -61,26 +64,25 @@ const CONFIG = {
         autoPlayOnEnter: true
     },
 
-    // Hiệu ứng hạt và nền
+    // Hiệu ứng hạt và nền - Đã tắt các hiệu ứng di chuột để tối ưu siêu mượt
     effects: {
         stars: true,
-        sparks: true,
+        sparks: false,      // Tắt tia sáng di chuột tránh lag
         nebula: true,
-        cosmicWhirl: true,
-        cursorTrail: true,
-        tilt3D: false // Tắt tilt theo yêu cầu
+        cosmicWhirl: false,  // Tắt xoáy nặng để siêu mượt
+        cursorTrail: false,  // Tắt vệt trỏ chuột tránh lag
+        tilt3D: false        // Tắt nghiêng 3D tránh lag
     },
 
     // Thời gian tính toán & chuyển đổi
     intervals: {
         avatarRotation: 3500,
         typewriterSpeed: 75,
-        typewriterPause: 1800,
-        countdownUpdate: 1000
+        typewriterPause: 1800
     },
 
     ui: {
-        enableTilt: false, // Tắt tilt theo yêu cầu
+        enableTilt: false, // Tắt nghiêng 3D
         enableGlow: true,
         enableRgbBorder: true
     },
@@ -97,18 +99,15 @@ const CONFIG = {
     discordPresence: {
         username: "Mahikari",
         customStatus: "Vibing in the Cosmos ✨",
-        gameName: "Genshin Impact",
-        gameDetails: "Exploring Teyvat · AR 60",
-        gameState: "In Party (4 of 4)",
-        onlineStatus: "dnd" // 'online' | 'idle' | 'dnd'
+        onlineStatus: "online"
     },
 
-    // Bộ sưu tập Waifu (Xếp hạng với 6 nhân vật, avatar 1-6 và 6 banner tương ứng)
+    // Bộ sưu tập Waifu (Chuẩn hóa 6 nhân vật, avatar 1-6 và 6 banner 16:9 1920x1080)
     waifu: {
         list: [
             { id: 0, name: "Shiina Mahiru", title: "The Angel Next Door", icon: "fa-feather-alt", color: "#fbbf24", rank: 1, affection: 100, image: "assets/avatar1.png", banner: "assets/bannertop1.jpg" },
-            { id: 1, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar2.png", banner: "assets/bannertop2.png" },
-            { id: 2, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar3.png", banner: "assets/bannertop3.png" },
+            { id: 1, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar2.png", banner: "assets/bannertop2.jpg" },
+            { id: 2, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar3.png", banner: "assets/bannertop3.jpg" },
             { id: 3, name: "Elfaria Albis Serfort", title: "Ice Magia Vende", icon: "fa-snowflake", color: "#38bdf8", rank: 4, affection: 90, image: "assets/avatar4.png", banner: "assets/bannertop4.jpg" },
             { id: 4, name: "Kagari Fuyukawa", title: "Neko Champion", icon: "fa-cat", color: "#f97316", rank: 5, affection: 87, image: "assets/avatar5.png", banner: "assets/bannertop5.jpg" },
             { id: 5, name: "Hiura Mihate", title: "Sweet Heart", icon: "fa-heart", color: "#ec4899", rank: 6, affection: 84, image: "assets/avatar6.png", banner: "assets/bannertop6.jpg" }

@@ -115,25 +115,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(nextQuote, 10000);
 
-    // 6. MOUSE CURSOR TRAILS
-    if (CONFIG.effects.cursorTrail && window.matchMedia("(min-width: 850px)").matches) {
-        let lastTrailX = 0, lastTrailY = 0;
-        document.addEventListener('mousemove', (e) => {
-            if (Math.abs(e.clientX - lastTrailX) > 6 || Math.abs(e.clientY - lastTrailY) > 6) {
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                trail.style.left = e.clientX + 'px';
-                trail.style.top = e.clientY + 'px';
-                document.body.appendChild(trail);
-                
-                setTimeout(() => {
-                    trail.remove();
-                }, 450);
-
-                lastTrailX = e.clientX;
-                lastTrailY = e.clientY;
-            }
-        });
-    }
-
 });
