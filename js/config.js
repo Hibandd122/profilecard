@@ -102,15 +102,15 @@ const CONFIG = {
         onlineStatus: "online"
     },
 
-    // Bộ sưu tập Waifu (Chuẩn hóa 6 nhân vật, avatar 1-6 và 6 banner 16:9 1920x1080)
+    // Bộ sưu tập Waifu (Chuẩn hóa 6 nhân vật, avatar 1-6 và 6 banner 16:9 + mobile)
     waifu: {
         list: [
-            { id: 0, name: "Shiina Mahiru", title: "The Angel Next Door", icon: "fa-feather-alt", color: "#fbbf24", rank: 1, affection: 100, image: "assets/avatar1.png", banner: "assets/bannertop1.jpg" },
-            { id: 1, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar2.png", banner: "assets/bannertop2.jpg" },
-            { id: 2, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar3.png", banner: "assets/bannertop3.jpg" },
-            { id: 3, name: "Elfaria Albis Serfort", title: "Ice Magia Vende", icon: "fa-snowflake", color: "#38bdf8", rank: 4, affection: 90, image: "assets/avatar4.png", banner: "assets/bannertop4.jpg" },
-            { id: 4, name: "Kagari Fuyukawa", title: "Neko Champion", icon: "fa-cat", color: "#f97316", rank: 5, affection: 87, image: "assets/avatar5.png", banner: "assets/bannertop5.jpg" },
-            { id: 5, name: "Hiura Mihate", title: "Sweet Heart", icon: "fa-heart", color: "#ec4899", rank: 6, affection: 84, image: "assets/avatar6.png", banner: "assets/bannertop6.jpg" }
+            { id: 0, name: "Shiina Mahiru", title: "The Angel Next Door", icon: "fa-feather-alt", color: "#fbbf24", rank: 1, affection: 100, image: "assets/avatar1.png", banner: "assets/bannertop1.jpg", bannerPhone: "assets/bannertop1_phonejpg.jpg" },
+            { id: 1, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar2.png", banner: "assets/bannertop2.jpg", bannerPhone: "assets/bannertop2_phonejpg.jpg" },
+            { id: 2, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar3.png", banner: "assets/bannertop3.jpg", bannerPhone: "assets/bannertop3_phonejpg.jpg" },
+            { id: 3, name: "Elfaria Albis Serfort", title: "Ice Magia Vende", icon: "fa-snowflake", color: "#38bdf8", rank: 4, affection: 90, image: "assets/avatar4.png", banner: "assets/bannertop4.jpg", bannerPhone: "assets/bannertop4.jpg" },
+            { id: 4, name: "Kagari Fuyukawa", title: "Neko Champion", icon: "fa-cat", color: "#f97316", rank: 5, affection: 87, image: "assets/avatar5.png", banner: "assets/bannertop5.jpg", bannerPhone: "assets/bannertop5.jpg" },
+            { id: 5, name: "Hiura Mihate", title: "Sweet Heart", icon: "fa-heart", color: "#ec4899", rank: 6, affection: 84, image: "assets/avatar6.png", banner: "assets/bannertop6.jpg", bannerPhone: "assets/bannertop6_phonejpg.jpg" }
         ]
     }
 };

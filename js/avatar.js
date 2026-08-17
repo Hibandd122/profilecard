@@ -45,11 +45,15 @@ function setAvatar(index) {
         });
     }
 
-    // Cập nhật banner to 16:9 đằng sau theo waifu
+    // Cập nhật banner to 16:9 / mobile phone đằng sau theo waifu
     const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentAvatarIndex] : null;
     if (waifu && waifu.banner) {
         const fullBgBanner = document.getElementById('full-bg-banner');
-        if (fullBgBanner) fullBgBanner.style.backgroundImage = `url('${waifu.banner}')`;
+        if (fullBgBanner) {
+            const isMobile = window.innerWidth <= 600;
+            const targetBanner = (isMobile && waifu.bannerPhone) ? waifu.bannerPhone : waifu.banner;
+            fullBgBanner.style.backgroundImage = `url('${targetBanner}')`;
+        }
     }
 
     // Cập nhật waifu active state trong collection
