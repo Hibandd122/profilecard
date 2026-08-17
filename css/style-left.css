@@ -9,7 +9,7 @@
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     position: relative;
     background: rgba(255, 255, 255, 0.01);
-    gap: 14px;
+    gap: 12px;
 }
 
 body.light-mode .col-left {
@@ -21,9 +21,9 @@ body.light-mode .col-left {
 ======================================================== */
 .avatar-zone {
     position: relative;
-    width: 145px;
-    height: 145px;
-    margin-bottom: 4px;
+    width: 135px;
+    height: 135px;
+    margin-bottom: 2px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -35,8 +35,8 @@ body.light-mode .col-left {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 130px;
-    height: 130px;
+    width: 125px;
+    height: 125px;
     pointer-events: none;
 }
 
@@ -56,8 +56,8 @@ body.light-mode .col-left {
 .ripple-ground span:nth-child(3) { animation-delay: 2s; border-color: var(--glow-accent); }
 
 @keyframes rippleGlow {
-    0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 15px var(--glow-primary); }
-    100% { transform: scale(1.4); opacity: 0; }
+    0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 12px var(--glow-primary); }
+    100% { transform: scale(1.35); opacity: 0; }
 }
 
 .halo-rotate {
@@ -65,18 +65,18 @@ body.light-mode .col-left {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 138px;
-    height: 138px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    border: 2px dashed rgba(0, 242, 254, 0.5);
+    border: 2px dashed rgba(0, 242, 254, 0.45);
     animation: rotateHalo 20s linear infinite;
     pointer-events: none;
 }
 
 .halo-rotate.outer {
-    width: 148px;
-    height: 148px;
-    border: 1px solid rgba(236, 72, 153, 0.35);
+    width: 140px;
+    height: 140px;
+    border: 1px solid rgba(236, 72, 153, 0.3);
     animation: rotateHaloRev 25s linear infinite;
 }
 
@@ -90,13 +90,13 @@ body.light-mode .col-left {
 
 .avatar-img {
     position: absolute;
-    bottom: 4px;
+    bottom: 2px;
     left: 50%;
     transform: translateX(-50%);
     max-height: 125%;
     width: auto;
     max-width: 115%;
-    filter: drop-shadow(0 6px 18px rgba(0, 242, 254, 0.4));
+    filter: drop-shadow(0 6px 16px rgba(0, 242, 254, 0.4));
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
     z-index: 5;
     user-select: none;
@@ -114,10 +114,10 @@ body.light-mode .col-left {
 
 .avatar-status-badge {
     position: absolute;
-    bottom: 8px;
-    right: 10px;
-    width: 14px;
-    height: 14px;
+    bottom: 6px;
+    right: 8px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     border: 2px solid #0d101c;
     z-index: 10;
@@ -125,13 +125,13 @@ body.light-mode .col-left {
 
 .avatar-status-badge.online {
     background: #10b981;
-    box-shadow: 0 0 10px #10b981;
+    box-shadow: 0 0 8px #10b981;
     animation: statusPulse 2s infinite ease-in-out;
 }
 
 @keyframes statusPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 8px #10b981; }
-    50% { transform: scale(1.2); box-shadow: 0 0 18px #10b981; }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 6px #10b981; }
+    50% { transform: scale(1.2); box-shadow: 0 0 14px #10b981; }
 }
 
 /* ========================================================
@@ -185,16 +185,16 @@ body.light-mode .col-left {
 
 .gradient-glitch {
     font-family: 'Outfit', sans-serif;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 900;
     letter-spacing: 1.5px;
     color: #ffffff;
     text-transform: uppercase;
     display: inline-block;
     position: relative;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                 0 0 20px rgba(0, 242, 254, 0.6),
-                 0 0 35px rgba(139, 92, 246, 0.4);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8),
+                 0 0 22px rgba(0, 242, 254, 0.5),
+                 0 0 35px rgba(139, 92, 246, 0.3);
     animation: neonNamePulse 3s infinite alternate ease-in-out;
     transition: all 0.3s ease;
     user-select: none;
@@ -223,14 +223,14 @@ body.light-mode .col-left {
 
 .badge-verified {
     color: #00f2fe;
-    font-size: 18px;
-    filter: drop-shadow(0 0 8px #00f2fe);
+    font-size: 17px;
+    filter: drop-shadow(0 0 6px #00f2fe);
 }
 
 .badge-crown {
     color: #fbbf24;
-    font-size: 16px;
-    filter: drop-shadow(0 0 8px #fbbf24);
+    font-size: 15px;
+    filter: drop-shadow(0 0 6px #fbbf24);
 }
 
 .handle-tag {
@@ -252,23 +252,23 @@ body.light-mode .col-left {
     width: 100%;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 10px 14px;
+    border-radius: 14px;
+    padding: 9px 12px;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     backdrop-filter: blur(8px);
 }
 
 .quote-icon {
     color: var(--glow-primary);
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.8;
 }
 
 .bio-quote-card p {
-    font-size: 11.5px;
+    font-size: 11px;
     font-style: italic;
     color: var(--text-secondary);
     line-height: 1.4;
@@ -279,14 +279,14 @@ body.light-mode .col-left {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--text-muted);
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    font-size: 9px;
     transition: all 0.3s ease;
 }
 
@@ -303,15 +303,15 @@ body.light-mode .col-left {
     width: 100%;
     background: linear-gradient(135deg, rgba(88, 101, 242, 0.1) 0%, rgba(18, 22, 42, 0.6) 100%);
     backdrop-filter: blur(12px);
-    border-radius: 16px;
-    padding: 10px 14px;
+    border-radius: 14px;
+    padding: 9px 12px;
     border: 1px solid rgba(88, 101, 242, 0.25);
     transition: all 0.3s ease;
 }
 
 .discord-widget:hover {
     border-color: rgba(88, 101, 242, 0.6);
-    box-shadow: 0 4px 20px rgba(88, 101, 242, 0.25);
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.25);
 }
 
 .discord-header {
@@ -323,13 +323,13 @@ body.light-mode .col-left {
 .discord-user-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
 }
 
 .discord-avatar-wrap {
     position: relative;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
 }
 
 .discord-avatar {
@@ -344,10 +344,10 @@ body.light-mode .col-left {
     position: absolute;
     bottom: -1px;
     right: -1px;
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    border: 2px solid #161b2e;
+    border: 1.5px solid #161b2e;
 }
 
 .discord-status-dot.online {
@@ -361,63 +361,63 @@ body.light-mode .col-left {
 }
 
 .discord-username {
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--text-primary);
 }
 
 .discord-custom-status {
-    font-size: 10px;
+    font-size: 9.5px;
     color: var(--text-secondary);
     font-family: 'Fira Code', monospace;
 }
 
 .discord-tag-pill {
-    font-size: 9px;
+    font-size: 8.5px;
     font-family: 'Fira Code', monospace;
     font-weight: 700;
     color: #ffffff;
     background: #5865F2;
-    padding: 3px 8px;
-    border-radius: 14px;
+    padding: 2px 7px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
 /* ========================================================
-   SOCIAL BUTTONS WITH AUTHENTIC BRAND STYLING
+   SOCIAL BUTTONS WITH RAZOR-SHARP BRAND STYLING
 ======================================================== */
 .social-panel {
     display: flex;
     gap: 10px;
     justify-content: center;
     width: 100%;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 .social-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
+    font-size: 16px;
     text-decoration: none;
     position: relative;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .social-icon:hover {
-    transform: translateY(-4px) scale(1.1);
+    transform: translateY(-3px) scale(1.1);
 }
 
-/* Facebook Button */
+/* Facebook */
 .social-icon.fb {
     color: #1877f2;
     background: rgba(24, 119, 242, 0.1);
@@ -428,30 +428,34 @@ body.light-mode .col-left {
     background: #1877f2;
     color: #ffffff;
     border-color: #1877f2;
-    box-shadow: 0 0 20px rgba(24, 119, 242, 0.7);
+    box-shadow: 0 0 16px rgba(24, 119, 242, 0.7);
 }
 
-/* TikTok Button - Authentic Black Glass with 3D Chromatic Icon */
+/* TikTok - Razor sharp FontAwesome with dual chromatic glow */
 .social-icon.tt {
-    background: rgba(0, 0, 0, 0.6);
+    background: #010101;
     border-color: rgba(255, 255, 255, 0.15);
 }
 
-.social-icon.tt .tiktok-svg {
-    transition: transform 0.3s ease;
+.social-icon.tt i {
+    color: #ffffff;
+    font-size: 17px;
+    filter: drop-shadow(-1.5px -1.5px 0px #25F4EE) drop-shadow(1.5px 1.5px 0px #FE2C55);
+    transition: all 0.3s ease;
 }
 
 .social-icon.tt:hover {
-    background: #010101;
+    background: #000000;
     border-color: #fe2c55;
-    box-shadow: 0 0 20px rgba(254, 44, 85, 0.6), 0 0 10px rgba(37, 244, 238, 0.5);
+    box-shadow: 0 0 16px rgba(254, 44, 85, 0.6), 0 0 8px rgba(37, 244, 238, 0.5);
 }
 
-.social-icon.tt:hover .tiktok-svg {
+.social-icon.tt:hover i {
+    filter: drop-shadow(-2px -2px 0px #25F4EE) drop-shadow(2px 2px 0px #FE2C55);
     transform: scale(1.15);
 }
 
-/* Discord Button */
+/* Discord */
 .social-icon.discord {
     color: #5865f2;
     background: rgba(88, 101, 242, 0.1);
@@ -462,10 +466,10 @@ body.light-mode .col-left {
     background: #5865f2;
     color: #ffffff;
     border-color: #5865f2;
-    box-shadow: 0 0 20px rgba(88, 101, 242, 0.7);
+    box-shadow: 0 0 16px rgba(88, 101, 242, 0.7);
 }
 
-/* GitHub Button */
+/* GitHub */
 .social-icon.github {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.06);
@@ -476,19 +480,19 @@ body.light-mode .col-left {
     background: #ffffff;
     color: #000000;
     border-color: #ffffff;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.7);
 }
 
 .social-tooltip {
     position: absolute;
-    bottom: -30px;
+    bottom: -28px;
     background: #090c18;
     color: #ffffff;
     font-family: 'Fira Code', monospace;
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 600;
-    padding: 2px 7px;
-    border-radius: 6px;
+    padding: 2px 6px;
+    border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     opacity: 0;
     visibility: hidden;
@@ -500,5 +504,5 @@ body.light-mode .col-left {
 .social-icon:hover .social-tooltip {
     opacity: 1;
     visibility: visible;
-    bottom: -26px;
+    bottom: -25px;
 }
