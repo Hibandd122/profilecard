@@ -1,5 +1,5 @@
 /* ========================================================
-   GUNS.LOL 16:9 FULL BACKGROUND BANNER & COSMIC LAYERS
+   16:9 FULL BACKGROUND BANNER & COSMIC LAYERS
 ======================================================== */
 .full-bg-banner,
 .starry-bg,
@@ -14,14 +14,16 @@
     pointer-events: none;
 }
 
-/* 16:9 Fullscreen Background Banner - Sáng rõ, tuyệt đẹp */
+/* 16:9 Fullscreen Background Banner - Sáng rõ, sắc nét */
 .full-bg-banner {
     z-index: 0;
     background-image: url('../assets/bannertop1.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    transition: background-image 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: background-image 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform: translateZ(0);
+    will-change: background-image;
 }
 
 .full-bg-banner::before {
@@ -31,17 +33,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(6, 8, 18, 0.22) 0%, rgba(3, 4, 8, 0.65) 100%);
+    background: radial-gradient(circle at 50% 50%, rgba(6, 8, 18, 0.18) 0%, rgba(3, 4, 8, 0.58) 100%);
     transition: opacity 0.4s ease;
 }
 
 body.light-mode .full-bg-banner::before {
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25) 0%, rgba(220, 230, 255, 0.65) 100%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, rgba(220, 230, 255, 0.55) 100%);
 }
 
 /* Chế độ Xem trọn vẹn Banner 16:9 */
 body.banner-view-mode .full-bg-banner::before {
-    opacity: 0.08;
+    opacity: 0.05;
 }
 
 .banner-mode-overlay {
@@ -50,15 +52,15 @@ body.banner-view-mode .full-bg-banner::before {
     left: 50%;
     transform: translateX(-50%);
     z-index: 10000;
-    background: rgba(13, 16, 28, 0.85);
-    border: 1px solid rgba(0, 242, 254, 0.4);
+    background: rgba(13, 16, 28, 0.88);
+    border: 1px solid rgba(0, 242, 254, 0.5);
     padding: 10px 24px;
     border-radius: 30px;
     color: #ffffff;
     font-family: 'Fira Code', monospace;
     font-size: 13px;
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
-    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
+    backdrop-filter: blur(14px);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
@@ -75,9 +77,9 @@ body.banner-view-mode .banner-mode-overlay {
 }
 
 .banner-mode-overlay:hover {
-    background: rgba(0, 242, 254, 0.25);
+    background: rgba(0, 242, 254, 0.3);
     border-color: #00f2fe;
-    box-shadow: 0 0 35px rgba(0, 242, 254, 0.6);
+    box-shadow: 0 0 40px rgba(0, 242, 254, 0.7);
 }
 
 .starry-bg { z-index: 1; }
@@ -87,16 +89,16 @@ body.banner-view-mode .banner-mode-overlay {
 
 /* Glowing multi-layered cosmic nebula */
 .nebula {
-    background: radial-gradient(circle at 25% 35%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 75% 65%, rgba(236, 72, 153, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.07) 0%, transparent 50%);
+    background: radial-gradient(circle at 25% 35%, rgba(0, 242, 254, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 75% 65%, rgba(236, 72, 153, 0.07) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
     filter: blur(70px);
     animation: nebulaPulse 14s infinite alternate ease-in-out;
 }
 
 @keyframes nebulaPulse {
     0% { opacity: 0.5; transform: scale(1); }
-    100% { opacity: 0.8; transform: scale(1.08); }
+    100% { opacity: 0.8; transform: scale(1.06); }
 }
 
 /* Ambient cosmic whirls */
@@ -106,7 +108,7 @@ body.banner-view-mode .banner-mode-overlay {
     transform: translate(-50%, -50%);
     width: 1200px;
     height: 1200px;
-    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 242, 254, 0.05) 60deg, rgba(236, 72, 153, 0.05) 140deg, transparent 200deg);
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 242, 254, 0.04) 60deg, rgba(236, 72, 153, 0.04) 140deg, transparent 200deg);
     border-radius: 50%;
     filter: blur(80px);
     animation: spinCosmic 50s linear infinite;
@@ -115,7 +117,7 @@ body.banner-view-mode .banner-mode-overlay {
 .cosmic-whirl.secondary {
     width: 900px;
     height: 900px;
-    background: conic-gradient(from 180deg, transparent 0deg, rgba(139, 92, 246, 0.04) 50deg, rgba(0, 242, 254, 0.04) 120deg, transparent 180deg);
+    background: conic-gradient(from 180deg, transparent 0deg, rgba(139, 92, 246, 0.03) 50deg, rgba(0, 242, 254, 0.03) 120deg, transparent 180deg);
     animation: spinCosmicRev 60s linear infinite;
 }
 

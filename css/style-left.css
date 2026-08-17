@@ -2,13 +2,14 @@
    LEFT COLUMN (HERO / PROFILE IDENTITY)
 ======================================================== */
 .col-left {
-    padding: 32px 28px;
+    padding: 28px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     position: relative;
     background: rgba(255, 255, 255, 0.01);
+    gap: 14px;
 }
 
 body.light-mode .col-left {
@@ -20,9 +21,9 @@ body.light-mode .col-left {
 ======================================================== */
 .avatar-zone {
     position: relative;
-    width: 170px;
-    height: 170px;
-    margin-bottom: 18px;
+    width: 145px;
+    height: 145px;
+    margin-bottom: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -34,8 +35,8 @@ body.light-mode .col-left {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     pointer-events: none;
 }
 
@@ -55,7 +56,7 @@ body.light-mode .col-left {
 .ripple-ground span:nth-child(3) { animation-delay: 2s; border-color: var(--glow-accent); }
 
 @keyframes rippleGlow {
-    0% { transform: scale(0.85); opacity: 0.8; box-shadow: 0 0 15px var(--glow-primary); }
+    0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 15px var(--glow-primary); }
     100% { transform: scale(1.4); opacity: 0; }
 }
 
@@ -64,8 +65,8 @@ body.light-mode .col-left {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 158px;
-    height: 158px;
+    width: 138px;
+    height: 138px;
     border-radius: 50%;
     border: 2px dashed rgba(0, 242, 254, 0.5);
     animation: rotateHalo 20s linear infinite;
@@ -73,8 +74,8 @@ body.light-mode .col-left {
 }
 
 .halo-rotate.outer {
-    width: 172px;
-    height: 172px;
+    width: 148px;
+    height: 148px;
     border: 1px solid rgba(236, 72, 153, 0.35);
     animation: rotateHaloRev 25s linear infinite;
 }
@@ -89,48 +90,48 @@ body.light-mode .col-left {
 
 .avatar-img {
     position: absolute;
-    bottom: 6px;
+    bottom: 4px;
     left: 50%;
     transform: translateX(-50%);
-    max-height: 130%;
+    max-height: 125%;
     width: auto;
     max-width: 115%;
-    filter: drop-shadow(0 8px 24px rgba(0, 242, 254, 0.45));
+    filter: drop-shadow(0 6px 18px rgba(0, 242, 254, 0.4));
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
     z-index: 5;
     user-select: none;
 }
 
 .avatar-zone:hover .avatar-img {
-    transform: translateX(-50%) scale(1.08) translateY(-6px);
-    filter: drop-shadow(0 12px 35px rgba(236, 72, 153, 0.6)) drop-shadow(0 0 20px rgba(0, 242, 254, 0.6));
+    transform: translateX(-50%) scale(1.08) translateY(-4px);
+    filter: drop-shadow(0 10px 25px rgba(236, 72, 153, 0.5)) drop-shadow(0 0 15px rgba(0, 242, 254, 0.5));
 }
 
 .avatar-img.active-touch {
-    transform: translateX(-50%) scale(1.15) translateY(-8px);
-    filter: drop-shadow(0 0 45px var(--glow-secondary));
+    transform: translateX(-50%) scale(1.12) translateY(-6px);
+    filter: drop-shadow(0 0 35px var(--glow-secondary));
 }
 
 .avatar-status-badge {
     position: absolute;
-    bottom: 10px;
-    right: 14px;
-    width: 15px;
-    height: 15px;
+    bottom: 8px;
+    right: 10px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    border: 2.5px solid #0d101c;
+    border: 2px solid #0d101c;
     z-index: 10;
 }
 
 .avatar-status-badge.online {
     background: #10b981;
-    box-shadow: 0 0 12px #10b981, 0 0 25px rgba(16, 185, 129, 0.6);
+    box-shadow: 0 0 10px #10b981;
     animation: statusPulse 2s infinite ease-in-out;
 }
 
 @keyframes statusPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 10px #10b981; }
-    50% { transform: scale(1.2); box-shadow: 0 0 20px #10b981, 0 0 30px rgba(16, 185, 129, 0.8); }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 8px #10b981; }
+    50% { transform: scale(1.2); box-shadow: 0 0 18px #10b981; }
 }
 
 /* ========================================================
@@ -138,13 +139,13 @@ body.light-mode .col-left {
 ======================================================== */
 .avatar-dots {
     display: flex;
-    gap: 7px;
-    margin-bottom: 18px;
+    gap: 6px;
+    margin-bottom: 2px;
 }
 
 .avatar-dots .dot {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     cursor: pointer;
@@ -153,15 +154,15 @@ body.light-mode .col-left {
 
 .avatar-dots .dot:hover {
     background: var(--glow-primary);
-    transform: scale(1.35);
-    box-shadow: 0 0 10px var(--glow-primary);
+    transform: scale(1.3);
+    box-shadow: 0 0 8px var(--glow-primary);
 }
 
 .avatar-dots .dot.active {
-    width: 22px;
-    border-radius: 10px;
+    width: 18px;
+    border-radius: 8px;
     background: var(--accent-gradient);
-    box-shadow: 0 0 12px var(--glow-primary);
+    box-shadow: 0 0 10px var(--glow-primary);
 }
 
 /* ========================================================
@@ -169,105 +170,79 @@ body.light-mode .col-left {
 ======================================================== */
 .title-area {
     text-align: center;
-    margin-bottom: 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2px;
 }
 
 .name-row {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     justify-content: center;
 }
 
 .gradient-glitch {
     font-family: 'Outfit', sans-serif;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: #ffffff;
     text-transform: uppercase;
     display: inline-block;
     position: relative;
-    text-shadow: 0 0 14px rgba(255, 255, 255, 0.95),
-                 0 0 28px #00f2fe,
-                 0 0 50px #8b5cf6,
-                 0 0 75px rgba(236, 72, 153, 0.6);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(0, 242, 254, 0.6),
+                 0 0 35px rgba(139, 92, 246, 0.4);
     animation: neonNamePulse 3s infinite alternate ease-in-out;
     transition: all 0.3s ease;
     user-select: none;
 }
 
 .gradient-glitch:hover {
-    letter-spacing: 3px;
-    text-shadow: 0 0 18px #ffffff,
-                 0 0 35px #00f2fe,
-                 0 0 60px #ec4899,
-                 0 0 90px #fbbf24;
-    transform: scale(1.05);
+    letter-spacing: 2.5px;
+    text-shadow: 0 0 15px #ffffff,
+                 0 0 28px #00f2fe,
+                 0 0 45px #ec4899;
+    transform: scale(1.04);
 }
 
 @keyframes neonNamePulse {
     0% {
-        text-shadow: 0 0 12px rgba(255, 255, 255, 0.9),
-                     0 0 24px #00f2fe,
-                     0 0 40px #8b5cf6,
-                     0 0 60px rgba(236, 72, 153, 0.4);
-        transform: scale(1);
-    }
-    50% {
-        text-shadow: 0 0 18px rgba(255, 255, 255, 1),
-                     0 0 35px #ec4899,
-                     0 0 55px #00f2fe,
-                     0 0 80px rgba(139, 92, 246, 0.6);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                     0 0 20px rgba(0, 242, 254, 0.5),
+                     0 0 35px rgba(139, 92, 246, 0.3);
     }
     100% {
-        text-shadow: 0 0 14px rgba(255, 255, 255, 0.95),
-                     0 0 28px #8b5cf6,
-                     0 0 50px #00f2fe,
-                     0 0 70px rgba(251, 191, 36, 0.5);
-        transform: scale(1.02);
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.9),
+                     0 0 25px rgba(0, 242, 254, 0.7),
+                     0 0 40px rgba(236, 72, 153, 0.4);
     }
 }
 
 .badge-verified {
     color: #00f2fe;
-    font-size: 20px;
-    filter: drop-shadow(0 0 10px #00f2fe);
-    animation: badgeShine 3s infinite ease-in-out;
+    font-size: 18px;
+    filter: drop-shadow(0 0 8px #00f2fe);
 }
 
 .badge-crown {
     color: #fbbf24;
-    font-size: 18px;
-    filter: drop-shadow(0 0 10px #fbbf24);
-    animation: crownFloat 2.5s infinite ease-in-out;
-}
-
-@keyframes crownFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-4px) rotate(8deg); }
-}
-
-@keyframes badgeShine {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.85; transform: scale(1.15); }
+    font-size: 16px;
+    filter: drop-shadow(0 0 8px #fbbf24);
 }
 
 .handle-tag {
     font-family: 'Fira Code', monospace;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--glow-primary);
     background: rgba(0, 242, 254, 0.08);
-    border: 1px solid rgba(0, 242, 254, 0.25);
-    padding: 3px 12px;
-    border-radius: 20px;
+    border: 1px solid rgba(0, 242, 254, 0.22);
+    padding: 2px 10px;
+    border-radius: 16px;
     letter-spacing: 0.5px;
-    margin-top: 4px;
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
 }
 
 /* ========================================================
@@ -275,135 +250,244 @@ body.light-mode .col-left {
 ======================================================== */
 .bio-quote-card {
     width: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 10px 14px;
     position: relative;
-    margin-bottom: 22px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(10px);
+    gap: 10px;
+    backdrop-filter: blur(8px);
 }
 
 .quote-icon {
     color: var(--glow-primary);
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0.8;
 }
 
 .bio-quote-card p {
-    font-size: 12px;
+    font-size: 11.5px;
     font-style: italic;
     color: var(--text-secondary);
-    line-height: 1.45;
+    line-height: 1.4;
     flex: 1;
-    transition: opacity 0.2s ease;
 }
 
 #quote-refresh {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--text-muted);
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    font-size: 10px;
+    transition: all 0.3s ease;
 }
 
 #quote-refresh:hover {
     color: var(--glow-primary);
     border-color: var(--glow-primary);
-    box-shadow: 0 0 12px var(--hover-glow);
-    transform: rotate(180deg) scale(1.1);
+    transform: rotate(180deg);
 }
 
 /* ========================================================
-   SOCIAL BUTTONS
+   DISCORD USER BADGE IN LEFT COLUMN
+======================================================== */
+.discord-widget {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(88, 101, 242, 0.1) 0%, rgba(18, 22, 42, 0.6) 100%);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 10px 14px;
+    border: 1px solid rgba(88, 101, 242, 0.25);
+    transition: all 0.3s ease;
+}
+
+.discord-widget:hover {
+    border-color: rgba(88, 101, 242, 0.6);
+    box-shadow: 0 4px 20px rgba(88, 101, 242, 0.25);
+}
+
+.discord-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.discord-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.discord-avatar-wrap {
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.discord-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid rgba(88, 101, 242, 0.5);
+}
+
+.discord-status-dot {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 2px solid #161b2e;
+}
+
+.discord-status-dot.online {
+    background: #10b981;
+    box-shadow: 0 0 6px #10b981;
+}
+
+.discord-user-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.discord-username {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.discord-custom-status {
+    font-size: 10px;
+    color: var(--text-secondary);
+    font-family: 'Fira Code', monospace;
+}
+
+.discord-tag-pill {
+    font-size: 9px;
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    color: #ffffff;
+    background: #5865F2;
+    padding: 3px 8px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ========================================================
+   SOCIAL BUTTONS WITH AUTHENTIC BRAND STYLING
 ======================================================== */
 .social-panel {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
     width: 100%;
-    margin-top: auto;
+    margin-top: 4px;
 }
 
 .social-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 17px;
     text-decoration: none;
     position: relative;
-    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .social-icon:hover {
-    transform: translateY(-5px) scale(1.12);
+    transform: translateY(-4px) scale(1.1);
+}
+
+/* Facebook Button */
+.social-icon.fb {
+    color: #1877f2;
+    background: rgba(24, 119, 242, 0.1);
+    border-color: rgba(24, 119, 242, 0.3);
 }
 
 .social-icon.fb:hover {
-    background: rgba(24, 119, 242, 0.25);
+    background: #1877f2;
+    color: #ffffff;
     border-color: #1877f2;
-    color: #1877f2;
-    box-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
+    box-shadow: 0 0 20px rgba(24, 119, 242, 0.7);
 }
 
-.social-icon.tt i {
-    filter: drop-shadow(-1.5px -1.5px 0px #25f4ee) drop-shadow(1.5px 1.5px 0px #fe2c55);
-    transition: all 0.3s ease;
+/* TikTok Button - Authentic Black Glass with 3D Chromatic Icon */
+.social-icon.tt {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.social-icon.tt .tiktok-svg {
+    transition: transform 0.3s ease;
 }
 
 .social-icon.tt:hover {
-    background: linear-gradient(135deg, rgba(37, 244, 238, 0.2) 0%, rgba(254, 44, 85, 0.3) 100%);
+    background: #010101;
     border-color: #fe2c55;
-    color: #ffffff;
-    box-shadow: 0 0 22px rgba(254, 44, 85, 0.65), 0 0 12px rgba(37, 244, 238, 0.45);
+    box-shadow: 0 0 20px rgba(254, 44, 85, 0.6), 0 0 10px rgba(37, 244, 238, 0.5);
 }
 
-.social-icon.tt:hover i {
-    filter: drop-shadow(-2.5px -2px 0px #25f4ee) drop-shadow(2.5px 2px 0px #fe2c55);
+.social-icon.tt:hover .tiktok-svg {
     transform: scale(1.15);
 }
 
-.social-icon.discord:hover {
-    background: rgba(88, 101, 242, 0.25);
-    border-color: #5865f2;
+/* Discord Button */
+.social-icon.discord {
     color: #5865f2;
-    box-shadow: 0 0 20px rgba(88, 101, 242, 0.6);
+    background: rgba(88, 101, 242, 0.1);
+    border-color: rgba(88, 101, 242, 0.3);
+}
+
+.social-icon.discord:hover {
+    background: #5865f2;
+    color: #ffffff;
+    border-color: #5865f2;
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.7);
+}
+
+/* GitHub Button */
+.social-icon.github {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .social-icon.github:hover {
-    background: rgba(168, 85, 247, 0.25);
-    border-color: #a855f7;
-    color: #a855f7;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
 }
 
 .social-tooltip {
     position: absolute;
-    bottom: -32px;
+    bottom: -30px;
     background: #090c18;
     color: #ffffff;
     font-family: 'Fira Code', monospace;
     font-size: 10px;
     font-weight: 600;
-    padding: 3px 8px;
+    padding: 2px 7px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     opacity: 0;
@@ -411,11 +495,10 @@ body.light-mode .col-left {
     transition: all 0.2s ease;
     white-space: nowrap;
     pointer-events: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .social-icon:hover .social-tooltip {
     opacity: 1;
     visibility: visible;
-    bottom: -28px;
+    bottom: -26px;
 }

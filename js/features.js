@@ -3,7 +3,7 @@
 ======================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. GUNS.LOL CLICK TO ENTER SPLASH OVERLAY
+    // 1. CLICK TO ENTER SPLASH OVERLAY
     const startOverlay = document.getElementById('start-overlay');
     if (startOverlay) {
         startOverlay.addEventListener('click', () => {
@@ -67,15 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
             item.title = `Click để trang bị avatar & banner ${waifu.name}`;
             
             item.innerHTML = `
+                <span class="waifu-rank">#${waifu.rank}</span>
                 <img src="${waifu.image}" alt="${waifu.name}" class="waifu-thumb">
-                <div class="waifu-rank">#${waifu.rank}</div>
                 <div class="waifu-info">
                     <div class="waifu-name-row">
-                        <span class="waifu-name">${waifu.name}</span>
+                        <div class="waifu-name-left">
+                            <span class="waifu-name">${waifu.name}</span>
+                            <span class="waifu-tag-equipped">EQUIPPED</span>
+                        </div>
                         <span class="waifu-percent">${waifu.affection}%</span>
                     </div>
                     <div class="waifu-bar">
-                        <div class="waifu-fill" style="width: ${waifu.affection}%; background: ${waifu.color}; box-shadow: 0 0 10px ${waifu.color}"></div>
+                        <div class="waifu-fill" style="width: ${waifu.affection}%; background: ${waifu.color}; box-shadow: 0 0 8px ${waifu.color}"></div>
                     </div>
                 </div>
                 <i class="fas ${waifu.icon}" style="color: ${waifu.color}"></i>

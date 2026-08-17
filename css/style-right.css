@@ -2,182 +2,84 @@
    RIGHT COLUMN (WIDGETS & MEDIA)
 ======================================================== */
 .col-right {
-    padding: 24px 28px;
+    padding: 24px 24px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     justify-content: flex-start;
     overflow-y: auto;
-    max-height: 620px;
+    max-height: 600px;
 }
 
 .panel-header-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .panel-title {
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 800;
     font-family: 'Fira Code', monospace;
     color: var(--glow-primary);
     letter-spacing: 1.5px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     text-transform: uppercase;
 }
 
 .panel-title i {
     color: var(--glow-primary);
-    filter: drop-shadow(0 0 8px var(--glow-primary));
 }
 
 .panel-tip {
-    font-size: 10.5px;
+    font-size: 10px;
     color: var(--text-muted);
     font-family: 'Fira Code', monospace;
-    font-weight: 500;
 }
 
 /* ========================================================
-   1. DISCORD USER BADGE
-======================================================== */
-.discord-widget {
-    background: linear-gradient(135deg, rgba(88, 101, 242, 0.12) 0%, rgba(20, 24, 46, 0.7) 100%);
-    backdrop-filter: blur(16px);
-    border-radius: 22px;
-    padding: 14px 18px;
-    border: 1px solid rgba(88, 101, 242, 0.3);
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-
-.discord-widget:hover {
-    border-color: rgba(88, 101, 242, 0.7);
-    box-shadow: 0 8px 30px rgba(88, 101, 242, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.discord-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.discord-user-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.discord-avatar-wrap {
-    position: relative;
-    width: 40px;
-    height: 40px;
-}
-
-.discord-avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(88, 101, 242, 0.5);
-    box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
-}
-
-.discord-status-dot {
-    position: absolute;
-    bottom: -1px;
-    right: -1px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2.5px solid #161b2e;
-}
-
-.discord-status-dot.online {
-    background: #10b981;
-    box-shadow: 0 0 8px #10b981;
-}
-
-.discord-user-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.discord-username {
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: 0.5px;
-}
-
-.discord-custom-status {
-    font-size: 11.5px;
-    color: var(--text-secondary);
-    font-family: 'Fira Code', monospace;
-}
-
-.discord-tag-pill {
-    font-size: 10px;
-    font-family: 'Fira Code', monospace;
-    font-weight: 700;
-    color: #ffffff;
-    background: linear-gradient(135deg, #5865F2, #8b5cf6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 4px 10px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
-}
-
-/* ========================================================
-   2. INTEGRATED MUSIC PLAYER
+   1. INTEGRATED MUSIC PLAYER
 ======================================================== */
 .music-panel {
-    background: var(--panel-bg);
-    backdrop-filter: blur(20px);
-    border-radius: 26px;
-    padding: 18px 20px;
-    border: 1px solid var(--border);
-    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, rgba(20, 26, 48, 0.6) 0%, rgba(12, 16, 32, 0.7) 100%);
+    backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
 .music-panel:hover {
-    border-color: rgba(0, 242, 254, 0.45);
-    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 242, 254, 0.2);
+    border-color: rgba(0, 242, 254, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.15);
 }
 
 .playlist-counter {
     font-family: 'Fira Code', monospace;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     color: var(--glow-primary);
-    background: rgba(0, 242, 254, 0.12);
-    border: 1px solid rgba(0, 242, 254, 0.3);
-    padding: 3px 10px;
-    border-radius: 14px;
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    padding: 2px 8px;
+    border-radius: 12px;
 }
 
 .player-top-row {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 10px;
 }
 
 .vinyl-disc-wrap {
-    width: 52px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
     position: relative;
     flex-shrink: 0;
 }
@@ -186,10 +88,10 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(circle, #2d3748 0%, #1a202c 40%, #000000 100%);
-    padding: 4px;
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.2);
+    background: #000000;
+    padding: 3px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
     animation: spinVinyl 6s linear infinite;
     animation-play-state: paused;
 }
@@ -214,7 +116,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 2px;
 }
 
 .track-marquee {
@@ -224,7 +126,7 @@
 
 .track-title {
     display: inline-block;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     color: var(--text-primary);
     animation: marqueeScroll 10s linear infinite;
@@ -236,30 +138,28 @@
 }
 
 .track-artist {
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--text-muted);
     font-family: 'Fira Code', monospace;
-    font-weight: 500;
 }
 
 #frequency-vis {
     width: 100%;
-    height: 20px;
-    border-radius: 6px;
-    margin-top: 4px;
+    height: 16px;
+    border-radius: 4px;
+    margin-top: 2px;
     opacity: 0.9;
-    filter: drop-shadow(0 0 6px var(--glow-primary));
 }
 
 .time-track {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     font-family: 'Fira Code', monospace;
-    font-size: 11px;
+    font-size: 10px;
     color: var(--text-muted);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 #current-time {
@@ -270,36 +170,36 @@
 .seek-area {
     position: relative;
     width: 100%;
-    height: 6px;
+    height: 5px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     transition: height 0.2s ease;
 }
 
 .seek-area:hover {
-    height: 8px;
+    height: 7px;
 }
 
 .seek-bar {
     width: 0%;
     height: 100%;
     background: var(--accent-gradient);
-    border-radius: 10px;
-    box-shadow: 0 0 12px var(--glow-primary);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--glow-primary);
     position: relative;
 }
 
 .seek-tooltip {
     position: absolute;
-    top: -30px;
+    top: -26px;
     background: #090c18;
     color: #ffffff;
-    padding: 3px 8px;
-    border-radius: 6px;
+    padding: 2px 6px;
+    border-radius: 4px;
     font-family: 'Fira Code', monospace;
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 700;
     border: 1px solid var(--glow-primary);
     pointer-events: none;
@@ -307,7 +207,6 @@
     transition: opacity 0.2s ease;
     white-space: nowrap;
     transform: translateX(-50%);
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
 }
 
 .seek-area:hover .seek-tooltip { opacity: 1; }
@@ -315,45 +214,44 @@
 .player-controls {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
 }
 
 .ctrl {
     background: none;
     border: none;
     color: var(--text-secondary);
-    font-size: 17px;
+    font-size: 15px;
     cursor: pointer;
-    padding: 6px;
-    border-radius: 10px;
+    padding: 4px;
+    border-radius: 6px;
     transition: all 0.2s ease;
 }
 
 .ctrl:hover {
     color: var(--glow-primary);
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 8px var(--glow-primary));
+    transform: scale(1.15);
 }
 
 .play-circle {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: var(--accent-gradient);
     border: none;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 0 22px rgba(0, 242, 254, 0.5);
+    box-shadow: 0 0 18px rgba(0, 242, 254, 0.45);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .play-circle:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 30px rgba(0, 242, 254, 0.75);
+    transform: scale(1.12);
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
 }
 
 /* Playlist dropdown */
@@ -363,19 +261,19 @@
 
 .playlist-menu {
     position: absolute;
-    bottom: 44px;
+    bottom: 40px;
     left: -50px;
-    width: 230px;
-    background: rgba(14, 18, 36, 0.95);
+    width: 220px;
+    background: rgba(14, 18, 36, 0.96);
     border: 1px solid rgba(0, 242, 254, 0.3);
-    border-radius: 16px;
-    padding: 8px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 242, 254, 0.2);
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     display: none;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
     z-index: 100;
-    backdrop-filter: blur(24px);
+    backdrop-filter: blur(20px);
 }
 
 .playlist-menu.show {
@@ -386,9 +284,9 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 10px;
-    border-radius: 10px;
-    font-size: 11.5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 11px;
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -401,21 +299,20 @@
     background: rgba(0, 242, 254, 0.15);
     color: var(--glow-primary);
     font-weight: 700;
-    border: 1px solid rgba(0, 242, 254, 0.3);
 }
 
 .volume-dock {
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .mute-toggle {
     background: none;
     border: none;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     transition: color 0.2s ease;
 }
@@ -425,7 +322,7 @@
 }
 
 input[type=range] {
-    width: 75px;
+    width: 65px;
     height: 4px;
     -webkit-appearance: none;
     background: var(--accent-gradient);
@@ -435,24 +332,19 @@ input[type=range] {
 
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     background: #ffffff;
     border-radius: 50%;
     border: 2px solid var(--glow-primary);
-    box-shadow: 0 0 10px var(--glow-primary);
+    box-shadow: 0 0 8px var(--glow-primary);
     cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-input[type=range]::-webkit-slider-thumb:hover {
-    transform: scale(1.3);
 }
 
 .audio-alert {
     color: #f87171;
-    font-size: 10.5px;
-    margin-top: 8px;
+    font-size: 10px;
+    margin-top: 6px;
     text-align: center;
     font-family: 'Fira Code', monospace;
 }
@@ -460,143 +352,139 @@ input[type=range]::-webkit-slider-thumb:hover {
 .hidden { display: none; }
 
 /* ========================================================
-   3. WAIFU COLLECTION WIDGET (STAR FEATURE)
+   2. WAIFU COLLECTION WIDGET
 ======================================================== */
 .waifu-panel {
-    background: var(--panel-bg);
-    backdrop-filter: blur(20px);
-    border-radius: 26px;
-    padding: 18px 20px;
-    border: 1px solid var(--border);
-    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, rgba(20, 26, 48, 0.6) 0%, rgba(12, 16, 32, 0.7) 100%);
+    backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
 }
 
 .waifu-panel:hover {
-    border-color: rgba(236, 72, 153, 0.45);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(236, 72, 153, 0.2);
+    border-color: rgba(236, 72, 153, 0.4);
 }
 
 .waifu-grid {
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 7px;
 }
 
 .waifu-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
     cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     position: relative;
-    overflow: hidden;
 }
 
 .waifu-item:hover {
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(0, 242, 254, 0.4);
-    transform: translateX(8px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 242, 254, 0.35);
+    transform: translateX(6px);
 }
 
 .waifu-item.active-equipped {
     border-color: var(--glow-primary);
-    background: linear-gradient(90deg, rgba(0, 242, 254, 0.16) 0%, rgba(139, 92, 246, 0.12) 100%);
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-}
-
-.waifu-item.active-equipped::after {
-    content: 'EQUIPPED';
-    position: absolute;
-    top: 6px;
-    right: 12px;
-    font-size: 8.5px;
-    font-family: 'Fira Code', monospace;
-    font-weight: 800;
-    color: var(--glow-primary);
-    background: rgba(0, 242, 254, 0.2);
-    border: 1px solid var(--glow-primary);
-    padding: 1px 6px;
-    border-radius: 8px;
-    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, rgba(0, 242, 254, 0.14) 0%, rgba(139, 92, 246, 0.08) 100%);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
 }
 
 .waifu-thumb {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
 }
 
 .waifu-rank {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 900;
     font-family: 'Outfit', sans-serif;
     color: var(--glow-primary);
-    min-width: 28px;
+    min-width: 24px;
 }
 
-.rank-1 .waifu-rank { color: #fbbf24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.6); }
-.rank-2 .waifu-rank { color: #e2e8f0; text-shadow: 0 0 10px rgba(226, 232, 240, 0.6); }
-.rank-3 .waifu-rank { color: #f97316; text-shadow: 0 0 10px rgba(249, 115, 22, 0.6); }
-.rank-4 .waifu-rank { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
-.rank-5 .waifu-rank { color: #f43f5e; text-shadow: 0 0 10px rgba(244, 63, 94, 0.6); }
-.rank-6 .waifu-rank { color: #ec4899; text-shadow: 0 0 10px rgba(236, 72, 153, 0.6); }
+.rank-1 .waifu-rank { color: #fbbf24; }
+.rank-2 .waifu-rank { color: #e2e8f0; }
+.rank-3 .waifu-rank { color: #f97316; }
+.rank-4 .waifu-rank { color: #38bdf8; }
+.rank-5 .waifu-rank { color: #f43f5e; }
+.rank-6 .waifu-rank { color: #ec4899; }
 
 .waifu-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
 }
 
 .waifu-name-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 4px;
+}
+
+.waifu-name-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .waifu-name {
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 12px;
+    font-weight: 700;
     color: var(--text-primary);
-    letter-spacing: 0.3px;
+}
+
+.waifu-tag-equipped {
+    font-size: 8px;
+    font-family: 'Fira Code', monospace;
+    font-weight: 800;
+    color: var(--glow-primary);
+    background: rgba(0, 242, 254, 0.15);
+    border: 1px solid var(--glow-primary);
+    padding: 1px 5px;
+    border-radius: 6px;
+    display: none;
+}
+
+.waifu-item.active-equipped .waifu-tag-equipped {
+    display: inline-block;
 }
 
 .waifu-percent {
-    font-size: 10.5px;
+    font-size: 10px;
     font-family: 'Fira Code', monospace;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--text-muted);
 }
 
 .waifu-bar {
     width: 100%;
-    height: 5px;
+    height: 3.5px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    border-radius: 6px;
     overflow: hidden;
 }
 
 .waifu-fill {
     height: 100%;
-    border-radius: 10px;
+    border-radius: 6px;
     transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .waifu-item i {
-    font-size: 15px;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.waifu-item:hover i {
-    transform: scale(1.35) rotate(12deg);
+    font-size: 13px;
+    margin-left: 4px;
 }
