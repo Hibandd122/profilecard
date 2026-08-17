@@ -1,13 +1,13 @@
 /* ========================================================
-   MAIN BIOLINK CARD STYLES (NO TILT)
+   MAIN BIOLINK CARD STYLES
 ======================================================== */
 .card-wrapper {
     width: 100%;
-    max-width: 1000px;
+    max-width: 920px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 24px auto;
+    margin: 20px auto;
     z-index: 100;
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -20,15 +20,15 @@ body.banner-view-mode .card-wrapper {
 
 .card-container {
     width: 100%;
-    min-height: 600px;
-    background: linear-gradient(145deg, rgba(16, 20, 38, 0.68) 0%, rgba(9, 12, 24, 0.76) 100%);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border-radius: 36px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.25),
-                0 35px 85px -15px rgba(0, 0, 0, 0.95),
-                0 0 50px rgba(0, 242, 254, 0.18);
+    min-height: 560px;
+    background: rgba(14, 18, 34, 0.72);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2),
+                0 30px 80px -15px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(0, 242, 254, 0.12);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -38,18 +38,18 @@ body.banner-view-mode .card-wrapper {
 }
 
 body.light-mode .card-container {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(245, 248, 255, 0.9) 100%);
-    border: 1px solid rgba(99, 102, 241, 0.25);
-    box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.8),
-                0 30px 80px -15px rgba(99, 102, 241, 0.25),
-                0 0 40px rgba(236, 72, 153, 0.18);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+                0 25px 70px -15px rgba(99, 102, 241, 0.2),
+                0 0 35px rgba(236, 72, 153, 0.15);
 }
 
 .card-container:hover {
-    border-color: rgba(0, 242, 254, 0.45);
-    box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
-                0 40px 100px -20px rgba(0, 0, 0, 0.95),
-                0 0 65px rgba(0, 242, 254, 0.3);
+    border-color: rgba(0, 242, 254, 0.35);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
+                0 35px 90px -20px rgba(0, 0, 0, 0.95),
+                0 0 50px rgba(0, 242, 254, 0.22);
 }
 
 /* ========================================================
@@ -61,7 +61,7 @@ body.light-mode .card-container {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 36px;
+    border-radius: 28px;
     padding: 1.5px;
     background: linear-gradient(90deg, #00f2fe, #8b5cf6, #ec4899, #fbbf24, #00f2fe);
     background-size: 400% 100%;
@@ -71,13 +71,13 @@ body.light-mode .card-container {
     animation: rgbFlowAnim 10s linear infinite;
     pointer-events: none;
     z-index: 10;
-    opacity: 0.7;
+    opacity: 0.55;
 }
 
 .rgb-flow.reverse {
     background: linear-gradient(270deg, #00f2fe, #8b5cf6, #ec4899, #fbbf24, #00f2fe);
     animation: rgbFlowReverse 12s linear infinite;
-    opacity: 0.35;
+    opacity: 0.25;
 }
 
 @keyframes rgbFlowAnim {
@@ -97,7 +97,7 @@ body.light-mode .card-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 26px;
+    padding: 14px 22px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.02);
     gap: 12px;
@@ -108,39 +108,39 @@ body.light-mode .card-container {
 .status-pill {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 11.5px;
+    gap: 7px;
+    font-size: 11px;
     font-weight: 600;
     font-family: 'Fira Code', monospace;
-    padding: 6px 14px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-secondary);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
     cursor: default;
 }
 
 .status-pill:hover {
     color: var(--text-primary);
     border-color: var(--glow-primary);
-    background: rgba(0, 242, 254, 0.12);
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+    background: rgba(0, 242, 254, 0.1);
+    box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
 }
 
 .banner-mode-btn {
     cursor: pointer;
-    background: rgba(0, 242, 254, 0.1);
-    border-color: rgba(0, 242, 254, 0.35);
+    background: rgba(0, 242, 254, 0.08);
+    border-color: rgba(0, 242, 254, 0.3);
     color: var(--glow-primary);
     font-weight: 700;
 }
 
 .banner-mode-btn:hover {
-    background: rgba(0, 242, 254, 0.22);
+    background: rgba(0, 242, 254, 0.18);
     border-color: var(--glow-primary);
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.45);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.35);
     transform: translateY(-1px);
 }
 
@@ -150,43 +150,36 @@ body.light-mode .card-container {
 
 .clock-pill i {
     color: #00f2fe;
-    animation: clockPulse 2s infinite ease-in-out;
-}
-
-@keyframes clockPulse {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(10deg); }
-    75% { transform: rotate(-10deg); }
 }
 
 .top-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     margin-left: auto;
 }
 
 .theme-toggle {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--text-primary);
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: all 0.25s ease;
     position: relative;
 }
 
 .theme-toggle:hover {
-    transform: scale(1.12) rotate(15deg);
+    transform: scale(1.1);
     border-color: var(--glow-primary);
-    box-shadow: 0 0 20px var(--hover-glow);
-    background: rgba(0, 242, 254, 0.15);
+    box-shadow: 0 0 15px var(--hover-glow);
+    background: rgba(0, 242, 254, 0.12);
 }
 
 .theme-toggle .fa-sun {
@@ -210,8 +203,8 @@ body.light-mode .theme-toggle .fa-moon {
 ======================================================== */
 .card-content-grid {
     display: grid;
-    grid-template-columns: 370px 1fr;
-    min-height: 520px;
+    grid-template-columns: 340px 1fr;
+    min-height: 490px;
     position: relative;
     z-index: 15;
 }
