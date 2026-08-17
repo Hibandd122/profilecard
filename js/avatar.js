@@ -8,6 +8,8 @@ const playerAlbumArt = document.getElementById('player-album-art');
 
 let currentAvatarIndex = 0;
 let isAvatarAnimating = false;
+let isForcedAvatar = false;
+let rotationTimer = null;
 
 // Khởi tạo và gán sẵn toàn bộ 6 hình nền Waifu vào 6 lớp GPU riêng biệt
 function initWaifuBanners() {
@@ -42,6 +44,8 @@ function initAvatarDots() {
         dot.dataset.index = idx;
         dot.addEventListener('click', () => {
             setAvatar(idx);
+            isForcedAvatar = true;
+            setTimeout(() => { isForcedAvatar = false; }, 6000);
         });
         avatarDotsContainer.appendChild(dot);
     });
@@ -89,9 +93,21 @@ function setAvatar(index) {
     updateTitle();
 }
 
+function startAvatarRotation() {
+    if (rotationTimer) clearInterval(rotationTimer);
+    const intervalTime = (CONFIG.intervals && CONFIG.intervals.avatarRotation) ? CONFIG.intervals.avatarRotation : 4000;
+    
+    rotationTimer = setInterval(() => {
+        if (!isForcedAvatar && !isAvatarAnimating) {
+            setAvatar((currentAvatarIndex + 1) % CONFIG.avatars.length);
+        }
+    }, intervalTime);
+}
+
 function handleAvatarClick(e) {
     if (!avatarImg || isAvatarAnimating) return;
     isAvatarAnimating = true;
+    isForcedAvatar = true;
 
     // Chọn avatar ngẫu nhiên tiếp theo
     let nextIndex;
@@ -124,6 +140,7 @@ function handleAvatarClick(e) {
     setTimeout(() => {
         avatarImg.classList.remove('active-touch');
         isAvatarAnimating = false;
+        setTimeout(() => { isForcedAvatar = false; }, 4000);
     }, 800);
 }
 
@@ -175,3 +192,4 @@ window.addEventListener('resize', () => {
 initWaifuBanners();
 initAvatarDots();
 setAvatar(0);
+startAvatarRotation();
