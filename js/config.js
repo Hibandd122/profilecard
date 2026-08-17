@@ -5,15 +5,15 @@ const CONFIG = {
     handle: "@mahikari",
     tagline: "Cosmic Voyager · Developer · Anime Enthusiast",
     bio: "Exploring the endless cosmos with waifus & lo-fi beats ✨",
-    
-    // Danh sách avatar 6 nhân vật theo đúng thứ tự
+
+    // Danh sách avatar 6 nhân vật theo đúng thứ tự 1 -> 6
     avatars: [
-        "assets/avatar2.png", // #1 Shiina Mahiru
-        "assets/avatar3.png", // #2 Kaguya
-        "assets/avatar5.png", // #3 Yachiyo Runami
+        "assets/avatar1.png", // #1 Shiina Mahiru
+        "assets/avatar2.png", // #2 Kaguya
+        "assets/avatar3.png", // #3 Yachiyo Runami
         "assets/avatar4.png", // #4 Elfaria Albis Serfort
-        "assets/avatar6.png", // #5 Kagari Fuyukawa
-        "assets/avatar1.png"  // #6 Hiura Mihate
+        "assets/avatar5.png", // #5 Kagari Fuyukawa
+        "assets/avatar6.png"  // #6 Hiura Mihate
     ],
 
     // Banner mặc định và các banner theo waifu
@@ -29,11 +29,8 @@ const CONFIG = {
 
     // Các vai trò / danh hiệu chạy hiệu ứng typewriter
     roles: [
-        "Wibu Chúa 👑",
         "Developer 💻",
-        "Gacha Player 🎲",
         "Music Lover 🎵",
-        "Cosmic Voyager ✨"
     ],
 
     // Danh ngôn ngẫu nhiên
@@ -47,7 +44,7 @@ const CONFIG = {
 
     favicon: {
         enabled: true,
-        fallback: "assets/avatar2.png"
+        fallback: "assets/avatar1.png"
     },
 
     // Danh sách nhạc với 5 bài
@@ -106,15 +103,15 @@ const CONFIG = {
         onlineStatus: "dnd" // 'online' | 'idle' | 'dnd'
     },
 
-    // Bộ sưu tập Waifu (Xếp hạng với 6 nhân vật, avatar và 6 banner tương ứng)
+    // Bộ sưu tập Waifu (Xếp hạng với 6 nhân vật, avatar 1-6 và 6 banner tương ứng)
     waifu: {
         list: [
-            { id: 0, name: "Shiina Mahiru", title: "The Angel Next Door", icon: "fa-feather-alt", color: "#fbbf24", rank: 1, affection: 100, image: "assets/avatar2.png", banner: "assets/bannertop1.jpg" },
-            { id: 1, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar3.png", banner: "assets/bannertop2.png" },
-            { id: 2, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar5.png", banner: "assets/bannertop3.png" },
+            { id: 0, name: "Shiina Mahiru", title: "The Angel Next Door", icon: "fa-feather-alt", color: "#fbbf24", rank: 1, affection: 100, image: "assets/avatar1.png", banner: "assets/bannertop1.jpg" },
+            { id: 1, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar2.png", banner: "assets/bannertop2.png" },
+            { id: 2, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar3.png", banner: "assets/bannertop3.png" },
             { id: 3, name: "Elfaria Albis Serfort", title: "Ice Magia Vende", icon: "fa-snowflake", color: "#38bdf8", rank: 4, affection: 90, image: "assets/avatar4.png", banner: "assets/bannertop4.jpg" },
-            { id: 4, name: "Kagari Fuyukawa", title: "Neko Champion", icon: "fa-cat", color: "#f97316", rank: 5, affection: 87, image: "assets/avatar6.png", banner: "assets/bannertop5.jpg" },
-            { id: 5, name: "Hiura Mihate", title: "Sweet Heart", icon: "fa-heart", color: "#ec4899", rank: 6, affection: 84, image: "assets/avatar1.png", banner: "assets/bannertop6.jpg" }
+            { id: 4, name: "Kagari Fuyukawa", title: "Neko Champion", icon: "fa-cat", color: "#f97316", rank: 5, affection: 87, image: "assets/avatar5.png", banner: "assets/bannertop5.jpg" },
+            { id: 5, name: "Hiura Mihate", title: "Sweet Heart", icon: "fa-heart", color: "#ec4899", rank: 6, affection: 84, image: "assets/avatar6.png", banner: "assets/bannertop6.jpg" }
         ]
     }
 };
@@ -131,5 +128,5 @@ if (!CONFIG.music.playlist || CONFIG.music.playlist.length === 0) {
 }
 
 if (!CONFIG.avatars || CONFIG.avatars.length === 0) {
-    CONFIG.avatars = ["assets/avatar2.png"];
+    CONFIG.avatars = ["assets/avatar1.png"];
 }
