@@ -11,6 +11,16 @@ let isAvatarAnimating = false;
 let isForcedAvatar = false;
 let rotationTimer = null;
 
+// Preload toàn bộ Avatar và Banner vào RAM/GPU
+function preloadAllAssets() {
+    if (CONFIG.avatars) {
+        CONFIG.avatars.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
+}
+
 // Khởi tạo và gán sẵn toàn bộ 6 hình nền Waifu vào 6 lớp GPU riêng biệt
 function initWaifuBanners() {
     if (!CONFIG.waifu || !CONFIG.waifu.list) return;
@@ -24,7 +34,6 @@ function initWaifuBanners() {
             if (targetBg) {
                 layer.style.backgroundImage = `url('${targetBg}')`;
                 
-                // Preload và decode vào GPU VRAM trước
                 const pre = new Image();
                 pre.src = targetBg;
                 if (pre.decode) {
@@ -51,7 +60,7 @@ function initAvatarDots() {
     });
 }
 
-// Chuyển đổi Banner mượt mà 60/120fps (Chỉ thay đổi opacity của lớp GPU đã tải sẵn)
+// Chuyển đổi Banner mượt mà 60/120fps
 function updateWaifuBanner(currentIdx) {
     const bannerLayers = document.querySelectorAll('.banner-stage .banner-layer');
     if (!bannerLayers || bannerLayers.length === 0) return;
@@ -68,7 +77,16 @@ function setAvatar(index) {
     currentAvatarIndex = ((index % CONFIG.avatars.length) + CONFIG.avatars.length) % CONFIG.avatars.length;
     const targetSrc = CONFIG.avatars[currentAvatarIndex];
     
-    avatarImg.src = targetSrc;
+    // Hiệu ứng chuyển động Avatar Pop & Fade sắc nét
+    avatarImg.style.opacity = '0.3';
+    avatarImg.style.transform = 'translateX(-50%) scale(0.92)';
+    
+    setTimeout(() => {
+        avatarImg.src = targetSrc;
+        avatarImg.style.opacity = '1';
+        avatarImg.style.transform = 'translateX(-50%) scale(1)';
+    }, 120);
+
     if (discordAvatarImg) discordAvatarImg.src = targetSrc;
     if (playerAlbumArt) playerAlbumArt.src = targetSrc;
 
@@ -95,7 +113,7 @@ function setAvatar(index) {
 
 function startAvatarRotation() {
     if (rotationTimer) clearInterval(rotationTimer);
-    const intervalTime = (CONFIG.intervals && CONFIG.intervals.avatarRotation) ? CONFIG.intervals.avatarRotation : 4000;
+    const intervalTime = (CONFIG.intervals && CONFIG.intervals.avatarRotation) ? CONFIG.intervals.avatarRotation : 3500;
     
     rotationTimer = setInterval(() => {
         if (!isForcedAvatar && !isAvatarAnimating) {
@@ -189,6 +207,7 @@ window.addEventListener('resize', () => {
 });
 
 // Khởi chạy ngay lập tức
+preloadAllAssets();
 initWaifuBanners();
 initAvatarDots();
 setAvatar(0);
