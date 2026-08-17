@@ -1,7 +1,7 @@
 /* ========================================================
    EXTENDED FEATURES & INTERACTION ENGINE
 ======================================================== */
-document.addEventListener('DOMContentLoaded', () => {
+function initFeatures() {
 
     // 1. CLICK TO ENTER SPLASH OVERLAY
     const startOverlay = document.getElementById('start-overlay');
@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             item.addEventListener('click', () => {
-                if (typeof setAvatar === 'function') {
-                    setAvatar(idx);
+                if (window.setAvatar) {
+                    window.setAvatar(idx);
                 }
             });
 
@@ -117,5 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setInterval(nextQuote, 10000);
+}
 
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFeatures);
+} else {
+    initFeatures();
+}

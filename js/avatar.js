@@ -1,10 +1,10 @@
 /* ========================================================
    MAHIKARI AVATAR & ULTRA-SMOOTH PRE-CACHED BANNER ENGINE
 ======================================================== */
-const avatarImg = document.getElementById('char-avatar');
-const avatarDotsContainer = document.getElementById('avatar-dots');
-const discordAvatarImg = document.getElementById('discord-avatar-img');
-const playerAlbumArt = document.getElementById('player-album-art');
+let avatarImg = null;
+let avatarDotsContainer = null;
+let discordAvatarImg = null;
+let playerAlbumArt = null;
 
 let currentAvatarIndex = 0;
 let isAvatarAnimating = false;
@@ -45,6 +45,7 @@ function initWaifuBanners() {
 }
 
 function initAvatarDots() {
+    avatarDotsContainer = document.getElementById('avatar-dots');
     if (!avatarDotsContainer || !CONFIG.avatars) return;
     avatarDotsContainer.innerHTML = '';
     CONFIG.avatars.forEach((_, idx) => {
@@ -72,6 +73,11 @@ function updateWaifuBanner(currentIdx) {
 }
 
 function setAvatar(index) {
+    avatarImg = document.getElementById('char-avatar');
+    discordAvatarImg = document.getElementById('discord-avatar-img');
+    playerAlbumArt = document.getElementById('player-album-art');
+    avatarDotsContainer = document.getElementById('avatar-dots');
+
     if (!avatarImg || !CONFIG.avatars || CONFIG.avatars.length === 0) return;
     
     currentAvatarIndex = ((index % CONFIG.avatars.length) + CONFIG.avatars.length) % CONFIG.avatars.length;
@@ -82,9 +88,11 @@ function setAvatar(index) {
     avatarImg.style.transform = 'translateX(-50%) scale(0.92)';
     
     setTimeout(() => {
-        avatarImg.src = targetSrc;
-        avatarImg.style.opacity = '1';
-        avatarImg.style.transform = 'translateX(-50%) scale(1)';
+        if (avatarImg) {
+            avatarImg.src = targetSrc;
+            avatarImg.style.opacity = '1';
+            avatarImg.style.transform = 'translateX(-50%) scale(1)';
+        }
     }, 120);
 
     if (discordAvatarImg) discordAvatarImg.src = targetSrc;
@@ -111,6 +119,9 @@ function setAvatar(index) {
     updateTitle();
 }
 
+// Gán toàn cục để các file khác gọi trực tiếp
+window.setAvatar = setAvatar;
+
 function startAvatarRotation() {
     if (rotationTimer) clearInterval(rotationTimer);
     const intervalTime = (CONFIG.intervals && CONFIG.intervals.avatarRotation) ? CONFIG.intervals.avatarRotation : 3500;
@@ -123,6 +134,7 @@ function startAvatarRotation() {
 }
 
 function handleAvatarClick(e) {
+    avatarImg = document.getElementById('char-avatar');
     if (!avatarImg || isAvatarAnimating) return;
     isAvatarAnimating = true;
     isForcedAvatar = true;
@@ -156,7 +168,7 @@ function handleAvatarClick(e) {
     }
 
     setTimeout(() => {
-        avatarImg.classList.remove('active-touch');
+        if (avatarImg) avatarImg.classList.remove('active-touch');
         isAvatarAnimating = false;
         setTimeout(() => { isForcedAvatar = false; }, 4000);
     }, 800);
@@ -195,10 +207,18 @@ function updateTitle() {
     document.title = `${prefix}${CONFIG.name} · Profile Card`;
 }
 
-// Lắng nghe sự kiện
-if (avatarImg) {
-    avatarImg.addEventListener('click', handleAvatarClick);
-    avatarImg.addEventListener('touchstart', handleAvatarClick, { passive: true });
+function initAvatarModule() {
+    avatarImg = document.getElementById('char-avatar');
+    if (avatarImg) {
+        avatarImg.addEventListener('click', handleAvatarClick);
+        avatarImg.addEventListener('touchstart', handleAvatarClick, { passive: true });
+    }
+
+    preloadAllAssets();
+    initWaifuBanners();
+    initAvatarDots();
+    setAvatar(0);
+    startAvatarRotation();
 }
 
 // Cập nhật khi xoay màn hình điện thoại
@@ -206,9 +226,8 @@ window.addEventListener('resize', () => {
     initWaifuBanners();
 });
 
-// Khởi chạy ngay lập tức
-preloadAllAssets();
-initWaifuBanners();
-initAvatarDots();
-setAvatar(0);
-startAvatarRotation();
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAvatarModule);
+} else {
+    initAvatarModule();
+}
