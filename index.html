@@ -41,6 +41,15 @@
         </div>
     </div>
 
+    <!-- 16:9 FULLSCREEN BACKGROUND BANNER (BANNER TO ĐẰNG SAU) -->
+    <div class="full-bg-banner" id="full-bg-banner"></div>
+
+    <!-- FLOATING RETURN BUTTON IN BANNER VIEW MODE -->
+    <div class="banner-mode-overlay" id="banner-mode-overlay">
+        <i class="fas fa-arrow-left"></i>
+        <span>Chạm bất kỳ đâu để quay lại hồ sơ</span>
+    </div>
+
     <!-- BACKGROUND CANVAS & AMBIENCE -->
     <canvas id="starry-canvas" class="starry-bg"></canvas>
     <div class="nebula"></div>
@@ -51,26 +60,22 @@
     <!-- MAIN GUNS.LOL BIOLINK CARD (NO TILT) -->
     <div class="card-wrapper">
         <div class="card-container" id="main-card">
-            <!-- Full-card Dynamic Background Banner (Banner đằng sau) -->
-            <div class="card-bg-banner" id="card-bg-banner"></div>
-
             <!-- Animated Glowing Neon Borders -->
             <span class="rgb-flow"></span>
             <span class="rgb-flow reverse"></span>
 
-            <!-- Top Header Banner Bar -->
-            <div class="card-banner" id="card-banner"></div>
-
             <!-- TOP STATUS BAR -->
             <div class="card-top-bar">
-                <div class="status-pill views-pill">
-                    <i class="fas fa-eye"></i>
-                    <span id="profile-views">14,289</span>
-                </div>
                 <div class="status-pill clock-pill">
                     <i class="fas fa-clock"></i>
                     <span id="live-clock">VN 00:00:00</span>
                 </div>
+                
+                <button class="status-pill banner-mode-btn" id="toggle-banner-view" title="Xem trọn vẹn hình nền banner 16:9">
+                    <i class="fas fa-image"></i>
+                    <span>Xem Banner 16:9</span>
+                </button>
+
                 <div class="top-controls">
                     <button class="theme-toggle" id="themeToggle" title="Chuyển đổi giao diện" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
@@ -141,30 +146,20 @@
                 <!-- CỘT PHẢI (GUNS.LOL WIDGETS & EMBEDDED MEDIA) -->
                 <div class="col-right">
                     
-                    <!-- 1. DISCORD RICH PRESENCE WIDGET (GUNS.LOL SIGNATURE) -->
+                    <!-- 1. DISCORD USER BADGE -->
                     <div class="discord-widget">
                         <div class="discord-header">
                             <div class="discord-user-info">
                                 <div class="discord-avatar-wrap">
                                     <img src="assets/avatar1.png" alt="Discord Avatar" class="discord-avatar" id="discord-avatar-img">
-                                    <span class="discord-status-dot dnd"></span>
+                                    <span class="discord-status-dot online"></span>
                                 </div>
                                 <div class="discord-user-meta">
                                     <span class="discord-username">Mahikari</span>
                                     <span class="discord-custom-status">Vibing in the Cosmos ✨</span>
                                 </div>
                             </div>
-                            <div class="discord-tag-pill"><i class="fab fa-discord"></i> RICH PRESENCE</div>
-                        </div>
-                        <div class="discord-activity">
-                            <div class="activity-game-icon">
-                                <i class="fas fa-gamepad"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">Playing <strong>Genshin Impact</strong></div>
-                                <div class="activity-subtitle">Exploring Teyvat · AR 60</div>
-                                <div class="activity-timer" id="discord-timer">Elapsed 02:45:18</div>
-                            </div>
+                            <div class="discord-tag-pill"><i class="fab fa-discord"></i> DISCORD</div>
                         </div>
                     </div>
 
@@ -229,27 +224,10 @@
                     <div class="waifu-panel">
                         <div class="panel-header-row">
                             <div class="panel-title"><i class="fas fa-heart"></i> WAIFU COLLECTION</div>
-                            <small class="panel-tip"><i class="fas fa-hand-pointer"></i> Click to equip waifu</small>
+                            <small class="panel-tip"><i class="fas fa-hand-pointer"></i> Click to equip waifu & banner</small>
                         </div>
                         <div class="waifu-grid" id="waifu-grid">
                             <!-- Populated dynamically via JS from CONFIG.waifu.list -->
-                        </div>
-                    </div>
-
-                    <!-- 4. ANIME COUNTDOWN (VIETNAM TIME) -->
-                    <div class="countdown-panel">
-                        <div class="panel-header-row">
-                            <div class="panel-title"><i class="fas fa-satellite-dish"></i> ANIME EPISODE COUNTDOWN</div>
-                            <div class="countdown-tag"><i class="fas fa-tv"></i> FRI 22:00 VN</div>
-                        </div>
-                        <div class="flip-clock">
-                            <div class="flip-unit"><span id="days">00</span><small>NGÀY</small></div>
-                            <div class="flip-sep">:</div>
-                            <div class="flip-unit"><span id="hours">00</span><small>GIỜ</small></div>
-                            <div class="flip-sep">:</div>
-                            <div class="flip-unit"><span id="minutes">00</span><small>PHÚT</small></div>
-                            <div class="flip-sep">:</div>
-                            <div class="flip-unit"><span id="seconds">00</span><small>GIÂY</small></div>
                         </div>
                     </div>
 
@@ -266,7 +244,6 @@
     <script src="js/avatar.js"></script>
     <script src="js/typewriter.js"></script>
     <script src="js/features.js"></script>
-    <script src="js/countdown.js"></script>
     <script src="js/social.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/reveal.js"></script>

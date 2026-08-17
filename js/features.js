@@ -31,14 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
     updateClock();
     setInterval(updateClock, 1000);
 
-    // 3. PROFILE VIEWS COUNTER
-    const profileViewsEl = document.getElementById('profile-views');
-    if (profileViewsEl) {
-        let views = parseInt(localStorage.getItem('mahikari_profile_views') || '14289', 10);
-        views += 1;
-        localStorage.setItem('mahikari_profile_views', views);
-        profileViewsEl.innerText = views.toLocaleString('en-US');
+    // 3. CHẾ ĐỘ XEM TRỌN VẸN BANNER 16:9 (BANNER VIEW MODE)
+    const toggleBannerBtn = document.getElementById('toggle-banner-view');
+    const bannerOverlay = document.getElementById('banner-mode-overlay');
+
+    if (toggleBannerBtn) {
+        toggleBannerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.body.classList.add('banner-view-mode');
+        });
     }
+
+    if (bannerOverlay) {
+        bannerOverlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.body.classList.remove('banner-view-mode');
+        });
+    }
+
+    // Click bất kỳ đâu khi đang ở chế độ xem banner để quay lại
+    document.addEventListener('click', (e) => {
+        if (document.body.classList.contains('banner-view-mode')) {
+            document.body.classList.remove('banner-view-mode');
+        }
+    });
 
     // 4. WAIFU COLLECTION GENERATOR & EQUIP INTERACTION
     const waifuGrid = document.getElementById('waifu-grid');
@@ -99,20 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(nextQuote, 10000);
 
-    // 6. DISCORD RICH PRESENCE ELAPSED TIMER
-    const discordTimerEl = document.getElementById('discord-timer');
-    let elapsedSeconds = 9918;
-    function updateDiscordTimer() {
-        if (!discordTimerEl) return;
-        elapsedSeconds++;
-        const hours = Math.floor(elapsedSeconds / 3600);
-        const mins = Math.floor((elapsedSeconds % 3600) / 60);
-        const secs = elapsedSeconds % 60;
-        discordTimerEl.innerText = `Elapsed ${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    }
-    setInterval(updateDiscordTimer, 1000);
-
-    // 7. MOUSE CURSOR TRAILS
+    // 6. MOUSE CURSOR TRAILS
     if (CONFIG.effects.cursorTrail && window.matchMedia("(min-width: 850px)").matches) {
         let lastTrailX = 0, lastTrailY = 0;
         document.addEventListener('mousemove', (e) => {
