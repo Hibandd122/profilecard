@@ -65,6 +65,8 @@ function updatePlaylistActiveItem() {
     });
 }
 
+const totalTracksNumEl = document.getElementById('total-tracks-num');
+
 function loadSong(index) {
     if (!playlist || playlist.length === 0) return;
     currentSongIndex = ((index % playlist.length) + playlist.length) % playlist.length;
@@ -73,6 +75,7 @@ function loadSong(index) {
     if (trackNameEl) trackNameEl.innerText = song.name;
     if (trackArtistEl) trackArtistEl.innerText = song.artist || 'Anime OST';
     if (currentTrackNumEl) currentTrackNumEl.innerText = currentSongIndex + 1;
+    if (totalTracksNumEl) totalTracksNumEl.innerText = playlist.length;
     if (audio) {
         audio.src = song.file;
         audio.load();

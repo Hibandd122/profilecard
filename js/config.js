@@ -41,19 +41,45 @@ const CONFIG = {
         fallback: "assets/avatar1.png"
     },
 
-    // Danh sách 10 bài hát đầy đủ
+    // Danh sách bài hát (Đã chuyển toàn bộ sang MP3 trong folder music/)
     music: {
         playlist: [
-            { name: "Chiisana Koi no Uta", artist: "MONGOL800 / Cover", file: "assets/song1.mp3" },
-            { name: "うれしい！たのしい！大好き！", artist: "DREAMS COME TRUE", file: "assets/song2.mp3" },
-            { name: "Remember", artist: "Anime OST", file: "assets/song3.mp3" },
-            { name: "ハッピーシンセサイザ", artist: "EasyPop / Megurine Luka & GUMI", file: "assets/song4.mp3" },
-            { name: "World is Mine CPK!", artist: "supercell feat. Hatsune Miku", file: "assets/song5.mp3" },
-            { name: "Chiisana Koi no Uta (Inst.)", artist: "Iwami Manaka", file: "assets/song6.mp3" },
-            { name: "Ai Uta (Inst.)", artist: "Iwami Manaka", file: "assets/song7.mp3" },
-            { name: "Kimi ni Todoke (Inst.)", artist: "Iwami Manaka", file: "assets/song8.mp3" },
-            { name: "Valentine Kiss (Inst.)", artist: "Iwami Manaka", file: "assets/song9.mp3" },
-            { name: "Gift (Inst.)", artist: "Iwami Manaka", file: "assets/song10.mp3" }
+            // --- MỤC 1: THIÊN SỨ NHÀ BÊN (IWAMI MANAKA) ---
+            { name: "Chiisana Koi no Uta", artist: "Iwami Manaka (Thiên sứ nhà bên)", file: "music/angel_01_Chiisana_Koi_no_Uta.mp3" },
+            { name: "Ai Uta", artist: "Iwami Manaka (Thiên sứ nhà bên)", file: "music/angel_02_Ai_Uta.mp3" },
+            { name: "Chiisana Koi no Uta (Inst.)", artist: "Iwami Manaka (Thiên sứ nhà bên)", file: "music/angel_03_Chiisana_Koi_no_Uta_Inst.mp3" },
+            { name: "Ai Uta (Inst.)", artist: "Iwami Manaka (Thiên sứ nhà bên)", file: "music/angel_04_Ai_Uta_Inst.mp3" },
+            { name: "Kimi ni Todoke (Inst.)", artist: "Iwami Manaka (Thiên sứ nhà bên)", file: "music/angel_05_Kimi_ni_Todoke_Inst.mp3" },
+            { name: "Valentine Kiss (Inst.)", artist: "Iwami Manaka (Thiên sứ nhà bên)", file: "music/angel_06_Valentine_Kiss_Inst.mp3" },
+            { name: "Gift (Inst.)", artist: "Iwami Manaka (Thiên sứ nhà bên)", file: "music/angel_07_Gift_Inst.mp3" },
+            
+            // --- MỤC 2: CPK COLLECTION ---
+            { name: "ワールドイズマイン (World is Mine)", artist: "supercell feat. 初音ミク (CPK)", file: "music/ワールドイズマイン.mp3" },
+            { name: "melt (メルト)", artist: "supercell feat. 初音ミク (CPK)", file: "music/melt.mp3" },
+            { name: "Tell Your World", artist: "kz (livetune) feat. 初音ミク (CPK)", file: "music/Tell Your World.mp3" },
+            { name: "ray", artist: "BUMP OF CHICKEN feat. HATSUNE MIKU (CPK)", file: "music/ray.mp3" },
+            { name: "ハッピーシンセサイザ", artist: "EasyPop (CPK)", file: "music/ハッピーシンセサイザ.mp3" },
+            { name: "Remember", artist: "Anime OST (CPK)", file: "music/Remember.mp3" },
+            { name: "トリノコシティ", artist: "40mP (CPK)", file: "music/トリノコシティ.mp3" },
+            { name: "竹取オーバーナイトセンセーション", artist: "HoneyWorks (CPK)", file: "music/竹取オーバーナイトセンセーション.mp3" },
+            { name: "Ex-Otogibanashi", artist: "CPK Original", file: "music/Ex-Otogibanashi.mp3" },
+            { name: "Full Moon Serenade", artist: "CPK Original", file: "music/Full Moon Serenade.mp3" },
+            { name: "FUSHI", artist: "CPK Original", file: "music/FUSHI.mp3" },
+            { name: "IROHA meets KAGUyA", artist: "CPK Original", file: "music/IROHA meets KAGUyA.mp3" },
+            { name: "IROHA'S Dancing All Night", artist: "CPK Original", file: "music/IROHA'S Dancing All Night.mp3" },
+            { name: "OnyXXX", artist: "CPK Original", file: "music/OnyXXX.mp3" },
+            { name: "Reply", artist: "CPK Original", file: "music/Reply.mp3" },
+            { name: "TSUKUYOMI", artist: "CPK Original", file: "music/TSUKUYOMI.mp3" },
+            { name: "うつし世の姫", artist: "CPK Original", file: "music/うつし世の姫.mp3" },
+            { name: "ヤチヨカップ優勝！", artist: "CPK Original", file: "music/ヤチヨカップ優勝！.mp3" },
+            { name: "ヤチヨ絵巻", artist: "CPK Original", file: "music/ヤチヨ絵巻.mp3" },
+            { name: "ロンリーユニバース", artist: "CPK Original", file: "music/ロンリーユニバース.mp3" },
+            { name: "夢をみる島", artist: "CPK Original", file: "music/夢をみる島.mp3" },
+            { name: "星降る海", artist: "CPK Original", file: "music/星降る海.mp3" },
+            { name: "瞬間、シンフォニー", artist: "CPK Original", file: "music/瞬間、シンフォニー.mp3" },
+            { name: "私は、わたしの事が好き", artist: "CPK Original", file: "music/私は、わたしの事が好き.mp3" },
+            { name: "超かぐや姫！", artist: "CPK Original", file: "music/超かぐや姫！.mp3" },
+            { name: "零ゆる光彩", artist: "CPK Original", file: "music/零ゆる光彩.mp3" }
         ],
         defaultVolume: 45,
         enablePulse: true,
