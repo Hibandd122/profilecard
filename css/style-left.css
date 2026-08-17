@@ -1,31 +1,29 @@
-.countdown-panel,
-.waifu-panel,
-.music-panel,
-.social-icon {
-    -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix lỗi bo góc trên Safari */
-}
-
-/* Phần còn lại giữ nguyên */
+/* ========================================================
+   GUNS.LOL LEFT COLUMN (HERO / PROFILE IDENTITY)
+======================================================== */
 .col-left {
-    flex: 1.2;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 24px 20px;
+    justify-content: flex-start;
+    padding: 32px 24px;
     position: relative;
-    z-index: 300;
+    background: rgba(255, 255, 255, 0.01);
 }
 
+/* ========================================================
+   AVATAR PRESENTATION
+======================================================== */
 .avatar-zone {
-    width: 220px;
-    height: 220px;
+    width: 170px;
+    height: 170px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
 }
 
 .halo-rotate {
@@ -34,20 +32,20 @@
     height: 100%;
     border-radius: 50%;
     border: 2px solid transparent;
-    border-top: 3px solid var(--glow-primary);
-    border-bottom: 3px solid var(--glow-secondary);
-    animation: spinHalo 7s linear infinite;
-    box-shadow: 0 0 25px var(--glow-primary);
+    border-top: 2.5px solid var(--glow-primary);
+    border-bottom: 2.5px solid var(--glow-secondary);
+    animation: spinHalo 6s linear infinite;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
 }
 
 .halo-rotate.outer {
-    width: 120%;
-    height: 120%;
-    top: -10%;
-    left: -10%;
+    width: 116%;
+    height: 116%;
+    top: -8%;
+    left: -8%;
     border-top: 2px solid var(--glow-secondary);
     border-bottom: 2px solid var(--glow-primary);
-    animation: spinHaloReverse 9s linear infinite;
+    animation: spinHaloReverse 8s linear infinite;
     opacity: 0.5;
 }
 
@@ -56,14 +54,15 @@
 
 .ripple-ground {
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     left: 50%;
-    transform: translateX(-50%) rotateX(60deg);
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, var(--glow-primary) 0%, transparent 80%);
+    transform: translateX(-50%) rotateX(65deg);
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, var(--glow-primary) 0%, transparent 75%);
     border-radius: 50%;
-    opacity: 0.15;
+    opacity: 0.2;
+    pointer-events: none;
 }
 
 .ripple-ground span {
@@ -74,153 +73,319 @@
     height: 100%;
     border: 2px solid var(--glow-primary);
     border-radius: 50%;
-    animation: rippleWave 3s infinite;
+    animation: rippleWave 3.5s infinite;
     opacity: 0;
 }
 
-.ripple-ground span:nth-child(2) { animation-delay: 1s; }
-.ripple-ground span:nth-child(3) { animation-delay: 2s; }
+.ripple-ground span:nth-child(2) { animation-delay: 1.2s; }
+.ripple-ground span:nth-child(3) { animation-delay: 2.4s; }
 
 @keyframes rippleWave {
-    0% { width: 0; height: 0; opacity: 1; margin-top: 100px; margin-left: 100px; }
+    0% { width: 0; height: 0; opacity: 0.8; margin-top: 80px; margin-left: 80px; }
     100% { width: 100%; height: 100%; opacity: 0; margin-top: 0; margin-left: 0; }
 }
 
 .avatar-img {
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
-    max-height: 130%;
+    max-height: 125%;
     width: auto;
-    max-width: 100%;
-    filter: drop-shadow(0 0 20px var(--glow-primary));
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.5s;
-    cursor: pointer;
+    max-width: 110%;
+    filter: drop-shadow(0 0 16px var(--glow-primary));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
     z-index: 5;
+    user-select: none;
 }
 
-.avatar-img:hover {
-    transform: translateX(-50%) scale(1.1) translateY(-10px);
-    filter: drop-shadow(0 0 40px var(--glow-secondary)) drop-shadow(0 0 20px var(--glow-primary));
+.avatar-zone:hover .avatar-img {
+    transform: translateX(-50%) scale(1.08) translateY(-6px);
+    filter: drop-shadow(0 0 30px var(--glow-secondary)) drop-shadow(0 0 15px var(--glow-primary));
 }
 
 .avatar-img.active-touch {
-    transform: translateX(-50%) scale(1.15) translateY(-5px);
-    filter: drop-shadow(0 0 60px var(--glow-secondary));
+    transform: translateX(-50%) scale(1.15) translateY(-8px);
+    filter: drop-shadow(0 0 45px var(--glow-secondary));
 }
 
+.avatar-status-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2.5px solid #0d101c;
+    z-index: 10;
+}
+
+.avatar-status-badge.online {
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+    animation: statusPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 8px #10b981; }
+    50% { transform: scale(1.2); box-shadow: 0 0 16px #10b981; }
+}
+
+/* ========================================================
+   AVATAR DOTS INDICATOR
+======================================================== */
+.avatar-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.avatar-dots .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.avatar-dots .dot:hover {
+    background: var(--glow-primary);
+    transform: scale(1.3);
+}
+
+.avatar-dots .dot.active {
+    width: 18px;
+    border-radius: 10px;
+    background: var(--accent-gradient);
+    box-shadow: 0 0 8px var(--glow-primary);
+}
+
+/* ========================================================
+   NAME & BADGES
+======================================================== */
 .title-area {
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
 }
 
 .gradient-glitch {
-    font-size: 42px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
     font-weight: 900;
-    margin-bottom: 12px;
+    letter-spacing: -0.5px;
     background: var(--accent-gradient);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradientFlow 6s linear infinite;
-    filter: drop-shadow(0 0 15px var(--glow-primary));
-    position: relative;
+    animation: gradientFlow 5s linear infinite;
+    filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.4));
     display: inline-block;
 }
 
 @keyframes gradientFlow { to { background-position: 200% center; } }
 
+.badge-verified {
+    color: #00f2fe;
+    font-size: 18px;
+    filter: drop-shadow(0 0 8px #00f2fe);
+    animation: badgeShine 3s infinite ease-in-out;
+}
+
+.badge-crown {
+    color: #fbbf24;
+    font-size: 16px;
+    filter: drop-shadow(0 0 8px #fbbf24);
+    animation: crownFloat 2.5s infinite ease-in-out;
+}
+
+@keyframes crownFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(8deg); }
+}
+
+@keyframes badgeShine {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.1); }
+}
+
+.handle-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-top: -2px;
+}
+
+/* ========================================================
+   TYPEWRITER ROLE BADGE
+======================================================== */
 .badge-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    min-height: 40px;
+    margin-bottom: 16px;
+    width: 100%;
 }
 
 .badge-live {
     background: var(--panel-bg);
-    backdrop-filter: blur(8px);
-    padding: 8px 24px;
-    border-radius: 40px;
-    font-size: 13px;
-    font-weight: 600;
+    backdrop-filter: blur(10px);
+    padding: 7px 20px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Fira Code', monospace;
     border: 1px solid var(--border);
     color: var(--text-primary);
-    min-width: 170px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    box-shadow: 0 0 15px var(--hover-glow);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
     position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
 }
 
 .badge-live::after {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(90deg, transparent, var(--glow-primary), transparent);
-    border-radius: 40px;
-    animation: scan 2.8s infinite;
-    pointer-events: none;
-    opacity: 0.4;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.3), transparent);
+    animation: badgeScan 3s infinite ease-in-out;
 }
 
-@keyframes scan {
-    0% { transform: translateX(-100%); }
-    20%, 100% { transform: translateX(100%); }
+@keyframes badgeScan {
+    0% { left: -100%; }
+    50%, 100% { left: 200%; }
 }
 
-.cursor-beam {
+/* ========================================================
+   BIO QUOTE CARD
+======================================================== */
+.bio-quote-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.bio-quote-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 242, 254, 0.3);
+}
+
+.quote-icon {
     color: var(--glow-primary);
-    font-size: 22px;
-    font-weight: 800;
-    animation: blinkBeam 1s step-end infinite;
+    font-size: 11px;
+    opacity: 0.8;
+    align-self: flex-start;
+    margin-top: 2px;
 }
 
-@keyframes blinkBeam { 0%,100% { opacity:1; } 50% { opacity:0; } }
+#quote-text {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    font-style: italic;
+    flex: 1;
+    line-height: 1.4;
+}
 
-/* Social panel */
+#quote-refresh {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+#quote-refresh:hover {
+    color: var(--glow-primary);
+    transform: rotate(180deg);
+}
+
+/* ========================================================
+   GUNS.LOL SOCIAL BUTTONS
+======================================================== */
 .social-panel {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     justify-content: center;
     align-items: center;
-    margin-top: 12px;
+    margin-top: auto;
+    width: 100%;
 }
 
 .social-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
     background: var(--panel-bg);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--text-primary);
-    font-size: 24px;
+    font-size: 18px;
     border: 1px solid var(--border);
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.social-icon .social-tooltip {
+    position: absolute;
+    bottom: -32px;
+    background: #0f1322;
+    color: #fff;
+    font-size: 10px;
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+.social-icon:hover .social-tooltip {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .social-icon:hover {
-    transform: translateY(-8px) scale(1.15) rotate(5deg);
-    box-shadow: 0 10px 25px var(--hover-glow), 0 0 15px var(--glow-primary);
-    border-color: var(--glow-primary);
+    transform: translateY(-6px) scale(1.12);
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.25);
 }
 
-.social-icon:active {
-    transform: scale(0.95);
-}
-
-.social-icon.fb:hover { background: #1877f2; color: white; }
-.social-icon.tt:hover { background: #000; color: white; }
-.social-icon.discord:hover { background: #5865F2; color: white; }
+.social-icon.fb:hover { background: #1877f2; color: #fff; border-color: #1877f2; }
+.social-icon.tt:hover { background: #000000; color: #00f2fe; border-color: #00f2fe; box-shadow: 0 8px 20px rgba(0, 242, 254, 0.4); }
+.social-icon.discord:hover { background: #5865F2; color: #fff; border-color: #5865F2; }
+.social-icon.github:hover { background: #24292e; color: #fff; border-color: #ffffff; }

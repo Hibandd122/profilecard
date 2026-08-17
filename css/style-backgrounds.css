@@ -1,8 +1,9 @@
-/* Nền sao động */
+/* ========================================================
+   GUNS.LOL COSMIC BACKGROUND LAYERS
+======================================================== */
 .starry-bg,
 .nebula,
 .cosmic-whirl,
-.cosmic-whirl.secondary,
 .spark-field {
     position: fixed;
     top: 0;
@@ -17,42 +18,44 @@
 .cosmic-whirl { z-index: 2; }
 .spark-field { z-index: 3; }
 
-/* Nebula tinh vân */
+/* Glowing multi-layered cosmic nebula */
 .nebula {
-    background: radial-gradient(circle at 30% 40%, var(--glow-primary) 0%, transparent 45%),
-                radial-gradient(circle at 70% 60%, var(--glow-secondary) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, var(--glow-primary) 0%, transparent 60%);
-    opacity: 0.15;
-    filter: blur(80px);
-    animation: nebulaWave 18s infinite alternate ease-in-out;
+    background: radial-gradient(circle at 25% 35%, rgba(0, 242, 254, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 75% 65%, rgba(236, 72, 153, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    filter: blur(70px);
+    animation: nebulaPulse 14s infinite alternate ease-in-out;
 }
 
-@keyframes nebulaWave {
-    0% { opacity: 0.1; transform: scale(1); }
-    100% { opacity: 0.25; transform: scale(1.15); }
+@keyframes nebulaPulse {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
 }
 
-/* Xoáy vũ trụ */
+/* Ambient cosmic whirls */
 .cosmic-whirl {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 1400px;
-    height: 1400px;
-    background: conic-gradient(from 0deg, transparent, var(--glow-primary) 20deg, var(--glow-secondary) 70deg, transparent 130deg);
+    width: 1200px;
+    height: 1200px;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 242, 254, 0.08) 60deg, rgba(236, 72, 153, 0.08) 140deg, transparent 200deg);
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.2;
-    animation: spinCosmic 40s linear infinite;
+    filter: blur(80px);
+    animation: spinCosmic 50s linear infinite;
 }
 
 .cosmic-whirl.secondary {
-    width: 1100px;
-    height: 1100px;
-    background: conic-gradient(from 180deg, transparent, var(--glow-secondary) 25deg, var(--glow-primary) 90deg, transparent 150deg);
-    animation: spinCosmicReverse 45s linear infinite;
-    opacity: 0.15;
+    width: 900px;
+    height: 900px;
+    background: conic-gradient(from 180deg, transparent 0deg, rgba(139, 92, 246, 0.07) 50deg, rgba(0, 242, 254, 0.07) 120deg, transparent 180deg);
+    animation: spinCosmicRev 60s linear infinite;
 }
 
-@keyframes spinCosmic { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
-@keyframes spinCosmicReverse { 100% { transform: translate(-50%, -50%) rotate(-360deg); } }
+@keyframes spinCosmic {
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinCosmicRev {
+    100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}

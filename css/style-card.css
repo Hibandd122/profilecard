@@ -1,70 +1,207 @@
-/* Card chính */
+/* ========================================================
+   GUNS.LOL MAIN BIOLINK CARD STYLES
+======================================================== */
 .card-wrapper {
-    perspective: 1500px;
+    perspective: 1200px;
     width: 100%;
+    max-width: 980px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transform-style: preserve-3d;
-    margin: 20px 0;
+    margin: 20px auto;
     z-index: 100;
 }
 
 .card-container {
-    width: 900px;
-    max-width: 95%;
-    min-height: 650px;
+    width: 100%;
+    min-height: 640px;
     background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 48px;
-    overflow: hidden; /* đảm bảo nội dung không tràn ra ngoài bo góc */
-    display: flex;
-    position: relative;
-    box-shadow: var(--shadow);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 36px;
     border: 1px solid var(--border);
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
     z-index: 200;
-    animation: floatSoft 8s infinite ease-in-out;
-    -webkit-mask-image: -webkit-radial-gradient(white, black); /* fix lỗi bo góc trên Safari */
 }
 
 .card-container:hover {
-    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5), 0 0 45px var(--hover-glow);
-    transform: translateY(-12px) scale(1.01);
+    border-color: rgba(0, 242, 254, 0.3);
+    box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 242, 254, 0.2);
 }
 
-@keyframes floatSoft {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* Viền RGB */
+/* ========================================================
+   RGB GLOWING BORDER FLOW
+======================================================== */
 .rgb-flow {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 48px; /* đồng bộ với card-container */
-    padding: 2px;
-    background: linear-gradient(90deg, #f43f5e, #eab308, #22c55e, #3b82f6, #8b5cf6, #d946ef, #f43f5e);
+    border-radius: 36px;
+    padding: 1.5px;
+    background: linear-gradient(90deg, #00f2fe, #8b5cf6, #ec4899, #fbbf24, #00f2fe);
     background-size: 400% 100%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: rgbStream 8s linear infinite;
+    animation: rgbFlowAnim 10s linear infinite;
     pointer-events: none;
-    z-index: 15;
-    opacity: 0.7;
+    z-index: 10;
+    opacity: 0.6;
 }
 
 .rgb-flow.reverse {
-    border-radius: 48px;
-    background: linear-gradient(270deg, #f43f5e, #eab308, #22c55e, #3b82f6, #8b5cf6, #d946ef, #f43f5e);
-    animation: rgbStreamReverse 10s linear infinite;
-    opacity: 0.4;
+    background: linear-gradient(270deg, #00f2fe, #8b5cf6, #ec4899, #fbbf24, #00f2fe);
+    animation: rgbFlowReverse 12s linear infinite;
+    opacity: 0.3;
 }
 
-@keyframes rgbStream { 100% { background-position: 400% 0; } }
-@keyframes rgbStreamReverse { 100% { background-position: 0% 0; } }
+@keyframes rgbFlowAnim {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 400% 0%; }
+}
+
+@keyframes rgbFlowReverse {
+    0% { background-position: 400% 0%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* ========================================================
+   TOP BANNER HEADER
+======================================================== */
+.card-banner {
+    width: 100%;
+    height: 110px;
+    background-image: url('../assets/bannertop1.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    transition: background-image 0.5s ease-in-out;
+}
+
+.card-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(13, 16, 28, 0.15) 0%, rgba(13, 16, 28, 0.8) 100%);
+    pointer-events: none;
+}
+
+body.light-mode .card-banner::after {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+/* ========================================================
+   CARD TOP STATUS BAR
+======================================================== */
+.card-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    gap: 12px;
+    z-index: 20;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Fira Code', monospace;
+    padding: 6px 14px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.status-pill:hover {
+    color: var(--text-primary);
+    border-color: var(--border-highlight);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.status-pill i {
+    color: var(--glow-primary);
+}
+
+.views-pill i {
+    color: #ec4899;
+}
+
+.clock-pill i {
+    color: #00f2fe;
+}
+
+.top-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.theme-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    border-color: var(--glow-primary);
+    box-shadow: 0 0 15px var(--hover-glow);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.theme-toggle .fa-sun {
+    display: block;
+}
+
+.theme-toggle .fa-moon {
+    display: none;
+}
+
+body.light-mode .theme-toggle .fa-sun {
+    display: none;
+}
+
+body.light-mode .theme-toggle .fa-moon {
+    display: block;
+}
+
+/* ========================================================
+   CONTENT 2-COLUMN GRID LAYOUT
+======================================================== */
+.card-content-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    min-height: 540px;
+    position: relative;
+    z-index: 15;
+}

@@ -1,89 +1,129 @@
-@media (max-width: 850px) {
+/* ========================================================
+   RESPONSIVE DESIGN (GUNS.LOL ADAPTIVE MOBILE LAYOUT)
+======================================================== */
+@media (max-width: 860px) {
+    body {
+        padding: 0.8rem 0.5rem;
+    }
+
+    .card-wrapper {
+        margin: 10px auto;
+    }
+
     .card-container {
-        flex-direction: column;
-        height: auto;
-        width: 96%;
-        border-radius: 36px; /* giảm từ 48px xuống 36px */
+        border-radius: 28px;
+        min-height: auto;
     }
-    .rgb-flow, .rgb-flow.reverse {
-        border-radius: 36px;
+
+    .card-content-grid {
+        grid-template-columns: 1fr;
     }
+
     .col-left {
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 30px 20px;
+        padding: 24px 18px;
     }
-    .avatar-zone { width: 160px; height: 160px; }
-    .gradient-glitch { font-size: 30px; }
-    .badge-live { min-width: 140px; padding: 6px 18px; font-size: 12px; }
-    .col-right { padding: 24px 20px; gap: 20px; }
-    .flip-unit { width: 48px; }
-    .flip-unit span { font-size: 26px; }
-    .flip-sep { font-size: 26px; }
-    .waifu-name { font-size: 14px; }
-    .music-panel { padding: 20px; }
-    #frequency-vis { width: 50px; height: 30px; }
-    .track-title { font-size: 14px; }
-    .player-controls { gap: 18px; }
-    .play-circle { width: 44px; height: 44px; font-size: 18px; }
-    .volume-dock input { width: 65px; }
-    .social-icon { width: 46px; height: 46px; font-size: 22px; }
-    .theme-toggle-container { top: 15px; right: 15px; }
 
-    /* Điều chỉnh border-radius cho các panel */
-    .countdown-panel, .waifu-panel, .music-panel {
-        border-radius: 28px; /* giảm từ 32px xuống 28px */
+    .avatar-zone {
+        width: 140px;
+        height: 140px;
     }
-    .social-icon {
-        border-radius: 18px; /* giảm từ 20px xuống 18px */
+
+    .gradient-glitch {
+        font-size: 26px;
     }
-    
-    /* FIX LAG MOIBLE: Tắt bớt hiệu ứng nặng */
-    .rgb-flow, .rgb-flow.reverse {
+
+    .col-right {
+        padding: 20px 16px;
+        max-height: none;
+        overflow-y: visible;
+        gap: 14px;
+    }
+
+    .card-top-bar {
+        padding: 12px 16px;
+    }
+
+    .status-pill {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+
+    .flip-unit span {
+        font-size: 22px;
+    }
+
+    .flip-sep {
+        font-size: 18px;
+    }
+
+    /* Tối ưu hiệu năng trên mobile */
+    .cosmic-whirl, .cosmic-whirl.secondary {
         display: none !important;
     }
-    .cosmic-whirl, .cosmic-whirl.secondary, .nebula {
-        display: none !important;
-        animation: none !important;
-    }
-    .card-container {
-        animation: none !important;
-    }
+
     .card-wrapper {
         perspective: none !important;
-        transform-style: flat !important;
-    }
-    .halo-rotate, .halo-rotate.outer, .ripple-ground {
-        display: none !important;
     }
 }
 
 @media (max-width: 480px) {
     .card-container {
-        border-radius: 30px; /* giảm thêm cho mobile nhỏ */
+        border-radius: 22px;
     }
-    .rgb-flow, .rgb-flow.reverse {
-        border-radius: 30px;
-    }
-    .avatar-zone { width: 140px; height: 140px; }
-    .gradient-glitch { font-size: 26px; }
-    .badge-live { min-width: 120px; font-size: 11px; padding: 5px 14px; }
-    .flip-unit { width: 40px; }
-    .flip-unit span { font-size: 22px; }
-    .flip-unit small { font-size: 8px; }
-    .flip-sep { font-size: 22px; margin-top: -8px; }
-    .col-right { padding: 18px 14px; }
-    .waifu-name { font-size: 13px; }
-    .volume-dock input { width: 55px; }
-    .social-icon { width: 42px; height: 42px; font-size: 20px; }
-    .glitch-text { font-size: 16px !important; letter-spacing: 4px !important; }
-    .tap-pulse { font-size: 11px; padding: 6px 14px; }
 
-    /* Điều chỉnh border-radius cho các panel */
-    .countdown-panel, .waifu-panel, .music-panel {
-        border-radius: 24px;
+    .avatar-zone {
+        width: 125px;
+        height: 125px;
     }
+
+    .gradient-glitch {
+        font-size: 23px;
+    }
+
+    .social-panel {
+        gap: 8px;
+    }
+
     .social-icon {
-        border-radius: 16px;
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .player-controls {
+        gap: 8px;
+    }
+
+    .play-circle {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .volume-dock input {
+        width: 50px;
+    }
+
+    .glitch-text {
+        font-size: 22px !important;
+        letter-spacing: 6px !important;
+    }
+
+    .tap-pulse {
+        font-size: 11px !important;
+        padding: 10px 18px !important;
+        letter-spacing: 1px !important;
+    }
+
+    .flip-unit span {
+        font-size: 18px;
+        padding: 4px 2px;
+    }
+
+    .flip-unit small {
+        font-size: 8px;
     }
 }

@@ -1,67 +1,92 @@
-# 🌌 COSMIC PROFILE CARD 3.0
+# 🌌 MAHIKARI · GUNS.LOL COSMIC BIOLINK CARD
 
-Một trang cá nhân (Profile Card) hiện đại, tương tác cao với thiết kế Glassmorphism sống động và các hiệu ứng không gian (vũ trụ, sao rơi, mây tinh vân). Dự án được thiết kế có thể dễ dàng cá nhân hóa và tối ưu chạy mượt mà trên cả máy tính lẫn thiết bị di động.
+Một trang cá nhân (Biolink / Profile Card) hiện đại mang phong cách **guns.lol** kết hợp giao diện vũ trụ (Cosmic Theme) với Glassmorphism siêu mượt, tương tác đỉnh cao dành cho **Mahikari**.
 
-🔗 **Live Demo:** [https://profilecard-azure.vercel.app/](https://profilecard-azure.vercel.app/)
+🔗 **Live Deployment (Vercel):** [https://profilecard-azure.vercel.app/](https://profilecard-azure.vercel.app/)
+
+---
 
 ## 🌟 Chức năng nổi bật
 
-*   **Hiệu ứng Không gian Đa tầng:** Canvas nền sao rơi, mây tinh vân và dải ngân hà cuộn xoáy mượt mà.
-*   **Chế độ Sáng/Tối (Light/Dark Mode):** Chuyển đổi linh hoạt giữa giao diện "Sâu thẳm huyền bí" và "Rực rỡ sắc màu" dạng lưới Gradient (Animated Mesh).
-*   **Audio Reactive (Tương tác Âm nhạc):** Khi nhạc phát, thẻ Profile và Avatar sẽ nhịp theo từng tiếng Bass / nhịp điệu của bài hát cực sống động.
-*   **Hiệu ứng Tương tác (Interactive):** 
-    *   Thẻ Card xoay 3D (Tilt) khi rê chuột (chỉ bật trên Desktop để tối ưu hiệu năng).
-    *   Hạt pháo bông (Particles) nổ lấp lánh khi click phím chuột vào bất kì đâu.
-    *   Bắn tim tung tóe khi click trực tiếp vào Avatar.
-*   **Đếm ngược (Countdown):** Đồng hồ (Flip clock) nâng cao đếm ngược tự động tới 10H tối Thứ Sáu hàng tuần và tự động hiển thị "ĐÃ RA TẬP MỚI".
-*   **Bộ sưu tập Waifu (Danh sách yêu thích):** Bảng xếp hạng các nhân vật yêu thích, kèm thanh thân mật (Affection Bar) mượt mà có hiệu ứng di chuột.
-*   **Tối ưu chuẩn Mobile:** Tự động tắt bớt hiệu ứng 3D siêu nặng khi xem trên điện thoại, đảm bảo FPS luôn cao và không nóng máy.
-
-## 🚀 Hướng dẫn Cài đặt & Sử dụng
-
-Profile Card này thuần **HTML, CSS, và Vanilla JavaScript**. Không yêu cầu cài đặt framework phức tạp nào.
-
-1.  **Chạy dự án:**
-    Bạn chỉ cần mở trực tiếp file `index.html` trong bất kỳ trình duyệt web hiện đại nào (Chrome, Firefox, Safari, Edge...). Ngay lập tức trang web sẽ hoạt động. Mọi tài nguyên đều đã được thiết lập sẵn thư mục.
-
-2.  **Cách tùy chỉnh (Config):**
-    Tất cả dữ liệu chính đều được quản lý tập trung ở file `js/config.js`. Bạn mở file này ra để chỉnh sửa thông tin cá nhân của riêng mình cho dễ:
-    *   **Tên & Avatar:** Sửa đổi mẩu `avatars` gốc (nhớ đưa ảnh của bạn vào thư mục `assets/`) và `pageName`.
-    *   **Danh sách Nhạc (Music Playlist):** Thêm tên và đường dẫn file MP3 yêu thích vào mảng `music.playlist`.
-    *   **Mạng xã hội:** Thay link trực tiếp trong khối `social`.
-
-## 📁 Cấu trúc Thư mục
-
-```text
-├── assets/                  # Nơi lưu trữ hình ảnh avatar, icon, file nhạc MP3...
-├── css/
-│   ├── style-base.css       # File gốc định dạng biến (Colors, Light/Dark theme), Typography.
-│   ├── style-backgrounds.css# Style quy định toàn bộ hệ thống lớp nến (Stars, Nebula).
-│   ├── style-card.css       # Style cho khung hiển thị 3D chính (Glassmorphism card).
-│   ├── style-left.css       # Style cột trái: Avatar, Tên, Logo MXH.
-│   ├── style-right.css      # Style cột phải: Countdown, Bảng xếp hạng, Trình phát nhạc.
-│   └── style-responsive.css # Style Responsive tinh chỉnh dành riêng cho Mobile/Tablet.
-├── js/
-│   ├── config.js            # Nơi lưu toàn bộ dữ liệu cấu hình dự án của bạn !!!
-│   ├── avatar.js            # Xử lý xoay, đổi avatar ngẫu nhiên và hiệu ứng nổ tim.
-│   ├── countdown.js         # Logic tính toán lật đồng hồ đếm ngược.
-│   ├── darkmode.js          # Tính năng chuyển đổi Light/Dark Mode ghi nhớ localStorage.
-│   ├── music.js             # Trình phát nhạc, Audio Context và Audio Reactive logic.
-│   ├── spark.js             # Hiệu ứng hạt lấp lánh bay ngẫu nhiên và khi click chuột.
-│   ├── stars.js             # Vẽ nền Background sao rơi (Canvas).
-│   ├── tilt.js              # Nghiêng thẻ Card 3D theo con trỏ chuột.
-│   ├── reveal.js            # Hiệu ứng hiển thị mượt mà.
-│   ├── ripple.js            # Hiệu ứng sóng lan tỏa.
-│   ├── parallax.js          # Lớp cuộn Parallax (nếu có).
-│   └── social.js            # Chức năng điều hướng nút mở mxh.
-└── index.html               # File Giao diện chính nối mọi thành phần.
-```
-
-## 🛠️ Công nghệ sử dụng
-*   HTML5 & CSS3 (Flexbox/Grid, Animations, Variables mạnh mẽ)
-*   Vanilla JavaScript (Canvas API, Web Audio API, DOM Manipulation)
-*   Font Awesome (v6.4.0) cho Icons
-*   Google Fonts (Inter)
+*   **Giao diện guns.lol Signature:** 
+    *   Màn hình chờ ấn tượng `[ CLICK ANYWHERE TO ENTER ]` tự động kích hoạt âm nhạc và hiệu ứng.
+    *   Card kính mờ (Frosted Glassmorphism) với viền RGB động và đổ bóng ánh sáng Neon.
+    *   Header banner theo từng waifu (#1 Shiina Mahiru, #2 Kaguya, #3 Yachiyo Runami, #4 Elfaria Albis Serfort).
+*   **Hồ sơ & Danh hiệu Mahikari:**
+    *   Tên hiển thị Gradient Glitch + Huy hiệu Verified & Vương miện VIP.
+    *   Huy hiệu vai trò Typewriter luân phiên: `Wibu Chúa 👑`, `Developer 💻`, `Gacha Player 🎲`, `Music Lover 🎵`, `Cosmic Voyager ✨`.
+    *   Khung trích dẫn anime tương tác với nút đổi quote ngẫu nhiên.
+*   **Discord Rich Presence Widget (Đặc trưng guns.lol):**
+    *   Hiển thị trạng thái Discord hoạt động: Avatar, Tag, Trạng thái hoạt động (*Playing Genshin Impact · Exploring Teyvat · AR 60*) và thời gian chơi (Elapsed time) trực tiếp.
+*   **Trình phát nhạc tích hợp (Embedded Music Player):**
+    *   Đĩa than Vinyl xoay theo điệu nhạc, Marquee cuộn tên bài hát & nghệ sĩ.
+    *   Live Audio Visualizer đa tầng (Web Audio API) vẽ trực tiếp trên Canvas.
+    *   Thanh tiến trình kéo/thả tương tác (Seek bar) có hiển thị mốc thời gian xem trước (Tooltip).
+    *   Trình chọn danh sách phát (Playlist Selector) nhanh với 5 bài hát chất lượng cao.
+    *   Thanh chỉnh âm lượng (Volume Slider) kèm nút tắt/mở tiếng nhanh.
+*   **Bộ sưu tập Waifu (Waifu Collection):**
+    *   Bảng xếp hạng:
+        *   **#1 Shiina Mahiru** (100%)
+        *   **#2 Kaguya** (96%)
+        *   **#3 Yachiyo Runami** (93%)
+        *   **#4 Elfaria Albis Serfort** (90%)
+        *   **#5 Kagari Fuyukawa** (87%)
+        *   **#6 Hiura Mihate** (84%)
+    *   **Tương tác Click-to-Equip:** Click vào bất kỳ nhân vật nào để lập tức trang bị avatar và banner tương ứng lên Profile!
+*   **Đồng hồ & Thống kê thời gian thực:**
+    *   Đồng hồ số trực tiếp theo múi giờ Việt Nam (GMT+7).
+    *   Bộ đếm lượt xem hồ sơ (Profile Views counter).
+    *   Đồng hồ đếm ngược (Flip clock) tập phim Anime mới vào 22:00 Thứ Sáu hàng tuần.
+*   **Hiệu ứng Tương tác & Nền:**
+    *   Nền vũ trụ sao băng và tinh vân đa tầng chuyển động liên tục.
+    *   Hiệu ứng vệt trỏ chuột (Mouse Cursor Trails) và chùm tim nổ tung (Heart Burst) khi tương tác với Avatar.
+    *   Card nghiêng 3D (Tilt) mượt mà theo chuyển động chuột trên Desktop.
+    *   Tối ưu hóa 60FPS cho thiết bị di động (iPhone / Android).
 
 ---
-*Được tinh chỉnh cho một trải nghiệm lướt Web cá nhân không nhàm chán!* 🎨✨
+
+## 🚀 Cấu trúc dự án
+
+```text
+├── assets/                  # Hình ảnh avatar, banner waifu, file nhạc MP3...
+│   ├── avatar.png ... avatar6.png
+│   ├── bannertop1.jpg ... bannertop4.jpg
+│   ├── e148d7f5abc12c955643ad28e49680f2.jpg (Elfaria)
+│   └── song1.mp3 ... song5.mp3
+├── css/
+│   ├── style-base.css       # Biến màu, guns.lol overlay, typography
+│   ├── style-backgrounds.css# Nền sao canvas, tinh vân nebula
+│   ├── style-card.css       # Khung card kính mờ, top bar, RGB viền
+│   ├── style-left.css       # Cột trái: Avatar, Tên, Typewriter, Bio, Social
+│   ├── style-right.css      # Cột phải: Discord widget, Music player, Waifu, Countdown
+│   └── style-responsive.css # Responsive hoàn hảo cho Mobile & Tablet
+├── js/
+│   ├── config.js            # Cấu hình toàn bộ thông tin Mahikari, waifus, playlist
+│   ├── avatar.js            # Logic đổi avatar, nổ tim, favicon động
+│   ├── countdown.js         # Logic đếm ngược Thứ Sáu 22:00
+│   ├── darkmode.js          # Chuyển đổi Dark/Light mode
+│   ├── features.js          # Overlay enter, Discord timer, VN clock, views, waifu equip
+│   ├── music.js             # Trình phát nhạc Web Audio API & Visualizer
+│   ├── spark.js             # Hiệu ứng nổ tia sáng
+│   ├── stars.js             # Nền sao động
+│   ├── tilt.js              # Nghiêng 3D
+│   ├── typewriter.js        # Chữ chạy máy đánh chữ
+│   ├── reveal.js            # Hiệu ứng xuất hiện
+│   ├── ripple.js            # Sóng lan tỏa
+│   ├── parallax.js          # Parallax nền
+│   └── social.js            # Điều hướng link mạng xã hội
+├── vercel.json              # Cấu hình cache và bảo mật cho Vercel
+├── README.md
+└── index.html
+```
+
+---
+
+## 🛠️ Công nghệ sử dụng
+*   HTML5 & CSS3 (Modern Glassmorphism, CSS Grid, Flexbox, Keyframes)
+*   Vanilla JavaScript (Web Audio API, Canvas 2D, LocalStorage, IntersectionObserver)
+*   Font Awesome 6.5.1
+*   Google Fonts (Inter, Outfit, Fira Code)
+
+---
+*Created with ❤️ for Mahikari* 🌌

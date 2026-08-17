@@ -1,65 +1,120 @@
-/* ===== AVATAR ===== */
-const avatar = document.getElementById('char-avatar');
+/* ========================================================
+   MAHIKARI AVATAR MODULE (GUNS.LOL STYLE)
+======================================================== */
+const avatarImg = document.getElementById('char-avatar');
+const avatarDotsContainer = document.getElementById('avatar-dots');
+const discordAvatarImg = document.getElementById('discord-avatar-img');
+const playerAlbumArt = document.getElementById('player-album-art');
+
 let currentAvatarIndex = 0;
-let rotationInterval;
-let isForced = false;
-let avatarAnim = false;
+let rotationTimer = null;
+let isForcedAvatar = false;
+let isAvatarAnimating = false;
+
+function initAvatarDots() {
+    if (!avatarDotsContainer || !CONFIG.avatars) return;
+    avatarDotsContainer.innerHTML = '';
+    CONFIG.avatars.forEach((_, idx) => {
+        const dot = document.createElement('span');
+        dot.className = `dot ${idx === currentAvatarIndex ? 'active' : ''}`;
+        dot.dataset.index = idx;
+        dot.addEventListener('click', () => {
+            setAvatar(idx);
+            isForcedAvatar = true;
+            setTimeout(() => { isForcedAvatar = false; }, 4000);
+        });
+        avatarDotsContainer.appendChild(dot);
+    });
+}
+
+function setAvatar(index) {
+    if (!avatarImg || !CONFIG.avatars || CONFIG.avatars.length === 0) return;
+    
+    currentAvatarIndex = ((index % CONFIG.avatars.length) + CONFIG.avatars.length) % CONFIG.avatars.length;
+    const targetSrc = CONFIG.avatars[currentAvatarIndex];
+    
+    avatarImg.src = targetSrc;
+    if (discordAvatarImg) discordAvatarImg.src = targetSrc;
+    if (playerAlbumArt) playerAlbumArt.src = targetSrc;
+
+    // Cập nhật dots selector
+    if (avatarDotsContainer) {
+        const dots = avatarDotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === currentAvatarIndex);
+        });
+    }
+
+    // Cập nhật waifu active state trong collection nếu có
+    const waifuItems = document.querySelectorAll('.waifu-item');
+    waifuItems.forEach((item) => {
+        const waifuImg = item.querySelector('.waifu-thumb');
+        if (waifuImg) {
+            const isMatch = waifuImg.getAttribute('src') === targetSrc;
+            item.classList.toggle('active-equipped', isMatch);
+        }
+    });
+
+    updateFavicon(targetSrc);
+    updateTitle();
+}
 
 function startAvatarRotation() {
-    if (!avatar) return;
-    if (rotationInterval) clearInterval(rotationInterval);
-    rotationInterval = setInterval(() => {
-        if (!isForced) {
-            currentAvatarIndex = (currentAvatarIndex + 1) % CONFIG.avatars.length;
-            avatar.src = CONFIG.avatars[currentAvatarIndex];
+    if (!avatarImg || !CONFIG.intervals.avatarRotation) return;
+    if (rotationTimer) clearInterval(rotationTimer);
+    rotationTimer = setInterval(() => {
+        if (!isForcedAvatar && !isAvatarAnimating) {
+            setAvatar((currentAvatarIndex + 1) % CONFIG.avatars.length);
         }
     }, CONFIG.intervals.avatarRotation);
 }
-startAvatarRotation();
 
-function handleAvatar(e) {
-    if (!avatar || avatarAnim) return;
-    avatarAnim = true;
-    isForced = true;
+function handleAvatarClick(e) {
+    if (!avatarImg || isAvatarAnimating) return;
+    isAvatarAnimating = true;
+    isForcedAvatar = true;
 
-    let randomIndex;
+    // Chọn avatar ngẫu nhiên khác avatar hiện tại
+    let nextIndex;
     do {
-        randomIndex = Math.floor(Math.random() * CONFIG.avatars.length);
-    } while (randomIndex === currentAvatarIndex && CONFIG.avatars.length > 1);
-    avatar.src = CONFIG.avatars[randomIndex];
-    avatar.classList.add('active-touch');
+        nextIndex = Math.floor(Math.random() * CONFIG.avatars.length);
+    } while (nextIndex === currentAvatarIndex && CONFIG.avatars.length > 1);
 
-    let x, y;
-    if (e.type === 'touchstart') {
-        e.preventDefault();
-        x = e.touches[0].clientX;
-        y = e.touches[0].clientY;
-    } else {
-        x = e.clientX;
-        y = e.clientY;
+    setAvatar(nextIndex);
+    avatarImg.classList.add('active-touch');
+
+    // Tạo hiệu ứng chùm tim bay
+    let clientX = e.clientX;
+    let clientY = e.clientY;
+    if (e.type === 'touchstart' && e.touches && e.touches[0]) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
     }
-    for (let i = 0; i < 18; i++) {
-        heartBurst(x + (Math.random()*60-30), y + (Math.random()*60-30));
+
+    if (!clientX || !clientY) {
+        const rect = avatarImg.getBoundingClientRect();
+        clientX = rect.left + rect.width / 2;
+        clientY = rect.top + rect.height / 2;
+    }
+
+    for (let i = 0; i < 16; i++) {
+        createHeartBurst(clientX + (Math.random() * 50 - 25), clientY + (Math.random() * 50 - 25));
     }
 
     setTimeout(() => {
-        avatar.src = CONFIG.avatars[currentAvatarIndex];
-        avatar.classList.remove('active-touch');
-        isForced = false;
-        avatarAnim = false;
+        avatarImg.classList.remove('active-touch');
+        isForcedAvatar = false;
+        isAvatarAnimating = false;
     }, 2000);
 }
-if (avatar) {
-    avatar.addEventListener('touchstart', handleAvatar, { passive: false });
-    avatar.addEventListener('click', handleAvatar);
-}
 
-function heartBurst(x, y) {
+function createHeartBurst(x, y) {
     const heart = document.createElement('div');
-    heart.innerHTML = ['❤️','💖','💘','💗','💕'][Math.floor(Math.random()*5)];
+    const icons = ['❤️', '💖', '💘', '💗', '💕', '✨'];
+    heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
     heart.className = 'heart-pop';
-    const rx = (Math.random() * 180 - 90);
-    const ry = (Math.random() * 180 - 90);
+    const rx = (Math.random() * 160 - 80);
+    const ry = (Math.random() * 160 - 80);
     heart.style.left = x + 'px';
     heart.style.top = y + 'px';
     heart.style.setProperty('--x', rx + 'px');
@@ -68,42 +123,30 @@ function heartBurst(x, y) {
     setTimeout(() => heart.remove(), 1200);
 }
 
-/* ===== FAVICON ĐỘNG ===== */
-if (CONFIG.favicon.enabled) {
-    function updateFavicon(src) {
-        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+function updateFavicon(src) {
+    if (!CONFIG.favicon || !CONFIG.favicon.enabled) return;
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+        link = document.createElement('link');
         link.type = 'image/png';
         link.rel = 'icon';
-        link.href = src;
-        if (!link.parentNode) document.head.appendChild(link);
+        document.head.appendChild(link);
     }
-
-    function updateTitle(src) {
-        const fileName = src.split('/').pop().split('.')[0];
-        let displayName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
-        displayName = displayName.replace(/(\d+)/g, ' $1');
-        document.title = `${CONFIG.pageName} · ${displayName}`;
-    }
-
-    const avatarElement = document.getElementById('char-avatar');
-    if (avatarElement) {
-        updateFavicon(avatarElement.src);
-        updateTitle(avatarElement.src);
-
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
-                    updateFavicon(avatarElement.src);
-                    updateTitle(avatarElement.src);
-                }
-            });
-        });
-        observer.observe(avatarElement, { attributes: true, attributeFilter: ['src'] });
-    }
-} else {
-    let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-    link.type = 'image/png';
-    link.rel = 'icon';
-    link.href = CONFIG.favicon.fallback;
-    if (!link.parentNode) document.head.appendChild(link);
+    link.href = src;
 }
+
+function updateTitle() {
+    document.title = `${CONFIG.name} · guns.lol biolink`;
+}
+
+if (avatarImg) {
+    avatarImg.addEventListener('click', handleAvatarClick);
+    avatarImg.addEventListener('touchstart', (e) => {
+        handleAvatarClick(e);
+    }, { passive: true });
+}
+
+// Khởi động
+initAvatarDots();
+setAvatar(0);
+startAvatarRotation();

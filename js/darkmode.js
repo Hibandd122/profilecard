@@ -1,17 +1,22 @@
-// Dark mode toggle
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
+/* ========================================================
+   THEME TOGGLE ENGINE (DARK / LIGHT MODE)
+======================================================== */
+const themeToggleBtn = document.getElementById('themeToggle');
+const rootBody = document.body;
 
-// Kiểm tra localStorage và hệ thống
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    body.classList.toggle('dark-mode', savedTheme === 'dark');
+// Đọc theme từ localStorage (mặc định Dark cho guns.lol style)
+const savedTheme = localStorage.getItem('mahikari_theme');
+if (savedTheme === 'light') {
+    rootBody.classList.add('light-mode');
 } else {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    body.classList.toggle('dark-mode', prefersDark);
+    rootBody.classList.remove('light-mode');
 }
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-});
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        rootBody.classList.toggle('light-mode');
+        const isLight = rootBody.classList.contains('light-mode');
+        localStorage.setItem('mahikari_theme', isLight ? 'light' : 'dark');
+    });
+}
