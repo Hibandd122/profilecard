@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Mahikari · guns.lol biolink</title>
     <meta name="description" content="Mahikari's official guns.lol style cosmic biolink card. Music player, waifu collection, and interactive cosmic aesthetic.">
-    <link rel="icon" type="image/png" href="assets/avatar.png">
+    <link rel="icon" type="image/png" href="assets/avatar2.png">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,14 +48,17 @@
     <div class="cosmic-whirl"></div>
     <div class="cosmic-whirl secondary"></div>
 
-    <!-- MAIN GUNS.LOL BIOLINK CARD -->
-    <div class="card-wrapper" id="card-tilt">
+    <!-- MAIN GUNS.LOL BIOLINK CARD (NO TILT) -->
+    <div class="card-wrapper">
         <div class="card-container" id="main-card">
+            <!-- Full-card Dynamic Background Banner (Banner đằng sau) -->
+            <div class="card-bg-banner" id="card-bg-banner"></div>
+
             <!-- Animated Glowing Neon Borders -->
             <span class="rgb-flow"></span>
             <span class="rgb-flow reverse"></span>
 
-            <!-- TOP BANNER (GUNS.LOL SIGNATURE) -->
+            <!-- Top Header Banner Bar -->
             <div class="card-banner" id="card-banner"></div>
 
             <!-- TOP STATUS BAR -->
@@ -83,7 +86,7 @@
                         <div class="ripple-ground"><span></span><span></span><span></span></div>
                         <div class="halo-rotate"></div>
                         <div class="halo-rotate outer"></div>
-                        <img src="assets/avatar.png" alt="Mahikari Avatar" class="avatar-img" id="char-avatar" title="Click để bắn tim & đổi avatar!">
+                        <img src="assets/avatar2.png" alt="Mahikari Avatar" class="avatar-img" id="char-avatar" title="Click để bắn tim & đổi avatar!">
                         <div class="avatar-status-badge online" title="Status: Online in Cosmos"></div>
                     </div>
 
@@ -143,7 +146,7 @@
                         <div class="discord-header">
                             <div class="discord-user-info">
                                 <div class="discord-avatar-wrap">
-                                    <img src="assets/avatar.png" alt="Discord Avatar" class="discord-avatar" id="discord-avatar-img">
+                                    <img src="assets/avatar2.png" alt="Discord Avatar" class="discord-avatar" id="discord-avatar-img">
                                     <span class="discord-status-dot dnd"></span>
                                 </div>
                                 <div class="discord-user-meta">
@@ -175,7 +178,7 @@
                         <div class="player-top-row">
                             <div class="vinyl-disc-wrap" id="vinyl-disc">
                                 <div class="vinyl-disc">
-                                    <img src="assets/avatar.png" alt="Album Art" id="player-album-art">
+                                    <img src="assets/avatar2.png" alt="Album Art" id="player-album-art">
                                 </div>
                             </div>
                             
@@ -264,7 +267,6 @@
     <script src="js/typewriter.js"></script>
     <script src="js/features.js"></script>
     <script src="js/countdown.js"></script>
-    <script src="js/tilt.js"></script>
     <script src="js/social.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/reveal.js"></script>

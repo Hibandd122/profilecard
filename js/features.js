@@ -42,14 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. WAIFU COLLECTION GENERATOR & EQUIP INTERACTION
     const waifuGrid = document.getElementById('waifu-grid');
-    const cardBanner = document.getElementById('card-banner');
 
     if (waifuGrid && CONFIG.waifu && CONFIG.waifu.list) {
         waifuGrid.innerHTML = '';
         CONFIG.waifu.list.forEach((waifu, idx) => {
             const item = document.createElement('div');
             item.className = `waifu-item rank-${waifu.rank} ${idx === 0 ? 'active-equipped' : ''}`;
-            item.title = `Click để trang bị avatar ${waifu.name}`;
+            item.title = `Click để trang bị avatar & banner ${waifu.name}`;
             
             item.innerHTML = `
                 <img src="${waifu.image}" alt="${waifu.name}" class="waifu-thumb">
@@ -68,21 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             item.addEventListener('click', () => {
                 if (typeof setAvatar === 'function') {
-                    const avatarIdx = CONFIG.avatars.findIndex(a => a === waifu.image);
-                    if (avatarIdx !== -1) {
-                        setAvatar(avatarIdx);
-                    } else {
-                        setAvatar(idx);
-                    }
+                    setAvatar(idx);
                 }
-                
-                // Cập nhật banner nếu waifu có banner riêng
-                if (cardBanner && waifu.banner) {
-                    cardBanner.style.backgroundImage = `url('${waifu.banner}')`;
-                }
-
-                document.querySelectorAll('.waifu-item').forEach(w => w.classList.remove('active-equipped'));
-                item.classList.add('active-equipped');
             });
 
             waifuGrid.appendChild(item);

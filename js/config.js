@@ -6,22 +6,24 @@ const CONFIG = {
     tagline: "Cosmic Voyager · Developer · Anime Enthusiast",
     bio: "Exploring the endless cosmos with waifus & lo-fi beats ✨",
     
-    // Danh sách avatar xoay vòng & tương tác
+    // Danh sách avatar 6 nhân vật theo đúng thứ tự
     avatars: [
-        "assets/avatar.png",
-        "assets/avatar2.png",
-        "assets/avatar3.png",
-        "assets/avatar4.png",
-        "assets/e148d7f5abc12c955643ad28e49680f2.jpg",
-        "assets/avatar5.png"
+        "assets/avatar2.png", // #1 Shiina Mahiru
+        "assets/avatar3.png", // #2 Kaguya
+        "assets/avatar5.png", // #3 Yachiyo Runami
+        "assets/avatar4.png", // #4 Elfaria Albis Serfort
+        "assets/avatar6.png", // #5 Kagari Fuyukawa
+        "assets/avatar1.png"  // #6 Hiura Mihate
     ],
 
     // Banner mặc định và các banner theo waifu
     banners: {
         default: "assets/bannertop1.jpg",
+        mahiru: "assets/bannertop1.jpg",
         kaguya: "assets/bannertop2.png",
         yachiyo: "assets/bannertop3.png",
         elfaria: "assets/bannertop4.jpg",
+        kagari: "assets/bannertop5.jpg",
         mihate: "assets/bannertop6.jpg"
     },
 
@@ -45,7 +47,7 @@ const CONFIG = {
 
     favicon: {
         enabled: true,
-        fallback: "assets/avatar.png"
+        fallback: "assets/avatar2.png"
     },
 
     // Danh sách nhạc với 5 bài
@@ -69,19 +71,19 @@ const CONFIG = {
         nebula: true,
         cosmicWhirl: true,
         cursorTrail: true,
-        tilt3D: true
+        tilt3D: false // Tắt tilt theo yêu cầu
     },
 
     // Thời gian tính toán & chuyển đổi
     intervals: {
-        avatarRotation: 3000,
+        avatarRotation: 3500,
         typewriterSpeed: 75,
         typewriterPause: 1800,
         countdownUpdate: 1000
     },
 
     ui: {
-        enableTilt: true,
+        enableTilt: false, // Tắt tilt theo yêu cầu
         enableGlow: true,
         enableRgbBorder: true
     },
@@ -104,15 +106,15 @@ const CONFIG = {
         onlineStatus: "dnd" // 'online' | 'idle' | 'dnd'
     },
 
-    // Bộ sưu tập Waifu (Xếp hạng với Elfaria Albis Serfort Top 4)
+    // Bộ sưu tập Waifu (Xếp hạng với 6 nhân vật, avatar và 6 banner tương ứng)
     waifu: {
         list: [
-            { id: 1, name: "Shiina Mahiru", title: "The Angel Next Door", icon: "fa-feather-alt", color: "#fbbf24", rank: 1, affection: 100, image: "assets/avatar2.png", banner: "assets/bannertop1.jpg" },
-            { id: 2, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar3.png", banner: "assets/bannertop2.png" },
-            { id: 3, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar4.png", banner: "assets/bannertop3.png" },
-            { id: 4, name: "Elfaria Albis Serfort", title: "Ice Magia Vende", icon: "fa-snowflake", color: "#38bdf8", rank: 4, affection: 90, image: "assets/e148d7f5abc12c955643ad28e49680f2.jpg", banner: "assets/bannertop4.jpg" },
-            { id: 5, name: "Kagari Fuyukawa", title: "Neko Champion", icon: "fa-cat", color: "#f97316", rank: 5, affection: 87, image: "assets/avatar5.png", banner: "assets/bannertop1.jpg" },
-            { id: 0, name: "Hiura Mihate", title: "Sweet Heart", icon: "fa-heart", color: "#ec4899", rank: 6, affection: 84, image: "assets/avatar.png", banner: "assets/bannertop6.jpg" }
+            { id: 0, name: "Shiina Mahiru", title: "The Angel Next Door", icon: "fa-feather-alt", color: "#fbbf24", rank: 1, affection: 100, image: "assets/avatar2.png", banner: "assets/bannertop1.jpg" },
+            { id: 1, name: "Kaguya", title: "Love is War", icon: "fa-moon", color: "#f0e68c", rank: 2, affection: 96, image: "assets/avatar3.png", banner: "assets/bannertop2.png" },
+            { id: 2, name: "Yachiyo Runami", title: "Cosmic Maiden", icon: "fa-star", color: "#60a5fa", rank: 3, affection: 93, image: "assets/avatar5.png", banner: "assets/bannertop3.png" },
+            { id: 3, name: "Elfaria Albis Serfort", title: "Ice Magia Vende", icon: "fa-snowflake", color: "#38bdf8", rank: 4, affection: 90, image: "assets/avatar4.png", banner: "assets/bannertop4.jpg" },
+            { id: 4, name: "Kagari Fuyukawa", title: "Neko Champion", icon: "fa-cat", color: "#f97316", rank: 5, affection: 87, image: "assets/avatar6.png", banner: "assets/bannertop5.jpg" },
+            { id: 5, name: "Hiura Mihate", title: "Sweet Heart", icon: "fa-heart", color: "#ec4899", rank: 6, affection: 84, image: "assets/avatar1.png", banner: "assets/bannertop6.jpg" }
         ]
     }
 };
@@ -129,5 +131,5 @@ if (!CONFIG.music.playlist || CONFIG.music.playlist.length === 0) {
 }
 
 if (!CONFIG.avatars || CONFIG.avatars.length === 0) {
-    CONFIG.avatars = ["assets/avatar.png"];
+    CONFIG.avatars = ["assets/avatar2.png"];
 }

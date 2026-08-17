@@ -45,14 +45,19 @@ function setAvatar(index) {
         });
     }
 
-    // Cập nhật waifu active state trong collection nếu có
+    // Cập nhật banner trên & banner nền theo waifu
+    const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentAvatarIndex] : null;
+    if (waifu && waifu.banner) {
+        const cardBanner = document.getElementById('card-banner');
+        const cardBgBanner = document.getElementById('card-bg-banner');
+        if (cardBanner) cardBanner.style.backgroundImage = `url('${waifu.banner}')`;
+        if (cardBgBanner) cardBgBanner.style.backgroundImage = `url('${waifu.banner}')`;
+    }
+
+    // Cập nhật waifu active state trong collection
     const waifuItems = document.querySelectorAll('.waifu-item');
-    waifuItems.forEach((item) => {
-        const waifuImg = item.querySelector('.waifu-thumb');
-        if (waifuImg) {
-            const isMatch = waifuImg.getAttribute('src') === targetSrc;
-            item.classList.toggle('active-equipped', isMatch);
-        }
+    waifuItems.forEach((item, idx) => {
+        item.classList.toggle('active-equipped', idx === currentAvatarIndex);
     });
 
     updateFavicon(targetSrc);
