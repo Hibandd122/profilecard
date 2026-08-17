@@ -364,11 +364,21 @@ body.light-mode .col-left {
     box-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
 }
 
+.social-icon.tt i {
+    filter: drop-shadow(-1.5px -1.5px 0px #25f4ee) drop-shadow(1.5px 1.5px 0px #fe2c55);
+    transition: all 0.3s ease;
+}
+
 .social-icon.tt:hover {
-    background: rgba(236, 72, 153, 0.25);
-    border-color: #ec4899;
-    color: #ec4899;
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+    background: linear-gradient(135deg, rgba(37, 244, 238, 0.2) 0%, rgba(254, 44, 85, 0.3) 100%);
+    border-color: #fe2c55;
+    color: #ffffff;
+    box-shadow: 0 0 22px rgba(254, 44, 85, 0.65), 0 0 12px rgba(37, 244, 238, 0.45);
+}
+
+.social-icon.tt:hover i {
+    filter: drop-shadow(-2.5px -2px 0px #25f4ee) drop-shadow(2.5px 2px 0px #fe2c55);
+    transform: scale(1.15);
 }
 
 .social-icon.discord:hover {
