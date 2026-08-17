@@ -1,15 +1,17 @@
 /* ========================================================
-   MAHIKARI AVATAR & ULTRA-SMOOTH PRE-CACHED BANNER ENGINE
+   MAHIKARI AVATAR & WAIFU BANNER ENGINE (MANUAL EQUIP MODE)
 ======================================================== */
 let avatarImg = null;
 let avatarDotsContainer = null;
 let discordAvatarImg = null;
 let playerAlbumArt = null;
 
-let currentAvatarIndex = 0;
+let currentAvatarIndex = parseInt(localStorage.getItem('saved_waifu_index') || '0', 10);
+if (isNaN(currentAvatarIndex) || currentAvatarIndex < 0 || (CONFIG.avatars && currentAvatarIndex >= CONFIG.avatars.length)) {
+    currentAvatarIndex = 0;
+}
+
 let isAvatarAnimating = false;
-let isForcedAvatar = false;
-let rotationTimer = null;
 
 // Preload toàn bộ Avatar và Banner vào RAM/GPU
 function preloadAllAssets() {
@@ -54,8 +56,6 @@ function initAvatarDots() {
         dot.dataset.index = idx;
         dot.addEventListener('click', () => {
             setAvatar(idx);
-            isForcedAvatar = true;
-            setTimeout(() => { isForcedAvatar = false; }, 6000);
         });
         avatarDotsContainer.appendChild(dot);
     });
@@ -78,22 +78,25 @@ function setAvatar(index) {
     playerAlbumArt = document.getElementById('player-album-art');
     avatarDotsContainer = document.getElementById('avatar-dots');
 
-    if (!avatarImg || !CONFIG.avatars || CONFIG.avatars.length === 0) return;
+    if (!CONFIG.avatars || CONFIG.avatars.length === 0) return;
     
     currentAvatarIndex = ((index % CONFIG.avatars.length) + CONFIG.avatars.length) % CONFIG.avatars.length;
     const targetSrc = CONFIG.avatars[currentAvatarIndex];
+    localStorage.setItem('saved_waifu_index', currentAvatarIndex);
     
     // Hiệu ứng chuyển động Avatar Pop & Fade sắc nét
-    avatarImg.style.opacity = '0.3';
-    avatarImg.style.transform = 'translateX(-50%) scale(0.92)';
-    
-    setTimeout(() => {
-        if (avatarImg) {
-            avatarImg.src = targetSrc;
-            avatarImg.style.opacity = '1';
-            avatarImg.style.transform = 'translateX(-50%) scale(1)';
-        }
-    }, 120);
+    if (avatarImg) {
+        avatarImg.style.opacity = '0.3';
+        avatarImg.style.transform = 'translateX(-50%) scale(0.92)';
+        
+        setTimeout(() => {
+            if (avatarImg) {
+                avatarImg.src = targetSrc;
+                avatarImg.style.opacity = '1';
+                avatarImg.style.transform = 'translateX(-50%) scale(1)';
+            }
+        }, 120);
+    }
 
     if (discordAvatarImg) discordAvatarImg.src = targetSrc;
     if (playerAlbumArt) playerAlbumArt.src = targetSrc;
@@ -122,29 +125,13 @@ function setAvatar(index) {
 // Gán toàn cục để các file khác gọi trực tiếp
 window.setAvatar = setAvatar;
 
-function startAvatarRotation() {
-    if (rotationTimer) clearInterval(rotationTimer);
-    const intervalTime = (CONFIG.intervals && CONFIG.intervals.avatarRotation) ? CONFIG.intervals.avatarRotation : 3500;
-    
-    rotationTimer = setInterval(() => {
-        if (!isForcedAvatar && !isAvatarAnimating) {
-            setAvatar((currentAvatarIndex + 1) % CONFIG.avatars.length);
-        }
-    }, intervalTime);
-}
-
 function handleAvatarClick(e) {
     avatarImg = document.getElementById('char-avatar');
     if (!avatarImg || isAvatarAnimating) return;
     isAvatarAnimating = true;
-    isForcedAvatar = true;
 
-    // Chọn avatar ngẫu nhiên tiếp theo
-    let nextIndex;
-    do {
-        nextIndex = Math.floor(Math.random() * CONFIG.avatars.length);
-    } while (nextIndex === currentAvatarIndex && CONFIG.avatars.length > 1);
-
+    // Chọn avatar tiếp theo khi click
+    const nextIndex = (currentAvatarIndex + 1) % CONFIG.avatars.length;
     setAvatar(nextIndex);
     avatarImg.classList.add('active-touch');
 
@@ -170,8 +157,7 @@ function handleAvatarClick(e) {
     setTimeout(() => {
         if (avatarImg) avatarImg.classList.remove('active-touch');
         isAvatarAnimating = false;
-        setTimeout(() => { isForcedAvatar = false; }, 4000);
-    }, 800);
+    }, 600);
 }
 
 function createHeartBurst(x, y) {
@@ -217,8 +203,7 @@ function initAvatarModule() {
     preloadAllAssets();
     initWaifuBanners();
     initAvatarDots();
-    setAvatar(0);
-    startAvatarRotation();
+    setAvatar(currentAvatarIndex);
 }
 
 // Cập nhật khi xoay màn hình điện thoại
