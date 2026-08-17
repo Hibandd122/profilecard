@@ -70,6 +70,58 @@
     border-radius: 12px;
 }
 
+/* Category Filter Tabs */
+.music-category-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    background: rgba(8, 12, 26, 0.5);
+    padding: 4px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cat-tab {
+    flex: 1;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    font-family: 'Fira Code', monospace;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 5px 8px;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    white-space: nowrap;
+}
+
+.cat-tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.cat-tab.active {
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+    border-color: rgba(0, 242, 254, 0.5);
+    color: #ffffff;
+    box-shadow: 0 0 14px rgba(0, 242, 254, 0.3);
+}
+
+.cat-tab i {
+    font-size: 9px;
+}
+
+.cat-tab.active i {
+    color: var(--glow-primary);
+}
+
 .player-top-row {
     display: flex;
     align-items: center;
@@ -261,19 +313,32 @@
 
 .playlist-menu {
     position: absolute;
-    bottom: 40px;
-    left: -50px;
-    width: 220px;
-    background: rgba(14, 18, 36, 0.96);
-    border: 1px solid rgba(0, 242, 254, 0.3);
-    border-radius: 14px;
-    padding: 6px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    bottom: 44px;
+    left: -60px;
+    width: 260px;
+    max-height: 270px;
+    overflow-y: auto;
+    background: rgba(12, 16, 34, 0.98);
+    border: 1px solid rgba(0, 242, 254, 0.35);
+    border-radius: 16px;
+    padding: 8px 6px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.2);
     display: none;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
     z-index: 100;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 242, 254, 0.4) transparent;
+}
+
+.playlist-menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.playlist-menu::-webkit-scrollbar-thumb {
+    background: rgba(0, 242, 254, 0.4);
+    border-radius: 4px;
 }
 
 .playlist-menu.show {
@@ -283,6 +348,7 @@
 .playlist-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     padding: 6px 10px;
     border-radius: 8px;
@@ -290,9 +356,36 @@
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
-    white-space: nowrap;
+}
+
+.playlist-item-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.playlist-item-cat {
+    font-size: 8.5px;
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.playlist-item-cat.angel {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.playlist-item-cat.cpk {
+    background: rgba(0, 242, 254, 0.15);
+    color: #00f2fe;
+    border: 1px solid rgba(0, 242, 254, 0.3);
 }
 
 .playlist-item:hover, .playlist-item.active {

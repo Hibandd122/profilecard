@@ -1,5 +1,5 @@
 /* ========================================================
-   GUNS.LOL INTEGRATED MUSIC PLAYER ENGINE
+   COSMIC MUSIC PLAYER ENGINE WITH CATEGORY FILTERING
 ======================================================== */
 const audio = document.getElementById('audio-player');
 const playBtn = document.getElementById('play-pause');
@@ -8,6 +8,7 @@ const nextBtn = document.getElementById('next-track');
 const trackNameEl = document.getElementById('track-name');
 const trackArtistEl = document.getElementById('track-artist');
 const currentTrackNumEl = document.getElementById('current-track-num');
+const totalTracksNumEl = document.getElementById('total-tracks-num');
 const seekFill = document.getElementById('seek-fill');
 const seekContainer = document.getElementById('seek-container');
 const seekTip = document.getElementById('seek-tip');
@@ -21,11 +22,29 @@ const audioAlert = document.getElementById('audio-alert');
 const playlistToggleBtn = document.getElementById('playlist-toggle-btn');
 const playlistMenu = document.getElementById('playlist-menu');
 const musicPanel = document.querySelector('.music-panel');
+const categoryTabs = document.querySelectorAll('.cat-tab');
 
-const playlist = CONFIG.music.playlist;
-let currentSongIndex = parseInt(localStorage.getItem('saved_song_index') || '0', 10);
-if (isNaN(currentSongIndex) || currentSongIndex < 0 || currentSongIndex >= playlist.length) {
-    currentSongIndex = 0;
+const fullPlaylist = CONFIG.music.playlist || [];
+let currentCategory = localStorage.getItem('saved_player_category') || 'all';
+
+// Hàm lấy playlist đã lọc theo danh mục
+function getFilteredPlaylist() {
+    if (currentCategory === 'all') {
+        return fullPlaylist;
+    }
+    return fullPlaylist.filter(song => song.category === currentCategory);
+}
+
+let activePlaylist = getFilteredPlaylist();
+let currentFilteredIndex = 0;
+
+// Tìm bài hát đã lưu trước đó nếu có
+const savedSongFile = localStorage.getItem('saved_song_file');
+if (savedSongFile) {
+    const foundIdx = activePlaylist.findIndex(s => s.file === savedSongFile);
+    if (foundIdx !== -1) {
+        currentFilteredIndex = foundIdx;
+    }
 }
 
 let isAudioPlaying = false;
@@ -35,14 +54,27 @@ let audioCtx = null;
 let analyser = null;
 let audioSource = null;
 
-// Khởi tạo Playlist Menu
+// Khởi tạo Playlist Dropdown Menu
 function initPlaylistMenu() {
     if (!playlistMenu) return;
     playlistMenu.innerHTML = '';
-    playlist.forEach((song, idx) => {
+    
+    activePlaylist.forEach((song, idx) => {
         const item = document.createElement('div');
-        item.className = `playlist-item ${idx === currentSongIndex ? 'active' : ''}`;
-        item.innerHTML = `<i class="fas fa-${idx === currentSongIndex ? 'volume-high' : 'music'}"></i> <span>${idx + 1}. ${song.name}</span>`;
+        const isActive = idx === currentFilteredIndex;
+        item.className = `playlist-item ${isActive ? 'active' : ''}`;
+        
+        const catClass = song.category === 'angel' ? 'angel' : 'cpk';
+        const catLabel = song.categoryLabel || (song.category === 'angel' ? 'Thiên Sứ' : 'CPK');
+
+        item.innerHTML = `
+            <div class="playlist-item-left">
+                <i class="fas fa-${isActive ? 'volume-high' : 'music'}"></i>
+                <span>${idx + 1}. ${song.name}</span>
+            </div>
+            <span class="playlist-item-cat ${catClass}">${catLabel}</span>
+        `;
+
         item.addEventListener('click', (e) => {
             e.stopPropagation();
             loadAndPlaySong(idx);
@@ -56,32 +88,66 @@ function updatePlaylistActiveItem() {
     if (!playlistMenu) return;
     const items = playlistMenu.querySelectorAll('.playlist-item');
     items.forEach((item, idx) => {
-        const isActive = idx === currentSongIndex;
+        const isActive = idx === currentFilteredIndex;
         item.classList.toggle('active', isActive);
-        const icon = item.querySelector('i');
+        const icon = item.querySelector('.playlist-item-left i');
         if (icon) {
             icon.className = `fas fa-${isActive ? 'volume-high' : 'music'}`;
         }
     });
 }
 
-const totalTracksNumEl = document.getElementById('total-tracks-num');
+// Cập nhật giao diện Tab phân loại
+function updateCategoryTabsUI() {
+    categoryTabs.forEach(tab => {
+        const cat = tab.getAttribute('data-cat');
+        tab.classList.toggle('active', cat === currentCategory);
+    });
+}
+
+// Chuyển đổi danh mục bài hát (Mục 1 / Mục 2 / Tất cả)
+function setCategory(category, autoPlay = true) {
+    currentCategory = category;
+    localStorage.setItem('saved_player_category', currentCategory);
+    updateCategoryTabsUI();
+
+    const previousSong = activePlaylist[currentFilteredIndex];
+    activePlaylist = getFilteredPlaylist();
+
+    // Nếu bài đang phát nằm trong danh mục mới thì giữ nguyên vị trí, ngược lại phát bài đầu tiên
+    let newIdx = 0;
+    if (previousSong) {
+        const found = activePlaylist.findIndex(s => s.file === previousSong.file);
+        if (found !== -1) {
+            newIdx = found;
+        }
+    }
+
+    initPlaylistMenu();
+    if (autoPlay && isAudioPlaying) {
+        loadAndPlaySong(newIdx);
+    } else {
+        loadSong(newIdx);
+    }
+}
 
 function loadSong(index) {
-    if (!playlist || playlist.length === 0) return;
-    currentSongIndex = ((index % playlist.length) + playlist.length) % playlist.length;
-    const song = playlist[currentSongIndex];
+    if (!activePlaylist || activePlaylist.length === 0) return;
+    currentFilteredIndex = ((index % activePlaylist.length) + activePlaylist.length) % activePlaylist.length;
+    const song = activePlaylist[currentFilteredIndex];
 
     if (trackNameEl) trackNameEl.innerText = song.name;
     if (trackArtistEl) trackArtistEl.innerText = song.artist || 'Anime OST';
-    if (currentTrackNumEl) currentTrackNumEl.innerText = currentSongIndex + 1;
-    if (totalTracksNumEl) totalTracksNumEl.innerText = playlist.length;
+    if (currentTrackNumEl) currentTrackNumEl.innerText = currentFilteredIndex + 1;
+    if (totalTracksNumEl) totalTracksNumEl.innerText = activePlaylist.length;
+    
     if (audio) {
         audio.src = song.file;
         audio.load();
     }
     if (audioAlert) audioAlert.classList.add('hidden');
-    localStorage.setItem('saved_song_index', currentSongIndex);
+    
+    localStorage.setItem('saved_song_file', song.file);
     updatePlaylistActiveItem();
 }
 
@@ -179,7 +245,6 @@ function renderMusicVisualizer() {
     vCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
 
     if (!analyser || !isAudioPlaying) {
-        // Vẽ waveform tĩnh nhẹ nhàng khi không phát
         vCtx.fillStyle = 'rgba(255, 255, 255, 0.1)';
         for (let x = 0; x < visualizerCanvas.width; x += 4) {
             vCtx.fillRect(x, visualizerCanvas.height - 3, 2, 3);
@@ -219,16 +284,27 @@ function renderMusicVisualizer() {
     }
 }
 
+// Lắng nghe sự kiện Category Tabs
+categoryTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cat = tab.getAttribute('data-cat');
+        if (cat) {
+            setCategory(cat, true);
+        }
+    });
+});
+
 // Event Listeners
 if (playBtn) playBtn.addEventListener('click', toggleAudio);
 if (prevBtn) {
     prevBtn.addEventListener('click', () => {
-        loadAndPlaySong(currentSongIndex - 1);
+        loadAndPlaySong(currentFilteredIndex - 1);
     });
 }
 if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-        loadAndPlaySong(currentSongIndex + 1);
+        loadAndPlaySong(currentFilteredIndex + 1);
     });
 }
 
@@ -273,7 +349,7 @@ if (audio) {
     });
 
     audio.addEventListener('ended', () => {
-        loadAndPlaySong(currentSongIndex + 1);
+        loadAndPlaySong(currentFilteredIndex + 1);
     });
 
     audio.addEventListener('error', () => {
@@ -308,8 +384,9 @@ if (seekContainer) {
 }
 
 // Khởi chạy Player
+updateCategoryTabsUI();
 initPlaylistMenu();
-loadSong(currentSongIndex);
+loadSong(currentFilteredIndex);
 const savedVol = localStorage.getItem('saved_player_volume');
 setVolume(savedVol !== null ? parseInt(savedVol, 10) : (CONFIG.music.defaultVolume || 45));
 renderMusicVisualizer();
