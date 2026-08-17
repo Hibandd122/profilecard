@@ -1,4 +1,4 @@
-/* ===== CẤU HÌNH MAIKARI PROFILE CARD (GUNS.LOL STYLE) ===== */
+/* ===== CẤU HÌNH MAIKARI PROFILE CARD ===== */
 const CONFIG = {
     // Thông tin định danh chính
     name: "Mahikari",
@@ -95,7 +95,7 @@ const CONFIG = {
         github: "https://github.com/Hibandd122"
     },
 
-    // Discord Rich Presence Widget mô phỏng phong cách guns.lol
+    // Discord Rich Presence Widget
     discordPresence: {
         username: "Mahikari",
         customStatus: "Vibing in the Cosmos ✨",

@@ -1,5 +1,5 @@
 /* ========================================================
-   MAHIKARI AVATAR MODULE (GUNS.LOL STYLE)
+   MAHIKARI AVATAR MODULE
 ======================================================== */
 const avatarImg = document.getElementById('char-avatar');
 const avatarDotsContainer = document.getElementById('avatar-dots');
@@ -149,7 +149,7 @@ function updateFavicon(src) {
 }
 
 function updateTitle() {
-    document.title = `${CONFIG.name} · guns.lol biolink`;
+    document.title = `${CONFIG.name} · Profile Card`;
 }
 
 if (avatarImg) {
