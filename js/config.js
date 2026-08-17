@@ -41,14 +41,19 @@ const CONFIG = {
         fallback: "assets/avatar1.png"
     },
 
-    // Danh sách nhạc với 5 bài
+    // Danh sách 10 bài hát đầy đủ
     music: {
         playlist: [
             { name: "Chiisana Koi no Uta", artist: "MONGOL800 / Cover", file: "assets/song1.mp3" },
             { name: "うれしい！たのしい！大好き！", artist: "DREAMS COME TRUE", file: "assets/song2.mp3" },
             { name: "Remember", artist: "Anime OST", file: "assets/song3.mp3" },
             { name: "ハッピーシンセサイザ", artist: "EasyPop / Megurine Luka & GUMI", file: "assets/song4.mp3" },
-            { name: "World is Mine CPK!", artist: "supercell feat. Hatsune Miku", file: "assets/song5.mp3" }
+            { name: "World is Mine CPK!", artist: "supercell feat. Hatsune Miku", file: "assets/song5.mp3" },
+            { name: "Chiisana Koi no Uta (Inst.)", artist: "Iwami Manaka", file: "assets/song6.mp3" },
+            { name: "Ai Uta (Inst.)", artist: "Iwami Manaka", file: "assets/song7.mp3" },
+            { name: "Kimi ni Todoke (Inst.)", artist: "Iwami Manaka", file: "assets/song8.mp3" },
+            { name: "Valentine Kiss (Inst.)", artist: "Iwami Manaka", file: "assets/song9.mp3" },
+            { name: "Gift (Inst.)", artist: "Iwami Manaka", file: "assets/song10.mp3" }
         ],
         defaultVolume: 45,
         enablePulse: true,
@@ -103,17 +108,6 @@ const CONFIG = {
         ]
     }
 };
-
-// Fallback an toàn
-if (!CONFIG.music.playlist || CONFIG.music.playlist.length === 0) {
-    CONFIG.music.playlist = [
-        { name: "Chiisana Koi no Uta", artist: "Cover", file: "assets/song1.mp3" },
-        { name: "うれしい！たのしい！大好き！", artist: "DREAMS COME TRUE", file: "assets/song2.mp3" },
-        { name: "Remember", artist: "Anime OST", file: "assets/song3.mp3" },
-        { name: "ハッピーシンセサイザ", artist: "EasyPop", file: "assets/song4.mp3" },
-        { name: "World is Mine CPK!", artist: "supercell", file: "assets/song5.mp3" }
-    ];
-}
 
 if (!CONFIG.avatars || CONFIG.avatars.length === 0) {
     CONFIG.avatars = ["assets/avatar1.png"];
