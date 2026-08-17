@@ -1,5 +1,5 @@
 /* ========================================================
-   16:9 DUAL-LAYER SEAMLESS CROSSFADE BACKGROUND BANNER
+   16:9 DUAL-LAYER SEAMLESS ULTRA-SHARP BACKGROUND BANNER
 ======================================================== */
 .banner-layer,
 .starry-bg,
@@ -14,16 +14,21 @@
     pointer-events: none;
 }
 
-/* Dual-Layer Crossfade Banners */
+/* Dual-Layer Crossfade Banners with Ultra-Sharp Contrast Rendering */
 .banner-layer {
     z-index: 0;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
     will-change: opacity;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+    filter: contrast(1.05) saturate(1.1) brightness(1.02);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .banner-layer.active {
@@ -37,17 +42,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(6, 8, 18, 0.18) 0%, rgba(3, 4, 8, 0.58) 100%);
+    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.35) 100%);
     transition: opacity 0.4s ease;
 }
 
 body.light-mode .banner-layer::before {
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, rgba(220, 230, 255, 0.55) 100%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, rgba(220, 230, 255, 0.35) 100%);
 }
 
 /* Chế độ Xem trọn vẹn Banner 16:9 */
 body.banner-view-mode .banner-layer::before {
-    opacity: 0.05;
+    opacity: 0;
 }
 
 .banner-mode-overlay {
@@ -93,16 +98,16 @@ body.banner-view-mode .banner-mode-overlay {
 
 /* Glowing multi-layered cosmic nebula */
 .nebula {
-    background: radial-gradient(circle at 25% 35%, rgba(0, 242, 254, 0.07) 0%, transparent 40%),
-                radial-gradient(circle at 75% 65%, rgba(236, 72, 153, 0.07) 0%, transparent 45%),
-                radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+    background: radial-gradient(circle at 25% 35%, rgba(0, 242, 254, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 75% 65%, rgba(236, 72, 153, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
     filter: blur(70px);
     animation: nebulaPulse 14s infinite alternate ease-in-out;
 }
 
 @keyframes nebulaPulse {
-    0% { opacity: 0.5; transform: scale(1); }
-    100% { opacity: 0.8; transform: scale(1.06); }
+    0% { opacity: 0.4; transform: scale(1); }
+    100% { opacity: 0.7; transform: scale(1.05); }
 }
 
 /* Ambient cosmic whirls */
@@ -112,7 +117,7 @@ body.banner-view-mode .banner-mode-overlay {
     transform: translate(-50%, -50%);
     width: 1200px;
     height: 1200px;
-    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 242, 254, 0.04) 60deg, rgba(236, 72, 153, 0.04) 140deg, transparent 200deg);
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 242, 254, 0.03) 60deg, rgba(236, 72, 153, 0.03) 140deg, transparent 200deg);
     border-radius: 50%;
     filter: blur(80px);
     animation: spinCosmic 50s linear infinite;
@@ -121,7 +126,7 @@ body.banner-view-mode .banner-mode-overlay {
 .cosmic-whirl.secondary {
     width: 900px;
     height: 900px;
-    background: conic-gradient(from 180deg, transparent 0deg, rgba(139, 92, 246, 0.03) 50deg, rgba(0, 242, 254, 0.03) 120deg, transparent 180deg);
+    background: conic-gradient(from 180deg, transparent 0deg, rgba(139, 92, 246, 0.025) 50deg, rgba(0, 242, 254, 0.025) 120deg, transparent 180deg);
     animation: spinCosmicRev 60s linear infinite;
 }
 
