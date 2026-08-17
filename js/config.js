@@ -27,15 +27,6 @@ const CONFIG = {
         mihate: "assets/bannertop6.jpg"
     },
 
-    // Các vai trò / danh hiệu chạy hiệu ứng typewriter
-    roles: [
-        "Wibu Chúa 👑",
-        "Developer 💻",
-        "Gacha Player 🎲",
-        "Music Lover 🎵",
-        "Cosmic Voyager ✨"
-    ],
-
     // Danh ngôn ngẫu nhiên
     quotes: [
         "Ara ara~ ✨",
@@ -64,7 +55,7 @@ const CONFIG = {
         autoPlayOnEnter: true
     },
 
-    // Hiệu ứng hạt và nền - Đã tắt các hiệu ứng di chuột để tối ưu siêu mượt
+    // Hiệu ứng hạt và nền
     effects: {
         stars: true,
         sparks: false,
@@ -76,9 +67,7 @@ const CONFIG = {
 
     // Thời gian tính toán & chuyển đổi
     intervals: {
-        avatarRotation: 3500,
-        typewriterSpeed: 75,
-        typewriterPause: 1800
+        avatarRotation: 3500
     },
 
     ui: {

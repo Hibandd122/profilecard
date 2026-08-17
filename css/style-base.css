@@ -1,41 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap');
 
 :root {
-    /* Guns.lol signature dark cosmic palette (Mặc định) */
-    --bg-dark: radial-gradient(circle at 50% 20%, #111428 0%, #090b14 60%, #030408 100%);
-    --card-bg-dark: rgba(13, 16, 28, 0.72);
-    --panel-bg-dark: rgba(22, 27, 46, 0.6);
-    --panel-bg-hover-dark: rgba(30, 38, 64, 0.8);
-    --text-primary-dark: #f8fafc;
-    --text-secondary-dark: #94a3b8;
-    --text-muted-dark: #64748b;
-    --border-dark: rgba(255, 255, 255, 0.12);
-    --border-highlight-dark: rgba(0, 242, 254, 0.4);
-    --shadow-dark: 0 25px 60px -15px rgba(0, 0, 0, 0.85), 0 0 40px rgba(0, 242, 254, 0.12);
+    /* Cosmic Cyber Dark Palette */
+    --bg-dark: radial-gradient(circle at 50% 30%, #0e1224 0%, #070913 60%, #030408 100%);
+    --card-bg-dark: linear-gradient(145deg, rgba(16, 20, 38, 0.65) 0%, rgba(9, 12, 23, 0.72) 100%);
+    --panel-bg-dark: linear-gradient(135deg, rgba(24, 30, 54, 0.65) 0%, rgba(15, 19, 36, 0.75) 100%);
+    --panel-bg-hover-dark: linear-gradient(135deg, rgba(34, 43, 76, 0.8) 0%, rgba(20, 26, 48, 0.85) 100%);
+    --text-primary-dark: #ffffff;
+    --text-secondary-dark: #cbd5e1;
+    --text-muted-dark: #818cf8;
+    --border-dark: rgba(255, 255, 255, 0.14);
+    --border-highlight-dark: rgba(0, 242, 254, 0.5);
+    --shadow-dark: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 242, 254, 0.18);
     --glow-primary-dark: #00f2fe;
     --glow-secondary-dark: #ec4899;
     --glow-accent-dark: #8b5cf6;
-    --accent-gradient-dark: linear-gradient(135deg, #00f2fe, #8b5cf6, #ec4899);
-    --hover-glow-dark: rgba(0, 242, 254, 0.35);
+    --glow-gold-dark: #fbbf24;
+    --accent-gradient-dark: linear-gradient(135deg, #00f2fe 0%, #8b5cf6 50%, #ec4899 100%);
+    --hover-glow-dark: rgba(0, 242, 254, 0.4);
 
-    /* Light Theme (Tùy chọn) */
-    --bg-light: radial-gradient(circle at 50% 20%, #fdf2f8 0%, #e0e7ff 60%, #c7d2fe 100%);
-    --card-bg-light: rgba(255, 255, 255, 0.75);
-    --panel-bg-light: rgba(255, 255, 255, 0.7);
-    --panel-bg-hover-light: rgba(255, 255, 255, 0.95);
+    /* Light Theme */
+    --bg-light: radial-gradient(circle at 50% 30%, #fdf2f8 0%, #e0e7ff 60%, #c7d2fe 100%);
+    --card-bg-light: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(245, 247, 255, 0.88) 100%);
+    --panel-bg-light: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(240, 243, 255, 0.85) 100%);
+    --panel-bg-hover-light: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(235, 240, 255, 0.95) 100%);
     --text-primary-light: #0f172a;
-    --text-secondary-light: #475569;
-    --text-muted-light: #94a3b8;
-    --border-light: rgba(99, 102, 241, 0.2);
-    --border-highlight-light: rgba(236, 72, 153, 0.4);
-    --shadow-light: 0 25px 60px -15px rgba(99, 102, 241, 0.25), 0 0 30px rgba(236, 72, 153, 0.15);
+    --text-secondary-light: #334155;
+    --text-muted-light: #64748b;
+    --border-light: rgba(99, 102, 241, 0.25);
+    --border-highlight-light: rgba(236, 72, 153, 0.5);
+    --shadow-light: 0 30px 80px -15px rgba(99, 102, 241, 0.28), 0 0 40px rgba(236, 72, 153, 0.2);
     --glow-primary-light: #6366f1;
     --glow-secondary-light: #ec4899;
     --glow-accent-light: #3b82f6;
-    --accent-gradient-light: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b);
-    --hover-glow-light: rgba(99, 102, 241, 0.3);
+    --glow-gold-light: #f59e0b;
+    --accent-gradient-light: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f59e0b 100%);
+    --hover-glow-light: rgba(99, 102, 241, 0.35);
 
-    /* Biến hoạt động */
+    /* Active dynamic variables */
     --bg: var(--bg-dark);
     --card-bg: var(--card-bg-dark);
     --panel-bg: var(--panel-bg-dark);
@@ -49,6 +51,7 @@
     --glow-primary: var(--glow-primary-dark);
     --glow-secondary: var(--glow-secondary-dark);
     --glow-accent: var(--glow-accent-dark);
+    --glow-gold: var(--glow-gold-dark);
     --accent-gradient: var(--accent-gradient-dark);
     --hover-glow: var(--hover-glow-dark);
 }
@@ -67,6 +70,7 @@ body.light-mode {
     --glow-primary: var(--glow-primary-light);
     --glow-secondary: var(--glow-secondary-light);
     --glow-accent: var(--glow-accent-light);
+    --glow-gold: var(--glow-gold-light);
     --accent-gradient: var(--accent-gradient-light);
     --hover-glow: var(--hover-glow-light);
 }
@@ -94,7 +98,7 @@ body {
 }
 
 /* ========================================================
-   GUNS.LOL CLICK TO ENTER SPLASH OVERLAY
+   CLICK TO ENTER SPLASH OVERLAY
 ======================================================== */
 .overlay {
     position: fixed;
@@ -102,15 +106,15 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(5, 7, 15, 0.94);
-    z-index: 100000;
+    background: radial-gradient(circle at center, rgba(14, 18, 36, 0.95) 0%, rgba(3, 4, 8, 0.98) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+    z-index: 99999;
     cursor: pointer;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s ease;
 }
 
 .overlay.fade-out {
@@ -120,33 +124,27 @@ body {
 }
 
 .overlay-box {
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: 30px;
+    gap: 16px;
+    animation: overlayBoxFloat 3s infinite ease-in-out;
+}
+
+@keyframes overlayBoxFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
 
 .loader {
     position: relative;
-    width: 90px;
-    height: 90px;
-    margin-bottom: 24px;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.loader-icon {
-    font-size: 24px;
-    color: var(--glow-primary);
-    animation: iconPulse 1.8s infinite ease-in-out;
-    text-shadow: 0 0 15px var(--glow-primary);
-}
-
-@keyframes iconPulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.2); opacity: 1; }
+    margin-bottom: 8px;
 }
 
 .ring {
@@ -154,21 +152,32 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 2px solid transparent;
+    border: 2.5px solid transparent;
     border-top-color: var(--glow-primary);
-    border-bottom-color: var(--glow-secondary);
+    border-right-color: var(--glow-secondary);
     animation: spinRing 2s linear infinite;
+    filter: drop-shadow(0 0 12px var(--glow-primary));
 }
 
 .ring.inner {
-    width: 70%;
-    height: 70%;
-    top: 15%;
-    left: 15%;
-    border-top-color: var(--glow-accent);
-    border-bottom-color: var(--glow-primary);
+    width: 65%;
+    height: 65%;
+    border-top-color: var(--glow-secondary);
+    border-right-color: var(--glow-gold);
     animation-direction: reverse;
     animation-duration: 1.4s;
+}
+
+.loader-icon {
+    font-size: 20px;
+    color: #ffffff;
+    filter: drop-shadow(0 0 10px var(--glow-primary));
+    animation: iconPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
 }
 
 @keyframes spinRing {
@@ -177,31 +186,31 @@ body {
 
 .glitch-text {
     font-family: 'Outfit', sans-serif;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 900;
-    letter-spacing: 10px;
+    letter-spacing: 12px;
     color: #ffffff;
     text-shadow: 0 0 20px var(--glow-primary), 0 0 40px var(--glow-secondary);
     position: relative;
     text-transform: uppercase;
-    margin-bottom: 20px;
 }
 
 .tap-pulse {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-family: 'Fira Code', monospace;
     font-size: 13px;
+    font-weight: 600;
     letter-spacing: 2px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(0, 242, 254, 0.4);
     padding: 12px 28px;
     border-radius: 50px;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    background: rgba(0, 242, 254, 0.08);
     animation: pulseBorder 2s infinite ease-in-out;
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
 }
 
 .pulse-icon {
@@ -211,22 +220,22 @@ body {
 
 @keyframes soundWave {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.25); }
+    50% { transform: scale(1.3); }
 }
 
 @keyframes pulseBorder {
     0%, 100% {
-        box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
-        border-color: rgba(0, 242, 254, 0.4);
+        box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        border-color: rgba(0, 242, 254, 0.5);
     }
     50% {
-        box-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
-        border-color: rgba(236, 72, 153, 0.7);
+        box-shadow: 0 0 35px rgba(236, 72, 153, 0.5);
+        border-color: rgba(236, 72, 153, 0.8);
     }
 }
 
 /* ========================================================
-   HEART BURST & CURSOR TRAIL
+   HEART BURST PARTICLES
 ======================================================== */
 .heart-pop {
     position: fixed;
@@ -242,12 +251,10 @@ body {
     100% { transform: translate(var(--x), calc(var(--y) - 140px)) scale(0.2) rotate(360deg); opacity: 0; }
 }
 
-
-
 /* Scrollbars */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(0, 242, 254, 0.25); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--glow-primary); }
 
 /* Ripple */
