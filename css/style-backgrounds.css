@@ -1,7 +1,7 @@
 /* ========================================================
-   16:9 FULL BACKGROUND BANNER & COSMIC LAYERS
+   16:9 DUAL-LAYER SEAMLESS CROSSFADE BACKGROUND BANNER
 ======================================================== */
-.full-bg-banner,
+.banner-layer,
 .starry-bg,
 .nebula,
 .cosmic-whirl,
@@ -14,19 +14,23 @@
     pointer-events: none;
 }
 
-/* 16:9 Fullscreen Background Banner - Sáng rõ, sắc nét */
-.full-bg-banner {
+/* Dual-Layer Crossfade Banners */
+.banner-layer {
     z-index: 0;
-    background-image: url('../assets/bannertop1.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    transition: background-image 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
-    will-change: background-image;
+    will-change: opacity;
 }
 
-.full-bg-banner::before {
+.banner-layer.active {
+    opacity: 1;
+}
+
+.banner-layer::before {
     content: '';
     position: absolute;
     top: 0;
@@ -37,12 +41,12 @@
     transition: opacity 0.4s ease;
 }
 
-body.light-mode .full-bg-banner::before {
+body.light-mode .banner-layer::before {
     background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, rgba(220, 230, 255, 0.55) 100%);
 }
 
 /* Chế độ Xem trọn vẹn Banner 16:9 */
-body.banner-view-mode .full-bg-banner::before {
+body.banner-view-mode .banner-layer::before {
     opacity: 0.05;
 }
 
