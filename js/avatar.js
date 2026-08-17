@@ -1,5 +1,5 @@
 /* ========================================================
-   MAHIKARI AVATAR & SEAMLESS BANNER MODULE
+   MAHIKARI AVATAR & ULTRA-SMOOTH PRE-CACHED BANNER ENGINE
 ======================================================== */
 const avatarImg = document.getElementById('char-avatar');
 const avatarDotsContainer = document.getElementById('avatar-dots');
@@ -7,28 +7,28 @@ const discordAvatarImg = document.getElementById('discord-avatar-img');
 const playerAlbumArt = document.getElementById('player-album-art');
 
 let currentAvatarIndex = 0;
-let rotationTimer = null;
-let isForcedAvatar = false;
 let isAvatarAnimating = false;
 
-let activeBannerLayer = 1;
-let currentLoadedBanner = '';
-
-// Preload toàn bộ 6 banner máy tính & 6 banner điện thoại vào RAM để chuyển ảnh 0ms giật lag
-function preloadAllBanners() {
+// Khởi tạo và gán sẵn toàn bộ 6 hình nền Waifu vào 6 lớp GPU riêng biệt
+function initWaifuBanners() {
     if (!CONFIG.waifu || !CONFIG.waifu.list) return;
-    CONFIG.waifu.list.forEach(w => {
-        if (w.banner) {
-            const img1 = new Image();
-            img1.src = w.banner;
-        }
-        if (w.bannerPhone) {
-            const img2 = new Image();
-            img2.src = w.bannerPhone;
-        }
-        if (w.image) {
-            const img3 = new Image();
-            img3.src = w.image;
+    const isMobile = window.innerWidth <= 768;
+    const bannerLayers = document.querySelectorAll('.banner-stage .banner-layer');
+
+    bannerLayers.forEach((layer, idx) => {
+        const waifu = CONFIG.waifu.list[idx];
+        if (waifu) {
+            const targetBg = (isMobile && waifu.bannerPhone) ? waifu.bannerPhone : waifu.banner;
+            if (targetBg) {
+                layer.style.backgroundImage = `url('${targetBg}')`;
+                
+                // Preload và decode vào GPU VRAM trước
+                const pre = new Image();
+                pre.src = targetBg;
+                if (pre.decode) {
+                    pre.decode().catch(() => {});
+                }
+            }
         }
     });
 }
@@ -42,41 +42,20 @@ function initAvatarDots() {
         dot.dataset.index = idx;
         dot.addEventListener('click', () => {
             setAvatar(idx);
-            isForcedAvatar = true;
-            setTimeout(() => { isForcedAvatar = false; }, 4000);
         });
         avatarDotsContainer.appendChild(dot);
     });
 }
 
-// Chuyển đổi Banner 2 lớp Cross-Fade triệt tiêu 100% hiện tượng chớp nháy / không banner
+// Chuyển đổi Banner mượt mà 60/120fps (Chỉ thay đổi opacity của lớp GPU đã tải sẵn)
 function updateWaifuBanner(currentIdx) {
-    const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentIdx] : null;
-    if (!waifu) return;
+    const bannerLayers = document.querySelectorAll('.banner-stage .banner-layer');
+    if (!bannerLayers || bannerLayers.length === 0) return;
 
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const targetBanner = (isMobile && waifu.bannerPhone) ? waifu.bannerPhone : waifu.banner;
-    if (!targetBanner) return;
-
-    const layer1 = document.getElementById('banner-layer-1');
-    const layer2 = document.getElementById('banner-layer-2');
-    if (!layer1 || !layer2) return;
-
-    if (currentLoadedBanner === targetBanner) return;
-    currentLoadedBanner = targetBanner;
-
-    const currentLayer = activeBannerLayer === 1 ? layer1 : layer2;
-    const nextLayer = activeBannerLayer === 1 ? layer2 : layer1;
-
-    // Đảm bảo ảnh đã tải xong rồi mới Cross-Fade chuyển lớp
-    const imgLoader = new Image();
-    imgLoader.onload = () => {
-        nextLayer.style.backgroundImage = `url('${targetBanner}')`;
-        nextLayer.classList.add('active');
-        currentLayer.classList.remove('active');
-        activeBannerLayer = activeBannerLayer === 1 ? 2 : 1;
-    };
-    imgLoader.src = targetBanner;
+    bannerLayers.forEach(layer => {
+        const layerIdx = parseInt(layer.getAttribute('data-index'), 10);
+        layer.classList.toggle('active', layerIdx === currentIdx);
+    });
 }
 
 function setAvatar(index) {
@@ -97,7 +76,7 @@ function setAvatar(index) {
         });
     }
 
-    // Cập nhật banner to 16:9 / mobile phone dọc theo waifu với Cross-Fade
+    // Cập nhật banner to 16:9 / mobile phone dọc mượt mà 0ms độ trễ
     updateWaifuBanner(currentAvatarIndex);
 
     // Cập nhật waifu active state trong collection
@@ -110,22 +89,11 @@ function setAvatar(index) {
     updateTitle();
 }
 
-function startAvatarRotation() {
-    if (!avatarImg || !CONFIG.intervals.avatarRotation) return;
-    if (rotationTimer) clearInterval(rotationTimer);
-    rotationTimer = setInterval(() => {
-        if (!isForcedAvatar && !isAvatarAnimating) {
-            setAvatar((currentAvatarIndex + 1) % CONFIG.avatars.length);
-        }
-    }, CONFIG.intervals.avatarRotation);
-}
-
 function handleAvatarClick(e) {
     if (!avatarImg || isAvatarAnimating) return;
     isAvatarAnimating = true;
-    isForcedAvatar = true;
 
-    // Chọn avatar ngẫu nhiên khác avatar hiện tại
+    // Chọn avatar ngẫu nhiên tiếp theo
     let nextIndex;
     do {
         nextIndex = Math.floor(Math.random() * CONFIG.avatars.length);
@@ -134,7 +102,7 @@ function handleAvatarClick(e) {
     setAvatar(nextIndex);
     avatarImg.classList.add('active-touch');
 
-    // Tạo hiệu ứng chùm tim bay
+    // Tạo hiệu ứng tim bay nhẹ nhàng
     let clientX = e.clientX;
     let clientY = e.clientY;
     if (e.type === 'touchstart' && e.touches && e.touches[0]) {
@@ -148,63 +116,62 @@ function handleAvatarClick(e) {
         clientY = rect.top + rect.height / 2;
     }
 
-    for (let i = 0; i < 16; i++) {
-        createHeartBurst(clientX + (Math.random() * 50 - 25), clientY + (Math.random() * 50 - 25));
+    const count = window.innerWidth <= 768 ? 8 : 14;
+    for (let i = 0; i < count; i++) {
+        createHeartBurst(clientX + (Math.random() * 40 - 20), clientY + (Math.random() * 40 - 20));
     }
 
     setTimeout(() => {
         avatarImg.classList.remove('active-touch');
-        isForcedAvatar = false;
         isAvatarAnimating = false;
-    }, 2000);
+    }, 800);
 }
 
 function createHeartBurst(x, y) {
     const heart = document.createElement('div');
-    const icons = ['❤️', '💖', '💘', '💗', '💕', '✨'];
-    heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-    heart.className = 'heart-pop';
-    const rx = (Math.random() * 160 - 80);
-    const ry = (Math.random() * 160 - 80);
-    heart.style.left = x + 'px';
-    heart.style.top = y + 'px';
-    heart.style.setProperty('--x', rx + 'px');
-    heart.style.setProperty('--y', ry + 'px');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
+    heart.style.fontSize = `${Math.random() * 12 + 14}px`;
+    heart.style.setProperty('--vx', `${Math.random() * 140 - 70}px`);
+    heart.style.setProperty('--vy', `${Math.random() * -120 - 40}px`);
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 1200);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 1200);
 }
 
 function updateFavicon(src) {
     if (!CONFIG.favicon || !CONFIG.favicon.enabled) return;
-    let link = document.querySelector("link[rel*='icon']");
+    let link = document.querySelector("link[rel~='icon']");
     if (!link) {
         link = document.createElement('link');
-        link.type = 'image/png';
         link.rel = 'icon';
         document.head.appendChild(link);
     }
-    link.href = src;
+    link.href = src || CONFIG.favicon.fallback;
 }
 
 function updateTitle() {
-    document.title = `${CONFIG.name} · Profile Card`;
+    const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentAvatarIndex] : null;
+    const prefix = waifu ? `${waifu.name} · ` : '';
+    document.title = `${prefix}${CONFIG.name} · Profile Card`;
 }
 
+// Lắng nghe sự kiện
 if (avatarImg) {
     avatarImg.addEventListener('click', handleAvatarClick);
-    avatarImg.addEventListener('touchstart', (e) => {
-        handleAvatarClick(e);
-    }, { passive: true });
+    avatarImg.addEventListener('touchstart', handleAvatarClick, { passive: true });
 }
 
-// Lắng nghe xoay màn hình hoặc đổi kích thước để cập nhật banner tương thích
+// Cập nhật khi xoay màn hình điện thoại
 window.addEventListener('resize', () => {
-    currentLoadedBanner = ''; // Buộc cập nhật lại nếu đổi breakpoint
-    updateWaifuBanner(currentAvatarIndex);
+    initWaifuBanners();
 });
 
-// Khởi động
-preloadAllBanners();
+// Khởi chạy ngay lập tức
+initWaifuBanners();
 initAvatarDots();
 setAvatar(0);
-startAvatarRotation();

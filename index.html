@@ -16,12 +16,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
     <!-- CSS stylesheets with cache-busting -->
-    <link rel="stylesheet" href="css/style-base.css?v=6.0">
-    <link rel="stylesheet" href="css/style-backgrounds.css?v=6.0">
-    <link rel="stylesheet" href="css/style-card.css?v=6.0">
-    <link rel="stylesheet" href="css/style-left.css?v=6.0">
-    <link rel="stylesheet" href="css/style-right.css?v=6.0">
-    <link rel="stylesheet" href="css/style-responsive.css?v=6.0">
+    <link rel="stylesheet" href="css/style-base.css?v=7.0">
+    <link rel="stylesheet" href="css/style-backgrounds.css?v=7.0">
+    <link rel="stylesheet" href="css/style-card.css?v=7.0">
+    <link rel="stylesheet" href="css/style-left.css?v=7.0">
+    <link rel="stylesheet" href="css/style-right.css?v=7.0">
+    <link rel="stylesheet" href="css/style-responsive.css?v=7.0">
 </head>
 <body>
 
@@ -41,9 +41,15 @@
         </div>
     </div>
 
-    <!-- 16:9 DUAL-LAYER SEAMLESS CROSSFADE FULLSCREEN BACKGROUND BANNER -->
-    <div class="banner-layer active" id="banner-layer-1"></div>
-    <div class="banner-layer" id="banner-layer-2"></div>
+    <!-- 6 PRE-RASTERIZED GPU-ACCELERATED WAIFU BANNER LAYERS -->
+    <div class="banner-stage" id="banner-stage">
+        <div class="banner-layer active" data-index="0"></div>
+        <div class="banner-layer" data-index="1"></div>
+        <div class="banner-layer" data-index="2"></div>
+        <div class="banner-layer" data-index="3"></div>
+        <div class="banner-layer" data-index="4"></div>
+        <div class="banner-layer" data-index="5"></div>
+    </div>
 
     <!-- FLOATING RETURN BUTTON IN BANNER VIEW MODE -->
     <div class="banner-mode-overlay" id="banner-mode-overlay">
@@ -54,7 +60,6 @@
     <!-- BACKGROUND CANVAS & AMBIENCE -->
     <canvas id="starry-canvas" class="starry-bg"></canvas>
     <div class="nebula"></div>
-    <canvas id="spark-field" class="spark-field"></canvas>
     <div class="cosmic-whirl"></div>
     <div class="cosmic-whirl secondary"></div>
 
@@ -232,16 +237,11 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT MODULES with cache-busting -->
-    <script src="js/config.js?v=6.0"></script>
-    <script src="js/stars.js?v=6.0"></script>
-    <script src="js/spark.js?v=6.0"></script>
-    <script src="js/music.js?v=6.0"></script>
-    <script src="js/avatar.js?v=6.0"></script>
-    <script src="js/features.js?v=6.0"></script>
-    <script src="js/social.js?v=6.0"></script>
-    <script src="js/reveal.js?v=6.0"></script>
-    <script src="js/ripple.js?v=6.0"></script>
-    <script src="js/parallax.js?v=6.0"></script>
+    <!-- CLEAN HIGH-PERFORMANCE JAVASCRIPT MODULES with cache-busting -->
+    <script src="js/config.js?v=7.0"></script>
+    <script src="js/stars.js?v=7.0"></script>
+    <script src="js/avatar.js?v=7.0"></script>
+    <script src="js/features.js?v=7.0"></script>
+    <script src="js/music.js?v=7.0"></script>
 </body>
 </html>

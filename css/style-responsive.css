@@ -1,18 +1,21 @@
 /* ========================================================
-   RESPONSIVE DESIGN (GUNS.LOL ADAPTIVE MOBILE LAYOUT)
+   ULTRA-SMOOTH MOBILE OPTIMIZATIONS (60FPS+ ADAPTIVE LAYOUT)
 ======================================================== */
 @media (max-width: 860px) {
     body {
-        padding: 0.8rem 0.5rem;
+        padding: 0.6rem 0.4rem;
     }
 
     .card-wrapper {
-        margin: 10px auto;
+        margin: 6px auto;
+        perspective: none !important;
     }
 
     .card-container {
-        border-radius: 28px;
+        border-radius: 24px;
         min-height: auto;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
 
     .card-content-grid {
@@ -21,28 +24,28 @@
 
     .col-left {
         border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 24px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 20px 16px;
     }
 
     .avatar-zone {
-        width: 140px;
-        height: 140px;
+        width: 130px;
+        height: 130px;
     }
 
     .gradient-glitch {
-        font-size: 26px;
+        font-size: 25px;
     }
 
     .col-right {
-        padding: 20px 16px;
+        padding: 16px 14px;
         max-height: none;
         overflow-y: visible;
-        gap: 14px;
+        gap: 12px;
     }
 
     .card-top-bar {
-        padding: 12px 16px;
+        padding: 10px 14px;
     }
 
     .status-pill {
@@ -50,36 +53,56 @@
         padding: 4px 10px;
     }
 
-    .flip-unit span {
-        font-size: 22px;
-    }
-
-    .flip-sep {
-        font-size: 18px;
-    }
-
-    /* Tối ưu hiệu năng trên mobile */
-    .cosmic-whirl, .cosmic-whirl.secondary {
+    /* Tắt các layer nặng và blur trên mobile để tăng tốc GPU lên 60-120 FPS */
+    .nebula, 
+    .cosmic-whirl, 
+    .cosmic-whirl.secondary,
+    .spark-field {
         display: none !important;
     }
 
-    .card-wrapper {
-        perspective: none !important;
+    .banner-layer {
+        filter: none !important;
+    }
+
+    .music-panel {
+        padding: 12px 14px;
+        backdrop-filter: none;
+    }
+
+    .waifu-panel {
+        padding: 12px 14px;
+        backdrop-filter: none;
+    }
+
+    .music-category-nav {
+        gap: 4px;
+        padding: 3px;
+    }
+
+    .cat-tab {
+        font-size: 9px;
+        padding: 4px 6px;
     }
 }
 
 @media (max-width: 480px) {
     .card-container {
-        border-radius: 22px;
+        border-radius: 20px;
     }
 
     .avatar-zone {
-        width: 125px;
-        height: 125px;
+        width: 120px;
+        height: 120px;
+    }
+
+    .avatar-img {
+        width: 110px;
+        height: 110px;
     }
 
     .gradient-glitch {
-        font-size: 23px;
+        font-size: 22px;
     }
 
     .social-panel {
@@ -104,26 +127,30 @@
     }
 
     .volume-dock input {
-        width: 50px;
+        width: 45px;
     }
 
     .glitch-text {
         font-size: 22px !important;
-        letter-spacing: 6px !important;
+        letter-spacing: 5px !important;
     }
 
     .tap-pulse {
         font-size: 11px !important;
-        padding: 10px 18px !important;
+        padding: 8px 16px !important;
         letter-spacing: 1px !important;
     }
 
-    .flip-unit span {
-        font-size: 18px;
-        padding: 4px 2px;
+    .waifu-item {
+        padding: 6px 8px;
     }
 
-    .flip-unit small {
-        font-size: 8px;
+    .waifu-thumb {
+        width: 30px;
+        height: 30px;
+    }
+
+    .waifu-name {
+        font-size: 11px;
     }
 }
