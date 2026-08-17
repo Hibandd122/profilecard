@@ -27,6 +27,20 @@ function initAvatarDots() {
     });
 }
 
+function updateWaifuBanner(currentIdx) {
+    const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentIdx] : null;
+    if (!waifu) return;
+    
+    const fullBgBanner = document.getElementById('full-bg-banner');
+    if (fullBgBanner) {
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const targetBanner = (isMobile && waifu.bannerPhone) ? waifu.bannerPhone : waifu.banner;
+        if (targetBanner) {
+            fullBgBanner.style.backgroundImage = `url('${targetBanner}')`;
+        }
+    }
+}
+
 function setAvatar(index) {
     if (!avatarImg || !CONFIG.avatars || CONFIG.avatars.length === 0) return;
     
@@ -45,16 +59,8 @@ function setAvatar(index) {
         });
     }
 
-    // Cập nhật banner to 16:9 / mobile phone đằng sau theo waifu
-    const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentAvatarIndex] : null;
-    if (waifu && waifu.banner) {
-        const fullBgBanner = document.getElementById('full-bg-banner');
-        if (fullBgBanner) {
-            const isMobile = window.innerWidth <= 600;
-            const targetBanner = (isMobile && waifu.bannerPhone) ? waifu.bannerPhone : waifu.banner;
-            fullBgBanner.style.backgroundImage = `url('${targetBanner}')`;
-        }
-    }
+    // Cập nhật banner to 16:9 / mobile phone dọc theo waifu
+    updateWaifuBanner(currentAvatarIndex);
 
     // Cập nhật waifu active state trong collection
     const waifuItems = document.querySelectorAll('.waifu-item');
@@ -152,6 +158,11 @@ if (avatarImg) {
         handleAvatarClick(e);
     }, { passive: true });
 }
+
+// Lắng nghe xoay màn hình hoặc đổi kích thước để cập nhật banner tương thích
+window.addEventListener('resize', () => {
+    updateWaifuBanner(currentAvatarIndex);
+});
 
 // Khởi động
 initAvatarDots();
