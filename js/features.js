@@ -177,42 +177,7 @@
         });
     }
 
-    // 5. 3D CARD TILT EFFECT (DESKTOP)
-    function initCardTilt() {
-        const cardContainer = document.getElementById('main-card');
-        const cardWrapper = document.querySelector('.card-wrapper');
-        if (!cardContainer || !cardWrapper) return;
-
-        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-        if (isTouch || window.innerWidth <= 860) return;
-
-        let ticking = false;
-
-        cardWrapper.addEventListener('mousemove', (e) => {
-            if (ticking) return;
-            ticking = true;
-
-            requestAnimationFrame(() => {
-                const rect = cardContainer.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = ((y - centerY) / centerY) * -4.5;
-                const rotateY = ((x - centerX) / centerX) * 4.5;
-
-                cardContainer.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
-                ticking = false;
-            });
-        });
-
-        cardWrapper.addEventListener('mouseleave', () => {
-            cardContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-        });
-    }
-
-    // 6. WAIFU COLLECTION GENERATOR & EQUIP INTERACTION
+    // 5. WAIFU COLLECTION GENERATOR & EQUIP INTERACTION
     function initWaifuCollection() {
         const waifuGrid = document.getElementById('waifu-grid');
         if (!waifuGrid || !CONFIG.waifu || !CONFIG.waifu.list) return;
@@ -366,7 +331,6 @@
         initSplashOverlay();
         initLiveClock();
         initBannerMode();
-        initCardTilt();
         initWaifuCollection();
         initQuoteShuffler();
         initQrModal();

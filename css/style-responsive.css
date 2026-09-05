@@ -12,7 +12,6 @@
 
     .card-wrapper {
         margin: 6px auto;
-        perspective: none !important;
     }
 
     .card-container {

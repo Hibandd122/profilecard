@@ -99,7 +99,7 @@ const CONFIG = {
         shootingStars: true,
         nebula: true,
         sfx: true,
-        tilt3D: true
+        tilt3D: false
     },
 
     // Thời gian tính toán & chuyển đổi
@@ -108,7 +108,7 @@ const CONFIG = {
     },
 
     ui: {
-        enableTilt: true,
+        enableTilt: false,
         enableGlow: true,
         enableRgbBorder: true,
         enableSfx: true
