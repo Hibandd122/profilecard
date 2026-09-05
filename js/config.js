@@ -18,13 +18,13 @@ const CONFIG = {
 
     // Banner mặc định và các banner chuẩn 16:9 1920x1080 theo từng waifu
     banners: {
-        default: "assets/bannertop1.jpg",
-        mahiru: "assets/bannertop1.jpg",
+        default: "assets/banner1.png",
+        mahiru: "assets/banner1.png",
         kaguya: "assets/bannertop2.jpg",
         yachiyo: "assets/bannertop3.jpg",
-        elfaria: "assets/bannertop4.jpg",
-        kagari: "assets/bannertop5.jpg",
-        mihate: "assets/bannertop6.jpg"
+        elfaria: "assets/banner4.png",
+        kagari: "assets/banner5.png",
+        mihate: "assets/banner6.png"
     },
 
     // Danh ngôn ngẫu nhiên
@@ -145,7 +145,7 @@ const CONFIG = {
                 affection: 100,
                 role: "Angel of Light",
                 image: "assets/avatar1.png",
-                banner: "assets/bannertop1.jpg",
+                banner: "assets/banner1.png",
                 bannerPhone: "assets/bannertop1_phone.jpg"
             },
             {
@@ -193,7 +193,7 @@ const CONFIG = {
                 affection: 90,
                 role: "Glacial Archmage",
                 image: "assets/avatar4.png",
-                banner: "assets/bannertop4.jpg",
+                banner: "assets/banner4.png",
                 bannerPhone: "assets/bannertop4_phone.jpg"
             },
             {
@@ -209,7 +209,7 @@ const CONFIG = {
                 affection: 87,
                 role: "Solar Vanguard",
                 image: "assets/avatar5.png",
-                banner: "assets/bannertop5.jpg",
+                banner: "assets/banner5.png",
                 bannerPhone: "assets/bannertop5_phone.jpg"
             },
             {
@@ -225,7 +225,7 @@ const CONFIG = {
                 affection: 84,
                 role: "Cyber Sweetheart",
                 image: "assets/avatar6.png",
-                banner: "assets/bannertop6.jpg",
+                banner: "assets/banner6.png",
                 bannerPhone: "assets/bannertop6_phone.jpg"
             }
         ]

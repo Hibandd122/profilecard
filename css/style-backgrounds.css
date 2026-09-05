@@ -1,11 +1,11 @@
 /* ========================================================
-   GPU-ACCELERATED PRE-CACHED BACKGROUND BANNER STAGE
+   HIGH-CLARITY BACKGROUND BANNER STAGE V11.0
+   - Crystal clear, vibrant anime wallpaper display
+   - Removed blurry nebula fog overlays for 100% sharpness
 ======================================================== */
 .banner-stage,
 .banner-layer,
-.starry-bg,
-.nebula,
-.cosmic-whirl {
+.starry-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -15,10 +15,10 @@
 }
 
 .banner-stage {
-    z-index: 0;
+    z-index: 1;
 }
 
-/* 6 Pre-Rasterized GPU Waifu Layers with Instant 0ms Crossfade */
+/* 6 Pre-Rasterized GPU Waifu Layers with Crisp Clarity */
 .banner-layer {
     position: absolute;
     top: 0;
@@ -29,13 +29,11 @@
     background-position: center center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateZ(0);
     will-change: opacity;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: high-quality;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    filter: contrast(1.04) saturate(1.06) brightness(1.02);
+    image-rendering: auto;
 }
 
 .banner-layer.active {
@@ -43,44 +41,34 @@
     z-index: 1;
 }
 
+/* Loại bỏ lớp phủ tối mờ để hình nền sắc nét và sáng rõ */
 .banner-layer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.35) 100%);
-    transition: opacity 0.4s ease;
-}
-
-/* Chế độ Xem trọn vẹn Banner 16:9 */
-body.banner-view-mode .banner-layer::before {
-    opacity: 0;
+    display: none;
 }
 
 .banner-mode-overlay {
     position: fixed;
-    bottom: 30px;
+    bottom: 32px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10000;
-    background: rgba(13, 16, 28, 0.88);
-    border: 1px solid rgba(0, 242, 254, 0.5);
-    padding: 10px 24px;
+    background: rgba(10, 14, 28, 0.92);
+    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.5));
+    padding: 11px 26px;
     border-radius: 30px;
     color: #ffffff;
     font-family: 'Fira Code', monospace;
     font-size: 13px;
-    box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
+    font-weight: 600;
+    box-shadow: 0 0 35px var(--waifu-glow, rgba(0, 242, 254, 0.4));
     backdrop-filter: blur(14px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 body.banner-view-mode .banner-mode-overlay {
@@ -90,53 +78,18 @@ body.banner-view-mode .banner-mode-overlay {
 }
 
 .banner-mode-overlay:hover {
-    background: rgba(0, 242, 254, 0.3);
-    border-color: #00f2fe;
-    box-shadow: 0 0 40px rgba(0, 242, 254, 0.7);
+    background: rgba(0, 242, 254, 0.25);
+    border-color: var(--waifu-color, #00f2fe);
+    box-shadow: 0 0 45px var(--waifu-glow, rgba(0, 242, 254, 0.7));
 }
 
-.starry-bg { z-index: 1; }
-.nebula { z-index: 2; }
-.cosmic-whirl { z-index: 3; }
-
-/* Glowing cosmic nebula for desktop */
-.nebula {
-    background: radial-gradient(circle at 25% 35%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 75% 65%, rgba(236, 72, 153, 0.05) 0%, transparent 45%),
-                radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
-    filter: blur(60px);
-    animation: nebulaPulse 14s infinite alternate ease-in-out;
+.starry-bg {
+    z-index: 2;
+    mix-blend-mode: screen;
 }
 
-@keyframes nebulaPulse {
-    0% { opacity: 0.3; transform: scale(1); }
-    100% { opacity: 0.6; transform: scale(1.05); }
-}
-
-/* Ambient cosmic whirls for desktop */
+/* Vô hiệu hóa nebula và cosmic-whirl vì gây mờ và nhòe hình nền */
+.nebula,
 .cosmic-whirl {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1100px;
-    height: 1100px;
-    background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 242, 254, 0.025) 60deg, rgba(236, 72, 153, 0.025) 140deg, transparent 200deg);
-    border-radius: 50%;
-    filter: blur(70px);
-    animation: spinCosmic 50s linear infinite;
-}
-
-.cosmic-whirl.secondary {
-    width: 850px;
-    height: 850px;
-    background: conic-gradient(from 180deg, transparent 0deg, rgba(139, 92, 246, 0.02) 50deg, rgba(0, 242, 254, 0.02) 120deg, transparent 180deg);
-    animation: spinCosmicRev 60s linear infinite;
-}
-
-@keyframes spinCosmic {
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes spinCosmicRev {
-    100% { transform: translate(-50%, -50%) rotate(-360deg); }
+    display: none !important;
 }
