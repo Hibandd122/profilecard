@@ -99,13 +99,23 @@
                         <i class="fas fa-volume-high"></i>
                     </button>
 
+                    <!-- Achievements Modal Button -->
+                    <button class="icon-button achievements-btn" id="achievements-modal-btn" type="button" title="Huy hiệu & Thành tựu khám phá" aria-label="Mở thành tựu">
+                        <i class="fas fa-award"></i>
+                    </button>
+
+                    <!-- Keyboard Shortcuts HUD Button -->
+                    <button class="icon-button shortcuts-btn" id="shortcuts-modal-btn" type="button" title="Bảng phím tắt điều khiển (?)" aria-label="Bảng phím tắt">
+                        <i class="fas fa-keyboard"></i>
+                    </button>
+
                     <!-- QR Code Modal Button -->
                     <button class="icon-button qr-btn" id="qr-modal-btn" type="button" title="Mở mã QR Profile" aria-label="Mở mã QR Profile">
                         <i class="fas fa-qrcode"></i>
                     </button>
 
                     <!-- Banner 16:9 View Button -->
-                    <button class="status-pill banner-mode-btn" id="toggle-banner-view" type="button" title="Xem trọn vẹn hình nền banner 16:9" aria-label="Xem trọn vẹn banner 16:9">
+                    <button class="status-pill banner-mode-btn" id="toggle-banner-view" type="button" title="Xem trọn vẹn hình nền banner 16:9 (B)" aria-label="Xem trọn vẹn banner 16:9">
                         <i class="fas fa-image"></i>
                         <span>Banner 16:9</span>
                     </button>
@@ -145,6 +155,16 @@
                         <p class="profile-tagline">Cosmic voyager <span>·</span> developer <span>·</span> anime enthusiast</p>
                     </div>
 
+                    <!-- Waifu Interactive Dialogue Box -->
+                    <div class="waifu-dialogue-box" id="waifu-dialogue-box">
+                        <div class="dialogue-header">
+                            <span class="dialogue-avatar-mini" id="dialogue-avatar-mini"><i class="fas fa-comment-dots"></i></span>
+                            <span class="dialogue-speaker" id="dialogue-name">Shiina Mahiru</span>
+                            <span class="dialogue-tag" id="dialogue-role">Angel of Light</span>
+                        </div>
+                        <p class="dialogue-text" id="dialogue-text">"Tôi sẽ luôn ở đây chuẩn bị bữa tối ấm áp và cùng bạn lắng nghe những giai điệu này nhé! ✨"</p>
+                    </div>
+
                     <!-- Stats Badges -->
                     <div class="profile-stats" aria-label="Thông tin nhanh">
                         <div class="stat-item" title="6 nhân vật waifu tuyển chọn"><strong>06</strong><span>waifus</span></div>
@@ -168,20 +188,30 @@
                         </button>
                     </div>
 
-                    <!-- Discord User Badge in Left Column -->
-                    <div class="discord-widget">
+                    <!-- Discord User Badge with Dynamic Rich Presence -->
+                    <div class="discord-widget" id="discord-widget">
                         <div class="discord-header">
                             <div class="discord-user-info">
                                 <div class="discord-avatar-wrap">
                                     <img src="assets/avatar1.png" alt="Discord Avatar" class="discord-avatar" id="discord-avatar-img">
-                                    <span class="discord-status-dot online"></span>
+                                    <span class="discord-status-dot online" id="discord-status-dot"></span>
                                 </div>
                                 <div class="discord-user-meta">
                                     <span class="discord-username">Mahikari</span>
-                                    <span class="discord-custom-status">Vibing in the Cosmos ✨</span>
+                                    <span class="discord-custom-status" id="discord-custom-status">Vibing in the Cosmos ✨</span>
                                 </div>
                             </div>
                             <div class="discord-tag-pill"><i class="fab fa-discord"></i> DISCORD</div>
+                        </div>
+                        <div class="discord-activity" id="discord-activity">
+                            <div class="activity-disc-wrap">
+                                <i class="fas fa-compact-disc activity-spin-icon" id="activity-spin-icon"></i>
+                            </div>
+                            <div class="activity-meta">
+                                <span class="activity-label">LISTENING TO STUDIO</span>
+                                <span class="activity-track" id="discord-activity-track">Chiisana Koi no Uta</span>
+                                <span class="activity-artist" id="discord-activity-artist">Iwami Manaka</span>
+                            </div>
                         </div>
                     </div>
 
@@ -262,6 +292,14 @@
                             <!-- Repeat Mode -->
                             <button id="repeat-btn" class="ctrl repeat-ctrl active" title="Lặp toàn bộ" type="button"><i class="fas fa-repeat"></i></button>
 
+                            <!-- Audio FX Equalizer Selector -->
+                            <div class="audio-fx-dropdown-wrap">
+                                <button id="audio-fx-btn" class="ctrl audio-fx-ctrl" title="Bộ lọc âm thanh Studio FX" type="button"><i class="fas fa-sliders"></i></button>
+                                <div class="audio-fx-menu" id="audio-fx-menu">
+                                    <!-- Populated dynamically via JS -->
+                                </div>
+                            </div>
+
                             <!-- Playlist selector dropdown with Live Search -->
                             <div class="playlist-dropdown-wrap">
                                 <button id="playlist-toggle-btn" class="ctrl" title="Danh sách phát & Tìm kiếm" type="button"><i class="fas fa-list-music"></i></button>
@@ -317,6 +355,36 @@
         </div>
     </div>
 
+    <!-- KEYBOARD SHORTCUTS MODAL -->
+    <div class="hud-modal-overlay" id="shortcuts-modal">
+        <div class="hud-modal-box">
+            <button class="hud-close-btn" id="shortcuts-modal-close" type="button" title="Đóng"><i class="fas fa-xmark"></i></button>
+            <div class="hud-modal-header">
+                <i class="fas fa-keyboard"></i>
+                <h3>Phím Tắt Điều Khiển (Shortcuts)</h3>
+            </div>
+            <p class="hud-modal-desc">Điều khiển nhanh mọi tính năng chỉ bằng bàn phím của bạn.</p>
+            <div class="shortcuts-grid" id="shortcuts-grid">
+                <!-- Populated dynamically via JS from CONFIG.shortcuts -->
+            </div>
+        </div>
+    </div>
+
+    <!-- COSMIC ACHIEVEMENTS MODAL -->
+    <div class="hud-modal-overlay" id="achievements-modal">
+        <div class="hud-modal-box">
+            <button class="hud-close-btn" id="achievements-modal-close" type="button" title="Đóng"><i class="fas fa-xmark"></i></button>
+            <div class="hud-modal-header">
+                <i class="fas fa-award"></i>
+                <h3>Huy Hiệu & Thành Tựu Tinh Tú</h3>
+            </div>
+            <p class="hud-modal-desc">Khám phá và tương tác để mở khóa toàn bộ huy hiệu danh dự.</p>
+            <div class="achievements-list" id="achievements-list">
+                <!-- Populated dynamically via JS from CONFIG.achievements -->
+            </div>
+        </div>
+    </div>
+
     <!-- TOAST NOTIFICATION REGION -->
     <div class="toast-region" id="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
 
@@ -324,12 +392,12 @@
         <div class="noscript-note">Bật JavaScript để sử dụng trình phát nhạc, đổi avatar và bộ sưu tập waifu.</div>
     </noscript>
 
-    <!-- CLEAN HIGH-PERFORMANCE JAVASCRIPT MODULES v11.0 -->
-    <script src="js/config.js?v=11.0"></script>
-    <script src="js/stars.js?v=11.0"></script>
-    <script src="js/avatar.js?v=11.0"></script>
-    <script src="js/features.js?v=11.0"></script>
-    <script src="js/music.js?v=11.0"></script>
-    <script src="js/premium.js?v=11.0"></script>
+    <!-- CLEAN HIGH-PERFORMANCE JAVASCRIPT MODULES v12.0 -->
+    <script src="js/config.js?v=12.0"></script>
+    <script src="js/stars.js?v=12.0"></script>
+    <script src="js/avatar.js?v=12.0"></script>
+    <script src="js/features.js?v=12.0"></script>
+    <script src="js/music.js?v=12.0"></script>
+    <script src="js/premium.js?v=12.0"></script>
 </body>
 </html>

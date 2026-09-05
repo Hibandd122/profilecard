@@ -347,6 +347,101 @@ body.light-mode .col-left {
     gap: 8px;
 }
 
+/* ========================================================
+   WAIFU INTERACTIVE DIALOGUE BOX
+======================================================== */
+.waifu-dialogue-box {
+    width: 100%;
+    background: rgba(13, 16, 28, 0.65);
+    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.3));
+    border-radius: 14px;
+    padding: 10px 14px;
+    position: relative;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 0 15px var(--waifu-glow, rgba(0, 242, 254, 0.15));
+    transition: all 0.35s ease;
+}
+
+.waifu-dialogue-box:hover {
+    border-color: var(--waifu-color, #00f2fe);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35), 0 0 22px var(--waifu-glow, rgba(0, 242, 254, 0.3));
+}
+
+.dialogue-header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 5px;
+}
+
+.dialogue-avatar-mini {
+    color: var(--waifu-color, #00f2fe);
+    font-size: 11px;
+    filter: drop-shadow(0 0 5px var(--waifu-color, #00f2fe));
+}
+
+.dialogue-speaker {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--waifu-color, #ffffff);
+    letter-spacing: 0.3px;
+}
+
+.dialogue-tag {
+    font-size: 8.5px;
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1px 7px;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.dialogue-text {
+    font-size: 11px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.88);
+    font-style: italic;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ========================================================
+   DISCORD WIDGET & RICH PRESENCE
+======================================================== */
+.discord-widget {
+    width: 100%;
+    background: rgba(22, 27, 46, 0.7);
+    border: 1px solid rgba(88, 101, 242, 0.3);
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.discord-widget:hover {
+    border-color: rgba(88, 101, 242, 0.65);
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.25);
+}
+
+.discord-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.discord-user-info {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
 .discord-avatar-wrap {
     position: relative;
     width: 30px;
@@ -358,7 +453,8 @@ body.light-mode .col-left {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 1.5px solid rgba(88, 101, 242, 0.5);
+    border: 1.5px solid var(--waifu-color, rgba(88, 101, 242, 0.5));
+    transition: border-color 0.3s ease;
 }
 
 .discord-status-dot {
@@ -404,6 +500,67 @@ body.light-mode .col-left {
     display: flex;
     align-items: center;
     gap: 3px;
+}
+
+.discord-activity {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.activity-disc-wrap {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(88, 101, 242, 0.15);
+    border: 1px solid rgba(88, 101, 242, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #10b981;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.discord-widget.playing .activity-spin-icon {
+    animation: spinDisc 3s linear infinite;
+    color: var(--waifu-color, #10b981);
+}
+
+.activity-meta {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+}
+
+.activity-label {
+    font-size: 7.5px;
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    color: #10b981;
+    letter-spacing: 0.5px;
+}
+
+.activity-track {
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.activity-artist {
+    font-size: 9.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ========================================================

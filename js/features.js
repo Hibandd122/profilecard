@@ -153,6 +153,7 @@
                 e.stopPropagation();
                 playSfx('click');
                 document.body.classList.add('banner-view-mode');
+                if (window.unlockAchievement) window.unlockAchievement('stargazer');
             });
         }
 
@@ -311,7 +312,7 @@
             const profileUrl = encodeURIComponent(window.location.href);
             const qrImg = new Image();
             qrImg.crossOrigin = 'anonymous';
-            qrImg.src = `https://api.qrserver.com/v1/create-qr-zone/?size=180x180&data=${profileUrl}&color=00f2fe&bgcolor=0a0e1c&margin=2`;
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${profileUrl}&color=00f2fe&bgcolor=0a0e1c&margin=2`;
             qrImg.onload = () => {
                 ctx.drawImage(qrImg, 0, 0, size, size);
             };
@@ -325,6 +326,178 @@
         }
     }
 
+    // 8. HỆ THỐNG THÀNH TỰU (COSMIC ACHIEVEMENTS)
+    function initAchievementsSystem() {
+        const modal = document.getElementById('achievements-modal');
+        const openBtn = document.getElementById('achievements-modal-btn');
+        const closeBtn = document.getElementById('achievements-modal-close');
+        const listEl = document.getElementById('achievements-list');
+
+        function getUnlocked() {
+            try {
+                const raw = localStorage.getItem('mahikari_achievements');
+                return raw ? JSON.parse(raw) : [];
+            } catch (_) {
+                return [];
+            }
+        }
+
+        function saveUnlocked(arr) {
+            try {
+                localStorage.setItem('mahikari_achievements', JSON.stringify(arr));
+            } catch (_) {}
+        }
+
+        function renderAchievements() {
+            if (!listEl || !CONFIG.achievements) return;
+            listEl.innerHTML = '';
+            const unlocked = getUnlocked();
+
+            CONFIG.achievements.forEach(ach => {
+                const isUnlocked = unlocked.includes(ach.id);
+                const card = document.createElement('div');
+                card.className = `achievement-card ${isUnlocked ? 'unlocked' : ''}`;
+                card.innerHTML = `
+                    <div class="achievement-icon-wrap">
+                        <i class="fas ${ach.icon}"></i>
+                    </div>
+                    <div class="achievement-info">
+                        <span class="achievement-title">${ach.title}</span>
+                        <span class="achievement-desc">${ach.desc}</span>
+                    </div>
+                    <span class="achievement-status">${isUnlocked ? '✓ MỞ KHÓA' : 'CHƯA ĐẠT'}</span>
+                `;
+                listEl.appendChild(card);
+            });
+        }
+
+        window.unlockAchievement = function(id) {
+            const unlocked = getUnlocked();
+            if (unlocked.includes(id)) return;
+            unlocked.push(id);
+            saveUnlocked(unlocked);
+
+            const ach = CONFIG.achievements?.find(a => a.id === id);
+            if (ach) {
+                if (window.playSfx) window.playSfx('success');
+                if (window.showPremiumToast) {
+                    window.showPremiumToast(`Mở khóa danh hiệu: ${ach.title}!`, 'fa-award');
+                }
+            }
+            renderAchievements();
+        };
+
+        if (openBtn) {
+            openBtn.addEventListener('click', () => {
+                playSfx('click');
+                renderAchievements();
+                modal?.classList.add('active');
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal?.classList.remove('active');
+            });
+        }
+
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        renderAchievements();
+    }
+
+    // 9. MODAL HƯỚNG DẪN PHÍM TẮT (SHORTCUTS MODAL)
+    function initShortcutsModal() {
+        const modal = document.getElementById('shortcuts-modal');
+        const openBtn = document.getElementById('shortcuts-modal-btn');
+        const closeBtn = document.getElementById('shortcuts-modal-close');
+        const gridEl = document.getElementById('shortcuts-grid');
+
+        function renderShortcuts() {
+            if (!gridEl || !CONFIG.shortcuts) return;
+            gridEl.innerHTML = '';
+            CONFIG.shortcuts.forEach(sc => {
+                const item = document.createElement('div');
+                item.className = 'shortcut-item';
+                item.innerHTML = `
+                    <span class="shortcut-key-badge">${sc.key}</span>
+                    <span class="shortcut-desc">${sc.desc}</span>
+                `;
+                gridEl.appendChild(item);
+            });
+        }
+
+        if (openBtn) {
+            openBtn.addEventListener('click', () => {
+                playSfx('click');
+                renderShortcuts();
+                modal?.classList.add('active');
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal?.classList.remove('active');
+            });
+        }
+
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        renderShortcuts();
+    }
+
+    // 10. BỘ BẮT PHÍM NÓNG TOÀN CỤC (GLOBAL KEYBOARD SHORTCUTS)
+    function initKeyboardHotkeys() {
+        document.addEventListener('keydown', (e) => {
+            // Không kích hoạt nếu đang gõ trong input hoặc textarea
+            const tag = (e.target.tagName || '').toLowerCase();
+            if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+
+            const key = e.key;
+
+            if (key === ' ' || e.code === 'Space') {
+                e.preventDefault();
+                const playBtn = document.getElementById('play-pause');
+                if (playBtn) playBtn.click();
+            } else if (key === 'j' || key === 'J') {
+                const prevBtn = document.getElementById('prev-track');
+                if (prevBtn) prevBtn.click();
+            } else if (key === 'k' || key === 'K') {
+                const nextBtn = document.getElementById('next-track');
+                if (nextBtn) nextBtn.click();
+            } else if (key === 'm' || key === 'M') {
+                const muteBtn = document.getElementById('mute-btn');
+                if (muteBtn) muteBtn.click();
+            } else if (key === 's' || key === 'S') {
+                const shuffleBtn = document.getElementById('shuffle-btn');
+                if (shuffleBtn) shuffleBtn.click();
+            } else if (key === 'r' || key === 'R') {
+                const repeatBtn = document.getElementById('repeat-btn');
+                if (repeatBtn) repeatBtn.click();
+            } else if (key === 'b' || key === 'B') {
+                const bannerBtn = document.getElementById('toggle-banner-view');
+                if (bannerBtn) bannerBtn.click();
+            } else if (key >= '1' && key <= '6') {
+                const waifuIdx = parseInt(key, 10) - 1;
+                if (window.setAvatar) window.setAvatar(waifuIdx, true);
+            } else if (key === 'q' || key === 'Q') {
+                const qrBtn = document.getElementById('qr-modal-btn');
+                if (qrBtn) qrBtn.click();
+            } else if (key === '?' || (e.shiftKey && key === '/')) {
+                const scBtn = document.getElementById('shortcuts-modal-btn');
+                if (scBtn) scBtn.click();
+            } else if (key === 'Escape') {
+                document.querySelectorAll('.hud-modal-overlay.active, .qr-modal-overlay.active').forEach(m => {
+                    m.classList.remove('active');
+                });
+            }
+        });
+    }
+
     function init() {
         initSfxContext();
         initSfxToggle();
@@ -334,6 +507,9 @@
         initWaifuCollection();
         initQuoteShuffler();
         initQrModal();
+        initAchievementsSystem();
+        initShortcutsModal();
+        initKeyboardHotkeys();
     }
 
     if (document.readyState === 'loading') {

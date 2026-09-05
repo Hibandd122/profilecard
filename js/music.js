@@ -29,11 +29,22 @@
     const audioAlert = document.getElementById('audio-alert');
     const playlistToggleBtn = document.getElementById('playlist-toggle-btn');
     const playlistMenu = document.getElementById('playlist-menu');
+    const audioFxBtn = document.getElementById('audio-fx-btn');
+    const audioFxMenu = document.getElementById('audio-fx-menu');
+    const discordWidget = document.getElementById('discord-widget');
+    const discordActivityTrack = document.getElementById('discord-activity-track');
+    const discordActivityArtist = document.getElementById('discord-activity-artist');
+    const discordActivityLabel = document.querySelector('.activity-label');
     const musicPanel = document.querySelector('.music-panel');
     const categoryTabs = document.querySelectorAll('.cat-tab');
     const shuffleBtn = document.getElementById('shuffle-btn');
     const repeatBtn = document.getElementById('repeat-btn');
     const vinylDiscWrap = document.getElementById('vinyl-disc');
+
+    let eqFilter = null;
+    let currentAudioFx = localStorage.getItem('mahikari_audio_fx') || 'hifi';
+    const peakValues = new Array(28).fill(0);
+    const peakHold = new Array(28).fill(0);
 
     const fullPlaylist = CONFIG.music.playlist || [];
     let currentCategory = localStorage.getItem('saved_player_category') || 'all';
@@ -70,6 +81,119 @@
     let analyser = null;
     let audioSource = null;
     let gainNode = null;
+
+    // Đồng bộ trạng thái phát nhạc với Discord Rich Presence Widget
+    function syncDiscordActivity(song, isPlaying) {
+        if (!discordWidget) return;
+        if (song) {
+            if (discordActivityTrack) discordActivityTrack.innerText = song.name;
+            if (discordActivityArtist) discordActivityArtist.innerText = song.artist || 'Mahikari Collection';
+        }
+        discordWidget.classList.toggle('playing', !!isPlaying);
+        if (discordActivityLabel) {
+            discordActivityLabel.innerText = isPlaying ? 'LISTENING TO STUDIO' : 'STUDIO PAUSED';
+            discordActivityLabel.style.color = isPlaying ? '#10b981' : '#94a3b8';
+        }
+    }
+
+    // Thiết lập cấu hình bộ lọc âm thanh BiquadFilter
+    function applyEqSettings(presetId) {
+        if (!eqFilter || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        if (presetId === 'bass') {
+            eqFilter.type = 'lowshelf';
+            eqFilter.frequency.setValueAtTime(200, now);
+            eqFilter.gain.setValueAtTime(6.5, now);
+        } else if (presetId === 'lofi') {
+            eqFilter.type = 'bandpass';
+            eqFilter.frequency.setValueAtTime(1400, now);
+            eqFilter.Q.setValueAtTime(0.85, now);
+        } else if (presetId === 'vocal') {
+            eqFilter.type = 'peaking';
+            eqFilter.frequency.setValueAtTime(2800, now);
+            eqFilter.Q.setValueAtTime(1.1, now);
+            eqFilter.gain.setValueAtTime(5.0, now);
+        } else {
+            // 'hifi'
+            eqFilter.type = 'allpass';
+            eqFilter.gain.setValueAtTime(0, now);
+        }
+    }
+
+    function setAudioFx(presetId) {
+        currentAudioFx = presetId;
+        localStorage.setItem('mahikari_audio_fx', presetId);
+        applyEqSettings(presetId);
+        updateAudioFxUI();
+        if (window.unlockAchievement) {
+            window.unlockAchievement('fx_master');
+        }
+        if (window.showPremiumToast) {
+            const preset = CONFIG.audioFx?.presets?.find(p => p.id === presetId);
+            window.showPremiumToast(`Bộ lọc âm thanh: ${preset ? preset.name : presetId}`, preset ? preset.icon : 'fa-sliders');
+        }
+        if (window.playSfx) window.playSfx('click');
+    }
+
+    function updateAudioFxUI() {
+        if (!audioFxMenu) return;
+        const items = audioFxMenu.querySelectorAll('.audio-fx-item');
+        items.forEach(item => {
+            const id = item.dataset.id;
+            item.classList.toggle('active', id === currentAudioFx);
+        });
+        if (audioFxBtn) {
+            audioFxBtn.classList.toggle('active', currentAudioFx !== 'hifi');
+            const preset = CONFIG.audioFx?.presets?.find(p => p.id === currentAudioFx);
+            audioFxBtn.title = `Audio FX: ${preset ? preset.name : currentAudioFx}`;
+        }
+    }
+
+    function initAudioFxMenu() {
+        if (!audioFxMenu || !CONFIG.audioFx || !CONFIG.audioFx.presets) return;
+        audioFxMenu.innerHTML = `
+            <div class="audio-fx-header">
+                <span><i class="fas fa-sliders"></i> STUDIO EQUALIZER</span>
+            </div>
+        `;
+
+        CONFIG.audioFx.presets.forEach(p => {
+            const item = document.createElement('div');
+            item.className = `audio-fx-item ${p.id === currentAudioFx ? 'active' : ''}`;
+            item.dataset.id = p.id;
+            item.innerHTML = `
+                <div class="audio-fx-icon"><i class="fas ${p.icon}"></i></div>
+                <div class="audio-fx-info">
+                    <div class="audio-fx-name">${p.name}</div>
+                    <div class="audio-fx-desc">${p.desc}</div>
+                </div>
+            `;
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setAudioFx(p.id);
+                audioFxMenu.classList.remove('show');
+            });
+            audioFxMenu.appendChild(item);
+        });
+
+        if (audioFxBtn) {
+            audioFxBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (window.playSfx) window.playSfx('click');
+                const willShow = !audioFxMenu.classList.contains('show');
+                if (playlistMenu) playlistMenu.classList.remove('show');
+                audioFxMenu.classList.toggle('show', willShow);
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (audioFxMenu && !audioFxMenu.contains(e.target) && e.target !== audioFxBtn) {
+                audioFxMenu.classList.remove('show');
+            }
+        });
+
+        updateAudioFxUI();
+    }
 
     // Khởi tạo Playlist Menu có Thanh Tìm Kiếm Trực Tiếp (Live Search)
     function initPlaylistMenu() {
@@ -293,6 +417,7 @@
         localStorage.setItem('saved_song_file', song.file);
         updatePlaylistActiveItem();
         updateMediaSession(song);
+        syncDiscordActivity(song, isAudioPlaying);
     }
 
     function initAudioContext() {
@@ -306,8 +431,12 @@
             analyser.smoothingTimeConstant = 0.82;
 
             gainNode = audioCtx.createGain();
+            eqFilter = audioCtx.createBiquadFilter();
+            applyEqSettings(currentAudioFx);
+
             audioSource = audioCtx.createMediaElementSource(audio);
-            audioSource.connect(gainNode);
+            audioSource.connect(eqFilter);
+            eqFilter.connect(gainNode);
             gainNode.connect(analyser);
             analyser.connect(audioCtx.destination);
         } catch (err) {
@@ -327,11 +456,14 @@
             if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
             if (musicPanel) musicPanel.classList.add('playing');
             updatePlaylistActiveItem();
+            syncDiscordActivity(activePlaylist[currentFilteredIndex], true);
+            if (window.unlockAchievement) window.unlockAchievement('audiophile');
         }).catch(err => {
             console.warn("Autoplay notice:", err);
             isAudioPlaying = false;
             if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
             if (musicPanel) musicPanel.classList.remove('playing');
+            syncDiscordActivity(activePlaylist[currentFilteredIndex], false);
         });
     }
 
@@ -342,6 +474,7 @@
         if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
         if (musicPanel) musicPanel.classList.remove('playing');
         updatePlaylistActiveItem();
+        syncDiscordActivity(activePlaylist[currentFilteredIndex], false);
     }
 
     function toggleAudio() {
@@ -470,6 +603,16 @@
 
             const barHeight = Math.max(2, (val / 255) * totalHeight);
 
+            // Peak Meters calculation with gravity drop
+            if (barHeight > peakValues[i]) {
+                peakValues[i] = barHeight;
+                peakHold[i] = 10;
+            } else if (peakHold[i] > 0) {
+                peakHold[i]--;
+            } else {
+                peakValues[i] = Math.max(0, peakValues[i] - 0.45);
+            }
+
             const gradient = vCtx.createLinearGradient(0, totalHeight, 0, totalHeight - barHeight);
             gradient.addColorStop(0, waifuColor);
             gradient.addColorStop(1, waifuSecondary);
@@ -477,9 +620,13 @@
             vCtx.fillStyle = gradient;
             vCtx.fillRect(x, totalHeight - barHeight, barWidth, barHeight);
 
-            // Glowing bar cap
+            // Glowing Peak LED Cap
+            const peakY = Math.max(1, totalHeight - peakValues[i]);
             vCtx.fillStyle = '#ffffff';
-            vCtx.fillRect(x, Math.max(0, totalHeight - barHeight - 1), barWidth, 1.2);
+            vCtx.shadowColor = waifuColor;
+            vCtx.shadowBlur = 4;
+            vCtx.fillRect(x, peakY, barWidth, 1.5);
+            vCtx.shadowBlur = 0;
 
             x += barWidth + 1.5;
         }
@@ -673,6 +820,7 @@
     updateCategoryTabsUI();
     updateControlsStateUI();
     initPlaylistMenu();
+    initAudioFxMenu();
     loadSong(currentFilteredIndex);
     const savedVol = localStorage.getItem('saved_player_volume');
     setVolume(savedVol !== null ? parseInt(savedVol, 10) : (CONFIG.music.defaultVolume || 45));

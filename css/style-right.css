@@ -311,6 +311,107 @@
     box-shadow: 0 0 28px var(--waifu-glow, rgba(0, 242, 254, 0.7));
 }
 
+/* Audio FX Equalizer Selector */
+.audio-fx-dropdown-wrap {
+    position: relative;
+}
+
+.audio-fx-ctrl.active {
+    color: var(--waifu-color, #00f2fe);
+    text-shadow: 0 0 10px var(--waifu-glow, rgba(0, 242, 254, 0.5));
+}
+
+.audio-fx-menu {
+    position: absolute;
+    bottom: 46px;
+    left: -110px;
+    width: 250px;
+    background: rgba(10, 14, 28, 0.98);
+    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.35));
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.85), 0 0 25px var(--waifu-glow, rgba(0, 242, 254, 0.2));
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 100;
+    backdrop-filter: blur(26px);
+}
+
+.audio-fx-menu.show {
+    display: flex;
+}
+
+.audio-fx-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 6px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Fira Code', monospace;
+}
+
+.audio-fx-header span {
+    color: var(--waifu-color, #00f2fe);
+}
+
+.audio-fx-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.audio-fx-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--waifu-color, rgba(0, 242, 254, 0.3));
+    transform: translateX(2px);
+}
+
+.audio-fx-item.active {
+    background: rgba(0, 242, 254, 0.12);
+    border-color: var(--waifu-color, #00f2fe);
+    box-shadow: 0 0 14px var(--waifu-glow, rgba(0, 242, 254, 0.2));
+}
+
+.audio-fx-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--waifu-color, #00f2fe);
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.audio-fx-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.audio-fx-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.audio-fx-desc {
+    font-size: 8.5px;
+    color: var(--text-muted);
+}
+
 /* Playlist dropdown & Search */
 .playlist-dropdown-wrap {
     position: relative;

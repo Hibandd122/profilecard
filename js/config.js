@@ -144,6 +144,7 @@ const CONFIG = {
                 rank: 1,
                 affection: 100,
                 role: "Angel of Light",
+                voiceLine: "Tôi sẽ luôn ở đây chuẩn bị bữa tối ấm áp và cùng bạn lắng nghe những giai điệu này nhé! ✨",
                 image: "assets/avatar1.png",
                 banner: "assets/banner1.png",
                 bannerPhone: "assets/bannertop1_phone.jpg"
@@ -160,6 +161,7 @@ const CONFIG = {
                 rank: 2,
                 affection: 96,
                 role: "Moonlight Empress",
+                voiceLine: "O-O kawaii koto... Muốn nghe nhạc cùng ta sao? Không phải là ta thích đâu đấy! 🌸",
                 image: "assets/avatar2.png",
                 banner: "assets/bannertop2.jpg",
                 bannerPhone: "assets/bannertop2_phone.jpg"
@@ -176,6 +178,7 @@ const CONFIG = {
                 rank: 3,
                 affection: 93,
                 role: "Astral Navigator",
+                voiceLine: "Tọa độ thiên hà đã được thiết lập, hãy để âm nhạc dẫn lối cho chuyến du hành này! 🚀",
                 image: "assets/avatar3.png",
                 banner: "assets/bannertop3.jpg",
                 bannerPhone: "assets/bannertop3_phone.jpg"
@@ -192,6 +195,7 @@ const CONFIG = {
                 rank: 4,
                 affection: 90,
                 role: "Glacial Archmage",
+                voiceLine: "Phép thuật băng giá vĩnh cửu cũng không thể làm nguội lạnh đi giai điệu tuyệt đẹp này được đâu ❄️",
                 image: "assets/avatar4.png",
                 banner: "assets/banner4.png",
                 bannerPhone: "assets/bannertop4_phone.jpg"
@@ -208,6 +212,7 @@ const CONFIG = {
                 rank: 5,
                 affection: 87,
                 role: "Solar Vanguard",
+                voiceLine: "Năng lượng hôm nay đang bùng nổ! Cùng quẩy hết mình với nhịp điệu rực cháy nào! 🔥",
                 image: "assets/avatar5.png",
                 banner: "assets/banner5.png",
                 bannerPhone: "assets/bannertop5_phone.jpg"
@@ -224,12 +229,45 @@ const CONFIG = {
                 rank: 6,
                 affection: 84,
                 role: "Cyber Sweetheart",
+                voiceLine: "Gửi đến bạn 1000% ngọt ngào và năng lượng tích cực cho cả ngày dài nhé! 💖",
                 image: "assets/avatar6.png",
                 banner: "assets/banner6.png",
                 bannerPhone: "assets/bannertop6_phone.jpg"
             }
         ]
-    }
+    },
+
+    // Audio FX Equalizer Presets
+    audioFx: {
+        presets: [
+            { id: "hifi", name: "Studio Hi-Fi", icon: "fa-headphones", desc: "Âm thanh nguyên bản trung thực" },
+            { id: "bass", name: "Bass Boost", icon: "fa-bolt", desc: "Tăng cường dải trầm mạnh mẽ (+6dB)" },
+            { id: "lofi", name: "Lo-Fi Warmth", icon: "fa-record-vinyl", desc: "Ấm áp hoài niệm phong cách retro" },
+            { id: "vocal", name: "Vocal Clarity", icon: "fa-microphone", desc: "Tối ưu giọng hát trong trẻo" }
+        ]
+    },
+
+    // Hệ thống Thành Tựu Mini (Cosmic Achievements)
+    achievements: [
+        { id: "voyager", title: "Nhà Du Hành Tinh Tú", desc: "Khám phá trọn bộ 6 nhân vật Waifu", icon: "fa-compass" },
+        { id: "audiophile", title: "Thính Giả Ngân Hà", desc: "Thưởng thức âm nhạc trên player", icon: "fa-music" },
+        { id: "fx_master", title: "Phù Thủy Âm Thanh", desc: "Trải nghiệm bộ lọc Studio Audio FX", icon: "fa-sliders" },
+        { id: "stargazer", title: "Góc Nhìn Toàn Cảnh", desc: "Mở chế độ xem toàn cảnh Banner 16:9", icon: "fa-expand" },
+        { id: "mahiru_love", title: "Tình Cảm Tuyệt Đối", desc: "Tương tác với Shiina Mahiru", icon: "fa-heart" }
+    ],
+
+    // Danh sách phím tắt hệ thống
+    shortcuts: [
+        { key: "Space", desc: "Phát / Dừng bài hát" },
+        { key: "J / K", desc: "Bài trước / Bài kế tiếp" },
+        { key: "M", desc: "Bật / Tắt âm thanh (Mute)" },
+        { key: "S", desc: "Bật / Tắt phát ngẫu nhiên (Shuffle)" },
+        { key: "R", desc: "Đổi chế độ lặp lại (Tất cả / 1 bài / Tắt)" },
+        { key: "B", desc: "Bật / Tắt chế độ xem Banner 16:9" },
+        { key: "1 - 6", desc: "Đổi nhanh nhân vật Waifu 1 - 6" },
+        { key: "Q", desc: "Mở mã QR Profile" },
+        { key: "?", desc: "Bật bảng hướng dẫn phím tắt" }
+    ]
 };
 
 if (!CONFIG.avatars || CONFIG.avatars.length === 0) {

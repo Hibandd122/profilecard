@@ -125,6 +125,42 @@
         }
     }
 
+    // Cập nhật hộp thoại tương tác của Waifu
+    function updateWaifuDialogue(waifu) {
+        if (!waifu) return;
+        const dialogueName = document.getElementById('dialogue-name');
+        const dialogueRole = document.getElementById('dialogue-role');
+        const dialogueText = document.getElementById('dialogue-text');
+
+        if (dialogueName) dialogueName.innerText = waifu.name;
+        if (dialogueRole) dialogueRole.innerText = waifu.role || waifu.title;
+        if (dialogueText && waifu.voiceLine) {
+            dialogueText.style.opacity = '0';
+            dialogueText.style.transform = 'translateY(4px)';
+            setTimeout(() => {
+                dialogueText.innerText = `"${waifu.voiceLine}"`;
+                dialogueText.style.opacity = '1';
+                dialogueText.style.transform = 'translateY(0)';
+            }, 150);
+        }
+    }
+
+    // Ghi nhận thành tựu khám phá Waifu
+    function trackWaifuExploration(index) {
+        try {
+            const raw = localStorage.getItem('mahikari_explored_waifus');
+            const set = raw ? new Set(JSON.parse(raw)) : new Set();
+            set.add(index);
+            localStorage.setItem('mahikari_explored_waifus', JSON.stringify([...set]));
+            if (set.size >= 6 && window.unlockAchievement) {
+                window.unlockAchievement('voyager');
+            }
+            if (index === 0 && window.unlockAchievement) {
+                window.unlockAchievement('mahiru_love');
+            }
+        } catch (_) {}
+    }
+
     function setAvatar(index, triggerSound = false) {
         avatarImg = document.getElementById('char-avatar');
         discordAvatarImg = document.getElementById('discord-avatar-img');
@@ -177,8 +213,10 @@
             item.setAttribute('aria-pressed', isEquipped ? 'true' : 'false');
         });
 
-        // Áp dụng chủ đề màu sắc Waifu
+        // Áp dụng chủ đề màu sắc & hộp thoại Waifu
         applyWaifuTheme(waifu);
+        updateWaifuDialogue(waifu);
+        trackWaifuExploration(currentAvatarIndex);
         updateFavicon(targetSrc);
         updateTitle();
 

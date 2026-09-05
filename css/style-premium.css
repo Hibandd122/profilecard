@@ -308,6 +308,223 @@ body.light-mode::after {
 }
 
 /* ========================================================
+   HUD MODALS (SHORTCUTS & ACHIEVEMENTS)
+======================================================== */
+.hud-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    background: rgba(3, 5, 12, 0.78);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hud-modal-box {
+    background: rgba(10, 15, 30, 0.95);
+    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.4));
+    border-radius: 22px;
+    padding: 24px;
+    max-width: 440px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--waifu-glow, rgba(0, 242, 254, 0.25));
+    transform: scale(0.92) translateY(12px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hud-modal-overlay.active .hud-modal-box {
+    transform: scale(1) translateY(0);
+}
+
+.hud-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-secondary);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.hud-close-btn:hover {
+    color: #ffffff;
+    border-color: #ff4757;
+    background: rgba(255, 71, 87, 0.2);
+}
+
+.hud-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--waifu-color, #00f2fe);
+    margin-bottom: 6px;
+}
+
+.hud-modal-header i {
+    font-size: 18px;
+}
+
+.hud-modal-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.hud-modal-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+/* Shortcuts Grid */
+.shortcuts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    max-height: 290px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 12px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    transition: border-color 0.2s ease;
+}
+
+.shortcut-item:hover {
+    border-color: var(--waifu-color, rgba(0, 242, 254, 0.3));
+}
+
+.shortcut-key-badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--waifu-color, #00f2fe);
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.3));
+    padding: 3px 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+}
+
+.shortcut-desc {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: right;
+}
+
+/* Achievements List */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 310px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.achievement-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+.achievement-card.unlocked {
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.4);
+    box-shadow: 0 0 16px rgba(251, 191, 36, 0.15);
+}
+
+.achievement-icon-wrap {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.achievement-card.unlocked .achievement-icon-wrap {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.35);
+}
+
+.achievement-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.achievement-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.achievement-card.unlocked .achievement-title {
+    color: #fbbf24;
+}
+
+.achievement-desc {
+    font-size: 9.5px;
+    color: var(--text-muted);
+}
+
+.achievement-status {
+    font-size: 9px;
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-muted);
+}
+
+.achievement-card.unlocked .achievement-status {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* ========================================================
    TOAST NOTIFICATIONS
 ======================================================== */
 .toast-region {
