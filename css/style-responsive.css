@@ -1,9 +1,13 @@
 /* ========================================================
-   ULTRA-SMOOTH MOBILE OPTIMIZATIONS (60FPS+ ADAPTIVE LAYOUT)
+   ULTRA-SMOOTH ADAPTIVE RESPONSIVE STYLES V11.0
+   - Perfect layout from 320px ultra-compact to 4K displays
+   - 60-144 FPS Hardware-Accelerated Optimization
 ======================================================== */
+
 @media (max-width: 860px) {
     body {
         padding: 0.6rem 0.4rem;
+        align-items: flex-start;
     }
 
     .card-wrapper {
@@ -14,8 +18,9 @@
     .card-container {
         border-radius: 24px;
         min-height: auto;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        transform: none !important;
     }
 
     .card-content-grid {
@@ -46,6 +51,7 @@
 
     .card-top-bar {
         padding: 10px 14px;
+        min-height: 52px;
     }
 
     .status-pill {
@@ -53,11 +59,14 @@
         padding: 4px 10px;
     }
 
-    /* Tắt các layer nặng và blur trên mobile để tăng tốc GPU lên 60-120 FPS */
+    .live-chip {
+        display: none;
+    }
+
+    /* Tắt các layer nặng và blur trên mobile để giữ 60-120 FPS */
     .nebula, 
     .cosmic-whirl, 
-    .cosmic-whirl.secondary,
-    .spark-field {
+    .cosmic-whirl.secondary {
         display: none !important;
     }
 
@@ -65,14 +74,9 @@
         filter: none !important;
     }
 
-    .music-panel {
-        padding: 12px 14px;
-        backdrop-filter: none;
-    }
-
+    .music-panel,
     .waifu-panel {
-        padding: 12px 14px;
-        backdrop-filter: none;
+        padding: 13px 14px;
     }
 
     .music-category-nav {
@@ -84,11 +88,46 @@
         font-size: 9px;
         padding: 4px 6px;
     }
+
+    .playlist-menu {
+        left: 50% !important;
+        transform: translateX(-50%);
+        width: min(320px, calc(100vw - 2.5rem));
+    }
 }
 
 @media (max-width: 480px) {
     .card-container {
-        border-radius: 20px;
+        border-radius: 22px;
+    }
+
+    .card-top-bar {
+        padding: 8px 10px;
+    }
+
+    .clock-pill {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+
+    .banner-mode-btn span {
+        display: none;
+    }
+
+    .banner-mode-btn {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .icon-button {
+        width: 32px;
+        height: 32px;
+    }
+
+    .top-bar-actions {
+        gap: 5px;
     }
 
     .avatar-zone {
@@ -97,12 +136,16 @@
     }
 
     .avatar-img {
-        width: 110px;
-        height: 110px;
+        max-height: 120%;
     }
 
     .gradient-glitch {
         font-size: 22px;
+    }
+
+    .profile-tagline {
+        font-size: 8.5px;
+        max-width: 250px;
     }
 
     .social-panel {
@@ -112,45 +155,96 @@
     .social-icon {
         width: 38px;
         height: 38px;
-        font-size: 16px;
-        border-radius: 12px;
+        font-size: 15px;
+        border-radius: 10px;
     }
 
     .player-controls {
-        gap: 8px;
+        gap: 6px;
+        justify-content: space-between;
     }
 
     .play-circle {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         font-size: 14px;
     }
 
-    .volume-dock input {
+    .ctrl {
+        font-size: 13px;
+        padding: 4px;
+    }
+
+    .volume-dock {
+        gap: 4px;
+    }
+
+    .volume-dock input[type=range] {
         width: 45px;
     }
 
     .glitch-text {
-        font-size: 22px !important;
-        letter-spacing: 5px !important;
+        font-size: 24px !important;
+        letter-spacing: 6px !important;
     }
 
     .tap-pulse {
         font-size: 11px !important;
-        padding: 8px 16px !important;
+        padding: 9px 18px !important;
         letter-spacing: 1px !important;
     }
 
     .waifu-item {
-        padding: 6px 8px;
+        padding: 7px 9px;
+        gap: 8px;
     }
 
-    .waifu-thumb {
+    .waifu-thumb-wrap {
         width: 30px;
         height: 30px;
     }
 
     .waifu-name {
-        font-size: 11px;
+        font-size: 11.5px;
+    }
+
+    .waifu-role-tag {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    .card-top-bar {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 4px;
+    }
+
+    .stat-item strong {
+        font-size: 14px;
+    }
+
+    .stat-item span {
+        font-size: 7px;
+    }
+
+    .profile-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

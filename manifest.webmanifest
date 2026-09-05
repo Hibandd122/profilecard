@@ -1,0 +1,19 @@
+{
+  "name": "Mahikari · Cosmic Profile Card",
+  "short_name": "Mahikari",
+  "description": "Premium cosmic profile card with anime art, music and links.",
+  "lang": "vi",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070913",
+  "theme_color": "#070913",
+  "icons": [
+    {
+      "src": "/assets/avatar1.png",
+      "sizes": "547x600",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

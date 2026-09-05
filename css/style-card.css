@@ -1,59 +1,61 @@
 /* ========================================================
-   MAIN BIOLINK CARD STYLES
+   MAIN BIOLINK CARD STYLES V11.0 (OBSIDIAN GLASS)
 ======================================================== */
 .card-wrapper {
     width: 100%;
-    max-width: 920px;
+    max-width: 960px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px auto;
     z-index: 100;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    perspective: 1200px;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body.banner-view-mode .card-wrapper {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.95);
     pointer-events: none;
 }
 
 .card-container {
     width: 100%;
     min-height: 560px;
-    background: rgba(14, 18, 34, 0.72);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-radius: 28px;
+    background: rgba(12, 16, 32, 0.74);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2),
-                0 30px 80px -15px rgba(0, 0, 0, 0.9),
-                0 0 40px rgba(0, 242, 254, 0.12);
+    box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.22),
+                0 32px 85px -15px rgba(0, 0, 0, 0.9),
+                0 0 50px var(--waifu-glow, rgba(0, 242, 254, 0.14));
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    transition: box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 200;
 }
 
 body.light-mode .card-container {
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
                 0 25px 70px -15px rgba(99, 102, 241, 0.2),
                 0 0 35px rgba(236, 72, 153, 0.15);
 }
 
 .card-container:hover {
-    border-color: rgba(0, 242, 254, 0.35);
-    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
-                0 35px 90px -20px rgba(0, 0, 0, 0.95),
-                0 0 50px rgba(0, 242, 254, 0.22);
+    border-color: var(--waifu-color, rgba(0, 242, 254, 0.4));
+    box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
+                0 38px 95px -20px rgba(0, 0, 0, 0.95),
+                0 0 65px var(--waifu-glow, rgba(0, 242, 254, 0.25));
 }
 
 /* ========================================================
-   RGB GLOWING BORDER FLOW
+   RGB GLOWING BORDER FLOW (DYNAMIC WAIFU REACTIVE)
 ======================================================== */
 .rgb-flow {
     position: absolute;
@@ -61,23 +63,23 @@ body.light-mode .card-container {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 28px;
+    border-radius: 30px;
     padding: 1.5px;
-    background: linear-gradient(90deg, #00f2fe, #8b5cf6, #ec4899, #fbbf24, #00f2fe);
+    background: linear-gradient(90deg, var(--waifu-color, #00f2fe), var(--waifu-secondary, #ec4899), #00f2fe, #8b5cf6, var(--waifu-color, #00f2fe));
     background-size: 400% 100%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: rgbFlowAnim 10s linear infinite;
+    animation: rgbFlowAnim 9s linear infinite;
     pointer-events: none;
     z-index: 10;
-    opacity: 0.55;
+    opacity: 0.65;
 }
 
 .rgb-flow.reverse {
-    background: linear-gradient(270deg, #00f2fe, #8b5cf6, #ec4899, #fbbf24, #00f2fe);
+    background: linear-gradient(270deg, var(--waifu-color, #00f2fe), #8b5cf6, var(--waifu-secondary, #ec4899), var(--waifu-color, #00f2fe));
     animation: rgbFlowReverse 12s linear infinite;
-    opacity: 0.25;
+    opacity: 0.35;
 }
 
 @keyframes rgbFlowAnim {
@@ -97,9 +99,9 @@ body.light-mode .card-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 22px;
+    padding: 13px 24px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.025);
     gap: 12px;
     z-index: 20;
     position: relative;
@@ -124,44 +126,43 @@ body.light-mode .card-container {
 
 .status-pill:hover {
     color: var(--text-primary);
-    border-color: var(--glow-primary);
+    border-color: var(--waifu-color, var(--glow-primary));
     background: rgba(0, 242, 254, 0.1);
-    box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
+    box-shadow: 0 0 14px var(--waifu-glow, rgba(0, 242, 254, 0.2));
 }
 
 .banner-mode-btn {
     cursor: pointer;
     background: rgba(0, 242, 254, 0.08);
     border-color: rgba(0, 242, 254, 0.3);
-    color: var(--glow-primary);
+    color: var(--waifu-color, var(--glow-primary));
     font-weight: 700;
 }
 
 .banner-mode-btn:hover {
-    background: rgba(0, 242, 254, 0.18);
-    border-color: var(--glow-primary);
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.35);
+    background: rgba(0, 242, 254, 0.2);
+    border-color: var(--waifu-color, var(--glow-primary));
+    box-shadow: 0 0 16px var(--waifu-glow, rgba(0, 242, 254, 0.35));
     transform: translateY(-1px);
 }
 
 .status-pill i {
-    color: var(--glow-primary);
+    color: var(--waifu-color, var(--glow-primary));
 }
 
 .clock-pill i {
-    color: #00f2fe;
+    color: var(--waifu-color, #00f2fe);
 }
 
-.top-controls {
+.top-bar-actions {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: auto;
 }
 
-.theme-toggle {
-    width: 32px;
-    height: 32px;
+.icon-button {
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -171,40 +172,29 @@ body.light-mode .card-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.25s ease;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
 }
 
-.theme-toggle:hover {
+.icon-button:hover {
     transform: scale(1.1);
-    border-color: var(--glow-primary);
-    box-shadow: 0 0 15px var(--hover-glow);
+    border-color: var(--waifu-color, var(--glow-primary));
+    box-shadow: 0 0 14px var(--waifu-glow, var(--hover-glow));
     background: rgba(0, 242, 254, 0.12);
 }
 
-.theme-toggle .fa-sun {
-    display: block;
-}
-
-.theme-toggle .fa-moon {
-    display: none;
-}
-
-body.light-mode .theme-toggle .fa-sun {
-    display: none;
-}
-
-body.light-mode .theme-toggle .fa-moon {
-    display: block;
-}
+.theme-toggle .fa-sun { display: block; }
+.theme-toggle .fa-moon { display: none; }
+body.light-mode .theme-toggle .fa-sun { display: none; }
+body.light-mode .theme-toggle .fa-moon { display: block; }
 
 /* ========================================================
    CONTENT 2-COLUMN GRID LAYOUT
 ======================================================== */
 .card-content-grid {
     display: grid;
-    grid-template-columns: 340px 1fr;
-    min-height: 490px;
+    grid-template-columns: 350px 1fr;
+    min-height: 500px;
     position: relative;
     z-index: 15;
 }

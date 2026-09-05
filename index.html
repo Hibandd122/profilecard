@@ -2,28 +2,41 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Mahikari · Profile Card</title>
-    <meta name="description" content="Mahikari's official cosmic biolink profile card. Music player, waifu collection, and interactive cosmic aesthetic.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mahikari · Cosmic Profile Card</title>
+    <meta name="description" content="Mahikari's cosmic waifu biolink & profile card — anime aesthetic, studio music player, dynamic waifu theme, and 60-144 FPS adaptive rendering.">
+    <meta name="theme-color" content="#070913">
+    <meta name="color-scheme" content="dark light">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Mahikari · Cosmic Profile Card">
+    <meta property="og:description" content="A premium anime-inspired profile, studio music player and interactive waifu collection.">
+    <meta property="og:image" content="assets/bannertop1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="assets/avatar1.png">
+    <link rel="apple-touch-icon" href="assets/avatar1.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="preload" as="image" href="assets/bannertop1.jpg" fetchpriority="high">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Inter, Outfit, Fira Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome Icons 6.5.1 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
-    <!-- CSS stylesheets with cache-busting -->
-    <link rel="stylesheet" href="css/style-base.css?v=8.0">
-    <link rel="stylesheet" href="css/style-backgrounds.css?v=8.0">
-    <link rel="stylesheet" href="css/style-card.css?v=8.0">
-    <link rel="stylesheet" href="css/style-left.css?v=8.0">
-    <link rel="stylesheet" href="css/style-right.css?v=8.0">
-    <link rel="stylesheet" href="css/style-responsive.css?v=8.0">
+    <!-- Stylesheets with Cache Busting v11.0 -->
+    <link rel="stylesheet" href="css/style-base.css?v=11.0">
+    <link rel="stylesheet" href="css/style-backgrounds.css?v=11.0">
+    <link rel="stylesheet" href="css/style-card.css?v=11.0">
+    <link rel="stylesheet" href="css/style-left.css?v=11.0">
+    <link rel="stylesheet" href="css/style-right.css?v=11.0">
+    <link rel="stylesheet" href="css/style-responsive.css?v=11.0">
+    <link rel="stylesheet" href="css/style-premium.css?v=11.0">
 </head>
 <body>
+
+    <a class="skip-link" href="#profile-content">Bỏ qua đến nội dung chính</a>
 
     <!-- CLICK TO ENTER SPLASH OVERLAY -->
     <div class="overlay" id="start-overlay">
@@ -38,6 +51,7 @@
                 <i class="fas fa-volume-high pulse-icon"></i>
                 <span>[ CLICK ANYWHERE TO ENTER ]</span>
             </div>
+            <div class="overlay-subtext">Cosmic Biolink & Waifu Studio 2.0</div>
         </div>
     </div>
 
@@ -52,9 +66,9 @@
     </div>
 
     <!-- FLOATING RETURN BUTTON IN BANNER VIEW MODE -->
-    <div class="banner-mode-overlay" id="banner-mode-overlay">
+    <div class="banner-mode-overlay" id="banner-mode-overlay" role="button" tabindex="0" aria-label="Quay lại hồ sơ">
         <i class="fas fa-arrow-left"></i>
-        <span>Chạm bất kỳ đâu để quay lại hồ sơ</span>
+        <span>Chạm bất kỳ đâu hoặc phím ESC để quay lại</span>
     </div>
 
     <!-- BACKGROUND CANVAS & AMBIENCE -->
@@ -63,35 +77,56 @@
     <div class="cosmic-whirl"></div>
     <div class="cosmic-whirl secondary"></div>
 
-    <!-- MAIN BIOLINK CARD (NO TILT) -->
-    <div class="card-wrapper">
-        <div class="card-container" id="main-card">
-            <!-- Animated Glowing Neon Borders -->
+    <!-- MAIN BIOLINK CARD -->
+    <main class="card-wrapper" id="profile-content">
+        <div class="card-container" id="main-card" aria-labelledby="profile-name">
+            <!-- Animated Glowing Neon Borders Reactive to Waifu -->
             <span class="rgb-flow"></span>
             <span class="rgb-flow reverse"></span>
 
-            <!-- TOP STATUS BAR (ONLY DARK MODE) -->
-            <div class="card-top-bar">
-                <div class="status-pill clock-pill">
+            <!-- TOP STATUS BAR -->
+            <header class="card-top-bar">
+                <div class="status-pill clock-pill" title="Giờ Việt Nam (GMT+7)">
                     <i class="fas fa-clock"></i>
-                    <span id="live-clock">VN 00:00:00</span>
+                    <span id="live-clock">VN --:--:--</span>
                 </div>
-                
-                <button class="status-pill banner-mode-btn" id="toggle-banner-view" title="Xem trọn vẹn hình nền banner 16:9">
-                    <i class="fas fa-image"></i>
-                    <span>Xem Banner 16:9</span>
-                </button>
-            </div>
+
+                <div class="top-bar-actions">
+                    <span class="live-chip"><span class="live-dot"></span> LIVE COSMOS</span>
+                    
+                    <!-- Sound Effects (SFX) Toggle -->
+                    <button class="icon-button sfx-btn" id="sfx-toggle" type="button" title="Bật/Tắt hiệu ứng âm thanh (SFX)" aria-label="Bật/Tắt âm thanh">
+                        <i class="fas fa-volume-high"></i>
+                    </button>
+
+                    <!-- QR Code Modal Button -->
+                    <button class="icon-button qr-btn" id="qr-modal-btn" type="button" title="Mở mã QR Profile" aria-label="Mở mã QR Profile">
+                        <i class="fas fa-qrcode"></i>
+                    </button>
+
+                    <!-- Banner 16:9 View Button -->
+                    <button class="status-pill banner-mode-btn" id="toggle-banner-view" type="button" title="Xem trọn vẹn hình nền banner 16:9" aria-label="Xem trọn vẹn banner 16:9">
+                        <i class="fas fa-image"></i>
+                        <span>Banner 16:9</span>
+                    </button>
+
+                    <!-- Dark / Light Theme Toggle -->
+                    <button class="icon-button theme-toggle" id="theme-toggle" type="button" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối">
+                        <i class="fas fa-sun" aria-hidden="true"></i>
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </header>
 
             <div class="card-content-grid">
                 <!-- CỘT TRÁI (HERO / PROFILE IDENTITY) -->
                 <div class="col-left">
-                    <div class="avatar-zone">
+                    <div class="avatar-zone" id="avatar-zone-wrap">
                         <div class="ripple-ground"><span></span><span></span><span></span></div>
                         <div class="halo-rotate"></div>
                         <div class="halo-rotate outer"></div>
-                        <img src="assets/avatar1.png" alt="Mahikari Avatar" class="avatar-img" id="char-avatar" title="Click để bắn tim & đổi avatar!">
-                        <div class="avatar-status-badge online" title="Status: Online"></div>
+                        <img src="assets/avatar1.png" alt="Mahikari Avatar" class="avatar-img" id="char-avatar" title="Click để bắn hiệu ứng & đổi Waifu!">
+                        <div class="avatar-status-badge online" title="Status: Online & Vibing"></div>
                     </div>
 
                     <!-- Waifu Avatar Dots Selector -->
@@ -102,18 +137,35 @@
                     <!-- Profile Name & Badges -->
                     <div class="title-area">
                         <div class="name-row">
-                            <h1 class="gradient-glitch" data-text="Mahikari">Mahikari</h1>
-                            <span class="badge-verified" title="Verified Creator"><i class="fas fa-circle-check"></i></span>
-                            <span class="badge-crown" title="Cosmic VIP"><i class="fas fa-crown"></i></span>
+                            <h1 class="gradient-glitch" id="profile-name" data-text="Mahikari">Mahikari</h1>
+                            <span class="badge-verified" title="Verified Anime Creator"><i class="fas fa-circle-check"></i></span>
+                            <span class="badge-crown" title="Cosmic VIP Explorer"><i class="fas fa-crown"></i></span>
                         </div>
                         <div class="handle-tag">@mahikari</div>
+                        <p class="profile-tagline">Cosmic voyager <span>·</span> developer <span>·</span> anime enthusiast</p>
                     </div>
 
-                    <!-- Bio Quote Card -->
+                    <!-- Stats Badges -->
+                    <div class="profile-stats" aria-label="Thông tin nhanh">
+                        <div class="stat-item" title="6 nhân vật waifu tuyển chọn"><strong>06</strong><span>waifus</span></div>
+                        <div class="stat-item" title="33 bài hát anime & lofi hay nhất"><strong>33</strong><span>tracks</span></div>
+                    </div>
+
+                    <!-- Bio Quote Card with Shuffle -->
                     <div class="bio-quote-card">
                         <i class="fas fa-quote-left quote-icon"></i>
                         <p id="quote-text">Exploring the endless cosmos with waifus & lo-fi beats ✨</p>
-                        <button id="quote-refresh" title="Đổi quote ngẫu nhiên"><i class="fas fa-shuffle"></i></button>
+                        <button id="quote-refresh" type="button" title="Đổi câu nói ngẫu nhiên" aria-label="Đổi câu nói"><i class="fas fa-shuffle"></i></button>
+                    </div>
+
+                    <!-- Action Buttons (Copy & Share) -->
+                    <div class="profile-actions" aria-label="Thao tác hồ sơ">
+                        <button class="action-button action-primary" id="copy-profile" type="button">
+                            <i class="fas fa-link" aria-hidden="true"></i><span>Copy link</span>
+                        </button>
+                        <button class="action-button action-secondary" id="share-profile" type="button">
+                            <i class="fas fa-arrow-up-from-bracket" aria-hidden="true"></i><span>Share</span>
+                        </button>
                     </div>
 
                     <!-- Discord User Badge in Left Column -->
@@ -156,8 +208,8 @@
 
                 <!-- CỘT PHẢI (WIDGETS & EMBEDDED MEDIA) -->
                 <div class="col-right">
-                    
-                    <!-- 1. INTEGRATED MUSIC PLAYER -->
+
+                    <!-- 1. COSMIC MUSIC PLAYER 2.0 (STUDIO EDITION) -->
                     <div class="music-panel">
                         <div class="panel-header-row">
                             <div class="panel-title"><i class="fas fa-compact-disc spin-icon"></i> COSMIC MUSIC PLAYER</div>
@@ -166,7 +218,7 @@
 
                         <!-- CATEGORY FILTER TABS -->
                         <div class="music-category-nav" id="music-category-nav">
-                            <button class="cat-tab active" data-cat="all" title="Toàn bộ 33 bài hát"><i class="fas fa-layer-group"></i> Tất cả</button>
+                            <button class="cat-tab active" data-cat="all" title="Toàn bộ 33 bài hát"><i class="fas fa-layer-group"></i> Tất cả (33)</button>
                             <button class="cat-tab" data-cat="angel" title="Mục 1: Thiên sứ nhà bên (7 bài)"><i class="fas fa-feather-alt"></i> Mục 1: Thiên Sứ</button>
                             <button class="cat-tab" data-cat="cpk" title="Mục 2: CPK Music (26 bài)"><i class="fas fa-bolt"></i> Mục 2: CPK</button>
                         </div>
@@ -183,7 +235,7 @@
                                     <span id="track-name" class="track-title">Chiisana Koi no Uta</span>
                                 </div>
                                 <div class="track-artist" id="track-artist">Iwami Manaka</div>
-                                <canvas id="frequency-vis" width="120" height="20"></canvas>
+                                <canvas id="frequency-vis" width="140" height="20" title="Cosmic Frequency Spectrum"></canvas>
                             </div>
                         </div>
 
@@ -199,20 +251,28 @@
                         </div>
 
                         <div class="player-controls">
-                            <button id="prev-track" class="ctrl" title="Bài trước"><i class="fas fa-backward-step"></i></button>
-                            <button id="play-pause" class="play-circle" title="Phát / Dừng"><i class="fas fa-play"></i></button>
-                            <button id="next-track" class="ctrl" title="Bài tiếp theo"><i class="fas fa-forward-step"></i></button>
+                            <!-- Shuffle Mode -->
+                            <button id="shuffle-btn" class="ctrl shuffle-ctrl" title="Phát ngẫu nhiên (Shuffle)" type="button"><i class="fas fa-shuffle"></i></button>
                             
-                            <!-- Playlist selector dropdown -->
+                            <!-- Prev / Play / Next -->
+                            <button id="prev-track" class="ctrl" title="Bài trước (J)" type="button"><i class="fas fa-backward-step"></i></button>
+                            <button id="play-pause" class="play-circle" title="Phát / Dừng (Space)" type="button"><i class="fas fa-play"></i></button>
+                            <button id="next-track" class="ctrl" title="Bài tiếp theo (K)" type="button"><i class="fas fa-forward-step"></i></button>
+                            
+                            <!-- Repeat Mode -->
+                            <button id="repeat-btn" class="ctrl repeat-ctrl active" title="Lặp toàn bộ" type="button"><i class="fas fa-repeat"></i></button>
+
+                            <!-- Playlist selector dropdown with Live Search -->
                             <div class="playlist-dropdown-wrap">
-                                <button id="playlist-toggle-btn" class="ctrl" title="Danh sách phát"><i class="fas fa-list-music"></i></button>
+                                <button id="playlist-toggle-btn" class="ctrl" title="Danh sách phát & Tìm kiếm" type="button"><i class="fas fa-list-music"></i></button>
                                 <div class="playlist-menu" id="playlist-menu">
-                                    <!-- Populated dynamically via JS -->
+                                    <!-- Populated dynamically via JS with Search Bar -->
                                 </div>
                             </div>
 
+                            <!-- Volume Dock -->
                             <div class="volume-dock">
-                                <button id="mute-btn" class="mute-toggle"><i class="fas fa-volume-low"></i></button>
+                                <button id="mute-btn" class="mute-toggle" title="Bật/Tắt tiếng (M)" type="button"><i class="fas fa-volume-low"></i></button>
                                 <input type="range" id="volume-control" min="0" max="100" value="45" aria-label="Volume">
                             </div>
                         </div>
@@ -225,7 +285,7 @@
                     <div class="waifu-panel">
                         <div class="panel-header-row">
                             <div class="panel-title"><i class="fas fa-heart"></i> WAIFU COLLECTION</div>
-                            <small class="panel-tip"><i class="fas fa-hand-pointer"></i> Click to equip waifu & banner</small>
+                            <small class="panel-tip"><i class="fas fa-hand-pointer"></i> Click to equip waifu & theme</small>
                         </div>
                         <div class="waifu-grid" id="waifu-grid">
                             <!-- Populated dynamically via JS from CONFIG.waifu.list -->
@@ -235,13 +295,41 @@
                 </div>
             </div>
         </div>
+    </main>
+
+    <!-- QR CODE PROFILE MODAL -->
+    <div class="qr-modal-overlay" id="qr-modal">
+        <div class="qr-modal-box">
+            <button class="qr-close-btn" id="qr-modal-close" type="button" title="Đóng"><i class="fas fa-xmark"></i></button>
+            <div class="qr-modal-header">
+                <i class="fas fa-qrcode"></i>
+                <h3>Mahikari Profile QR</h3>
+            </div>
+            <p class="qr-modal-desc">Quét mã bằng camera điện thoại để truy cập hồ sơ Mahikari tức thì.</p>
+            <div class="qr-canvas-wrap">
+                <canvas id="qr-canvas"></canvas>
+            </div>
+            <div class="qr-modal-actions">
+                <button class="action-button action-primary" onclick="copyProfile()" type="button">
+                    <i class="fas fa-copy"></i> Sao chép liên kết
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- CLEAN HIGH-PERFORMANCE JAVASCRIPT MODULES with cache-busting v9.0 -->
-    <script src="js/config.js?v=9.0"></script>
-    <script src="js/stars.js?v=9.0"></script>
-    <script src="js/avatar.js?v=9.0"></script>
-    <script src="js/features.js?v=9.0"></script>
-    <script src="js/music.js?v=9.0"></script>
+    <!-- TOAST NOTIFICATION REGION -->
+    <div class="toast-region" id="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <noscript>
+        <div class="noscript-note">Bật JavaScript để sử dụng trình phát nhạc, đổi avatar và bộ sưu tập waifu.</div>
+    </noscript>
+
+    <!-- CLEAN HIGH-PERFORMANCE JAVASCRIPT MODULES v11.0 -->
+    <script src="js/config.js?v=11.0"></script>
+    <script src="js/stars.js?v=11.0"></script>
+    <script src="js/avatar.js?v=11.0"></script>
+    <script src="js/features.js?v=11.0"></script>
+    <script src="js/music.js?v=11.0"></script>
+    <script src="js/premium.js?v=11.0"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* ========================================================
-   LEFT COLUMN (HERO / PROFILE IDENTITY)
+   LEFT COLUMN (HERO / PROFILE IDENTITY) V11.0
 ======================================================== */
 .col-left {
     padding: 24px 22px;
@@ -8,8 +8,8 @@
     align-items: center;
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     position: relative;
-    background: rgba(255, 255, 255, 0.01);
-    gap: 11px;
+    background: rgba(255, 255, 255, 0.012);
+    gap: 12px;
 }
 
 body.light-mode .col-left {
@@ -21,8 +21,8 @@ body.light-mode .col-left {
 ======================================================== */
 .avatar-zone {
     position: relative;
-    width: 125px;
-    height: 125px;
+    width: 130px;
+    height: 130px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -34,8 +34,8 @@ body.light-mode .col-left {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 115px;
-    height: 115px;
+    width: 120px;
+    height: 120px;
     pointer-events: none;
 }
 
@@ -46,17 +46,17 @@ body.light-mode .col-left {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 1.5px solid var(--glow-primary);
+    border: 1.5px solid var(--waifu-color, var(--glow-primary));
     opacity: 0;
-    animation: rippleGlow 3s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: rippleGlow 3s infinite cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ripple-ground span:nth-child(2) { animation-delay: 1s; border-color: var(--glow-secondary); }
-.ripple-ground span:nth-child(3) { animation-delay: 2s; border-color: var(--glow-accent); }
+.ripple-ground span:nth-child(2) { animation-delay: 1s; border-color: var(--waifu-secondary, var(--glow-secondary)); }
+.ripple-ground span:nth-child(3) { animation-delay: 2s; border-color: #8b5cf6; }
 
 @keyframes rippleGlow {
-    0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 10px var(--glow-primary); }
-    100% { transform: scale(1.35); opacity: 0; }
+    0% { transform: scale(0.9); opacity: 0.85; box-shadow: 0 0 10px var(--waifu-color, var(--glow-primary)); }
+    100% { transform: scale(1.4); opacity: 0; }
 }
 
 .halo-rotate {
@@ -64,18 +64,18 @@ body.light-mode .col-left {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
+    width: 124px;
+    height: 124px;
     border-radius: 50%;
-    border: 1.5px dashed rgba(0, 242, 254, 0.45);
+    border: 1.5px dashed var(--waifu-color, rgba(0, 242, 254, 0.5));
     animation: rotateHalo 20s linear infinite;
     pointer-events: none;
 }
 
 .halo-rotate.outer {
-    width: 130px;
-    height: 130px;
-    border: 1px solid rgba(236, 72, 153, 0.3);
+    width: 134px;
+    height: 134px;
+    border: 1px solid var(--waifu-secondary, rgba(236, 72, 153, 0.4));
     animation: rotateHaloRev 25s linear infinite;
 }
 
@@ -94,8 +94,8 @@ body.light-mode .col-left {
     transform: translateX(-50%);
     max-height: 122%;
     width: auto;
-    max-width: 112%;
-    filter: drop-shadow(0 6px 14px rgba(0, 242, 254, 0.4));
+    max-width: 114%;
+    filter: drop-shadow(0 6px 14px var(--waifu-glow, rgba(0, 242, 254, 0.4)));
     transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
     z-index: 5;
     user-select: none;
@@ -103,20 +103,20 @@ body.light-mode .col-left {
 
 .avatar-zone:hover .avatar-img {
     transform: translateX(-50%) scale(1.08) translateY(-4px);
-    filter: drop-shadow(0 10px 22px rgba(236, 72, 153, 0.5)) drop-shadow(0 0 12px rgba(0, 242, 254, 0.5));
+    filter: drop-shadow(0 10px 24px var(--waifu-glow, rgba(236, 72, 153, 0.5))) drop-shadow(0 0 14px var(--waifu-color, rgba(0, 242, 254, 0.5)));
 }
 
 .avatar-img.active-touch {
-    transform: translateX(-50%) scale(1.12) translateY(-6px);
-    filter: drop-shadow(0 0 30px var(--glow-secondary));
+    transform: translateX(-50%) scale(1.14) translateY(-6px);
+    filter: drop-shadow(0 0 35px var(--waifu-color, var(--glow-secondary)));
 }
 
 .avatar-status-badge {
     position: absolute;
     bottom: 5px;
-    right: 6px;
-    width: 12px;
-    height: 12px;
+    right: 8px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     border: 2px solid #0d101c;
     z-index: 10;
@@ -124,7 +124,7 @@ body.light-mode .col-left {
 
 .avatar-status-badge.online {
     background: #10b981;
-    box-shadow: 0 0 6px #10b981;
+    box-shadow: 0 0 8px #10b981;
     animation: statusPulse 2s infinite ease-in-out;
 }
 
@@ -139,28 +139,31 @@ body.light-mode .col-left {
 .avatar-dots {
     display: flex;
     gap: 6px;
+    align-items: center;
 }
 
 .avatar-dots .dot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: none;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .avatar-dots .dot:hover {
-    background: var(--glow-primary);
+    background: var(--waifu-color, var(--glow-primary));
     transform: scale(1.3);
-    box-shadow: 0 0 6px var(--glow-primary);
+    box-shadow: 0 0 8px var(--waifu-color, var(--glow-primary));
 }
 
 .avatar-dots .dot.active {
-    width: 16px;
+    width: 20px;
     border-radius: 6px;
-    background: var(--accent-gradient);
-    box-shadow: 0 0 8px var(--glow-primary);
+    background: var(--waifu-gradient);
+    box-shadow: 0 0 10px var(--waifu-glow, var(--glow-primary));
 }
 
 /* ========================================================
@@ -171,7 +174,7 @@ body.light-mode .col-left {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
 }
 
 .name-row {
@@ -191,7 +194,7 @@ body.light-mode .col-left {
     display: inline-block;
     position: relative;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                 0 0 20px rgba(0, 242, 254, 0.5),
+                 0 0 20px var(--waifu-glow, rgba(0, 242, 254, 0.5)),
                  0 0 32px rgba(139, 92, 246, 0.3);
     animation: neonNamePulse 3s infinite alternate ease-in-out;
     transition: all 0.3s ease;
@@ -201,46 +204,60 @@ body.light-mode .col-left {
 .gradient-glitch:hover {
     letter-spacing: 2px;
     text-shadow: 0 0 14px #ffffff,
-                 0 0 26px #00f2fe,
-                 0 0 40px #ec4899;
+                 0 0 26px var(--waifu-color, #00f2fe),
+                 0 0 42px var(--waifu-secondary, #ec4899);
     transform: scale(1.03);
 }
 
 @keyframes neonNamePulse {
     0% {
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                     0 0 18px rgba(0, 242, 254, 0.5),
+                     0 0 18px var(--waifu-glow, rgba(0, 242, 254, 0.5)),
                      0 0 30px rgba(139, 92, 246, 0.3);
     }
     100% {
-        text-shadow: 0 0 12px rgba(255, 255, 255, 0.9),
-                     0 0 22px rgba(0, 242, 254, 0.65),
-                     0 0 36px rgba(236, 72, 153, 0.4);
+        text-shadow: 0 0 14px rgba(255, 255, 255, 0.95),
+                     0 0 24px var(--waifu-color, rgba(0, 242, 254, 0.65)),
+                     0 0 38px var(--waifu-secondary, rgba(236, 72, 153, 0.4));
     }
 }
 
 .badge-verified {
-    color: #00f2fe;
+    color: var(--waifu-color, #00f2fe);
     font-size: 16px;
-    filter: drop-shadow(0 0 5px #00f2fe);
+    filter: drop-shadow(0 0 6px var(--waifu-color, #00f2fe));
 }
 
 .badge-crown {
     color: #fbbf24;
     font-size: 14px;
-    filter: drop-shadow(0 0 5px #fbbf24);
+    filter: drop-shadow(0 0 6px #fbbf24);
 }
 
 .handle-tag {
     font-family: 'Fira Code', monospace;
     font-size: 11.5px;
     font-weight: 600;
-    color: var(--glow-primary);
+    color: var(--waifu-color, var(--glow-primary));
     background: rgba(0, 242, 254, 0.08);
     border: 1px solid rgba(0, 242, 254, 0.22);
-    padding: 2px 9px;
+    padding: 2px 10px;
     border-radius: 14px;
     letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.profile-tagline {
+    font-family: 'Fira Code', monospace;
+    font-size: 9.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+}
+
+.profile-tagline span {
+    color: var(--waifu-color, var(--glow-primary));
 }
 
 /* ========================================================
@@ -248,21 +265,26 @@ body.light-mode .col-left {
 ======================================================== */
 .bio-quote-card {
     width: 100%;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.035);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    padding: 8px 12px;
+    padding: 9px 12px;
     position: relative;
     display: flex;
     align-items: center;
     gap: 8px;
     backdrop-filter: blur(8px);
+    transition: border-color 0.3s ease;
+}
+
+.bio-quote-card:hover {
+    border-color: var(--waifu-color, rgba(0, 242, 254, 0.3));
 }
 
 .quote-icon {
-    color: var(--glow-primary);
+    color: var(--waifu-color, var(--glow-primary));
     font-size: 11px;
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .bio-quote-card p {
@@ -271,26 +293,27 @@ body.light-mode .col-left {
     color: var(--text-secondary);
     line-height: 1.35;
     flex: 1;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 #quote-refresh {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--text-muted);
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 9px;
-    transition: all 0.25s ease;
+    font-size: 10px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #quote-refresh:hover {
-    color: var(--glow-primary);
-    border-color: var(--glow-primary);
+    color: var(--waifu-color, var(--glow-primary));
+    border-color: var(--waifu-color, var(--glow-primary));
     transform: rotate(180deg);
 }
 
@@ -299,7 +322,7 @@ body.light-mode .col-left {
 ======================================================== */
 .discord-widget {
     width: 100%;
-    background: linear-gradient(135deg, rgba(88, 101, 242, 0.1) 0%, rgba(18, 22, 42, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(88, 101, 242, 0.12) 0%, rgba(16, 20, 38, 0.65) 100%);
     backdrop-filter: blur(10px);
     border-radius: 14px;
     padding: 8px 12px;
@@ -309,7 +332,7 @@ body.light-mode .col-left {
 
 .discord-widget:hover {
     border-color: rgba(88, 101, 242, 0.6);
-    box-shadow: 0 3px 14px rgba(88, 101, 242, 0.25);
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.25);
 }
 
 .discord-header {
@@ -326,8 +349,8 @@ body.light-mode .col-left {
 
 .discord-avatar-wrap {
     position: relative;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
 }
 
 .discord-avatar {
@@ -342,15 +365,15 @@ body.light-mode .col-left {
     position: absolute;
     bottom: -1px;
     right: -1px;
-    width: 8px;
-    height: 8px;
+    width: 8.5px;
+    height: 8.5px;
     border-radius: 50%;
     border: 1.5px solid #161b2e;
 }
 
 .discord-status-dot.online {
     background: #10b981;
-    box-shadow: 0 0 5px #10b981;
+    box-shadow: 0 0 6px #10b981;
 }
 
 .discord-user-meta {
@@ -359,13 +382,13 @@ body.light-mode .col-left {
 }
 
 .discord-username {
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--text-primary);
 }
 
 .discord-custom-status {
-    font-size: 9px;
+    font-size: 9.5px;
     color: var(--text-secondary);
     font-family: 'Fira Code', monospace;
 }
@@ -376,7 +399,7 @@ body.light-mode .col-left {
     font-weight: 700;
     color: #ffffff;
     background: #5865F2;
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -388,16 +411,16 @@ body.light-mode .col-left {
 ======================================================== */
 .social-panel {
     display: flex;
-    gap: 9px;
+    gap: 10px;
     justify-content: center;
     width: 100%;
     margin-top: 2px;
 }
 
 .social-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
@@ -426,31 +449,21 @@ body.light-mode .col-left {
     background: #1877f2;
     color: #ffffff;
     border-color: #1877f2;
-    box-shadow: 0 0 14px rgba(24, 119, 242, 0.65);
+    box-shadow: 0 0 16px rgba(24, 119, 242, 0.65);
 }
 
-/* TikTok - Clean official styling */
+/* TikTok */
 .social-icon.tt {
     background: #010101;
     border-color: rgba(255, 255, 255, 0.18);
     color: #ffffff;
 }
 
-.social-icon.tt i {
-    font-size: 16px;
-    color: #ffffff;
-    transition: all 0.25s ease;
-}
-
 .social-icon.tt:hover {
     background: #000000;
     border-color: #fe2c55;
-    box-shadow: 0 0 14px rgba(254, 44, 85, 0.6), 0 0 6px rgba(37, 244, 238, 0.5);
+    box-shadow: 0 0 15px rgba(254, 44, 85, 0.6), 0 0 8px rgba(37, 244, 238, 0.5);
     color: #ffffff;
-}
-
-.social-icon.tt:hover i {
-    transform: scale(1.12);
 }
 
 /* Discord */
@@ -464,7 +477,7 @@ body.light-mode .col-left {
     background: #5865f2;
     color: #ffffff;
     border-color: #5865f2;
-    box-shadow: 0 0 14px rgba(88, 101, 242, 0.65);
+    box-shadow: 0 0 16px rgba(88, 101, 242, 0.65);
 }
 
 /* GitHub */
@@ -478,7 +491,7 @@ body.light-mode .col-left {
     background: #ffffff;
     color: #000000;
     border-color: #ffffff;
-    box-shadow: 0 0 14px rgba(255, 255, 255, 0.65);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.65);
 }
 
 .social-tooltip {
@@ -489,7 +502,7 @@ body.light-mode .col-left {
     font-family: 'Fira Code', monospace;
     font-size: 9px;
     font-weight: 600;
-    padding: 2px 5px;
+    padding: 2px 6px;
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     opacity: 0;
