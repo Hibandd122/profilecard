@@ -396,51 +396,6 @@ body.light-mode::after {
     margin-bottom: 16px;
 }
 
-/* Shortcuts Grid */
-.shortcuts-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    max-height: 290px;
-    overflow-y: auto;
-    padding-right: 4px;
-}
-
-.shortcut-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 7px 12px;
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    transition: border-color 0.2s ease;
-}
-
-.shortcut-item:hover {
-    border-color: var(--waifu-color, rgba(0, 242, 254, 0.3));
-}
-
-.shortcut-key-badge {
-    font-family: 'Fira Code', monospace;
-    font-size: 10.5px;
-    font-weight: 700;
-    color: var(--waifu-color, #00f2fe);
-    background: rgba(0, 242, 254, 0.1);
-    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.3));
-    padding: 3px 8px;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-    white-space: nowrap;
-}
-
-.shortcut-desc {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.85);
-    text-align: right;
-}
-
 /* Achievements List */
 .achievements-list {
     display: flex;

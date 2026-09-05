@@ -104,18 +104,13 @@
                         <i class="fas fa-award"></i>
                     </button>
 
-                    <!-- Keyboard Shortcuts HUD Button -->
-                    <button class="icon-button shortcuts-btn" id="shortcuts-modal-btn" type="button" title="Bảng phím tắt điều khiển (?)" aria-label="Bảng phím tắt">
-                        <i class="fas fa-keyboard"></i>
-                    </button>
-
                     <!-- QR Code Modal Button -->
                     <button class="icon-button qr-btn" id="qr-modal-btn" type="button" title="Mở mã QR Profile" aria-label="Mở mã QR Profile">
                         <i class="fas fa-qrcode"></i>
                     </button>
 
                     <!-- Banner 16:9 View Button -->
-                    <button class="status-pill banner-mode-btn" id="toggle-banner-view" type="button" title="Xem trọn vẹn hình nền banner 16:9 (B)" aria-label="Xem trọn vẹn banner 16:9">
+                    <button class="status-pill banner-mode-btn" id="toggle-banner-view" type="button" title="Xem trọn vẹn hình nền banner 16:9" aria-label="Xem trọn vẹn banner 16:9">
                         <i class="fas fa-image"></i>
                         <span>Banner 16:9</span>
                     </button>
@@ -188,7 +183,7 @@
                         </button>
                     </div>
 
-                    <!-- Discord User Badge with Dynamic Rich Presence -->
+                    <!-- Discord User Badge in Left Column -->
                     <div class="discord-widget" id="discord-widget">
                         <div class="discord-header">
                             <div class="discord-user-info">
@@ -202,16 +197,6 @@
                                 </div>
                             </div>
                             <div class="discord-tag-pill"><i class="fab fa-discord"></i> DISCORD</div>
-                        </div>
-                        <div class="discord-activity" id="discord-activity">
-                            <div class="activity-disc-wrap">
-                                <i class="fas fa-compact-disc activity-spin-icon" id="activity-spin-icon"></i>
-                            </div>
-                            <div class="activity-meta">
-                                <span class="activity-label">LISTENING TO STUDIO</span>
-                                <span class="activity-track" id="discord-activity-track">Chiisana Koi no Uta</span>
-                                <span class="activity-artist" id="discord-activity-artist">Iwami Manaka</span>
-                            </div>
                         </div>
                     </div>
 
@@ -351,21 +336,6 @@
                 <button class="action-button action-primary" onclick="copyProfile()" type="button">
                     <i class="fas fa-copy"></i> Sao chép liên kết
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- KEYBOARD SHORTCUTS MODAL -->
-    <div class="hud-modal-overlay" id="shortcuts-modal">
-        <div class="hud-modal-box">
-            <button class="hud-close-btn" id="shortcuts-modal-close" type="button" title="Đóng"><i class="fas fa-xmark"></i></button>
-            <div class="hud-modal-header">
-                <i class="fas fa-keyboard"></i>
-                <h3>Phím Tắt Điều Khiển (Shortcuts)</h3>
-            </div>
-            <p class="hud-modal-desc">Điều khiển nhanh mọi tính năng chỉ bằng bàn phím của bạn.</p>
-            <div class="shortcuts-grid" id="shortcuts-grid">
-                <!-- Populated dynamically via JS from CONFIG.shortcuts -->
             </div>
         </div>
     </div>

@@ -502,67 +502,6 @@ body.light-mode .col-left {
     gap: 3px;
 }
 
-.discord-activity {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    padding: 7px 10px;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.activity-disc-wrap {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: rgba(88, 101, 242, 0.15);
-    border: 1px solid rgba(88, 101, 242, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #10b981;
-    font-size: 12px;
-    flex-shrink: 0;
-}
-
-.discord-widget.playing .activity-spin-icon {
-    animation: spinDisc 3s linear infinite;
-    color: var(--waifu-color, #10b981);
-}
-
-.activity-meta {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    flex: 1;
-}
-
-.activity-label {
-    font-size: 7.5px;
-    font-family: 'Fira Code', monospace;
-    font-weight: 700;
-    color: #10b981;
-    letter-spacing: 0.5px;
-}
-
-.activity-track {
-    font-size: 11px;
-    font-weight: 600;
-    color: #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.activity-artist {
-    font-size: 9.5px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 /* ========================================================
    SOCIAL BUTTONS
 ======================================================== */

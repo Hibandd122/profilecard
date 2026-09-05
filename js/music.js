@@ -31,10 +31,6 @@
     const playlistMenu = document.getElementById('playlist-menu');
     const audioFxBtn = document.getElementById('audio-fx-btn');
     const audioFxMenu = document.getElementById('audio-fx-menu');
-    const discordWidget = document.getElementById('discord-widget');
-    const discordActivityTrack = document.getElementById('discord-activity-track');
-    const discordActivityArtist = document.getElementById('discord-activity-artist');
-    const discordActivityLabel = document.querySelector('.activity-label');
     const musicPanel = document.querySelector('.music-panel');
     const categoryTabs = document.querySelectorAll('.cat-tab');
     const shuffleBtn = document.getElementById('shuffle-btn');
@@ -81,20 +77,6 @@
     let analyser = null;
     let audioSource = null;
     let gainNode = null;
-
-    // Đồng bộ trạng thái phát nhạc với Discord Rich Presence Widget
-    function syncDiscordActivity(song, isPlaying) {
-        if (!discordWidget) return;
-        if (song) {
-            if (discordActivityTrack) discordActivityTrack.innerText = song.name;
-            if (discordActivityArtist) discordActivityArtist.innerText = song.artist || 'Mahikari Collection';
-        }
-        discordWidget.classList.toggle('playing', !!isPlaying);
-        if (discordActivityLabel) {
-            discordActivityLabel.innerText = isPlaying ? 'LISTENING TO STUDIO' : 'STUDIO PAUSED';
-            discordActivityLabel.style.color = isPlaying ? '#10b981' : '#94a3b8';
-        }
-    }
 
     // Thiết lập cấu hình bộ lọc âm thanh BiquadFilter
     function applyEqSettings(presetId) {
@@ -417,7 +399,6 @@
         localStorage.setItem('saved_song_file', song.file);
         updatePlaylistActiveItem();
         updateMediaSession(song);
-        syncDiscordActivity(song, isAudioPlaying);
     }
 
     function initAudioContext() {
@@ -456,14 +437,12 @@
             if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
             if (musicPanel) musicPanel.classList.add('playing');
             updatePlaylistActiveItem();
-            syncDiscordActivity(activePlaylist[currentFilteredIndex], true);
             if (window.unlockAchievement) window.unlockAchievement('audiophile');
         }).catch(err => {
             console.warn("Autoplay notice:", err);
             isAudioPlaying = false;
             if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
             if (musicPanel) musicPanel.classList.remove('playing');
-            syncDiscordActivity(activePlaylist[currentFilteredIndex], false);
         });
     }
 
@@ -474,7 +453,6 @@
         if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
         if (musicPanel) musicPanel.classList.remove('playing');
         updatePlaylistActiveItem();
-        syncDiscordActivity(activePlaylist[currentFilteredIndex], false);
     }
 
     function toggleAudio() {

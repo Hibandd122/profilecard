@@ -254,19 +254,6 @@ const CONFIG = {
         { id: "fx_master", title: "Phù Thủy Âm Thanh", desc: "Trải nghiệm bộ lọc Studio Audio FX", icon: "fa-sliders" },
         { id: "stargazer", title: "Góc Nhìn Toàn Cảnh", desc: "Mở chế độ xem toàn cảnh Banner 16:9", icon: "fa-expand" },
         { id: "mahiru_love", title: "Tình Cảm Tuyệt Đối", desc: "Tương tác với Shiina Mahiru", icon: "fa-heart" }
-    ],
-
-    // Danh sách phím tắt hệ thống
-    shortcuts: [
-        { key: "Space", desc: "Phát / Dừng bài hát" },
-        { key: "J / K", desc: "Bài trước / Bài kế tiếp" },
-        { key: "M", desc: "Bật / Tắt âm thanh (Mute)" },
-        { key: "S", desc: "Bật / Tắt phát ngẫu nhiên (Shuffle)" },
-        { key: "R", desc: "Đổi chế độ lặp lại (Tất cả / 1 bài / Tắt)" },
-        { key: "B", desc: "Bật / Tắt chế độ xem Banner 16:9" },
-        { key: "1 - 6", desc: "Đổi nhanh nhân vật Waifu 1 - 6" },
-        { key: "Q", desc: "Mở mã QR Profile" },
-        { key: "?", desc: "Bật bảng hướng dẫn phím tắt" }
     ]
 };
 
