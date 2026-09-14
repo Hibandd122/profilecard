@@ -47,6 +47,12 @@
         margin: 0 auto;
     }
 
+    .site-brand-header {
+        max-width: 100%;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.65rem;
+    }
+
     .card-container {
         border-radius: var(--radius-md);
     }
@@ -74,9 +80,10 @@
         gap: 1rem;
     }
 
+    .avatar-zone,
     .avatar-presentation-stage {
-        width: 110px;
-        height: 110px;
+        width: 124px;
+        height: 124px;
     }
 
     .creator-name {
@@ -169,8 +176,9 @@
         padding: 0.4rem 0.25rem;
     }
 
+    .site-brand-header,
     .card-top-bar {
-        padding: 0.75rem 0.85rem;
+        padding: 0.65rem 0.85rem;
     }
 
     .brand-name {

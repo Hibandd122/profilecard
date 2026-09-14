@@ -57,41 +57,40 @@
     <!-- AMBIENT PARTICLES CANVAS -->
     <canvas id="starry-canvas" class="starry-bg" aria-hidden="true"></canvas>
 
+    <!-- GLOBAL LUXURY BRAND HEADER -->
+    <header class="site-brand-header">
+        <div class="brand-monogram-wrap">
+            <div class="monogram-symbol" aria-hidden="true">M</div>
+            <div class="brand-text-block">
+                <span class="brand-name">MAHIKARI</span>
+                <span class="brand-sub">STUDIO · ARCHITECT</span>
+            </div>
+        </div>
+
+        <div class="top-bar-controls">
+            <div class="status-indicator-pill" title="Status: Active & Available for Projects">
+                <span class="status-pulse-dot" aria-hidden="true"></span>
+                <span class="status-label">AVAILABLE</span>
+            </div>
+
+            <button class="top-action-btn" id="copy-profile" type="button" title="Sao chép liên kết hồ sơ" aria-label="Sao chép liên kết hồ sơ">
+                <i class="fas fa-link" aria-hidden="true"></i>
+            </button>
+
+            <button class="top-action-btn" id="share-profile" type="button" title="Chia sẻ hồ sơ" aria-label="Chia sẻ hồ sơ">
+                <i class="fas fa-arrow-up-from-bracket" aria-hidden="true"></i>
+            </button>
+
+            <button class="top-action-btn theme-toggle-btn" id="theme-toggle" type="button" title="Đổi giao diện Sáng / Tối" aria-label="Đổi giao diện Sáng / Tối">
+                <i class="fas fa-sun icon-sun" aria-hidden="true"></i>
+                <i class="fas fa-moon icon-moon" aria-hidden="true"></i>
+            </button>
+        </div>
+    </header>
+
     <!-- MAIN EDITORIAL PROFILE CARD -->
     <main class="card-wrapper" id="profile-content">
         <div class="card-container" id="main-card">
-
-            <!-- LUXURY BRAND TOP BAR -->
-            <header class="card-top-bar">
-                <div class="brand-monogram-wrap">
-                    <div class="monogram-symbol" aria-hidden="true">M</div>
-                    <div class="brand-text-block">
-                        <span class="brand-name">MAHIKARI</span>
-                        <span class="brand-sub">STUDIO · ARCHITECT</span>
-                    </div>
-                </div>
-
-                <div class="top-bar-controls">
-                    <div class="status-indicator-pill" title="Status: Active & Available for Projects">
-                        <span class="status-pulse-dot" aria-hidden="true"></span>
-                        <span class="status-label">AVAILABLE</span>
-                    </div>
-
-                    <button class="top-action-btn" id="copy-profile" type="button" title="Sao chép liên kết hồ sơ" aria-label="Sao chép liên kết hồ sơ">
-                        <i class="fas fa-link" aria-hidden="true"></i>
-                    </button>
-
-                    <button class="top-action-btn" id="share-profile" type="button" title="Chia sẻ hồ sơ" aria-label="Chia sẻ hồ sơ">
-                        <i class="fas fa-arrow-up-from-bracket" aria-hidden="true"></i>
-                    </button>
-
-                    <button class="top-action-btn theme-toggle-btn" id="theme-toggle" type="button" title="Đổi giao diện Sáng / Tối" aria-label="Đổi giao diện Sáng / Tối">
-                        <i class="fas fa-sun icon-sun" aria-hidden="true"></i>
-                        <i class="fas fa-moon icon-moon" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </header>
-
             <!-- CARD CONTENT GRID -->
             <div class="card-content-grid">
 
@@ -99,11 +98,13 @@
                 <section class="col-left" aria-labelledby="creator-name">
                     
                     <!-- AVATAR PRESENTATION STAGE -->
-                    <div class="avatar-presentation-stage">
-                        <div class="avatar-frame">
-                            <img src="assets/avatar1.png" alt="Mahikari Portrait" class="avatar-portrait" id="char-avatar" fetchpriority="high">
-                        </div>
-                        <span class="avatar-status-badge" title="Online Status"></span>
+                    <div class="avatar-zone" id="avatar-zone-wrap">
+                        <div class="ripple-ground" aria-hidden="true"><span></span><span></span><span></span></div>
+                        <div class="avatar-backdrop-disc" aria-hidden="true"></div>
+                        <div class="halo-rotate" aria-hidden="true"></div>
+                        <div class="halo-rotate outer" aria-hidden="true"></div>
+                        <img src="assets/avatar1.png" alt="Mahikari Portrait" class="avatar-img avatar-portrait" id="char-avatar" fetchpriority="high">
+                        <div class="avatar-status-badge online" title="Status: Online & Active"></div>
                     </div>
 
                     <!-- IDENTITY HEADER -->
@@ -113,7 +114,7 @@
                             <span class="verified-badge" title="Verified Creator" aria-label="Verified"><i class="fas fa-circle-check"></i></span>
                         </div>
                         <div class="creator-handle">@mahikari</div>
-                        <p class="creator-tagline">Creative Technologist · UI/UX Architect</p>
+                        <p class="creator-tagline" id="persona-role-text">Angel of Light · The Angel Next Door</p>
                     </div>
 
                     <!-- EDITORIAL BIOGRAPHY -->
@@ -173,7 +174,6 @@
                         <!-- PANEL TOP BAR -->
                         <div class="suite-header-row">
                             <div class="suite-title" id="audio-suite-title">
-                                <i class="fas fa-compact-disc" aria-hidden="true"></i>
                                 <span>STUDIO AUDIO SUITE</span>
                             </div>
                             <div class="track-indicator">
@@ -198,9 +198,7 @@
                             <div class="track-metadata">
                                 <h2 class="track-title" id="track-name">Chiisana Koi no Uta</h2>
                                 <p class="track-artist" id="track-artist">Iwami Manaka</p>
-                                <div class="persona-insight" id="persona-insight-wrap">
-                                    <span class="insight-badge" id="persona-role-text">Angel of Light · The Angel Next Door</span>
-                                </div>
+                                <span class="track-category-tag" id="track-category-tag">Thiên Sứ Nhà Bên</span>
                             </div>
                         </div>
 
@@ -251,7 +249,7 @@
                                 <!-- Playlist Selector -->
                                 <div class="dropdown-wrapper">
                                     <button class="ctrl-btn" id="playlist-toggle-btn" type="button" title="Danh sách phát & Tìm kiếm" aria-label="Danh sách phát">
-                                        <i class="fas fa-list-music" aria-hidden="true"></i>
+                                        <i class="fas fa-list-ul" aria-hidden="true"></i>
                                     </button>
                                     <div class="dropdown-flyout playlist-menu" id="playlist-menu">
                                         <!-- Populated dynamically via js/music.js -->

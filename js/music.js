@@ -140,6 +140,9 @@
         if (currentTimeEl) currentTimeEl.textContent = '0:00';
         if (totalTimeEl) totalTimeEl.textContent = track.duration || '0:00';
 
+        const trackCatEl = document.getElementById('track-category-tag');
+        if (trackCatEl) trackCatEl.textContent = track.categoryLabel || '';
+
         updateMediaSession(track);
         renderPlaylist();
 
@@ -323,15 +326,15 @@
     if (repeatBtn) {
         function updateRepeatUI() {
             if (repeatMode === 'all') {
-                repeatBtn.className = 'ctrl repeat-ctrl active';
+                repeatBtn.className = 'ctrl-btn repeat-btn active';
                 repeatBtn.innerHTML = '<i class="fas fa-repeat"></i>';
                 repeatBtn.title = 'Repeat: All';
             } else if (repeatMode === 'one') {
-                repeatBtn.className = 'ctrl repeat-ctrl active';
+                repeatBtn.className = 'ctrl-btn repeat-btn active';
                 repeatBtn.innerHTML = '<i class="fas fa-repeat-1"></i>';
                 repeatBtn.title = 'Repeat: One Track';
             } else {
-                repeatBtn.className = 'ctrl repeat-ctrl';
+                repeatBtn.className = 'ctrl-btn repeat-btn';
                 repeatBtn.innerHTML = '<i class="fas fa-repeat"></i>';
                 repeatBtn.title = 'Repeat: Off';
             }

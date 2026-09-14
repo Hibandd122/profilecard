@@ -172,6 +172,15 @@
         }, 200);
     }, { passive: true });
 
+    // Interactive click on avatar zone switches to next persona
+    const avatarZone = document.getElementById('avatar-zone-wrap');
+    if (avatarZone) {
+        avatarZone.addEventListener('click', () => {
+            const nextIdx = (currentIndex + 1) % CONFIG.personas.length;
+            setPersona(nextIdx, true);
+        });
+    }
+
     // Initialization
     renderPersonaSelector();
     setPersona(currentIndex, false);

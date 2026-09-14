@@ -13,56 +13,185 @@
 }
 
 /* ========================================================
-   AVATAR PRESENTATION STAGE
+   AVATAR ZONE & CELESTIAL ROTATING HALOS (UNCLIPPED ARTWORK)
 ======================================================== */
+.avatar-zone,
 .avatar-presentation-stage {
     position: relative;
-    width: 128px;
-    height: 128px;
-    margin: 0 auto;
+    width: 136px;
+    height: 136px;
+    margin: 0.25rem auto 0.65rem auto;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
 }
 
-.avatar-frame {
+/* Pulsing Ethereal Ripple Waves */
+.ripple-ground {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ripple-ground span {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    position: relative;
-    overflow: hidden;
-    background: var(--surface-2);
-    border: 1.5px solid var(--color-border-active);
-    box-shadow: 
-        0 12px 28px -4px rgba(0, 0, 0, 0.6),
-        0 0 24px var(--color-accent-glow);
-    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+    border: 1.5px solid var(--color-accent);
+    opacity: 0;
+    animation: rippleGlow 3s infinite cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.ripple-ground span:nth-child(2) { 
+    animation-delay: 1s; 
+    border-color: var(--color-accent-secondary, rgba(56, 189, 248, 0.5)); 
+}
+
+.ripple-ground span:nth-child(3) { 
+    animation-delay: 2s; 
+    border-color: #818cf8; 
+}
+
+@keyframes rippleGlow {
+    0% { transform: scale(0.92); opacity: 0.75; box-shadow: 0 0 12px var(--color-accent); }
+    100% { transform: scale(1.38); opacity: 0; }
+}
+
+/* Obsidian Glass Pedestal Disc */
+.avatar-backdrop-disc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 50% 28%,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(18, 22, 38, 0.94) 65%,
+        rgba(8, 10, 18, 0.98) 100%
+    );
+    border: 1.5px solid var(--color-border);
+    box-shadow: 
+        0 12px 28px -4px rgba(0, 0, 0, 0.7),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        0 0 24px var(--color-accent-glow);
+    z-index: 2;
+    pointer-events: none;
+    transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+body.light-mode .avatar-backdrop-disc {
+    background: radial-gradient(
+        circle at 50% 25%,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(235, 240, 250, 0.9) 65%,
+        rgba(215, 222, 238, 0.95) 100%
+    );
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        0 0 20px var(--color-accent-glow);
+}
+
+/* Rotating Celestial Halos */
+.halo-rotate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 126px;
+    height: 126px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--color-accent);
+    animation: rotateHalo 20s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+    transition: border-color var(--transition-normal);
+}
+
+.halo-rotate.outer {
+    width: 138px;
+    height: 138px;
+    border: 1px solid var(--color-accent-secondary, rgba(56, 189, 248, 0.4));
+    animation: rotateHaloRev 26s linear infinite;
+    z-index: 3;
+}
+
+@keyframes rotateHalo {
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes rotateHaloRev {
+    100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+/* Unclipped Character Artwork Pop-Out */
+.avatar-img,
 .avatar-portrait {
     position: absolute;
-    bottom: 0;
+    bottom: 2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 116%;
-    height: auto;
-    max-height: 122%;
-    object-fit: contain;
-    transition: opacity var(--transition-normal), transform var(--transition-normal);
-    filter: contrast(1.02);
+    max-height: 124%;
+    width: auto;
+    max-width: 116%;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 16px var(--color-accent-glow));
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.35s ease, opacity 0.25s ease;
+    z-index: 5;
+    user-select: none;
+    pointer-events: none;
 }
 
+.avatar-zone:hover .avatar-img,
+.avatar-zone:hover .avatar-portrait,
+.avatar-presentation-stage:hover .avatar-img,
+.avatar-presentation-stage:hover .avatar-portrait {
+    transform: translateX(-50%) scale(1.08) translateY(-4px);
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 24px var(--color-accent));
+}
+
+.avatar-zone:hover .avatar-backdrop-disc,
+.avatar-presentation-stage:hover .avatar-backdrop-disc {
+    border-color: var(--color-border-active);
+    box-shadow: 
+        0 16px 32px -4px rgba(0, 0, 0, 0.8),
+        0 0 32px var(--color-accent-glow);
+}
+
+/* Status Indicator Dot */
 .avatar-status-badge {
     position: absolute;
-    bottom: 4px;
+    bottom: 5px;
     right: 8px;
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: #10b981;
-    border: 2.5px solid var(--surface-2);
+    border: 2.5px solid var(--surface-1);
     box-shadow: 0 0 10px #10b981;
     z-index: 10;
+    transition: all var(--transition-fast);
+}
+
+.avatar-status-badge.online {
+    animation: avatarStatusPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes avatarStatusPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 8px #10b981; }
+    50% { transform: scale(1.18); box-shadow: 0 0 14px #10b981; }
 }
 
 /* ========================================================

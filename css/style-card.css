@@ -59,8 +59,41 @@ body.light-mode .card-container {
 }
 
 /* ========================================================
-   LUXURY BRAND TOP BAR
+   GLOBAL LUXURY BRAND HEADER
 ======================================================== */
+.site-brand-header {
+    width: 100%;
+    max-width: 990px;
+    margin: 0 auto 0.95rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
+        var(--shadow-soft);
+    position: relative;
+    z-index: 20;
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.site-brand-header:hover {
+    border-color: var(--color-border-active);
+}
+
+body.light-mode .site-brand-header {
+    background: var(--surface-1);
+    border: 1px solid var(--color-border);
+    box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+        var(--shadow-soft);
+}
+
 .card-top-bar {
     display: flex;
     align-items: center;
