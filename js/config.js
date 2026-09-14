@@ -29,8 +29,7 @@ const CONFIG = {
             bannerPhone: "assets/bannertop1_phone.jpg",
             accent: "#fbbf24",
             accentSecondary: "#f59e0b",
-            accentGlow: "rgba(251, 191, 36, 0.28)",
-            quote: "Gentle warmth and melody beneath the quiet stars."
+            accentGlow: "rgba(251, 191, 36, 0.28)"
         },
         {
             id: 1,
@@ -56,8 +55,7 @@ const CONFIG = {
             bannerPhone: "assets/bannertop3_phone.jpg",
             accent: "#60a5fa",
             accentSecondary: "#818cf8",
-            accentGlow: "rgba(96, 165, 250, 0.28)",
-            quote: "Galaxy coordinates locked. Let sound guide the voyage."
+            accentGlow: "rgba(96, 165, 250, 0.28)"
         },
         {
             id: 3,
@@ -70,8 +68,7 @@ const CONFIG = {
             bannerPhone: "assets/bannertop4_phone.jpg",
             accent: "#38bdf8",
             accentSecondary: "#a5f3fc",
-            accentGlow: "rgba(56, 189, 248, 0.28)",
-            quote: "Eternal frost crystalline harmony preserved in silence."
+            accentGlow: "rgba(56, 189, 248, 0.28)"
         },
         {
             id: 4,
@@ -84,8 +81,7 @@ const CONFIG = {
             bannerPhone: "assets/bannertop5_phone.jpg",
             accent: "#f97316",
             accentSecondary: "#ef4444",
-            accentGlow: "rgba(249, 115, 22, 0.28)",
-            quote: "Ignite the cadence with radiant cosmic fire."
+            accentGlow: "rgba(249, 115, 22, 0.28)"
         },
         {
             id: 5,
@@ -98,8 +94,7 @@ const CONFIG = {
             bannerPhone: "assets/bannertop6_phone.jpg",
             accent: "#ec4899",
             accentSecondary: "#d946ef",
-            accentGlow: "rgba(236, 72, 153, 0.28)",
-            quote: "Pure frequency resonance for modern dreamers."
+            accentGlow: "rgba(236, 72, 153, 0.28)"
         }
     ],
 

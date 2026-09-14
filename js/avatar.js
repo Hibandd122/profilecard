@@ -9,7 +9,6 @@
     const heroBanner = document.getElementById('hero-banner-img');
     const personaContainer = document.getElementById('persona-selector');
     const personaRoleEl = document.getElementById('persona-role-text');
-    const personaQuoteEl = document.getElementById('persona-quote-text');
 
     function safeStorageGet(key) {
         try { return localStorage.getItem(key); } catch (_) { return null; }
@@ -84,15 +83,6 @@
 
     function updatePersonaText(persona) {
         if (personaRoleEl) personaRoleEl.textContent = `${persona.role} · ${persona.title}`;
-        if (personaQuoteEl) {
-            if (persona.quote) {
-                personaQuoteEl.textContent = `"${persona.quote}"`;
-                personaQuoteEl.style.display = '';
-            } else {
-                personaQuoteEl.textContent = '';
-                personaQuoteEl.style.display = 'none';
-            }
-        }
     }
 
     function updateBannerLayers(persona) {
