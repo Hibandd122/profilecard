@@ -1,198 +1,236 @@
 /* ========================================================
-   MAIN BIOLINK CARD STYLES V11.0 (OBSIDIAN GLASS)
+   MAHIKARI · LUXURY PROFILE CARD & BRAND TOP BAR
+   Obsidian Glass Hybrid Architecture · Editorial Precision
 ======================================================== */
+
 .card-wrapper {
     width: 100%;
-    max-width: 960px;
+    max-width: 980px;
+    margin: auto;
+    position: relative;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px auto;
-    z-index: 100;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body.banner-view-mode .card-wrapper {
-    opacity: 0;
-    transform: scale(0.95);
-    pointer-events: none;
 }
 
 .card-container {
     width: 100%;
-    min-height: 560px;
-    background: rgba(12, 16, 32, 0.74);
-    backdrop-filter: blur(28px) saturate(190%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.22),
-                0 32px 85px -15px rgba(0, 0, 0, 0.9),
-                0 0 50px var(--waifu-glow, rgba(0, 242, 254, 0.14));
+    background: var(--color-surface);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.12),
+        var(--shadow-deep);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    transition: box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
-    z-index: 200;
-}
-
-body.light-mode .card-container {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(99, 102, 241, 0.22);
-    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
-                0 25px 70px -15px rgba(99, 102, 241, 0.2),
-                0 0 35px rgba(236, 72, 153, 0.15);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .card-container:hover {
-    border-color: var(--waifu-color, rgba(0, 242, 254, 0.4));
-    box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
-                0 38px 95px -20px rgba(0, 0, 0, 0.95),
-                0 0 65px var(--waifu-glow, rgba(0, 242, 254, 0.25));
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+body.light-mode .card-container {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+        var(--shadow-deep);
 }
 
 /* ========================================================
-   RGB GLOWING BORDER FLOW (DYNAMIC WAIFU REACTIVE)
-======================================================== */
-.rgb-flow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 30px;
-    padding: 1.5px;
-    background: linear-gradient(90deg, var(--waifu-color, #00f2fe), var(--waifu-secondary, #ec4899), #00f2fe, #8b5cf6, var(--waifu-color, #00f2fe));
-    background-size: 400% 100%;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: rgbFlowAnim 9s linear infinite;
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0.65;
-}
-
-.rgb-flow.reverse {
-    background: linear-gradient(270deg, var(--waifu-color, #00f2fe), #8b5cf6, var(--waifu-secondary, #ec4899), var(--waifu-color, #00f2fe));
-    animation: rgbFlowReverse 12s linear infinite;
-    opacity: 0.35;
-}
-
-@keyframes rgbFlowAnim {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 400% 0%; }
-}
-
-@keyframes rgbFlowReverse {
-    0% { background-position: 400% 0%; }
-    100% { background-position: 0% 0%; }
-}
-
-/* ========================================================
-   CARD TOP STATUS BAR
+   LUXURY BRAND TOP BAR
 ======================================================== */
 .card-top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.025);
-    gap: 12px;
-    z-index: 20;
-    position: relative;
+    padding: 1rem 1.75rem;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.015);
 }
 
-.status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 11px;
-    font-weight: 600;
-    font-family: 'Fira Code', monospace;
-    padding: 5px 12px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-secondary);
-    backdrop-filter: blur(8px);
-    transition: all 0.25s ease;
-    cursor: default;
-}
-
-.status-pill:hover {
-    color: var(--text-primary);
-    border-color: var(--waifu-color, var(--glow-primary));
-    background: rgba(0, 242, 254, 0.1);
-    box-shadow: 0 0 14px var(--waifu-glow, rgba(0, 242, 254, 0.2));
-}
-
-.banner-mode-btn {
-    cursor: pointer;
-    background: rgba(0, 242, 254, 0.08);
-    border-color: rgba(0, 242, 254, 0.3);
-    color: var(--waifu-color, var(--glow-primary));
-    font-weight: 700;
-}
-
-.banner-mode-btn:hover {
-    background: rgba(0, 242, 254, 0.2);
-    border-color: var(--waifu-color, var(--glow-primary));
-    box-shadow: 0 0 16px var(--waifu-glow, rgba(0, 242, 254, 0.35));
-    transform: translateY(-1px);
-}
-
-.status-pill i {
-    color: var(--waifu-color, var(--glow-primary));
-}
-
-.clock-pill i {
-    color: var(--waifu-color, #00f2fe);
-}
-
-.top-bar-actions {
+/* Bespoke Monogram & Studio Branding */
+.brand-monogram-wrap {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.85rem;
+    user-select: none;
 }
 
-.icon-button {
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: var(--text-primary);
-    font-size: 13px;
-    cursor: pointer;
+.monogram-symbol {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid var(--color-border-active);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-.icon-button:hover {
-    transform: scale(1.1);
-    border-color: var(--waifu-color, var(--glow-primary));
-    box-shadow: 0 0 14px var(--waifu-glow, var(--hover-glow));
-    background: rgba(0, 242, 254, 0.12);
+.brand-text-block {
+    display: flex;
+    flex-direction: column;
 }
 
-.theme-toggle .fa-sun { display: block; }
-.theme-toggle .fa-moon { display: none; }
-body.light-mode .theme-toggle .fa-sun { display: none; }
-body.light-mode .theme-toggle .fa-moon { display: block; }
+.brand-name {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--color-text);
+    line-height: 1.1;
+}
+
+.brand-sub {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+}
+
+/* Top Bar Controls */
+.top-bar-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.status-indicator-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+}
+
+.status-pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2), 0 0 8px #10b981;
+    animation: statusPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.status-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #34d399;
+}
+
+.top-action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.top-action-btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-border-active);
+    background: var(--color-surface-hover);
+    transform: translateY(-1px);
+}
+
+.top-action-btn:active {
+    transform: translateY(0);
+}
+
+/* Theme Toggle Icons */
+.theme-toggle-btn .icon-sun {
+    display: none;
+}
+
+.theme-toggle-btn .icon-moon {
+    display: block;
+}
+
+body.light-mode .theme-toggle-btn .icon-sun {
+    display: block;
+}
+
+body.light-mode .theme-toggle-btn .icon-moon {
+    display: none;
+}
 
 /* ========================================================
-   CONTENT 2-COLUMN GRID LAYOUT
+   CARD GRID LAYOUT
 ======================================================== */
 .card-content-grid {
     display: grid;
-    grid-template-columns: 350px 1fr;
-    min-height: 500px;
-    position: relative;
-    z-index: 15;
+    grid-template-columns: 360px 1fr;
+    min-height: 580px;
+}
+
+/* ========================================================
+   HIGH-FIDELITY TOAST NOTIFICATIONS
+======================================================== */
+.toast-region {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+.luxury-toast {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border-active);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-deep);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+    transition: all var(--transition-normal);
+    pointer-events: auto;
+}
+
+.luxury-toast.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.luxury-toast i {
+    color: var(--color-accent);
+    font-size: 0.95rem;
 }

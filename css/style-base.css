@@ -1,261 +1,149 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap');
+/* ========================================================
+   MAHIKARI · DESIGN TOKENS & BASE ARCHITECTURE
+   Luxury Minimal Editorial System · Native CSS Custom Properties
+======================================================== */
 
 :root {
-    /* Cosmic Cyber Dark Palette */
-    --bg-dark: radial-gradient(circle at 50% 25%, #0e1328 0%, #060812 60%, #020306 100%);
-    --card-bg-dark: linear-gradient(145deg, rgba(14, 18, 36, 0.72) 0%, rgba(8, 10, 22, 0.82) 100%);
-    --panel-bg-dark: linear-gradient(135deg, rgba(22, 28, 52, 0.65) 0%, rgba(13, 17, 34, 0.75) 100%);
-    --panel-bg-hover-dark: linear-gradient(135deg, rgba(32, 40, 72, 0.8) 0%, rgba(18, 23, 44, 0.88) 100%);
-    --text-primary-dark: #ffffff;
-    --text-secondary-dark: #cbd5e1;
-    --text-muted-dark: #94a3b8;
-    --border-dark: rgba(255, 255, 255, 0.12);
-    --border-highlight-dark: rgba(0, 242, 254, 0.45);
-    --shadow-dark: 0 30px 90px -15px rgba(0, 0, 0, 0.92), 0 0 50px rgba(0, 242, 254, 0.15);
-    --glow-primary-dark: #00f2fe;
-    --glow-secondary-dark: #ec4899;
-    --glow-accent-dark: #8b5cf6;
-    --glow-gold-dark: #fbbf24;
-    --accent-gradient-dark: linear-gradient(135deg, #00f2fe 0%, #8b5cf6 50%, #ec4899 100%);
-    --hover-glow-dark: rgba(0, 242, 254, 0.4);
+    /* Color System — Dark Luxury (Default) */
+    --color-bg: #06070d;
+    --color-bg-subtle: #0c0f18;
+    --color-surface: rgba(13, 17, 27, 0.78);
+    --color-surface-elevated: rgba(20, 26, 42, 0.88);
+    --color-surface-hover: rgba(28, 36, 58, 0.95);
+    
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-subtle: rgba(255, 255, 255, 0.04);
+    --color-border-active: rgba(255, 255, 255, 0.22);
 
-    /* Dynamic Waifu Accent Variables (Updated dynamically via JS) */
-    --waifu-color: #fbbf24;
-    --waifu-secondary: #f59e0b;
-    --waifu-glow: rgba(251, 191, 36, 0.45);
-    --waifu-gradient: linear-gradient(135deg, #fbbf24, #f59e0b);
+    --color-text: #f8fafc;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
 
-    /* Light Theme */
-    --bg-light: radial-gradient(circle at 50% 25%, #fdf4f8 0%, #e0e7ff 60%, #c7d2fe 100%);
-    --card-bg-light: linear-gradient(145deg, rgba(255, 255, 255, 0.88) 0%, rgba(245, 247, 255, 0.92) 100%);
-    --panel-bg-light: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(240, 243, 255, 0.9) 100%);
-    --panel-bg-hover-light: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(235, 240, 255, 0.98) 100%);
-    --text-primary-light: #0f172a;
-    --text-secondary-light: #334155;
-    --text-muted-light: #64748b;
-    --border-light: rgba(99, 102, 241, 0.25);
-    --border-highlight-light: rgba(236, 72, 153, 0.5);
-    --shadow-light: 0 30px 80px -15px rgba(99, 102, 241, 0.25), 0 0 40px rgba(236, 72, 153, 0.18);
-    --glow-primary-light: #6366f1;
-    --glow-secondary-light: #ec4899;
-    --glow-accent-light: #3b82f6;
-    --glow-gold-light: #f59e0b;
-    --accent-gradient-light: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f59e0b 100%);
-    --hover-glow-light: rgba(99, 102, 241, 0.35);
+    /* Dynamic Persona Accent Tokens (Updated via JS) */
+    --color-accent: #fbbf24;
+    --color-accent-secondary: #f59e0b;
+    --color-accent-glow: rgba(251, 191, 36, 0.28);
 
-    /* Active dynamic variables */
-    --bg: var(--bg-dark);
-    --card-bg: var(--card-bg-dark);
-    --panel-bg: var(--panel-bg-dark);
-    --panel-bg-hover: var(--panel-bg-hover-dark);
-    --text-primary: var(--text-primary-dark);
-    --text-secondary: var(--text-secondary-dark);
-    --text-muted: var(--text-muted-dark);
-    --border: var(--border-dark);
-    --border-highlight: var(--border-highlight-dark);
-    --shadow: var(--shadow-dark);
-    --glow-primary: var(--glow-primary-dark);
-    --glow-secondary: var(--glow-secondary-dark);
-    --glow-accent: var(--glow-accent-dark);
-    --glow-gold: var(--glow-gold-dark);
-    --accent-gradient: var(--accent-gradient-dark);
-    --hover-glow: var(--hover-glow-dark);
+    /* Elevation & Radii */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+
+    --shadow-soft: 0 12px 32px -4px rgba(0, 0, 0, 0.5);
+    --shadow-deep: 0 28px 72px -12px rgba(0, 0, 0, 0.85);
+
+    /* Typography Hierarchy */
+    --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+
+    /* Transitions */
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-fast: 160ms var(--ease-out-quint);
+    --transition-normal: 280ms var(--ease-out-quint);
+    --transition-smooth: 420ms var(--ease-out-quint);
 }
 
+/* Light Mode System (Refined & Non-glaring) */
 body.light-mode {
-    --bg: var(--bg-light);
-    --card-bg: var(--card-bg-light);
-    --panel-bg: var(--panel-bg-light);
-    --panel-bg-hover: var(--panel-bg-hover-light);
-    --text-primary: var(--text-primary-light);
-    --text-secondary: var(--text-secondary-light);
-    --text-muted: var(--text-muted-light);
-    --border: var(--border-light);
-    --border-highlight: var(--border-highlight-light);
-    --shadow: var(--shadow-light);
-    --glow-primary: var(--glow-primary-light);
-    --glow-secondary: var(--glow-secondary-light);
-    --glow-accent: var(--glow-accent-light);
-    --glow-gold: var(--glow-gold-light);
-    --accent-gradient: var(--accent-gradient-light);
-    --hover-glow: var(--hover-glow-light);
+    --color-bg: #f5f7fb;
+    --color-bg-subtle: #ebf0f7;
+    --color-surface: rgba(255, 255, 255, 0.88);
+    --color-surface-elevated: rgba(255, 255, 255, 0.96);
+    --color-surface-hover: #ffffff;
+
+    --color-border: rgba(15, 23, 42, 0.08);
+    --color-border-subtle: rgba(15, 23, 42, 0.04);
+    --color-border-active: rgba(15, 23, 42, 0.2);
+
+    --color-text: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94a3b8;
+
+    --shadow-soft: 0 12px 32px -4px rgba(15, 23, 42, 0.08);
+    --shadow-deep: 0 28px 72px -12px rgba(15, 23, 42, 0.14);
 }
 
-* {
+/* Global Reset & Base Setup */
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    background-color: var(--color-bg);
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--text-primary);
-    line-height: 1.5;
-    padding: 1.5rem 1rem;
-    position: relative;
+    min-height: 100svh;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-bg);
     overflow-x: hidden;
-    transition: background 0.4s ease, color 0.4s ease;
-}
-
-/* ========================================================
-   CLICK TO ENTER SPLASH OVERLAY
-======================================================== */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(12, 16, 32, 0.95) 0%, rgba(2, 3, 6, 0.98) 100%);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    cursor: pointer;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
-}
-
-.overlay.fade-out {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.overlay-box {
-    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
-    animation: overlayBoxFloat 3.2s infinite ease-in-out;
-}
-
-@keyframes overlayBoxFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-.loader {
-    position: relative;
-    width: 86px;
-    height: 86px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 6px;
-}
-
-.ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2.5px solid transparent;
-    border-top-color: var(--waifu-color, #00f2fe);
-    border-right-color: var(--waifu-secondary, #ec4899);
-    animation: spinRing 2s linear infinite;
-    filter: drop-shadow(0 0 14px var(--waifu-color, #00f2fe));
-}
-
-.ring.inner {
-    width: 65%;
-    height: 65%;
-    border-top-color: var(--waifu-secondary, #ec4899);
-    border-right-color: #fbbf24;
-    animation-direction: reverse;
-    animation-duration: 1.4s;
-}
-
-.loader-icon {
-    font-size: 22px;
-    color: #ffffff;
-    filter: drop-shadow(0 0 12px var(--waifu-color, #00f2fe));
-    animation: iconPulse 1.6s infinite ease-in-out;
-}
-
-@keyframes iconPulse {
-    0%, 100% { transform: scale(1); opacity: 0.85; }
-    50% { transform: scale(1.18); opacity: 1; }
-}
-
-@keyframes spinRing {
-    100% { transform: rotate(360deg); }
-}
-
-.glitch-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: 12px;
-    color: #ffffff;
-    text-shadow: 0 0 24px var(--waifu-color, #00f2fe), 0 0 45px var(--waifu-secondary, #ec4899);
+    padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+    line-height: 1.5;
     position: relative;
-    text-transform: uppercase;
 }
 
-.tap-pulse {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-primary);
-    font-family: 'Fira Code', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    border: 1px solid rgba(0, 242, 254, 0.4);
-    padding: 12px 28px;
-    border-radius: 50px;
-    backdrop-filter: blur(12px);
-    background: rgba(0, 242, 254, 0.08);
-    animation: pulseBorder 2.2s infinite ease-in-out;
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+/* Accessibility: Skip Link */
+.skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 99999;
+    padding: 0.6rem 1rem;
+    background: var(--color-surface-elevated);
+    color: var(--color-text);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+    transition: transform var(--transition-fast);
 }
 
-.overlay-subtext {
-    font-family: 'Fira Code', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 1px;
+.skip-link:focus {
+    transform: translateY(0);
 }
 
-.pulse-icon {
-    color: var(--glow-primary);
-    animation: soundWave 1.2s infinite ease-in-out;
+/* Custom Refined Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
 
-@keyframes soundWave {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.3); }
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-@keyframes pulseBorder {
-    0%, 100% {
-        box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-        border-color: rgba(0, 242, 254, 0.5);
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-active);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
-    50% {
-        box-shadow: 0 0 35px rgba(236, 72, 153, 0.5);
-        border-color: rgba(236, 72, 153, 0.8);
-    }
-}
-
-/* Custom Scrollbars */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--waifu-color, #00f2fe); }
-
-/* Selection */
-::selection {
-    color: #060812;
-    background: var(--waifu-color, #00f2fe);
 }

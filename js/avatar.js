@@ -1,16 +1,15 @@
 /* ========================================================
-   MAHIKARI AVATAR & WAIFU REACTIVE THEME ENGINE V11.0
+   MAHIKARI · PERSONA & VISUAL IDENTITY ENGINE
+   Seamless Crossfade, Theme Harmonization & Asset Preload
 ======================================================== */
 (function() {
     'use strict';
 
-    let avatarImg = null;
-    let avatarDotsContainer = null;
-    let discordAvatarImg = null;
-    let playerAlbumArt = null;
-    let bannerMode = null;
-    let avatarChangeToken = 0;
-    let isAvatarAnimating = false;
+    const avatarImg = document.getElementById('char-avatar');
+    const heroBanner = document.getElementById('hero-banner-img');
+    const personaContainer = document.getElementById('persona-selector');
+    const personaRoleEl = document.getElementById('persona-role-text');
+    const personaQuoteEl = document.getElementById('persona-quote-text');
 
     function safeStorageGet(key) {
         try { return localStorage.getItem(key); } catch (_) { return null; }
@@ -20,333 +19,163 @@
         try { localStorage.setItem(key, value); } catch (_) { /* private mode */ }
     }
 
-    let currentAvatarIndex = parseInt(safeStorageGet('saved_waifu_index') || '0', 10);
-    if (isNaN(currentAvatarIndex) || currentAvatarIndex < 0 || (CONFIG.avatars && currentAvatarIndex >= CONFIG.avatars.length)) {
-        currentAvatarIndex = 0;
+    let currentIndex = parseInt(safeStorageGet('mahikari_persona_index') || '0', 10);
+    if (isNaN(currentIndex) || currentIndex < 0 || currentIndex >= CONFIG.personas.length) {
+        currentIndex = 0;
     }
 
-    // Preload toàn bộ Avatar và Banner vào RAM/GPU
-    function preloadAllAssets() {
-        if (!CONFIG.avatars || CONFIG.avatars.length === 0) return;
-        const saveData = Boolean(navigator.connection && navigator.connection.saveData);
-        const firstWave = CONFIG.avatars.slice(0, saveData ? 1 : 3);
-        firstWave.forEach(src => {
-            const img = new Image();
-            img.decoding = 'async';
-            img.fetchPriority = 'high';
-            img.src = src;
-        });
+    // Preload persona assets for immediate zero-latency switching
+    function preloadAssets() {
+        CONFIG.personas.forEach(p => {
+            const av = new Image();
+            av.decoding = 'async';
+            av.src = p.avatar;
 
-        const idle = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 200));
-        idle(() => {
-            CONFIG.avatars.slice(firstWave.length).forEach(src => {
-                const img = new Image();
-                img.decoding = 'async';
-                img.src = src;
-            });
-        });
-    }
+            const bn = new Image();
+            bn.decoding = 'async';
+            bn.src = p.banner;
 
-    // Khởi tạo và gán sẵn toàn bộ 6 hình nền Waifu vào 6 lớp GPU riêng biệt
-    function initWaifuBanners() {
-        if (!CONFIG.waifu || !CONFIG.waifu.list) return;
-        const isMobile = window.innerWidth <= 768;
-        const nextMode = isMobile ? 'mobile' : 'desktop';
-        if (bannerMode === nextMode) return;
-        bannerMode = nextMode;
-        const bannerLayers = document.querySelectorAll('.banner-stage .banner-layer');
-
-        bannerLayers.forEach((layer, idx) => {
-            const waifu = CONFIG.waifu.list[idx];
-            if (waifu) {
-                const targetBg = (isMobile && waifu.bannerPhone) ? waifu.bannerPhone : waifu.banner;
-                if (targetBg) {
-                    layer.style.backgroundImage = `url('${targetBg}')`;
-                    const pre = new Image();
-                    pre.decoding = 'async';
-                    pre.src = targetBg;
-                    if (pre.decode) pre.decode().catch(() => {});
-                }
+            if (p.bannerPhone) {
+                const bnp = new Image();
+                bnp.decoding = 'async';
+                bnp.src = p.bannerPhone;
             }
         });
-
-        const active = CONFIG.waifu.list[currentAvatarIndex];
-        if (active) {
-            const activeSrc = (isMobile && active.bannerPhone) ? active.bannerPhone : active.banner;
-            const activeLayer = document.querySelector(`.banner-layer[data-index="${currentAvatarIndex}"]`);
-            if (activeLayer && activeSrc) activeLayer.style.backgroundImage = `url('${activeSrc}')`;
-        }
     }
 
-    function initAvatarDots() {
-        avatarDotsContainer = document.getElementById('avatar-dots');
-        if (!avatarDotsContainer || !CONFIG.avatars) return;
-        avatarDotsContainer.innerHTML = '';
-        CONFIG.avatars.forEach((_, idx) => {
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.className = `dot ${idx === currentAvatarIndex ? 'active' : ''}`;
-            dot.dataset.index = idx;
-            const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[idx] : null;
-            dot.setAttribute('aria-label', `Chọn avatar ${waifu ? waifu.name : idx + 1}`);
-            dot.title = waifu ? `${waifu.name} (${waifu.title})` : `Avatar ${idx + 1}`;
-            dot.addEventListener('click', () => {
-                setAvatar(idx, true);
-            });
-            avatarDotsContainer.appendChild(dot);
-        });
-    }
-
-    function updateWaifuBanner(currentIdx) {
-        const bannerLayers = document.querySelectorAll('.banner-stage .banner-layer');
-        if (!bannerLayers || bannerLayers.length === 0) return;
-
-        bannerLayers.forEach(layer => {
-            const layerIdx = parseInt(layer.getAttribute('data-index'), 10);
-            layer.classList.toggle('active', layerIdx === currentIdx);
-        });
-    }
-
-    // Cập nhật Dynamic Theme màu sắc toàn hệ thống theo Waifu
-    function applyWaifuTheme(waifu) {
-        if (!waifu) return;
+    // Apply color tokens based on active persona
+    function applyPersonaTokens(persona) {
         const root = document.documentElement;
-        root.style.setProperty('--waifu-color', waifu.color);
-        root.style.setProperty('--waifu-secondary', waifu.secondaryColor || '#ec4899');
-        root.style.setProperty('--waifu-glow', waifu.accentGlow || 'rgba(0, 242, 254, 0.4)');
-        root.style.setProperty('--waifu-gradient', `linear-gradient(135deg, ${waifu.color}, ${waifu.secondaryColor || '#ec4899'})`);
+        root.style.setProperty('--color-accent', persona.accent);
+        root.style.setProperty('--color-accent-secondary', persona.accentSecondary);
+        root.style.setProperty('--color-accent-glow', persona.accentGlow);
+    }
 
-        // Cập nhật thẻ handle hoặc tagline nếu cần
-        const handleTag = document.querySelector('.handle-tag');
-        if (handleTag) {
-            handleTag.style.borderColor = `${waifu.color}44`;
-            handleTag.style.color = waifu.color;
-            handleTag.style.background = `${waifu.color}15`;
+    // Render persona selector buttons
+    function renderPersonaSelector() {
+        if (!personaContainer) return;
+        personaContainer.innerHTML = '';
+
+        CONFIG.personas.forEach((persona, idx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = `persona-chip ${idx === currentIndex ? 'active' : ''}`;
+            btn.setAttribute('aria-label', `Select visual persona: ${persona.name}`);
+            btn.setAttribute('title', `${persona.name} · ${persona.role}`);
+            btn.dataset.index = idx;
+
+            btn.innerHTML = `
+                <span class="persona-avatar-preview">
+                    <img src="${persona.avatar}" alt="${persona.name}" loading="lazy" decoding="async">
+                </span>
+                <span class="persona-meta">
+                    <span class="persona-name">${persona.name}</span>
+                    <span class="persona-tag">${persona.role}</span>
+                </span>
+            `;
+
+            btn.addEventListener('click', () => {
+                setPersona(idx, true);
+            });
+
+            personaContainer.appendChild(btn);
+        });
+    }
+
+    function updatePersonaText(persona) {
+        if (personaRoleEl) personaRoleEl.textContent = `${persona.role} · ${persona.title}`;
+        if (personaQuoteEl) personaQuoteEl.textContent = `"${persona.quote}"`;
+    }
+
+    function updateBannerLayers(persona) {
+        const isMobile = window.innerWidth <= 768;
+        const bannerSrc = (isMobile && persona.bannerPhone) ? persona.bannerPhone : persona.banner;
+
+        // Update full-bleed background layers if present
+        const bannerLayers = document.querySelectorAll('.banner-stage .banner-layer');
+        bannerLayers.forEach((layer, idx) => {
+            layer.classList.toggle('active', idx === currentIndex);
+            if (idx === currentIndex) {
+                const p = CONFIG.personas[idx];
+                const src = (isMobile && p.bannerPhone) ? p.bannerPhone : p.banner;
+                layer.style.backgroundImage = `url('${src}')`;
+            }
+        });
+
+        // Update hero banner img
+        if (heroBanner && heroBanner.src !== bannerSrc) {
+            heroBanner.style.opacity = '0.4';
+            const img = new Image();
+            img.onload = () => {
+                heroBanner.src = bannerSrc;
+                heroBanner.style.opacity = '1';
+            };
+            img.src = bannerSrc;
         }
     }
 
-    // Cập nhật hộp thoại tương tác của Waifu
-    function updateWaifuDialogue(waifu) {
-        if (!waifu) return;
-        const dialogueName = document.getElementById('dialogue-name');
-        const dialogueRole = document.getElementById('dialogue-role');
-        const dialogueText = document.getElementById('dialogue-text');
+    let isSwitching = false;
+    function setPersona(index, persist) {
+        if (index < 0 || index >= CONFIG.personas.length) return;
+        currentIndex = index;
+        const persona = CONFIG.personas[index];
+        if (!persona) return;
 
-        if (dialogueName) dialogueName.innerText = waifu.name;
-        if (dialogueRole) dialogueRole.innerText = waifu.role || waifu.title;
-        if (dialogueText && waifu.voiceLine) {
-            dialogueText.style.opacity = '0';
-            dialogueText.style.transform = 'translateY(4px)';
-            setTimeout(() => {
-                dialogueText.innerText = `"${waifu.voiceLine}"`;
-                dialogueText.style.opacity = '1';
-                dialogueText.style.transform = 'translateY(0)';
-            }, 150);
+        if (persist) {
+            safeStorageSet('mahikari_persona_index', index.toString());
         }
-    }
 
-    // Ghi nhận thành tựu khám phá Waifu
-    function trackWaifuExploration(index) {
-        try {
-            const raw = localStorage.getItem('mahikari_explored_waifus');
-            const set = raw ? new Set(JSON.parse(raw)) : new Set();
-            set.add(index);
-            localStorage.setItem('mahikari_explored_waifus', JSON.stringify([...set]));
-            if (set.size >= 6 && window.unlockAchievement) {
-                window.unlockAchievement('voyager');
-            }
-            if (index === 0 && window.unlockAchievement) {
-                window.unlockAchievement('mahiru_love');
-            }
-        } catch (_) {}
-    }
+        applyPersonaTokens(persona);
+        updatePersonaText(persona);
+        updateBannerLayers(persona);
 
-    function setAvatar(index, triggerSound = false) {
-        avatarImg = document.getElementById('char-avatar');
-        discordAvatarImg = document.getElementById('discord-avatar-img');
-        playerAlbumArt = document.getElementById('player-album-art');
-        avatarDotsContainer = document.getElementById('avatar-dots');
+        // Update active chip state
+        if (personaContainer) {
+            const chips = personaContainer.querySelectorAll('.persona-chip');
+            chips.forEach((chip, idx) => {
+                chip.classList.toggle('active', idx === index);
+            });
+        }
 
-        if (!CONFIG.avatars || CONFIG.avatars.length === 0) return;
-        
-        currentAvatarIndex = ((index % CONFIG.avatars.length) + CONFIG.avatars.length) % CONFIG.avatars.length;
-        const targetSrc = CONFIG.avatars[currentAvatarIndex];
-        const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentAvatarIndex] : null;
+        // Smooth avatar crossfade
+        if (avatarImg && !isSwitching) {
+            isSwitching = true;
+            avatarImg.style.opacity = '0.3';
+            avatarImg.style.transform = 'translateX(-50%) scale(0.96)';
 
-        safeStorageSet('saved_waifu_index', currentAvatarIndex);
-        const changeToken = ++avatarChangeToken;
-        
-        // Hiệu ứng chuyển động Avatar Pop & Fade sắc nét
-        if (avatarImg) {
-            avatarImg.style.opacity = '0.35';
-            avatarImg.style.transform = 'translateX(-50%) scale(0.92)';
-            
             setTimeout(() => {
-                if (avatarImg && changeToken === avatarChangeToken) {
-                    avatarImg.src = targetSrc;
-                    avatarImg.decoding = 'async';
+                avatarImg.src = persona.avatar;
+                avatarImg.onload = () => {
                     avatarImg.style.opacity = '1';
                     avatarImg.style.transform = 'translateX(-50%) scale(1)';
-                }
-            }, 100);
+                    isSwitching = false;
+                };
+            }, 120);
         }
 
-        if (discordAvatarImg) discordAvatarImg.src = targetSrc;
-        if (playerAlbumArt) playerAlbumArt.src = targetSrc;
-
-        // Cập nhật dots selector
-        if (avatarDotsContainer) {
-            const dots = avatarDotsContainer.querySelectorAll('.dot');
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentAvatarIndex);
-            });
+        // Sync player album art if no custom song art
+        const playerArt = document.getElementById('player-album-art');
+        if (playerArt) {
+            playerArt.src = persona.avatar;
         }
-
-        // Cập nhật banner to 16:9 / mobile phone dọc mượt mà 0ms độ trễ
-        updateWaifuBanner(currentAvatarIndex);
-
-        // Cập nhật waifu active state trong collection
-        const waifuItems = document.querySelectorAll('.waifu-item');
-        waifuItems.forEach((item, idx) => {
-            const isEquipped = idx === currentAvatarIndex;
-            item.classList.toggle('active-equipped', isEquipped);
-            item.setAttribute('aria-pressed', isEquipped ? 'true' : 'false');
-        });
-
-        // Áp dụng chủ đề màu sắc & hộp thoại Waifu
-        applyWaifuTheme(waifu);
-        updateWaifuDialogue(waifu);
-        trackWaifuExploration(currentAvatarIndex);
-        updateFavicon(targetSrc);
-        updateTitle();
-
-        // Âm thanh tương tác khi đổi waifu
-        if (triggerSound && window.playSfx) {
-            window.playSfx('equip');
-        }
-
-        document.dispatchEvent(new CustomEvent('mahikari:avatar-change', {
-            detail: {
-                index: currentAvatarIndex,
-                waifu: waifu
-            }
-        }));
     }
 
-    // Gán toàn cục để các file khác gọi trực tiếp
-    window.setAvatar = setAvatar;
+    // Global hook for keyboard shortcuts or other modules
+    window.setPersona = setPersona;
+    window.getCurrentPersonaIndex = () => currentIndex;
 
-    const PARTICLE_EMOJIS = {
-        feather: ['🪶', '💛', '✨', '🕊️'],
-        moon: ['🌙', '⭐', '🌸', '💖'],
-        star: ['⭐', '🌌', '✨', '💫'],
-        crystal: ['❄️', '💎', '🧊', '✨'],
-        flame: ['🔥', '⚡', '🐾', '✨'],
-        heart: ['💖', '💕', '✨', '🍬']
-    };
-
-    function handleAvatarClick(e) {
-        avatarImg = document.getElementById('char-avatar');
-        if (!avatarImg || isAvatarAnimating) return;
-        isAvatarAnimating = true;
-
-        const nextIndex = (currentAvatarIndex + 1) % CONFIG.avatars.length;
-        setAvatar(nextIndex, true);
-        avatarImg.classList.add('active-touch');
-
-        let clientX = e.clientX;
-        let clientY = e.clientY;
-        if (e.type === 'touchstart' && e.touches && e.touches[0]) {
-            clientX = e.touches[0].clientX;
-            clientY = e.touches[0].clientY;
-        }
-
-        if (!clientX || !clientY) {
-            const rect = avatarImg.getBoundingClientRect();
-            clientX = rect.left + rect.width / 2;
-            clientY = rect.top + rect.height / 2;
-        }
-
-        const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentAvatarIndex] : null;
-        const particleType = waifu ? waifu.particleType : 'heart';
-        const icons = PARTICLE_EMOJIS[particleType] || PARTICLE_EMOJIS.heart;
-
-        const count = window.innerWidth <= 768 ? 8 : 14;
-        for (let i = 0; i < count; i++) {
-            const chosenIcon = icons[Math.floor(Math.random() * icons.length)];
-            createThemedBurst(clientX + (Math.random() * 40 - 20), clientY + (Math.random() * 40 - 20), chosenIcon, waifu ? waifu.color : '#ec4899');
-        }
-
-        setTimeout(() => {
-            if (avatarImg) avatarImg.classList.remove('active-touch');
-            isAvatarAnimating = false;
-        }, 500);
-    }
-
-    function createThemedBurst(x, y, icon, glowColor) {
-        const p = document.createElement('div');
-        p.className = 'floating-heart';
-        p.innerHTML = icon;
-        p.style.left = `${x}px`;
-        p.style.top = `${y}px`;
-        p.style.fontSize = `${Math.random() * 12 + 16}px`;
-        p.style.filter = `drop-shadow(0 0 10px ${glowColor})`;
-        p.style.setProperty('--vx', `${Math.random() * 150 - 75}px`);
-        p.style.setProperty('--vy', `${Math.random() * -130 - 45}px`);
-        document.body.appendChild(p);
-
-        setTimeout(() => {
-            p.remove();
-        }, 1150);
-    }
-
-    function updateFavicon(src) {
-        if (!CONFIG.favicon || !CONFIG.favicon.enabled) return;
-        let link = document.querySelector("link[rel~='icon']");
-        if (!link) {
-            link = document.createElement('link');
-            link.rel = 'icon';
-            document.head.appendChild(link);
-        }
-        link.href = src || CONFIG.favicon.fallback;
-    }
-
-    function updateTitle() {
-        const waifu = CONFIG.waifu && CONFIG.waifu.list ? CONFIG.waifu.list[currentAvatarIndex] : null;
-        const prefix = waifu ? `${waifu.name} · ` : '';
-        document.title = `${prefix}${CONFIG.name} · Profile Card`;
-    }
-
-    function initAvatarModule() {
-        avatarImg = document.getElementById('char-avatar');
-        if (avatarImg) {
-            avatarImg.addEventListener('click', handleAvatarClick);
-            avatarImg.setAttribute('tabindex', '0');
-            avatarImg.setAttribute('role', 'button');
-            avatarImg.setAttribute('aria-label', 'Đổi avatar & waifu');
-            avatarImg.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    handleAvatarClick(event);
-                }
-            });
-        }
-
-        preloadAllAssets();
-        initWaifuBanners();
-        initAvatarDots();
-        setAvatar(currentAvatarIndex, false);
-    }
-
+    // Handle responsive banner resize
     let resizeTimer = null;
     window.addEventListener('resize', () => {
-        window.clearTimeout(resizeTimer);
-        resizeTimer = window.setTimeout(() => initWaifuBanners(), 160);
-    });
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const persona = CONFIG.personas[currentIndex];
+            if (persona) updateBannerLayers(persona);
+        }, 200);
+    }, { passive: true });
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAvatarModule);
-    } else {
-        initAvatarModule();
-    }
+    // Initialization
+    renderPersonaSelector();
+    setPersona(currentIndex, false);
+    window.requestAnimationFrame(() => preloadAssets());
 })();

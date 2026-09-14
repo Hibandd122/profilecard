@@ -1,39 +1,37 @@
 /* ========================================================
-   HIGH-CLARITY BACKGROUND BANNER STAGE V11.0
-   - Crystal clear, vibrant anime wallpaper display
-   - Removed blurry nebula fog overlays for 100% sharpness
+   MAHIKARI · BACKGROUND & CINEMATIC BANNER STAGE
+   Ultra-Crisp 16:9 Artwork Presentation · Zero Blurry Fog
 ======================================================== */
+
 .banner-stage,
 .banner-layer,
 .starry-bg {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
 }
 
 .banner-stage {
-    z-index: 1;
+    z-index: 0;
+    overflow: hidden;
+    background-color: #030408;
 }
 
-/* 6 Pre-Rasterized GPU Waifu Layers with Crisp Clarity */
+/* 6 Pre-Rasterized GPU Waifu Layers */
 .banner-layer {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-size: cover;
-    background-position: center center;
+    background-position: center 25%;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.6s var(--ease-out-quint);
     transform: translateZ(0);
     will-change: opacity;
-    filter: contrast(1.04) saturate(1.06) brightness(1.02);
-    image-rendering: auto;
+    filter: contrast(1.02) saturate(1.04);
 }
 
 .banner-layer.active {
@@ -41,55 +39,26 @@
     z-index: 1;
 }
 
-/* Loại bỏ lớp phủ tối mờ để hình nền sắc nét và sáng rõ */
-.banner-layer::before {
-    display: none;
+/* Cinematic controlled vignette — keeps the image crystal-clear while providing subtle contrast */
+.banner-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(3, 5, 12, 0.35) 0%, rgba(3, 5, 12, 0.85) 100%);
+    pointer-events: none;
+    z-index: 2;
 }
 
-.banner-mode-overlay {
-    position: fixed;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10000;
-    background: rgba(10, 14, 28, 0.92);
-    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.5));
-    padding: 11px 26px;
-    border-radius: 30px;
-    color: #ffffff;
-    font-family: 'Fira Code', monospace;
-    font-size: 13px;
-    font-weight: 600;
-    box-shadow: 0 0 35px var(--waifu-glow, rgba(0, 242, 254, 0.4));
-    backdrop-filter: blur(14px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+body.light-mode .banner-stage::after {
+    background: radial-gradient(circle at 50% 50%, rgba(245, 247, 251, 0.45) 0%, rgba(245, 247, 251, 0.88) 100%);
 }
 
-body.banner-view-mode .banner-mode-overlay {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-
-.banner-mode-overlay:hover {
-    background: rgba(0, 242, 254, 0.25);
-    border-color: var(--waifu-color, #00f2fe);
-    box-shadow: 0 0 45px var(--waifu-glow, rgba(0, 242, 254, 0.7));
-}
-
+/* Minimalist ambient canvas */
 .starry-bg {
     z-index: 2;
     mix-blend-mode: screen;
 }
 
-/* Vô hiệu hóa nebula và cosmic-whirl vì gây mờ và nhòe hình nền */
-.nebula,
-.cosmic-whirl {
-    display: none !important;
+body.light-mode .starry-bg {
+    opacity: 0.3;
 }

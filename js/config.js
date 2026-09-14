@@ -1,57 +1,126 @@
-/* ===== CẤU HÌNH MAHIKARI COSMIC PROFILE CARD V11.0 ===== */
+/* ========================================================
+   MAHIKARI · BESPOKE DIGITAL IDENTITY & STUDIO CONFIG
+   Luxury Creator Profile & Cosmic Audio Architecture
+======================================================== */
 const CONFIG = {
-    // Thông tin định danh chính
+    // Brand & Identity Information
+    brand: {
+        monogram: "M",
+        logoText: "MAHIKARI",
+        subtitle: "CREATIVE TECHNOLOGIST & ARCHITECT",
+        status: "Available for Projects",
+        location: "Vietnam · GMT+7"
+    },
     name: "Mahikari",
     handle: "@mahikari",
-    tagline: "Cosmic Voyager · Developer · Anime Enthusiast",
-    bio: "Exploring the endless cosmos with waifus & lo-fi beats ✨",
+    title: "Creative Technologist · UI/UX Architect · Visual Explorer",
+    bio: "Crafting bespoke digital artifacts, cinematic web aesthetics, and ambient sonic environments across the digital cosmos.",
     
-    // Danh sách avatar 6 nhân vật theo đúng thứ tự 1 -> 6
-    avatars: [
-        "assets/avatar1.png", // #1 Shiina Mahiru
-        "assets/avatar2.png", // #2 Kaguya
-        "assets/avatar3.png", // #3 Yachiyo Runami
-        "assets/avatar4.png", // #4 Elfaria Albis Serfort
-        "assets/avatar5.png", // #5 Kagari Fuyukawa
-        "assets/avatar6.png"  // #6 Hiura Mihate
+    // 6 Persona Visual Themes (Avatars 1-6 with 16:9 Ultra HD Banners & Mobile Banners)
+    personas: [
+        {
+            id: 0,
+            key: "mahiru",
+            name: "Shiina Mahiru",
+            role: "Angel of Light",
+            title: "The Angel Next Door",
+            avatar: "assets/avatar1.png",
+            banner: "assets/banner1.png",
+            bannerPhone: "assets/bannertop1_phone.jpg",
+            accent: "#fbbf24",
+            accentSecondary: "#f59e0b",
+            accentGlow: "rgba(251, 191, 36, 0.28)",
+            quote: "Gentle warmth and melody beneath the quiet stars."
+        },
+        {
+            id: 1,
+            key: "kaguya",
+            name: "Kaguya",
+            role: "Moonlight Empress",
+            title: "Love is War",
+            avatar: "assets/avatar2.png",
+            banner: "assets/bannertop2.jpg",
+            bannerPhone: "assets/bannertop2_phone.jpg",
+            accent: "#fde047",
+            accentSecondary: "#f43f5e",
+            accentGlow: "rgba(253, 224, 71, 0.28)",
+            quote: "Pride and elegance etched into the midnight sky."
+        },
+        {
+            id: 2,
+            key: "yachiyo",
+            name: "Yachiyo Runami",
+            role: "Astral Navigator",
+            title: "Cosmic Maiden",
+            avatar: "assets/avatar3.png",
+            banner: "assets/bannertop3.jpg",
+            bannerPhone: "assets/bannertop3_phone.jpg",
+            accent: "#60a5fa",
+            accentSecondary: "#818cf8",
+            accentGlow: "rgba(96, 165, 250, 0.28)",
+            quote: "Galaxy coordinates locked. Let sound guide the voyage."
+        },
+        {
+            id: 3,
+            key: "elfaria",
+            name: "Elfaria Albis Serfort",
+            role: "Glacial Archmage",
+            title: "Ice Magia Vende",
+            avatar: "assets/avatar4.png",
+            banner: "assets/banner4.png",
+            bannerPhone: "assets/bannertop4_phone.jpg",
+            accent: "#38bdf8",
+            accentSecondary: "#a5f3fc",
+            accentGlow: "rgba(56, 189, 248, 0.28)",
+            quote: "Eternal frost crystalline harmony preserved in silence."
+        },
+        {
+            id: 4,
+            key: "kagari",
+            name: "Kagari Fuyukawa",
+            role: "Solar Vanguard",
+            title: "Neko Champion",
+            avatar: "assets/avatar5.png",
+            banner: "assets/banner5.png",
+            bannerPhone: "assets/bannertop5_phone.jpg",
+            accent: "#f97316",
+            accentSecondary: "#ef4444",
+            accentGlow: "rgba(249, 115, 22, 0.28)",
+            quote: "Ignite the cadence with radiant cosmic fire."
+        },
+        {
+            id: 5,
+            key: "mihate",
+            name: "Hiura Mihate",
+            role: "Cyber Sweetheart",
+            title: "Sweet Heart",
+            avatar: "assets/avatar6.png",
+            banner: "assets/banner6.png",
+            bannerPhone: "assets/bannertop6_phone.jpg",
+            accent: "#ec4899",
+            accentSecondary: "#d946ef",
+            accentGlow: "rgba(236, 72, 153, 0.28)",
+            quote: "Pure frequency resonance for modern dreamers."
+        }
     ],
 
-    // Banner mặc định và các banner chuẩn 16:9 1920x1080 theo từng waifu
-    banners: {
-        default: "assets/banner1.png",
-        mahiru: "assets/banner1.png",
-        kaguya: "assets/bannertop2.jpg",
-        yachiyo: "assets/bannertop3.jpg",
-        elfaria: "assets/banner4.png",
-        kagari: "assets/banner5.png",
-        mihate: "assets/banner6.png"
+    // Backward compatibility references for existing scripts
+    get avatars() {
+        return this.personas.map(p => p.avatar);
+    },
+    get waifu() {
+        return { list: this.personas };
     },
 
-    // Danh ngôn ngẫu nhiên
-    quotes: [
-        "Ara ara~ Dạo bước cùng em qua triệu vì tinh tú nhé! ✨",
-        "Oni-chan baka! (⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄) Cố gắng hôm nay nha!",
-        "Kyou mo ganbatte ne! 🌸 Giai điệu vũ trụ luôn bên bạn.",
-        "Nyan nyan~ 🐾 Âm nhạc lofi và waifu chữa lành tâm hồn.",
-        "Let's explore the endless cosmos together~ 🌌",
-        "Ánh sao lấp lánh phản chiếu nụ cười của em giữa màn đêm ✨",
-        "Vũ trụ bao la nhưng tim em chỉ có một tọa độ dành cho người 💫"
-    ],
-
-    favicon: {
-        enabled: true,
-        fallback: "assets/avatar1.png"
-    },
-
-    // Danh sách bài hát phân loại theo Mục 1 (Thiên sứ nhà bên) và Mục 2 (CPK)
+    // Curated 33-Track Cosmic Audio Collection
     music: {
         categories: [
-            { id: "all", name: "Tất cả", icon: "fa-layer-group" },
-            { id: "angel", name: "Mục 1: Thiên Sứ", icon: "fa-feather-alt" },
-            { id: "cpk", name: "Mục 2: CPK", icon: "fa-bolt" }
+            { id: "all", name: "All Tracks", icon: "fa-layer-group" },
+            { id: "angel", name: "The Angel Next Door", icon: "fa-feather-alt" },
+            { id: "cpk", name: "CPK Collection", icon: "fa-bolt" }
         ],
         playlist: [
-            // --- MỤC 1: THIÊN SỨ NHÀ BÊN (IWAMI MANAKA) ---
+            // --- SECTION 1: THE ANGEL NEXT DOOR (IWAMI MANAKA) ---
             { id: 1, name: "Chiisana Koi no Uta", artist: "Iwami Manaka", category: "angel", categoryLabel: "Thiên Sứ", file: "music/angel_01_Chiisana_Koi_no_Uta.mp3", duration: "3:38" },
             { id: 2, name: "Ai Uta", artist: "Iwami Manaka", category: "angel", categoryLabel: "Thiên Sứ", file: "music/angel_02_Ai_Uta.mp3", duration: "4:02" },
             { id: 3, name: "Chiisana Koi no Uta (Inst.)", artist: "Iwami Manaka", category: "angel", categoryLabel: "Thiên Sứ", file: "music/angel_03_Chiisana_Koi_no_Uta_Inst.mp3", duration: "3:38" },
@@ -60,7 +129,7 @@ const CONFIG = {
             { id: 6, name: "Valentine Kiss (Inst.)", artist: "Iwami Manaka", category: "angel", categoryLabel: "Thiên Sứ", file: "music/angel_06_Valentine_Kiss_Inst.mp3", duration: "3:40" },
             { id: 7, name: "Gift (Inst.)", artist: "Iwami Manaka", category: "angel", categoryLabel: "Thiên Sứ", file: "music/angel_07_Gift_Inst.mp3", duration: "4:28" },
             
-            // --- MỤC 2: CPK COLLECTION ---
+            // --- SECTION 2: CPK COLLECTION ---
             { id: 8, name: "ワールドイズマイン (World is Mine)", artist: "supercell feat. 初音ミク", category: "cpk", categoryLabel: "CPK", file: "music/ワールドイズマイン.mp3", duration: "4:12" },
             { id: 9, name: "melt (メルト)", artist: "supercell feat. 初音ミク", category: "cpk", categoryLabel: "CPK", file: "music/melt.mp3", duration: "4:17" },
             { id: 10, name: "Tell Your World", artist: "kz (livetune) feat. 初音ミク", category: "cpk", categoryLabel: "CPK", file: "music/Tell Your World.mp3", duration: "4:18" },
@@ -88,175 +157,24 @@ const CONFIG = {
             { id: 32, name: "超かぐや姫！", artist: "CPK Original", category: "cpk", categoryLabel: "CPK", file: "music/超かぐや姫！.mp3", duration: "3:20" },
             { id: 33, name: "零ゆる光彩", artist: "CPK Original", category: "cpk", categoryLabel: "CPK", file: "music/零ゆる光彩.mp3", duration: "3:52" }
         ],
-        defaultVolume: 45,
-        enablePulse: true,
-        autoPlayOnEnter: true
+        defaultVolume: 45
     },
 
-    // Hiệu ứng hạt và nền
-    effects: {
-        stars: true,
-        shootingStars: true,
-        nebula: true,
-        sfx: true,
-        tilt3D: false
-    },
-
-    // Thời gian tính toán & chuyển đổi
-    intervals: {
-        quoteRotation: 9000
-    },
-
-    ui: {
-        enableTilt: false,
-        enableGlow: true,
-        enableRgbBorder: true,
-        enableSfx: true
-    },
-
-    // Mạng xã hội / Bio links
-    social: {
-        facebook: "https://www.facebook.com/profile.php?id=61582336522985",
-        tiktok: "https://www.tiktok.com/@mahikari_hola",
-        discord: "https://discord.gg/NkbMV48zY6",
-        github: "https://github.com/Hibandd122"
-    },
-
-    // Discord Rich Presence Widget
-    discordPresence: {
-        username: "Mahikari",
-        customStatus: "Vibing in the Cosmos ✨",
-        onlineStatus: "online"
-    },
-
-    // Bộ sưu tập Waifu (Chuẩn hóa 6 nhân vật, avatar 1-6, 6 banner 16:9 + 6 banner phone dọc)
-    waifu: {
-        list: [
-            {
-                id: 0,
-                name: "Shiina Mahiru",
-                title: "The Angel Next Door",
-                icon: "fa-feather-alt",
-                color: "#fbbf24",
-                secondaryColor: "#f59e0b",
-                accentGlow: "rgba(251, 191, 36, 0.45)",
-                particleType: "feather",
-                rank: 1,
-                affection: 100,
-                role: "Angel of Light",
-                voiceLine: "Tôi sẽ luôn ở đây chuẩn bị bữa tối ấm áp và cùng bạn lắng nghe những giai điệu này nhé! ✨",
-                image: "assets/avatar1.png",
-                banner: "assets/banner1.png",
-                bannerPhone: "assets/bannertop1_phone.jpg"
-            },
-            {
-                id: 1,
-                name: "Kaguya",
-                title: "Love is War",
-                icon: "fa-moon",
-                color: "#fde047",
-                secondaryColor: "#f43f5e",
-                accentGlow: "rgba(253, 224, 71, 0.45)",
-                particleType: "moon",
-                rank: 2,
-                affection: 96,
-                role: "Moonlight Empress",
-                voiceLine: "O-O kawaii koto... Muốn nghe nhạc cùng ta sao? Không phải là ta thích đâu đấy! 🌸",
-                image: "assets/avatar2.png",
-                banner: "assets/bannertop2.jpg",
-                bannerPhone: "assets/bannertop2_phone.jpg"
-            },
-            {
-                id: 2,
-                name: "Yachiyo Runami",
-                title: "Cosmic Maiden",
-                icon: "fa-star",
-                color: "#60a5fa",
-                secondaryColor: "#818cf8",
-                accentGlow: "rgba(96, 165, 250, 0.45)",
-                particleType: "star",
-                rank: 3,
-                affection: 93,
-                role: "Astral Navigator",
-                voiceLine: "Tọa độ thiên hà đã được thiết lập, hãy để âm nhạc dẫn lối cho chuyến du hành này! 🚀",
-                image: "assets/avatar3.png",
-                banner: "assets/bannertop3.jpg",
-                bannerPhone: "assets/bannertop3_phone.jpg"
-            },
-            {
-                id: 3,
-                name: "Elfaria Albis Serfort",
-                title: "Ice Magia Vende",
-                icon: "fa-snowflake",
-                color: "#38bdf8",
-                secondaryColor: "#a5f3fc",
-                accentGlow: "rgba(56, 189, 248, 0.45)",
-                particleType: "crystal",
-                rank: 4,
-                affection: 90,
-                role: "Glacial Archmage",
-                voiceLine: "Phép thuật băng giá vĩnh cửu cũng không thể làm nguội lạnh đi giai điệu tuyệt đẹp này được đâu ❄️",
-                image: "assets/avatar4.png",
-                banner: "assets/banner4.png",
-                bannerPhone: "assets/bannertop4_phone.jpg"
-            },
-            {
-                id: 4,
-                name: "Kagari Fuyukawa",
-                title: "Neko Champion",
-                icon: "fa-cat",
-                color: "#f97316",
-                secondaryColor: "#ef4444",
-                accentGlow: "rgba(249, 115, 22, 0.45)",
-                particleType: "flame",
-                rank: 5,
-                affection: 87,
-                role: "Solar Vanguard",
-                voiceLine: "Năng lượng hôm nay đang bùng nổ! Cùng quẩy hết mình với nhịp điệu rực cháy nào! 🔥",
-                image: "assets/avatar5.png",
-                banner: "assets/banner5.png",
-                bannerPhone: "assets/bannertop5_phone.jpg"
-            },
-            {
-                id: 5,
-                name: "Hiura Mihate",
-                title: "Sweet Heart",
-                icon: "fa-heart",
-                color: "#ec4899",
-                secondaryColor: "#d946ef",
-                accentGlow: "rgba(236, 72, 153, 0.45)",
-                particleType: "heart",
-                rank: 6,
-                affection: 84,
-                role: "Cyber Sweetheart",
-                voiceLine: "Gửi đến bạn 1000% ngọt ngào và năng lượng tích cực cho cả ngày dài nhé! 💖",
-                image: "assets/avatar6.png",
-                banner: "assets/banner6.png",
-                bannerPhone: "assets/bannertop6_phone.jpg"
-            }
-        ]
-    },
-
-    // Audio FX Equalizer Presets
+    // Audio Equalizer Presets
     audioFx: {
         presets: [
-            { id: "hifi", name: "Studio Hi-Fi", icon: "fa-headphones", desc: "Âm thanh nguyên bản trung thực" },
-            { id: "bass", name: "Bass Boost", icon: "fa-bolt", desc: "Tăng cường dải trầm mạnh mẽ (+6dB)" },
-            { id: "lofi", name: "Lo-Fi Warmth", icon: "fa-record-vinyl", desc: "Ấm áp hoài niệm phong cách retro" },
-            { id: "vocal", name: "Vocal Clarity", icon: "fa-microphone", desc: "Tối ưu giọng hát trong trẻo" }
+            { id: "hifi", name: "Studio Reference", icon: "fa-headphones", desc: "Transparent, linear studio response" },
+            { id: "bass", name: "Low-End Warmth", icon: "fa-bolt", desc: "Enhanced analog sub-bass (+6dB)" },
+            { id: "lofi", name: "Lo-Fi Tape", icon: "fa-record-vinyl", desc: "Vintage warmth & rolled-off highs" },
+            { id: "vocal", name: "Acoustic Presence", icon: "fa-microphone", desc: "Forward vocal clarity & articulation" }
         ]
     },
 
-    // Hệ thống Thành Tựu Mini (Cosmic Achievements)
-    achievements: [
-        { id: "voyager", title: "Nhà Du Hành Tinh Tú", desc: "Khám phá trọn bộ 6 nhân vật Waifu", icon: "fa-compass" },
-        { id: "audiophile", title: "Thính Giả Ngân Hà", desc: "Thưởng thức âm nhạc trên player", icon: "fa-music" },
-        { id: "fx_master", title: "Phù Thủy Âm Thanh", desc: "Trải nghiệm bộ lọc Studio Audio FX", icon: "fa-sliders" },
-        { id: "stargazer", title: "Góc Nhìn Toàn Cảnh", desc: "Mở chế độ xem toàn cảnh Banner 16:9", icon: "fa-expand" },
-        { id: "mahiru_love", title: "Tình Cảm Tuyệt Đối", desc: "Tương tác với Shiina Mahiru", icon: "fa-heart" }
+    // Social Links
+    social: [
+        { key: "facebook", name: "Facebook", handle: "Mahikari", url: "https://www.facebook.com/profile.php?id=61582336522985", icon: "fab fa-facebook-f" },
+        { key: "tiktok", name: "TikTok", handle: "@mahikari_hola", url: "https://www.tiktok.com/@mahikari_hola", icon: "fab fa-tiktok" },
+        { key: "discord", name: "Discord", handle: "mahikari#0", url: "https://discord.gg/NkbMV48zY6", icon: "fab fa-discord" },
+        { key: "github", name: "GitHub", handle: "Hibandd122", url: "https://github.com/Hibandd122", icon: "fab fa-github" }
     ]
 };
-
-if (!CONFIG.avatars || CONFIG.avatars.length === 0) {
-    CONFIG.avatars = ["assets/avatar1.png"];
-}

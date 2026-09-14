@@ -1,25 +1,36 @@
 /* ========================================================
-   ULTRA-SMOOTH ADAPTIVE RESPONSIVE STYLES V11.0
-   - Perfect layout from 320px ultra-compact to 4K displays
-   - 60-144 FPS Hardware-Accelerated Optimization
+   MAHIKARI · ADAPTIVE RESPONSIVE ARCHITECTURE
+   Flawless Ergonomics from 320px to 4K Ultra-Wide
 ======================================================== */
 
+/* ========================================================
+   TABLET & MOBILE BREAKPOINT (< 860px)
+======================================================== */
 @media (max-width: 860px) {
     body {
-        padding: 0.6rem 0.4rem;
-        align-items: flex-start;
+        padding: 0.75rem 0.5rem;
+        justify-content: flex-start;
     }
 
     .card-wrapper {
-        margin: 6px auto;
+        max-width: 100%;
+        margin: 0 auto;
     }
 
     .card-container {
-        border-radius: 24px;
-        min-height: auto;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        transform: none !important;
+        border-radius: var(--radius-md);
+    }
+
+    .card-top-bar {
+        padding: 0.85rem 1rem;
+    }
+
+    .brand-sub {
+        display: none;
+    }
+
+    .status-indicator-pill {
+        display: none;
     }
 
     .card-content-grid {
@@ -28,228 +39,192 @@
 
     .col-left {
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 20px 16px;
+        border-bottom: 1px solid var(--color-border);
+        padding: 1.5rem 1.25rem;
+        gap: 1rem;
     }
 
-    .avatar-zone {
-        width: 130px;
-        height: 130px;
+    .avatar-presentation-stage {
+        width: 110px;
+        height: 110px;
     }
 
-    .gradient-glitch {
-        font-size: 25px;
+    .creator-name {
+        font-size: 1.5rem;
+    }
+
+    .social-destination-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.45rem;
+    }
+
+    .persona-selector-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .col-right {
-        padding: 16px 14px;
-        max-height: none;
-        overflow-y: visible;
-        gap: 12px;
+        padding: 1.25rem 1.25rem 1.5rem;
+        gap: 1.25rem;
+    }
+
+    .now-playing-stage {
+        padding: 0.85rem 1rem;
+        gap: 0.85rem;
+    }
+
+    .vinyl-disc-wrap {
+        width: 68px;
+        height: 68px;
+    }
+
+    .vinyl-platter {
+        width: 36px;
+        height: 36px;
+    }
+
+    .track-title {
+        font-size: 1.05rem;
+    }
+
+    /* Mobile Controls Ergonomics */
+    .audio-controls-dock {
+        flex-direction: column;
+        gap: 0.85rem;
+        align-items: stretch;
+    }
+
+    .controls-playback-group {
+        justify-content: center;
+        gap: 0.85rem;
+    }
+
+    .controls-utility-group {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .volume-slider-dock {
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .volume-slider {
+        width: 100%;
+        max-width: 100px;
+    }
+
+    /* Responsive Dropdowns */
+    .dropdown-flyout {
+        position: fixed;
+        bottom: 1rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        width: auto;
+        max-width: none;
+        border-radius: var(--radius-md);
+    }
+
+    .studio-card-footer {
+        flex-direction: column;
+        gap: 0.35rem;
+        text-align: center;
+    }
+}
+
+/* ========================================================
+   COMPACT SMARTPHONES (< 430px: iPhone 13/14/15, Android)
+======================================================== */
+@media (max-width: 430px) {
+    body {
+        padding: 0.4rem 0.25rem;
     }
 
     .card-top-bar {
-        padding: 10px 14px;
-        min-height: 52px;
+        padding: 0.75rem 0.85rem;
     }
 
-    .status-pill {
-        font-size: 10px;
-        padding: 4px 10px;
+    .brand-name {
+        font-size: 0.85rem;
     }
 
-    .live-chip {
-        display: none;
+    .monogram-symbol {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
     }
 
-    /* Tắt các layer nặng và blur trên mobile để giữ 60-120 FPS */
-    .nebula, 
-    .cosmic-whirl, 
-    .cosmic-whirl.secondary {
-        display: none !important;
+    .col-left, .col-right {
+        padding: 1.1rem 0.85rem;
     }
 
-    .banner-layer {
-        filter: none !important;
+    .persona-selector-grid {
+        grid-template-columns: 1fr;
     }
 
-    .music-panel,
-    .waifu-panel {
-        padding: 13px 14px;
-    }
-
-    .music-category-nav {
-        gap: 4px;
-        padding: 3px;
+    .audio-category-nav {
+        flex-wrap: wrap;
     }
 
     .cat-tab {
-        font-size: 9px;
-        padding: 4px 6px;
+        flex: 1 1 calc(50% - 0.4rem);
+        font-size: 0.65rem;
     }
 
-    .playlist-menu,
-    .audio-fx-menu {
-        left: 50% !important;
-        transform: translateX(-50%);
-        width: min(320px, calc(100vw - 2.5rem));
-    }
-
-    .hud-modal-box {
-        padding: 20px 16px;
-        max-width: calc(100vw - 2rem);
+    .cat-tab:first-child {
+        flex: 1 1 100%;
     }
 }
 
-@media (max-width: 480px) {
-    .card-container {
-        border-radius: 22px;
-    }
-
-    .card-top-bar {
-        padding: 8px 10px;
-    }
-
-    .clock-pill {
-        padding: 4px 8px;
-        font-size: 9px;
-    }
-
-    .banner-mode-btn span {
-        display: none;
-    }
-
-    .banner-mode-btn {
-        width: 32px;
-        height: 32px;
-        padding: 0;
-        justify-content: center;
-    }
-
-    .icon-button {
-        width: 32px;
-        height: 32px;
-    }
-
-    .top-bar-actions {
-        gap: 5px;
-    }
-
-    .avatar-zone {
-        width: 120px;
-        height: 120px;
-    }
-
-    .avatar-img {
-        max-height: 120%;
-    }
-
-    .gradient-glitch {
-        font-size: 22px;
-    }
-
-    .profile-tagline {
-        font-size: 8.5px;
-        max-width: 250px;
-    }
-
-    .social-panel {
-        gap: 8px;
-    }
-
-    .social-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 15px;
-        border-radius: 10px;
-    }
-
-    .player-controls {
-        gap: 6px;
-        justify-content: space-between;
-    }
-
-    .play-circle {
-        width: 38px;
-        height: 38px;
-        font-size: 14px;
-    }
-
-    .ctrl {
-        font-size: 13px;
-        padding: 4px;
-    }
-
-    .volume-dock {
-        gap: 4px;
-    }
-
-    .volume-dock input[type=range] {
-        width: 45px;
-    }
-
-    .glitch-text {
-        font-size: 24px !important;
-        letter-spacing: 6px !important;
-    }
-
-    .tap-pulse {
-        font-size: 11px !important;
-        padding: 9px 18px !important;
-        letter-spacing: 1px !important;
-    }
-
-    .waifu-item {
-        padding: 7px 9px;
-        gap: 8px;
-    }
-
-    .waifu-thumb-wrap {
-        width: 30px;
-        height: 30px;
-    }
-
-    .waifu-name {
-        font-size: 11.5px;
-    }
-
-    .waifu-role-tag {
-        font-size: 8px;
-    }
-}
-
+/* ========================================================
+   ULTRA-COMPACT (< 360px: Galaxy Z Flip cover, SE 1st gen)
+======================================================== */
 @media (max-width: 360px) {
-    .card-top-bar {
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    .profile-stats {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 4px;
-    }
-
-    .stat-item strong {
-        font-size: 14px;
-    }
-
-    .stat-item span {
-        font-size: 7px;
-    }
-
-    .profile-actions {
+    .social-destination-grid {
         grid-template-columns: 1fr;
     }
+
+    .controls-playback-group {
+        gap: 0.5rem;
+    }
+
+    .ctrl-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .play-hero-btn {
+        width: 40px;
+        height: 40px;
+    }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
+/* ========================================================
+   DESKTOP & 4K OPTIMIZATIONS (> 1440px)
+======================================================== */
+@media (min-width: 1440px) {
+    .card-wrapper {
+        max-width: 1040px;
+    }
 
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+    .card-content-grid {
+        grid-template-columns: 380px 1fr;
+        min-height: 620px;
+    }
+
+    .col-left {
+        padding: 2.5rem 2.25rem;
+    }
+
+    .col-right {
+        padding: 2.5rem 2.5rem;
+    }
+
+    .avatar-presentation-stage {
+        width: 136px;
+        height: 136px;
+    }
+
+    .creator-name {
+        font-size: 2rem;
     }
 }

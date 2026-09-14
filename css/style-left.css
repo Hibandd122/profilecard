@@ -1,615 +1,271 @@
 /* ========================================================
-   LEFT COLUMN (HERO / PROFILE IDENTITY) V11.0
+   MAHIKARI · LEFT COLUMN: CREATOR IDENTITY & PERSONAS
+   Editorial Portraiture · Social Destinations · Theme Suite
 ======================================================== */
+
 .col-left {
-    padding: 24px 22px;
+    padding: 2rem 1.75rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-    position: relative;
-    background: rgba(255, 255, 255, 0.012);
-    gap: 12px;
-}
-
-body.light-mode .col-left {
-    border-right: 1px solid rgba(99, 102, 241, 0.15);
+    gap: 1.25rem;
+    border-right: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.008);
 }
 
 /* ========================================================
-   AVATAR ZONE & NEON RINGS
+   AVATAR PRESENTATION STAGE
 ======================================================== */
-.avatar-zone {
+.avatar-presentation-stage {
     position: relative;
-    width: 130px;
-    height: 130px;
-    cursor: pointer;
+    width: 124px;
+    height: 124px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.ripple-ground {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
-    pointer-events: none;
-}
-
-.ripple-ground span {
-    position: absolute;
-    top: 0;
-    left: 0;
+.avatar-frame {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 1.5px solid var(--waifu-color, var(--glow-primary));
-    opacity: 0;
-    animation: rippleGlow 3s infinite cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface-elevated);
+    border: 1.5px solid var(--color-border-active);
+    box-shadow: 
+        0 10px 24px -4px rgba(0, 0, 0, 0.5),
+        0 0 20px var(--color-accent-glow);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
-.ripple-ground span:nth-child(2) { animation-delay: 1s; border-color: var(--waifu-secondary, var(--glow-secondary)); }
-.ripple-ground span:nth-child(3) { animation-delay: 2s; border-color: #8b5cf6; }
-
-@keyframes rippleGlow {
-    0% { transform: scale(0.9); opacity: 0.85; box-shadow: 0 0 10px var(--waifu-color, var(--glow-primary)); }
-    100% { transform: scale(1.4); opacity: 0; }
-}
-
-.halo-rotate {
+.avatar-portrait {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 124px;
-    height: 124px;
-    border-radius: 50%;
-    border: 1.5px dashed var(--waifu-color, rgba(0, 242, 254, 0.5));
-    animation: rotateHalo 20s linear infinite;
-    pointer-events: none;
-}
-
-.halo-rotate.outer {
-    width: 134px;
-    height: 134px;
-    border: 1px solid var(--waifu-secondary, rgba(236, 72, 153, 0.4));
-    animation: rotateHaloRev 25s linear infinite;
-}
-
-@keyframes rotateHalo {
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes rotateHaloRev {
-    100% { transform: translate(-50%, -50%) rotate(-360deg); }
-}
-
-.avatar-img {
-    position: absolute;
-    bottom: 2px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    max-height: 122%;
-    width: auto;
-    max-width: 114%;
-    filter: drop-shadow(0 6px 14px var(--waifu-glow, rgba(0, 242, 254, 0.4)));
-    transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
-    z-index: 5;
-    user-select: none;
-}
-
-.avatar-zone:hover .avatar-img {
-    transform: translateX(-50%) scale(1.08) translateY(-4px);
-    filter: drop-shadow(0 10px 24px var(--waifu-glow, rgba(236, 72, 153, 0.5))) drop-shadow(0 0 14px var(--waifu-color, rgba(0, 242, 254, 0.5)));
-}
-
-.avatar-img.active-touch {
-    transform: translateX(-50%) scale(1.14) translateY(-6px);
-    filter: drop-shadow(0 0 35px var(--waifu-color, var(--glow-secondary)));
+    width: 116%;
+    height: auto;
+    max-height: 120%;
+    object-fit: contain;
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+    filter: contrast(1.02);
 }
 
 .avatar-status-badge {
     position: absolute;
-    bottom: 5px;
-    right: 8px;
-    width: 13px;
-    height: 13px;
+    bottom: 4px;
+    right: 6px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    border: 2px solid #0d101c;
+    background: #10b981;
+    border: 2px solid var(--color-surface-elevated);
+    box-shadow: 0 0 8px #10b981;
     z-index: 10;
 }
 
-.avatar-status-badge.online {
-    background: #10b981;
-    box-shadow: 0 0 8px #10b981;
-    animation: statusPulse 2s infinite ease-in-out;
-}
-
-@keyframes statusPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 6px #10b981; }
-    50% { transform: scale(1.2); box-shadow: 0 0 12px #10b981; }
-}
-
 /* ========================================================
-   AVATAR DOTS INDICATOR
+   IDENTITY HEADER & EDITORIAL TYPOGRAPHY
 ======================================================== */
-.avatar-dots {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-}
-
-.avatar-dots .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    border: none;
-    padding: 0;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.avatar-dots .dot:hover {
-    background: var(--waifu-color, var(--glow-primary));
-    transform: scale(1.3);
-    box-shadow: 0 0 8px var(--waifu-color, var(--glow-primary));
-}
-
-.avatar-dots .dot.active {
-    width: 20px;
-    border-radius: 6px;
-    background: var(--waifu-gradient);
-    box-shadow: 0 0 10px var(--waifu-glow, var(--glow-primary));
-}
-
-/* ========================================================
-   NAME & BADGES
-======================================================== */
-.title-area {
+.identity-header {
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 3px;
+    gap: 0.25rem;
 }
 
-.name-row {
+.name-title-row {
     display: flex;
     align-items: center;
-    gap: 7px;
     justify-content: center;
+    gap: 0.45rem;
 }
 
-.gradient-glitch {
-    font-family: 'Outfit', sans-serif;
-    font-size: 26px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: #ffffff;
-    text-transform: uppercase;
-    display: inline-block;
-    position: relative;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                 0 0 20px var(--waifu-glow, rgba(0, 242, 254, 0.5)),
-                 0 0 32px rgba(139, 92, 246, 0.3);
-    animation: neonNamePulse 3s infinite alternate ease-in-out;
-    transition: all 0.3s ease;
-    user-select: none;
+.creator-name {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    line-height: 1.15;
 }
 
-.gradient-glitch:hover {
-    letter-spacing: 2px;
-    text-shadow: 0 0 14px #ffffff,
-                 0 0 26px var(--waifu-color, #00f2fe),
-                 0 0 42px var(--waifu-secondary, #ec4899);
-    transform: scale(1.03);
+.verified-badge {
+    color: #38bdf8;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
 }
 
-@keyframes neonNamePulse {
-    0% {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                     0 0 18px var(--waifu-glow, rgba(0, 242, 254, 0.5)),
-                     0 0 30px rgba(139, 92, 246, 0.3);
-    }
-    100% {
-        text-shadow: 0 0 14px rgba(255, 255, 255, 0.95),
-                     0 0 24px var(--waifu-color, rgba(0, 242, 254, 0.65)),
-                     0 0 38px var(--waifu-secondary, rgba(236, 72, 153, 0.4));
-    }
+.creator-handle {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
 }
 
-.badge-verified {
-    color: var(--waifu-color, #00f2fe);
-    font-size: 16px;
-    filter: drop-shadow(0 0 6px var(--waifu-color, #00f2fe));
+.creator-tagline {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-top: 0.2rem;
 }
 
-.badge-crown {
-    color: #fbbf24;
-    font-size: 14px;
-    filter: drop-shadow(0 0 6px #fbbf24);
-}
-
-.handle-tag {
-    font-family: 'Fira Code', monospace;
-    font-size: 11.5px;
-    font-weight: 600;
-    color: var(--waifu-color, var(--glow-primary));
-    background: rgba(0, 242, 254, 0.08);
-    border: 1px solid rgba(0, 242, 254, 0.22);
-    padding: 2px 10px;
-    border-radius: 14px;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-}
-
-.profile-tagline {
-    font-family: 'Fira Code', monospace;
-    font-size: 9.5px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-top: 2px;
-}
-
-.profile-tagline span {
-    color: var(--waifu-color, var(--glow-primary));
+.creator-bio {
+    font-size: 0.825rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding: 0 0.5rem;
 }
 
 /* ========================================================
-   BIO QUOTE CARD
+   SOCIAL DESTINATION PILLS
 ======================================================== */
-.bio-quote-card {
+.social-destination-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
     width: 100%;
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 9px 12px;
-    position: relative;
+}
+
+.social-link-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--radius-md);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.social-link-pill i {
+    font-size: 0.9rem;
+}
+
+.social-link-pill:hover {
+    color: var(--color-text);
+    border-color: var(--color-border-active);
+    background: var(--color-surface-hover);
+    transform: translateY(-1px);
+}
+
+.social-link-pill:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ========================================================
+   VISUAL THEMES & PERSONA ROSTER
+======================================================== */
+.persona-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.1rem;
+}
+
+.section-micro-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    backdrop-filter: blur(8px);
-    transition: border-color 0.3s ease;
+    justify-content: space-between;
+    padding: 0 0.25rem;
 }
 
-.bio-quote-card:hover {
-    border-color: var(--waifu-color, rgba(0, 242, 254, 0.3));
+.micro-title {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
 }
 
-.quote-icon {
-    color: var(--waifu-color, var(--glow-primary));
-    font-size: 11px;
-    opacity: 0.85;
+.micro-meta {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
 }
 
-.bio-quote-card p {
-    font-size: 11px;
-    font-style: italic;
-    color: var(--text-secondary);
-    line-height: 1.35;
-    flex: 1;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+.persona-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.45rem;
 }
 
-#quote-refresh {
+.persona-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.65rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-fast);
+}
+
+.persona-chip:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-active);
+    transform: translateY(-1px);
+}
+
+.persona-chip.active {
+    border-color: var(--color-accent);
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: var(--text-muted);
+    box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+.persona-avatar-preview {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-bg);
 }
 
-#quote-refresh:hover {
-    color: var(--waifu-color, var(--glow-primary));
-    border-color: var(--waifu-color, var(--glow-primary));
-    transform: rotate(180deg);
-}
-
-/* ========================================================
-   DISCORD USER BADGE IN LEFT COLUMN
-======================================================== */
-.discord-widget {
-    width: 100%;
-    background: linear-gradient(135deg, rgba(88, 101, 242, 0.12) 0%, rgba(16, 20, 38, 0.65) 100%);
-    backdrop-filter: blur(10px);
-    border-radius: 14px;
-    padding: 8px 12px;
-    border: 1px solid rgba(88, 101, 242, 0.25);
-    transition: all 0.25s ease;
-}
-
-.discord-widget:hover {
-    border-color: rgba(88, 101, 242, 0.6);
-    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.25);
-}
-
-.discord-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.discord-user-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* ========================================================
-   WAIFU INTERACTIVE DIALOGUE BOX
-======================================================== */
-.waifu-dialogue-box {
-    width: 100%;
-    background: rgba(13, 16, 28, 0.65);
-    border: 1px solid var(--waifu-color, rgba(0, 242, 254, 0.3));
-    border-radius: 14px;
-    padding: 10px 14px;
-    position: relative;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 0 15px var(--waifu-glow, rgba(0, 242, 254, 0.15));
-    transition: all 0.35s ease;
-}
-
-.waifu-dialogue-box:hover {
-    border-color: var(--waifu-color, #00f2fe);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35), 0 0 22px var(--waifu-glow, rgba(0, 242, 254, 0.3));
-}
-
-.dialogue-header {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-bottom: 5px;
-}
-
-.dialogue-avatar-mini {
-    color: var(--waifu-color, #00f2fe);
-    font-size: 11px;
-    filter: drop-shadow(0 0 5px var(--waifu-color, #00f2fe));
-}
-
-.dialogue-speaker {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--waifu-color, #ffffff);
-    letter-spacing: 0.3px;
-}
-
-.dialogue-tag {
-    font-size: 8.5px;
-    font-family: 'Fira Code', monospace;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 1px 7px;
-    border-radius: 10px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-}
-
-.dialogue-text {
-    font-size: 11px;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.88);
-    font-style: italic;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-/* ========================================================
-   DISCORD WIDGET & RICH PRESENCE
-======================================================== */
-.discord-widget {
-    width: 100%;
-    background: rgba(22, 27, 46, 0.7);
-    border: 1px solid rgba(88, 101, 242, 0.3);
-    border-radius: 14px;
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-}
-
-.discord-widget:hover {
-    border-color: rgba(88, 101, 242, 0.65);
-    box-shadow: 0 0 20px rgba(88, 101, 242, 0.25);
-}
-
-.discord-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.discord-user-info {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.discord-avatar-wrap {
-    position: relative;
-    width: 30px;
-    height: 30px;
-}
-
-.discord-avatar {
+.persona-avatar-preview img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
     object-fit: cover;
-    border: 1.5px solid var(--waifu-color, rgba(88, 101, 242, 0.5));
-    transition: border-color 0.3s ease;
 }
 
-.discord-status-dot {
-    position: absolute;
-    bottom: -1px;
-    right: -1px;
-    width: 8.5px;
-    height: 8.5px;
-    border-radius: 50%;
-    border: 1.5px solid #161b2e;
-}
-
-.discord-status-dot.online {
-    background: #10b981;
-    box-shadow: 0 0 6px #10b981;
-}
-
-.discord-user-meta {
+.persona-meta {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
-.discord-username {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.discord-custom-status {
-    font-size: 9.5px;
-    color: var(--text-secondary);
-    font-family: 'Fira Code', monospace;
-}
-
-.discord-tag-pill {
-    font-size: 8px;
-    font-family: 'Fira Code', monospace;
-    font-weight: 700;
-    color: #ffffff;
-    background: #5865F2;
-    padding: 2px 7px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 3px;
-}
-
-/* ========================================================
-   SOCIAL BUTTONS
-======================================================== */
-.social-panel {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-    margin-top: 2px;
-}
-
-.social-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 11px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    text-decoration: none;
-    position: relative;
-    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-}
-
-.social-icon:hover {
-    transform: translateY(-3px) scale(1.1);
-}
-
-/* Facebook */
-.social-icon.fb {
-    color: #1877f2;
-    background: rgba(24, 119, 242, 0.08);
-    border-color: rgba(24, 119, 242, 0.25);
-}
-
-.social-icon.fb:hover {
-    background: #1877f2;
-    color: #ffffff;
-    border-color: #1877f2;
-    box-shadow: 0 0 16px rgba(24, 119, 242, 0.65);
-}
-
-/* TikTok */
-.social-icon.tt {
-    background: #010101;
-    border-color: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
-}
-
-.social-icon.tt:hover {
-    background: #000000;
-    border-color: #fe2c55;
-    box-shadow: 0 0 15px rgba(254, 44, 85, 0.6), 0 0 8px rgba(37, 244, 238, 0.5);
-    color: #ffffff;
-}
-
-/* Discord */
-.social-icon.discord {
-    color: #5865f2;
-    background: rgba(88, 101, 242, 0.08);
-    border-color: rgba(88, 101, 242, 0.25);
-}
-
-.social-icon.discord:hover {
-    background: #5865f2;
-    color: #ffffff;
-    border-color: #5865f2;
-    box-shadow: 0 0 16px rgba(88, 101, 242, 0.65);
-}
-
-/* GitHub */
-.social-icon.github {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.18);
-}
-
-.social-icon.github:hover {
-    background: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
-    box-shadow: 0 0 16px rgba(255, 255, 255, 0.65);
-}
-
-.social-tooltip {
-    position: absolute;
-    bottom: -26px;
-    background: #090c18;
-    color: #ffffff;
-    font-family: 'Fira Code', monospace;
-    font-size: 9px;
+.persona-name {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
     font-weight: 600;
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
+    color: var(--color-text);
     white-space: nowrap;
-    pointer-events: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.social-icon:hover .social-tooltip {
-    opacity: 1;
-    visibility: visible;
-    bottom: -23px;
+.persona-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.persona-chip.active .persona-name {
+    color: var(--color-accent);
 }
