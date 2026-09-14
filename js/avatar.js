@@ -84,7 +84,15 @@
 
     function updatePersonaText(persona) {
         if (personaRoleEl) personaRoleEl.textContent = `${persona.role} · ${persona.title}`;
-        if (personaQuoteEl) personaQuoteEl.textContent = `"${persona.quote}"`;
+        if (personaQuoteEl) {
+            if (persona.quote) {
+                personaQuoteEl.textContent = `"${persona.quote}"`;
+                personaQuoteEl.style.display = '';
+            } else {
+                personaQuoteEl.textContent = '';
+                personaQuoteEl.style.display = 'none';
+            }
+        }
     }
 
     function updateBannerLayers(persona) {

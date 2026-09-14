@@ -43,8 +43,7 @@ const CONFIG = {
             bannerPhone: "assets/bannertop2_phone.jpg",
             accent: "#fde047",
             accentSecondary: "#f43f5e",
-            accentGlow: "rgba(253, 224, 71, 0.28)",
-            quote: "Pride and elegance etched into the midnight sky."
+            accentGlow: "rgba(253, 224, 71, 0.28)"
         },
         {
             id: 2,
