@@ -4,7 +4,7 @@
 ======================================================== */
 
 .col-right {
-    padding: 2rem 2rem;
+    padding: 2.25rem 2.25rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,19 +30,19 @@
 .suite-title {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.725rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: var(--color-accent);
 }
 
 .track-indicator {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.725rem;
     font-weight: 600;
-    padding: 0.2rem 0.6rem;
+    padding: 0.2rem 0.65rem;
     border-radius: var(--radius-full);
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--color-border);
@@ -57,8 +57,8 @@
 .audio-category-nav {
     display: flex;
     gap: 0.4rem;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 0.3rem;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 0.35rem;
     border-radius: var(--radius-md);
     border: 1px solid var(--color-border-subtle);
 }
@@ -68,8 +68,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    padding: 0.45rem 0.65rem;
+    gap: 0.45rem;
+    padding: 0.5rem 0.75rem;
     border-radius: var(--radius-sm);
     background: transparent;
     border: none;
@@ -84,12 +84,12 @@
 
 .cat-tab:hover {
     color: var(--color-text);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .cat-tab.active {
     color: var(--color-text);
-    background: var(--color-surface-elevated);
+    background: var(--surface-2);
     border: 1px solid var(--color-border-active);
     box-shadow: var(--shadow-soft);
 }
@@ -100,24 +100,25 @@
 .now-playing-stage {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    background: var(--color-surface-elevated);
+    gap: 1.35rem;
+    background: var(--surface-2);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    padding: 1.1rem 1.25rem;
+    padding: 1.25rem 1.35rem;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 /* Vinyl Platter */
 .vinyl-disc-wrap {
-    width: 86px;
-    height: 86px;
+    width: 88px;
+    height: 88px;
     flex-shrink: 0;
     position: relative;
     border-radius: 50%;
     background: radial-gradient(circle, #1a1a24 0%, #0d0d12 60%, #050508 100%);
     box-shadow: 
-        0 6px 18px rgba(0, 0, 0, 0.6),
-        inset 0 0 0 2px rgba(255, 255, 255, 0.05),
+        0 8px 20px rgba(0, 0, 0, 0.65),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.06),
         inset 0 0 0 8px rgba(0, 0, 0, 0.6),
         inset 0 0 0 14px rgba(255, 255, 255, 0.03);
     display: flex;
@@ -126,8 +127,8 @@
 }
 
 .vinyl-platter {
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
@@ -152,13 +153,13 @@
 .track-metadata {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.25rem;
     overflow: hidden;
 }
 
 .track-title {
     font-family: var(--font-display);
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-text);
     line-height: 1.2;
@@ -186,6 +187,7 @@
     font-family: var(--font-mono);
     font-size: 0.65rem;
     font-weight: 600;
+    letter-spacing: 0.06em;
     color: var(--color-accent);
 }
 
@@ -195,7 +197,7 @@
 .playback-progress-wrap {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
 }
 
 .time-display {
@@ -214,7 +216,7 @@
 
 .seek-bar-track {
     width: 100%;
-    height: 6px;
+    height: 5px;
     border-radius: var(--radius-full);
     background: rgba(255, 255, 255, 0.08);
     position: relative;
@@ -234,14 +236,14 @@
 .seek-fill-bar::after {
     content: '';
     position: absolute;
-    right: -4px;
+    right: -5px;
     top: 50%;
     transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     background: #ffffff;
-    box-shadow: 0 0 6px var(--color-accent-glow);
+    box-shadow: 0 0 8px var(--color-accent-glow);
     opacity: 0;
     transition: opacity var(--transition-fast);
 }
@@ -254,12 +256,12 @@
     position: absolute;
     top: -24px;
     transform: translateX(-50%);
-    background: var(--color-surface-elevated);
+    background: var(--surface-3);
     border: 1px solid var(--color-border-active);
     color: var(--color-text);
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    padding: 0.15rem 0.4rem;
+    padding: 0.15rem 0.45rem;
     border-radius: 4px;
     pointer-events: none;
     opacity: 0;
@@ -280,7 +282,7 @@
 .controls-utility-group {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
 }
 
 .ctrl-btn {
@@ -300,7 +302,7 @@
 
 .ctrl-btn:hover {
     color: var(--color-text);
-    background: var(--color-surface-hover);
+    background: var(--surface-hover);
     border-color: var(--color-border);
 }
 
@@ -309,8 +311,8 @@
 }
 
 .play-hero-btn {
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: var(--color-accent);
     border: none;
@@ -318,15 +320,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     cursor: pointer;
-    box-shadow: 0 4px 16px var(--color-accent-glow);
+    box-shadow: 0 4px 18px var(--color-accent-glow);
     transition: all var(--transition-fast);
 }
 
 .play-hero-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 22px var(--color-accent-glow);
+    transform: scale(1.04);
+    box-shadow: 0 6px 24px var(--color-accent-glow);
 }
 
 .play-hero-btn:active {
@@ -338,10 +340,10 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    background: var(--color-surface-elevated);
+    background: var(--surface-2);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    padding: 0 0.5rem 0 0.2rem;
+    padding: 0 0.55rem 0 0.25rem;
 }
 
 .volume-slider {
@@ -362,7 +364,7 @@
     bottom: calc(100% + 12px);
     right: 0;
     width: 320px;
-    background: var(--color-surface-elevated);
+    background: var(--surface-3);
     border: 1px solid var(--color-border-active);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-deep);
@@ -389,7 +391,7 @@
     font-family: var(--font-mono);
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--color-text-muted);
     padding-bottom: 0.4rem;
     border-bottom: 1px solid var(--color-border);
@@ -416,7 +418,7 @@
 }
 
 .fx-option:hover {
-    background: var(--color-surface-hover);
+    background: var(--surface-hover);
     border-color: var(--color-border);
 }
 
@@ -462,7 +464,7 @@
     font-family: var(--font-mono);
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--color-text-muted);
 }
 
@@ -470,7 +472,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--color-bg);
+    background: var(--surface-0);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     padding: 0.35rem 0.65rem;
@@ -514,7 +516,7 @@
 }
 
 .playlist-row:hover {
-    background: var(--color-surface-hover);
+    background: var(--surface-hover);
     border-color: var(--color-border);
 }
 
@@ -589,7 +591,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1rem;
+    padding-top: 1.1rem;
     border-top: 1px solid var(--color-border);
     user-select: none;
 }

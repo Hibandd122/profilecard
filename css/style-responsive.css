@@ -4,6 +4,36 @@
 ======================================================== */
 
 /* ========================================================
+   TABLET INTENTIONAL LAYOUT (768px to 1024px)
+======================================================== */
+@media (min-width: 861px) and (max-width: 1024px) {
+    .card-wrapper {
+        max-width: 94%;
+    }
+
+    .card-content-grid {
+        grid-template-columns: 330px 1fr;
+    }
+
+    .col-left {
+        padding: 1.85rem 1.45rem;
+    }
+
+    .col-right {
+        padding: 1.85rem 1.65rem;
+    }
+
+    .creator-name {
+        font-size: 1.75rem;
+    }
+
+    .now-playing-stage {
+        padding: 1rem 1.15rem;
+        gap: 1rem;
+    }
+}
+
+/* ========================================================
    TABLET & MOBILE BREAKPOINT (< 860px)
 ======================================================== */
 @media (max-width: 860px) {
