@@ -96,14 +96,19 @@
 body.light-mode .avatar-backdrop-disc {
     background: radial-gradient(
         circle at 50% 25%,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(235, 240, 250, 0.9) 65%,
-        rgba(215, 222, 238, 0.95) 100%
+        #ffffff 0%,
+        #edf2f7 65%,
+        #e2e8f0 100%
     );
+    border-color: rgba(15, 23, 42, 0.12);
     box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.08),
-        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        0 10px 24px -4px rgba(15, 23, 42, 0.1),
+        inset 0 1px 2px #ffffff,
         0 0 20px var(--color-accent-glow);
+}
+
+body.light-mode .avatar-status-badge {
+    border-color: #ffffff;
 }
 
 /* Rotating Celestial Halos */
@@ -430,4 +435,42 @@ body.light-mode .creator-name {
 
 .persona-chip.active .persona-name {
     color: var(--color-accent);
+}
+
+/* ========================================================
+   LIGHT MODE OVERRIDES FOR SOCIAL PILLS & PERSONA CHIPS
+======================================================== */
+body.light-mode .social-link-pill {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.11);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+body.light-mode .social-link-pill:hover {
+    background: #f8fafc;
+    border-color: rgba(15, 23, 42, 0.24);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+body.light-mode .persona-chip {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.1);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+body.light-mode .persona-chip:hover {
+    background: #f8fafc;
+    border-color: rgba(15, 23, 42, 0.22);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+body.light-mode .persona-chip.active {
+    background: #ffffff;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 14px var(--color-accent-glow), 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+body.light-mode .persona-avatar-preview {
+    background: #f1f5f9;
+    border-color: rgba(15, 23, 42, 0.1);
 }

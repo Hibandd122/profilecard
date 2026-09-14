@@ -221,7 +221,7 @@
     width: 100%;
     height: 5px;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--track-bg);
     position: relative;
     cursor: pointer;
     overflow: visible;
@@ -606,4 +606,85 @@
     font-weight: 500;
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
+}
+
+/* ========================================================
+   LIGHT MODE STYLING FOR STUDIO AUDIO SUITE & FLYOUTS
+======================================================== */
+body.light-mode .cat-tab:hover {
+    color: var(--color-text);
+    background: rgba(15, 23, 42, 0.05);
+}
+
+body.light-mode .cat-tab.active {
+    color: var(--color-text);
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.16);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+body.light-mode .now-playing-stage {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+}
+
+body.light-mode .track-category-tag {
+    background: rgba(15, 23, 42, 0.05);
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+body.light-mode .ctrl-btn:hover {
+    color: var(--color-text);
+    background: rgba(15, 23, 42, 0.06);
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+body.light-mode .volume-slider-dock {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.1);
+}
+
+body.light-mode .dropdown-flyout {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.14);
+}
+
+body.light-mode .flyout-header {
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-mode .playlist-search {
+    background: #f8fafc;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    color: var(--color-text);
+}
+
+body.light-mode .playlist-search:focus {
+    border-color: var(--color-accent);
+    background: #ffffff;
+}
+
+body.light-mode .playlist-row:hover {
+    background: rgba(15, 23, 42, 0.04);
+}
+
+body.light-mode .playlist-row.playing {
+    background: rgba(15, 23, 42, 0.08);
+}
+
+body.light-mode .fx-preset-btn {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+body.light-mode .fx-preset-btn:hover {
+    background: #f8fafc;
+    border-color: rgba(15, 23, 42, 0.2);
+}
+
+body.light-mode .fx-preset-btn.active {
+    background: rgba(15, 23, 42, 0.08);
+    border-color: var(--color-accent);
 }

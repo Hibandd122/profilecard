@@ -50,7 +50,11 @@
 }
 
 body.light-mode .banner-stage::after {
-    background: radial-gradient(circle at 50% 50%, rgba(245, 247, 251, 0.45) 0%, rgba(245, 247, 251, 0.88) 100%);
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(240, 244, 250, 0.28) 0%,
+        rgba(235, 240, 248, 0.68) 100%
+    );
 }
 
 /* Minimalist ambient canvas */
@@ -60,5 +64,6 @@ body.light-mode .banner-stage::after {
 }
 
 body.light-mode .starry-bg {
-    opacity: 0.3;
+    opacity: 0.22;
+    mix-blend-mode: multiply;
 }
